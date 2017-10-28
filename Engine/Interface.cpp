@@ -2,9 +2,12 @@
 
 void Interface::set_graphics(Graphics* gfx) { 
 	this->gfx = gfx; 
+	if (gfx != nullptr) {
+		Graphics_loaded = YES;
+	}
 }
 void Interface::DrawPixel(int x, int y, Color c) { 
-	if (gfx == nullptr) {
+	if (!(Graphics_loaded == YES)) {
 		return;
 	}
 	gfx->PutPixel(x, y, c);
@@ -13,23 +16,24 @@ void Interface::DrawPixel(int x, int y, Color c) {
 
 void Interface::DrawText(char * str, int x, int y)
 {
-	double POS_COUNTER = 0;
-	Bitmap*  BCHR;
-
-	this->TextObj->setText(str);
-	char* chr = &TextObj->text[0];
 	
-	do {
-		BCHR = TextObj->Get_Bitmap_Char(*chr);
-		Draw_Bitmap(BCHR, x + (int) POS_COUNTER, y);
+	double POS_COUNTER = 0;
+	
+	//cache variables
+	int BASE_W;
+	Bitmap*  B;
+	this->TextObj->setText(str);
+	char* ptr = &TextObj->text;
 		
-		if (*chr >= '0' && *chr <= '9') POS_COUNTER += BCHR->IMG_WIDTH * 0.20;
-		else if (*chr >= 'A' && *chr <= 'Z') POS_COUNTER += BCHR->IMG_WIDTH * 0.05;
-		POS_COUNTER += BCHR->IMG_WIDTH * 0.65;
+	while(*ptr++ != 0){
+		B = TextObj->Get_Bitmap_Char(ptr - 1);
+		BASE_W = B->IMG_WIDTH;
+		Draw_Bitmap(B, x + (int) POS_COUNTER, y);
+		POS_COUNTER += BASE_W * 0.65;
 
-
-	} while (*chr++);
-
+		if (*ptr >= '0' && *ptr <= '9') POS_COUNTER += BASE_W * 0.20;
+		else if (*ptr >= 'A' && *ptr <= 'Z') POS_COUNTER += BASE_W * 0.05;
+	}
 
 }
 
@@ -39,23 +43,30 @@ void Interface::set_font(Text * txt)
 }
 
 void Interface::Draw_Bitmap(Bitmap* B, int fx, int fy) {
-	int x, y, r, g, b;
-
+	//cache variables
+	int r;
+	int g;
+	int b;
 	unsigned char* ptr;
+	
+	for (int y = 0; y < B->IMG_HEIGHT; y++) {
+		for (int x = 0; x < B->IMG_WIDTH; x++) {
+			ptr = &B->Data[y* B->IMG_LINE_SIZE + x * 3];
+			
+			r = *ptr++;
+			g = *ptr++;
+			b = *ptr;
 
-	for (int i = 0; i < B->IMG_PIXEL_COUNT; i++) {		
-		ptr = &B->Data[i*3];
+			READ_COLOR.dword = (b << 16) + (g << 8) + r;
 
-		b = *ptr; g = *(ptr + 1); r = *(ptr + 2);
 
-		READ_COLOR.dword = b + (g << 8) + (r << 16);
+			if (READ_COLOR.dword == B->TRANSPARENCY_KEY.dword) {
+				continue;
+			}
 
-		if (READ_COLOR.dword != B->TRANSPARENCY_KEY.dword) {
-			x = i % B->IMG_WIDTH;
-			y = i / B->IMG_HEIGHT;
-			DrawPixel(x + fx, y + fy, this->READ_COLOR);
+			DrawPixel(x + fx, y + fy, READ_COLOR);
+			
+			
 		}
-
 	}
-
 }

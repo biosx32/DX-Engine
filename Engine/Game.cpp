@@ -89,28 +89,30 @@ void drawcircle(Interface out, int x0, int y0, int radius)
 }
 void drawline(Interface out, int x0, int y0, int width, int height)
 {
-	int dx, dy, p, x, y,t;
+	int dx, dy, p, x, y,t, y1, x1;
 
-	int x1 = t = x0 + width ;
+	x1 = t = x0 + width;
+	
 	if (x1 < x0) {
 		x1 = x0;
 		x0 = t;
 	}
-	int y1 = t = y0 + height;
+	y1 = t = y0 + height;
+	
 	if (y1 < y0) {
 		y1 = y0;
 		y0 = t;
 	}
 
 
-	dx = x1 - x0; dy = y1 - y0;
+	dx = x1 - x0; 
+	dy = y1 - y0;
 
 	if (dy == 0) return drawFastVLine(out, x0, y0, width);
 	if (dx == 0) return drawFastHLine(out, x0, y0, height);
 
-
-
-	x = x0;  y = y0;
+	x = x0;  
+	y = y0;
 	p = 2 * dy - dx;
 
 	while (x<x1){

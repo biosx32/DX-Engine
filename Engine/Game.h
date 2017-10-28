@@ -40,7 +40,6 @@ public:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
-	Graphics& getGraphics() { return gfx; }
 	Interface out;
 private:
 	void ComposeFrame();

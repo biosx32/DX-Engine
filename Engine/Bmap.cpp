@@ -5,10 +5,11 @@ Bitmap::~Bitmap() {
 	delete[] Data;
 	delete[] Header;
 }
-Bitmap::Bitmap(char* const FileName) {
-	IMG_LOADED = false; 
-	IMG_TOP_DOWN = false;
-	COLOR_REPLACE_MODE = NO_COLOR;
+
+Bitmap::Bitmap(char* FileName) {
+	this->IMG_LOADED = false; 
+	this->IMG_TOP_DOWN = false;
+	this->COLOR_REPLACE_MODE = NO_COLOR;
 
 	FILE* rBMP;
 	fopen_s(&rBMP, FileName, "rb");
@@ -17,7 +18,7 @@ Bitmap::Bitmap(char* const FileName) {
 		goto IOError;
 	}
 
-	const int BYTES_TO_READ = Get_image_bytes(rBMP, +54);
+	int BYTES_TO_READ = Get_image_bytes(rBMP, +54);
 
 	if (BYTES_TO_READ < 1) {
 		goto Exit;
@@ -31,20 +32,20 @@ Bitmap::Bitmap(char* const FileName) {
 	this->IMG_WIDTH = *(int*)&Header[18];
 	this->IMG_HEIGHT = *(int*)&Header[22];
 
-	if (IMG_HEIGHT < 0) {
-		IMG_TOP_DOWN = true;
-		IMG_HEIGHT = -IMG_HEIGHT;
+	if (this->IMG_HEIGHT < 0) {
+		this->IMG_TOP_DOWN = true;
+		this->IMG_HEIGHT = -IMG_HEIGHT;
 	}
 
-	this->IMG_LINE_DATA = IMG_WIDTH * COLOR_BSIZE;
-	this->IMG_DATA_SIZE = IMG_LINE_DATA * IMG_HEIGHT;
+	this->IMG_LINE_SIZE = IMG_WIDTH * COLOR_BSIZE;
+	this->IMG_DATA_SIZE = IMG_LINE_SIZE * IMG_HEIGHT;
 
 	int IGN_COUNT = IMG_WIDTH % 4;
 
 	unsigned char temp[3];
 	
 	for (int i = 0; i < IMG_HEIGHT; i++) {
-		fread_s(&Data[i * IMG_LINE_DATA], IMG_LINE_DATA, sizeof(unsigned char), IMG_LINE_DATA, rBMP);
+		fread_s(&Data[i * IMG_LINE_SIZE], IMG_LINE_SIZE, sizeof(unsigned char), IMG_LINE_SIZE, rBMP);
 		if (IGN_COUNT) {
 			fread_s(temp, IGN_COUNT, sizeof(unsigned char), IGN_COUNT, rBMP);
 		}
@@ -53,103 +54,89 @@ Bitmap::Bitmap(char* const FileName) {
 
 	fclose(rBMP);
 
+	//cache
+	unsigned char *a;
+	unsigned char *b;
+	unsigned char c;
+
 
 	if (!IMG_TOP_DOWN) {
 		for (int i = 0; i < IMG_DATA_SIZE / 2; i++) {
-			int x = i % IMG_LINE_DATA;
-			int y = i / IMG_LINE_DATA;
+			int x = i % IMG_LINE_SIZE;
+			int y = i / IMG_LINE_SIZE;
 
-			unsigned char* a = &Data[y * IMG_LINE_DATA + x];
-			unsigned char* b = &Data[((IMG_HEIGHT - 1 - y) * IMG_LINE_DATA) + x];
-			unsigned char c = *a;
+			a = &Data[y * IMG_LINE_SIZE + x];
+			b = &Data[((IMG_HEIGHT - 1 - y) * IMG_LINE_SIZE) + x];
+			c = *a;
 			*a = *b;
 			*b = c;
 
 		}
 	}
 
-
-
-
 	IMG_LOADED = true;
-	IMG_TOP_DOWN = true;
 	goto Exit;
 
 IOError:
 	//debug
-	goto Exit;
+	{}
 Exit:
 	{}
 }
-
-
-Bitmap::Bitmap(Bitmap* source, int fromX, int fromY, int width, int height) {
-	this->IMG_LOADED = false;
-	this->IMG_TOP_DOWN = true;
-	this->IMG_PIXEL_COUNT = width * height;
-	this->IMG_DATA_SIZE = IMG_PIXEL_COUNT * COLOR_BSIZE;
-	
+Bitmap::Bitmap(Bitmap* source, int loc_x, int loc_y, int width, int height) {
 	this->Header = new unsigned char[0];
 	this->Data = new unsigned char[IMG_DATA_SIZE];
-
+	
+	this->IMG_LOADED = false; 
+	this->IMG_TOP_DOWN = false;
 	this->IMG_WIDTH = width;
 	this->IMG_HEIGHT = height;
-	this->IMG_LINE_DATA = width * COLOR_BSIZE;
+	this->IMG_LINE_SIZE = IMG_WIDTH* COLOR_BSIZE;
+	this->IMG_DATA_SIZE = IMG_LINE_SIZE * IMG_HEIGHT;
+	
+	//cache
+	int LN_W, x,y,l_x,l_y;
 
+	for (int i = 0; i < IMG_DATA_SIZE; i++) {
+		LN_W = (IMG_WIDTH * COLOR_BSIZE);
+		x = i % LN_W;
+		y = i / LN_W;
 
-	int xsrc, ysrc, xdest, ydest;
+		l_x = x + loc_x * source->COLOR_BSIZE;
+		l_y = y * source->IMG_LINE_SIZE + loc_y * source->IMG_LINE_SIZE;
 
-	for (int i = 0; i < source->IMG_DATA_SIZE; i++) {
-		xsrc = i % source->IMG_LINE_DATA + fromX * source->COLOR_BSIZE;
-		ysrc = i / source->IMG_LINE_DATA + fromY * source->IMG_LINE_DATA;
-
-		xdest = i % source->IMG_LINE_DATA;
-		ydest = i / source->IMG_LINE_DATA;
-
-		this->Data[ydest * this->IMG_LINE_DATA + xdest] = source->Data[ysrc * source->IMG_DATA_SIZE + xsrc];
+		this->Data[y * LN_W + x] = source->Data[l_y + l_x];
 
 	}
 
-	IMG_LOADED = true;
+	this->IMG_LOADED = true;
 }
 
 
 
 Bitmap* Bitmap::get_sprite(int loc_x, int loc_y, int WIDTH, int HEIGHT) {
-	int r, g, b;
-	unsigned char* ptr;
-    char* c_ptr = (char*) &TO_REPLACE_KEY.dword;
+	//cache
+	int r, g, b, y,x;
+    unsigned char* c_ptr, ptr;
 
 	if (COLOR_REPLACE_MODE) {
-		for (int i = 0; i < this->IMG_PIXEL_COUNT; i++) {
-			ptr = &this->Data[i * 3];
+		for (y = 0; y < IMG_HEIGHT; y++) {
+			for (x = 0; x < IMG_WIDTH; x++) {
+				ptr = &Data[y* IMG_LINE_SIZE + x * 3];
+				r = *ptr++; 
+				g = *ptr++; 
+				b = *ptr;
+				READ_COLOR.dword = (b << 16) + (g << 8) + r;
 
-			b = *ptr; g = *(ptr + 1); r = *(ptr + 2);
-
-			READ_COLOR.dword = b + (g << 8) + (r << 16);
-
-			if (READ_COLOR.dword == TRANSPARENCY_KEY.dword);
-			else if (COLOR_REPLACE_MODE & ANY_COLOR || READ_COLOR.dword == FROM_REPLACE_KEY.dword) {
-				*ptr = *c_ptr;
-				*(ptr + 1) = *(c_ptr + 1);
-				*(ptr + 2) = *(c_ptr + 2);
-
-				
+				if (READ_COLOR.dword == TRANSPARENCY_KEY.dword);
+				else if (COLOR_REPLACE_MODE & ANY_COLOR || READ_COLOR.dword == FROM_REPLACE_KEY.dword) {
+					c_ptr = (unsigned char*) &TO_REPLACE_KEY.dword + 2;
+					*ptr-- = *c_ptr--; //b
+					*ptr-- = *c_ptr--; //g
+					*ptr =   *c_ptr;   //r
+				}
 			}
 		}
-
-
-		for (int i = 0; i < this->IMG_DATA_SIZE; i++) {
-			int x = i % this->IMG_LINE_DATA;
-			int y = i / this->IMG_LINE_DATA;
-
-			ptr = &Data[y* IMG_LINE_DATA + x * 3];
-			r = *ptr++; g = *ptr++; b = *ptr;
-			READ_COLOR.dword = r + (g << 8)  + (b << 16);
-
-			
-		}
-		
 	}
 	
 	return new Bitmap(this, loc_x, loc_y, WIDTH, HEIGHT);
@@ -157,7 +144,7 @@ Bitmap* Bitmap::get_sprite(int loc_x, int loc_y, int WIDTH, int HEIGHT) {
 
 int Bitmap::Get_image_bytes(FILE* p_file, int offset)
 {
-	const int RESUME = ftell(p_file);
+	int RESUME = ftell(p_file);
 	fseek(p_file, 0, SEEK_END); //seek end
 	int size = ftell(p_file) - offset; //get size
 	fseek(p_file, 0 + RESUME, SEEK_SET);

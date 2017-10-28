@@ -13,10 +13,6 @@ public:
 	int SH_SLOTS_MAX;
 	int SH_SPRITE_W;
 	int SH_SPRITE_H;
-
-
-	
-
 	Bitmap** SPRITE_DATA;
 	
 
