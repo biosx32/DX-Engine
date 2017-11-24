@@ -1,9 +1,14 @@
 #include "Spritesheet.h"
 
+Spritesheet::Spritesheet(int W_COUNT, int H_COUNT)
+{
+
+}
+
 Spritesheet::~Spritesheet() {
 	
-	if (SPRITE_DATA) {
-		delete[] SPRITE_DATA;
+	if (this->SpriteData) {
+		delete[] SpriteData;
 	}
 }
 

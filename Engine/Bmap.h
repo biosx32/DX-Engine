@@ -20,9 +20,10 @@ public:
 class Bitmap {
 public:
 	Bitmap();
-	BitmapDS* BitmapData;	
-	Bitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT);
+	~Bitmap();
+	BitmapDS* BitmapData;
 
+	Bitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT);
 	int Load(char* FileName);
 	int SetDataSource(BitmapDS* data);
 };

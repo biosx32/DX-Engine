@@ -114,3 +114,10 @@ int Bitmap::SetDataSource(BitmapDS * data)
 Bitmap::Bitmap() {
 
 }
+
+Bitmap::~Bitmap()
+{
+	if (BitmapData) {
+		delete BitmapData;
+	}
+}
