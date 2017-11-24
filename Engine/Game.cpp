@@ -133,11 +133,12 @@ void drawrectangle(Interface out, int x0, int y0, int width, int height) {
 
 Bitmap img;
 Bitmap* imgptr = &img;
+Bitmap* cutted;
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
 	imgptr->Load("FONT\\small.bmp");
-	
+	cutted = imgptr->GetBitmapPart(0, 0, 30, 30);
 
 }
 
@@ -147,7 +148,7 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	out.Draw_Bitmap(imgptr, 0, 0);
+	out.Draw_Bitmap(imgptr, 30, 30);
 
-
+	out.Draw_Bitmap(cutted, 0, 0);
 }
