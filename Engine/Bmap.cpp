@@ -44,14 +44,16 @@ Bitmap::Bitmap(Bitmap* source, int loc_x, int loc_y, int width, int height): Bit
 
 
 */
-BitmapDS* Bitmap::CutSprite(int xoff, int yoff, int width, int height) {
+Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 
 
-	BitmapDS* cut = new BitmapDS(width, height);
+	Bitmap* cut = new Bitmap();
+	BitmapDS* datastruct = new BitmapDS(width, height);
+	cut->SetDataSource(datastruct);
 
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
-			cut->ptr[y*width + x] = this->BitmapData->ptr[(y + yoff)* this->BitmapData->width + (x + xoff)];
+			datastruct->ptr[y*width + x] = this->BitmapData->ptr[(y + yoff)* this->BitmapData->width + (x + xoff)];
 		}
 	}
 

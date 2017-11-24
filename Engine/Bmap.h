@@ -25,15 +25,19 @@ class Bitmap {
 public:
 
 	Bitmap();
-
-
-	BitmapDS* BitmapData;
-	Color transparent_color;
-	
-	BitmapDS* CutSprite(int xoff, int yoff, int WIDTH, int HEIGHT);
+	BitmapDS* BitmapData;	
+	Bitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT);
 
 	int Load(char* FileName);
 	int SetDataSource(BitmapDS* data);
+};
+
+class BitmapPart {
+	int xoff;
+	int yoff;
+	int width;
+	int height;
+
 };
 
 #endif

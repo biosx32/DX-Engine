@@ -4,8 +4,7 @@
 
 class Spritesheet: public Bitmap {
 public:
-	Spritesheet(char* FileName, int W_COUNT, int H_COUNT);
-	Spritesheet(char* FileName, int W_COUNT, int H_COUNT, int ColorReplaceMode, int ReplaceColor, int NewColor);
+	Spritesheet(, int W_COUNT, int H_COUNT);
 	~Spritesheet();
 
 	int SH_W_COUNT;
