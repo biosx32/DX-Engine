@@ -7,6 +7,11 @@ Spritesheet::~Spritesheet() {
 	}
 }
 
+void Spritesheet::Load(Bitmap * BitmapImage)
+{
+	this->BitmapImage = BitmapImage;
+}
+
 void Spritesheet::_initialise(char* FileName, int W_COUNT, int H_COUNT)
 {
 	if (!IMG_LOADED) return;
