@@ -131,27 +131,24 @@ void drawrectangle(Interface out, int x0, int y0, int width, int height) {
 
 }
 
-
 Bitmap b = Bitmap();
-
+Bitmap* cutted = new Bitmap();
 void Game::Initialise() {
 	out.set_graphics(&gfx);
 	int result = b.Load("FONT\\small.bmp");
-	println("Helloš world init");
-
+	BitmapDS* ds = b.CutSprite(0, 0, 30, 30);
+	
+	cutted->SetDataSource(ds);
 }
-
 
 void Game::UpdateModel()
 {
 }
 
-
-
-
 void Game::ComposeFrame()
 {
-	out.Draw_Bitmap(&b, 0, 0);
+	out.Draw_Bitmap(&b, 100, 100);
+	out.Draw_Bitmap(cutted, 0, 0);
 
 
 }

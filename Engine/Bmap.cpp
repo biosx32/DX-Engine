@@ -1,7 +1,6 @@
 #include "Bmap.h"
 
 
-
 BitmapDS::~BitmapDS() {
 	if (ptr) delete[] ptr;
 }
@@ -13,12 +12,7 @@ BitmapDS::BitmapDS(int width, int height)
 	this->ptr = new Color[width* height];
 	///////////////////////////////////
 }
-BitmapDS::BitmapDS(int width, int height, Color * data)
-{
-	this->width = width;
-	this->height = height;
-	this->ptr = data;
-}
+
 /*
 Bitmap::Bitmap(Bitmap* source, int loc_x, int loc_y, int width, int height): Bitmap(*source) {
 	
@@ -49,34 +43,21 @@ Bitmap::Bitmap(Bitmap* source, int loc_x, int loc_y, int width, int height): Bit
 }
 
 
+*/
+BitmapDS* Bitmap::CutSprite(int xoff, int yoff, int width, int height) {
 
-Bitmap* Bitmap::get_sprite(int loc_x, int loc_y, int WIDTH, int HEIGHT) {
-	//cache
-	int r, g, b, y,x;
-    unsigned char * c_ptr,  *ptr;
 
-	if (COLOR_REPLACE_MODE) {
-		for (y = 0; y < height; y++) {
-			for (x = 0; x < width; x++) {
-				ptr = &Data[y* IMG_LINE_SIZE + x * 3];
-				r = *ptr++; 
-				g = *ptr++; 
-				b = *ptr;
-				READ_COLOR.dword = (b << 16) + (g << 8) + r;
+	BitmapDS* cut = new BitmapDS(width, height);
 
-				if (READ_COLOR.dword == transparent_color.dword);
-				else if (COLOR_REPLACE_MODE & ANY_COLOR || READ_COLOR.dword == FROM_REPLACE_KEY.dword) {
-					c_ptr = (unsigned char*) &TO_REPLACE_KEY.dword + 2;
-					*ptr-- = *c_ptr--; //b
-					*ptr-- = *c_ptr--; //g
-					*ptr =   *c_ptr;   //r
-				}
-			}
+	for (int y = 0; y < height; y++) {
+		for (int x = 0; x < width; x++) {
+			cut->ptr[y*width + x] = this->BitmapData->ptr[(y + yoff)* this->BitmapData->width + (x + xoff)];
 		}
 	}
-	
-	return new Bitmap(this, loc_x, loc_y, WIDTH, HEIGHT);
-}*/
+
+
+	return cut;
+}
 
 int Bitmap::Load(char * FileName)
 {
@@ -149,6 +130,12 @@ int Bitmap::Load(char * FileName)
 		
 	}
 
+	return 0;
+}
+
+int Bitmap::SetDataSource(BitmapDS * data)
+{
+	this->BitmapData = data;
 	return 0;
 }
 

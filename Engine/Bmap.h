@@ -13,7 +13,6 @@ class BitmapDS {
 public:
 	
 	BitmapDS(int width, int height);
-	BitmapDS(int width, int height, Color* data);
 	~BitmapDS();
 
 	int width;
@@ -31,9 +30,10 @@ public:
 	BitmapDS* BitmapData;
 	Color transparent_color;
 	
-	//virtual BitmapDS* get_sprite(int loc_x, int loc_y, int WIDTH, int HEIGHT) final;
+	BitmapDS* CutSprite(int xoff, int yoff, int WIDTH, int HEIGHT);
 
-	virtual int Load(char* FileName);
+	int Load(char* FileName);
+	int SetDataSource(BitmapDS* data);
 };
 
 #endif
