@@ -8,3 +8,8 @@ int File_bytes(FILE* p_file)
 	fseek(p_file, 0 + RESUME, SEEK_SET);
 	return size;
 }
+
+void DebugString(char * str)
+{
+	OutputDebugString((LPCWSTR) str);
+}
