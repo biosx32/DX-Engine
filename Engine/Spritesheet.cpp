@@ -1,7 +1,10 @@
 #include "Spritesheet.h"
 
 Spritesheet::~Spritesheet() {
-	delete[] SPRITE_DATA;
+	
+	if (SPRITE_DATA) {
+		delete[] SPRITE_DATA;
+	}
 }
 
 void Spritesheet::_initialise(char* FileName, int W_COUNT, int H_COUNT)
@@ -13,8 +16,8 @@ void Spritesheet::_initialise(char* FileName, int W_COUNT, int H_COUNT)
 	SH_W_COUNT = W_COUNT;
 	SH_H_COUNT = H_COUNT;
 	SH_SLOTS_MAX = (W_COUNT*H_COUNT);
-	SH_SPRITE_W = (IMG_WIDTH / W_COUNT);
-	SH_SPRITE_H = (IMG_HEIGHT / H_COUNT);
+	SH_SPRITE_W = (width / W_COUNT);
+	SH_SPRITE_H = (height / H_COUNT);
 	
 	//cache
 	int slot_x, slot_y, loc_x, loc_y;

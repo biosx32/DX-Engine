@@ -75,6 +75,9 @@
     <ClInclude Include="Interface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Func.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="COMInitializer.cpp">
@@ -116,6 +119,9 @@
     <ClCompile Include="Interface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Func.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
@@ -132,6 +138,15 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Chili.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="FONT\big.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="FONT\medium.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="FONT\small.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -23,11 +23,11 @@ void Interface::DrawText(char * str, int x, int y)
 	int BASE_W;
 	Bitmap*  B;
 	this->TextObj->setText(str);
-	char* ptr = &TextObj->text;
+	char* ptr = &TextObj->text[0];
 		
 	while(*ptr++ != 0){
-		B = TextObj->Get_Bitmap_Char(ptr - 1);
-		BASE_W = B->IMG_WIDTH;
+		B = TextObj->Get_Bitmap_Char(* (ptr - 1));
+		BASE_W = B->width;
 		Draw_Bitmap(B, x + (int) POS_COUNTER, y);
 		POS_COUNTER += BASE_W * 0.65;
 
@@ -49,8 +49,8 @@ void Interface::Draw_Bitmap(Bitmap* B, int fx, int fy) {
 	int b;
 	unsigned char* ptr;
 	
-	for (int y = 0; y < B->IMG_HEIGHT; y++) {
-		for (int x = 0; x < B->IMG_WIDTH; x++) {
+	for (int y = 0; y < B->height; y++) {
+		for (int x = 0; x < B->width; x++) {
 			ptr = &B->Data[y* B->IMG_LINE_SIZE + x * 3];
 			
 			r = *ptr++;
@@ -60,7 +60,7 @@ void Interface::Draw_Bitmap(Bitmap* B, int fx, int fy) {
 			READ_COLOR.dword = (b << 16) + (g << 8) + r;
 
 
-			if (READ_COLOR.dword == B->TRANSPARENCY_KEY.dword) {
+			if (READ_COLOR.dword == B->transparent_color.dword) {
 				continue;
 			}
 

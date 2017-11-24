@@ -2,41 +2,35 @@
 #define __BITMAP_H__
 #include <stdio.h>
 #include "Colors.h"
+#include "Func.h"
 
-#define ONE_COLOR 1
-#define ANY_COLOR 2
-#define NO_COLOR 0
 
-class Bitmap {
+#define ERROR_IO_READ -1
+#define ERROR_EMPTY_FILE 1
+
+
+class BitmapData {
 public:
 	
-	Bitmap(char* FileName);
-	Bitmap(Bitmap* source, int loc_x, int loc_y, int width, int height);
-	~Bitmap();
+	BitmapData(int width, int height);
+	~BitmapData();
 
-	Color TRANSPARENCY_KEY = 0xb1f4b1;
+	int width;
+	int height;
+	int data_count;
+	Color * Data;
 
-	int IMG_WIDTH;
-	int IMG_HEIGHT;
-	int IMG_DATA_SIZE;
-	int IMG_LINE_SIZE;
-
-	unsigned char * Data;
-	unsigned char * Header;
-
-	Bitmap* get_sprite(int loc_x, int loc_y, int WIDTH, int HEIGHT);
-
-protected:
-	int const static COLOR_BSIZE = 3 * 1;
 	
-	bool IMG_TOP_DOWN;
-	bool IMG_LOADED;
-	int COLOR_REPLACE_MODE;
-	int Get_image_bytes(FILE* p_file, int offset);
 
-	Color READ_COLOR;
-	Color FROM_REPLACE_KEY;
-	Color TO_REPLACE_KEY;
+};
+
+class Bitmap : public BitmapData {
+public:
+	Color transparent_color;
+	
+	virtual BitmapData* get_sprite(int loc_x, int loc_y, int WIDTH, int HEIGHT) final;
+
+	virtual int Load(char* FileName);
 };
 
 #endif
