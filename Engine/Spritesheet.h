@@ -4,7 +4,7 @@
 
 class Spritesheet: public Bitmap {
 public:
-	Spritesheet(, int W_COUNT, int H_COUNT);
+	Spritesheet(int W_COUNT, int H_COUNT);
 	~Spritesheet();
 
 	int SH_W_COUNT;
