@@ -131,7 +131,7 @@ int Bitmap::Load(char * FileName)
 
 	fclose(file_read);
 
-	OutputDebugString();
+
 
 	if (RotationNeeded == 1) {
 

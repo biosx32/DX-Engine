@@ -1,4 +1,4 @@
-/****************************************************************************************** 
+﻿/****************************************************************************************** 
  *	Chili DirectX Framework Version 16.07.20											  *	
  *	Game.cpp																			  *
  *	Copyright 2016 PlanetChili.net <http://www.planetchili.net>							  *
@@ -137,7 +137,7 @@ Bitmap b = Bitmap();
 void Game::Initialise() {
 	out.set_graphics(&gfx);
 	int result = b.Load("FONT\\small.bmp");
-	
+	println("Helloš world init");
 
 }
 

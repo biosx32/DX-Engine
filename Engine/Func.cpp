@@ -9,7 +9,14 @@ int File_bytes(FILE* p_file)
 	return size;
 }
 
-void DebugString(char * str)
+void print(char * str)
 {
-	OutputDebugString((LPCWSTR) str);
+	wchar_t* wString = new wchar_t[4096];
+	MultiByteToWideChar(CP_ACP, 0, str, -1, wString, 4096);
+	OutputDebugString(wString);
+}
+void println(char * str)
+{
+	print(str);
+	print("\n");
 }
