@@ -13,37 +13,6 @@ BitmapDS::BitmapDS(int width, int height)
 	///////////////////////////////////
 }
 
-/*
-Bitmap::Bitmap(Bitmap* source, int loc_x, int loc_y, int width, int height): Bitmap(*source) {
-	
-
-	bool _IMG_TOP_DOWN = false;
-	this->width = width;
-	this->height = height;
-	this->IMG_LINE_SIZE = width* COLOR_BSIZE;
-
-	this->IMG_DATA_SIZE = IMG_LINE_SIZE * height;
-	
-	//cache
-	int LN_W, x,y,l_x,l_y;
-
-	for (int i = 0; i < IMG_DATA_SIZE; i++) {
-		LN_W = (width * COLOR_BSIZE);
-		x = i % LN_W;
-		y = i / LN_W;
-
-		l_x = x + loc_x * source->COLOR_BSIZE;
-		l_y = y * source->IMG_LINE_SIZE + loc_y * source->IMG_LINE_SIZE;
-
-		this->Data[y * LN_W + x] = source->Data[l_y + l_x];
-
-	}
-
-	this->IMG_LOADED = true;
-}
-
-
-*/
 Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 
 
