@@ -145,7 +145,7 @@ void Game::Initialise() {
 void Game::UpdateModel()
 {
 }
-
+//test
 void Game::ComposeFrame()
 {
 	out.Draw_Bitmap(imgptr, 30, 30);
