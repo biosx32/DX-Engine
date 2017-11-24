@@ -13,11 +13,9 @@ public:
 	int SH_SPRITE_W;
 	int SH_SPRITE_H;
 	Bitmap** SPRITE_DATA;
-	
 
-protected:
 	
-	void _initialise(char* FileName, int W_COUNT, int H_COUNT);
+	void Load(char* FileName, int W_COUNT, int H_COUNT);
 };
 
 

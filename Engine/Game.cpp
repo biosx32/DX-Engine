@@ -140,6 +140,19 @@ void Game::Initialise() {
 	imgptr->Load("FONT\\small.bmp");
 	cutted = imgptr->GetBitmapPart(0, 0, 30, 30);
 
+	/*
+	Spritesheet sh = Spritesheet("img.bmp", 12, 12);
+	Spritesheet sh = Spritesheet(Bitmap_object, 12, 12);
+
+
+	Spritesheet sh = Spritesheet(12, 12);
+	sh.Load("img.bmp");
+
+
+    Spritesheet sh = Spritesheet(12, 12);
+	sh.Load(Bitmap_objectt);
+	*/
+
 }
 
 void Game::UpdateModel()
