@@ -39,11 +39,6 @@ void Game::Go()
 }
 
 
-
-void Game::Initialise() {
-	out.set_graphics(&gfx);
-}
-
 void drawFastVLine(Interface out, int x0, int y0, int width) {
 	for (int i = 0; i < width; i++) {
 		out.DrawPixel(x0 + i, y0, Colors::Green);
@@ -136,14 +131,27 @@ void drawrectangle(Interface out, int x0, int y0, int width, int height) {
 
 }
 
+
+Bitmap b = Bitmap();
+
+void Game::Initialise() {
+	out.set_graphics(&gfx);
+	int result = b.Load("FONT\\small.bmp");
+	
+
+}
+
+
 void Game::UpdateModel()
 {
 }
 
 
 
+
 void Game::ComposeFrame()
 {
-	out.DrawText("Jebek",0,0);
+	out.Draw_Bitmap(&b, 0, 0);
+
 
 }

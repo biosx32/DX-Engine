@@ -2,19 +2,22 @@
 
 
 
-BitmapData::~BitmapData() {
-	if (Data) delete[] Data;
+BitmapDS::~BitmapDS() {
+	if (ptr) delete[] ptr;
 }
 
-BitmapData::BitmapData(int width, int height)
+BitmapDS::BitmapDS(int width, int height)
 {
 	this->width = width;
 	this->height = height;
-	this->data_count = width*height;
-	this->Data = new Color[width* height];
-	
-	
+	this->ptr = new Color[width* height];
 	///////////////////////////////////
+}
+BitmapDS::BitmapDS(int width, int height, Color * data)
+{
+	this->width = width;
+	this->height = height;
+	this->ptr = data;
 }
 /*
 Bitmap::Bitmap(Bitmap* source, int loc_x, int loc_y, int width, int height): Bitmap(*source) {
@@ -91,44 +94,52 @@ int Bitmap::Load(char * FileName)
 	}
 
 	char Header[54] = {};
-	this->Data = new Color[BYTES_TO_READ];
+	
 
 	fread_s((void*) Header, 54, sizeof(unsigned char), 54, file_read);
 
-	this->width = *(int*)&Header[18];
-	this->height = *(int*)&Header[22];
-
-
-	if (this->height < 0) {
-		this->height = -height;
+	int width = *(int*)&Header[18];
+	int height = *(int*)&Header[22];
+	
+	if (height < 0) {
+		height = -height;
 		RotationNeeded = 1;
 	}
 
-	int IGN_COUNT = this->width % 4;
+	this->BitmapData = new BitmapDS(width, height);
+	BitmapDS* Data = this->BitmapData;
 
-	unsigned char temp[3] = {};
-
+	int bitmap_align_bytes = Data->width % 4;
 	int size_line = width * 3;
-
+	unsigned char temp[3] = {};
+	Color temp_color = Color();
+	unsigned char * linedata = new unsigned char[size_line];
 	for (int i = 0; i < height; i++) {
-		fread_s(&Data[i * size_line], size_line, sizeof(unsigned char), size_line, file_read);
-		if (IGN_COUNT) {
-			fread_s(temp, IGN_COUNT, sizeof(unsigned char), IGN_COUNT, file_read);
+		fread_s((void*) linedata, size_line, 1, size_line, file_read);
+
+		if (bitmap_align_bytes) {
+			fread_s(&temp, bitmap_align_bytes, 1, bitmap_align_bytes, file_read);
+		}
+		
+		for (int j = 0; j < Data->width; j++) {
+			unsigned char* datachar = &linedata[j * 3];
+			temp_color = *(Color*) datachar;
+			this->BitmapData->ptr[i * width + j] = temp_color;
 		}
 	}
 
 	fclose(file_read);
 
-	Color temp_color = Color();
+	
 
 	if (RotationNeeded == 1) {
 
 		for (int y = 0; y <= height / 2; y++) {
 			for (int x = 0; x < width; x++) {
 				
-				temp_color = Data[(y)* width + x];
-				Data[(y)* width + x] = Data[((height-1)-y)* width + x];
-				Data[((height - 1) - y)* width + x] = temp_color;
+				temp_color = Data->ptr[(y)* width + x];
+				Data->ptr[(y)* width + x] = Data->ptr[((height-1)-y)* width + x];
+				Data->ptr[((height - 1) - y)* width + x] = temp_color;
 
 
 			}
@@ -140,4 +151,6 @@ int Bitmap::Load(char * FileName)
 	return 0;
 }
 
+Bitmap::Bitmap() {
 
+}

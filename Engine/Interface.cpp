@@ -41,22 +41,16 @@ void Interface::set_font(Text * txt)
 {
 	this->TextObj = txt;
 }
-
+*/
 void Interface::Draw_Bitmap(Bitmap* B, int fx, int fy) {
 	
-	for (int y = 0; y < B->height; y++) {
-		for (int x = 0; x < B->width; x++) {
+	for (int y = 0; y < B->BitmapData->height; y++) {
+		for (int x = 0; x < B->BitmapData->width; x++) {
 
-			READ_COLOR = B->Data[y* B->width + x];
-
-
-			if (READ_COLOR.dword == B->transparent_color.dword) {
-				continue;
-			}
-
+			READ_COLOR = B->BitmapData->ptr[y* B->BitmapData->width + x];
 			DrawPixel(x + fx, y + fy, READ_COLOR);
 			
 			
 		}
 	}
-}*/
+}

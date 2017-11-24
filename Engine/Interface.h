@@ -13,7 +13,7 @@ public:
 	void set_graphics(Graphics* gfx);
 //	void set_font(Text* txt);
 	void DrawPixel(int x, int y, Color c);
-	void DrawText(char* str, int x, int y);
+//	void DrawText(char* str, int x, int y);
 	void Draw_Bitmap(Bitmap* B, int fx, int fy);
 
 protected:

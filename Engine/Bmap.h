@@ -9,26 +9,29 @@
 #define ERROR_EMPTY_FILE 1
 
 
-class BitmapData {
+class BitmapDS {
 public:
 	
-	BitmapData(int width, int height);
-	~BitmapData();
+	BitmapDS(int width, int height);
+	BitmapDS(int width, int height, Color* data);
+	~BitmapDS();
 
 	int width;
 	int height;
-	int data_count;
-	Color * Data;
-
-	
+	Color * ptr;
 
 };
 
-class Bitmap : public BitmapData {
+class Bitmap {
 public:
+
+	Bitmap();
+
+
+	BitmapDS* BitmapData;
 	Color transparent_color;
 	
-	virtual BitmapData* get_sprite(int loc_x, int loc_y, int WIDTH, int HEIGHT) final;
+	//virtual BitmapDS* get_sprite(int loc_x, int loc_y, int WIDTH, int HEIGHT) final;
 
 	virtual int Load(char* FileName);
 };
