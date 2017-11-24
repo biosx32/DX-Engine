@@ -119,33 +119,23 @@ int Bitmap::Load(char * FileName)
 
 	fclose(file_read);
 
-	//cache
-	unsigned char *a;
-	unsigned char *b;
-	unsigned char c;
-
+	Color temp_color = Color();
 
 	if (RotationNeeded == 1) {
-		for (int i = 0; i < size_line / 2; i++) {
-			int x = i % size_line;
-			int y = i / size_line;
 
-			a = &Data[y * size_line + x];
-			b = &Data[((height - 1 - y) * IMG_LINE_SIZE) + x];
-			c = *a;
-			*a = *b;
-			*b = c;
+		for (int y = 0; y <= height / 2; y++) {
+			for (int x = 0; x < width; x++) {
+				
+				temp_color = Data[(y)* width + x];
+				Data[(y)* width + x] = Data[((height-1)-y)* width + x];
+				Data[((height - 1) - y)* width + x] = temp_color;
+
+
+			}
 
 		}
+		
 	}
-
-	goto Exit;
-
-IOError:
-	//debug
-	{}
-Exit:
-	{}
 
 	return 0;
 }

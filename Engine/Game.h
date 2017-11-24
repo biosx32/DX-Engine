@@ -24,8 +24,6 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "Bmap.h"
-#include "Spritesheet.h"
-#include "Text.h"
 #include "Interface.h"
 
 

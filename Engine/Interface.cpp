@@ -14,7 +14,7 @@ void Interface::DrawPixel(int x, int y, Color c) {
 	
 }
 
-void Interface::DrawText(char * str, int x, int y)
+/*void Interface::DrawText(char * str, int x, int y)
 {
 	
 	double POS_COUNTER = 0;
@@ -43,21 +43,11 @@ void Interface::set_font(Text * txt)
 }
 
 void Interface::Draw_Bitmap(Bitmap* B, int fx, int fy) {
-	//cache variables
-	int r;
-	int g;
-	int b;
-	unsigned char* ptr;
 	
 	for (int y = 0; y < B->height; y++) {
 		for (int x = 0; x < B->width; x++) {
-			ptr = &B->Data[y* B->IMG_LINE_SIZE + x * 3];
-			
-			r = *ptr++;
-			g = *ptr++;
-			b = *ptr;
 
-			READ_COLOR.dword = (b << 16) + (g << 8) + r;
+			READ_COLOR = B->Data[y* B->width + x];
 
 
 			if (READ_COLOR.dword == B->transparent_color.dword) {
@@ -69,4 +59,4 @@ void Interface::Draw_Bitmap(Bitmap* B, int fx, int fy) {
 			
 		}
 	}
-}
+}*/
