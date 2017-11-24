@@ -3,12 +3,18 @@
 
 #include <stdio.h>
 #include <Windows.h>
+#include <string>
 
 int File_bytes(FILE* p_file);
 
+class OutputStream {
+public:
+	OutputStream& operator<<(char* str);
+	OutputStream& operator<<(double chr);
+};
 
-void print(char* str);
-void println(char* str);
+extern OutputStream print;
+
 
 
 #endif

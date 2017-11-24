@@ -135,6 +135,7 @@ int Bitmap::Load(char * FileName)
 
 int Bitmap::SetDataSource(BitmapDS * data)
 {
+	if (this->BitmapData) delete BitmapData;
 	this->BitmapData = data;
 	return 0;
 }

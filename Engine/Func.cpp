@@ -1,5 +1,7 @@
 #include "Func.h"
 
+OutputStream print;
+
 int File_bytes(FILE* p_file)
 {
 	int RESUME = ftell(p_file);
@@ -9,14 +11,23 @@ int File_bytes(FILE* p_file)
 	return size;
 }
 
-void print(char * str)
+
+
+OutputStream & OutputStream::operator<<(char * str)
 {
 	wchar_t* wString = new wchar_t[4096];
 	MultiByteToWideChar(CP_ACP, 0, str, -1, wString, 4096);
 	OutputDebugString(wString);
+	return OutputStream();
 }
-void println(char * str)
+
+OutputStream & OutputStream::operator<<( double chr)
 {
-	print(str);
-	print("\n");
+	std::string s = std::to_string(chr);
+	char const *pchar = s.c_str();
+	wchar_t* wString = new wchar_t[128];
+	MultiByteToWideChar(CP_ACP, 0, pchar, -1, wString, 128);
+	OutputDebugString(wString);
+	return OutputStream();
 }
+

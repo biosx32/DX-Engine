@@ -136,9 +136,8 @@ Bitmap* cutted = new Bitmap();
 void Game::Initialise() {
 	out.set_graphics(&gfx);
 	int result = b.Load("FONT\\small.bmp");
-	BitmapDS* ds = b.CutSprite(0, 0, 30, 30);
-	
-	cutted->SetDataSource(ds);
+	cutted->SetDataSource(b.CutSprite(0, 0, 30, 30));
+	print << "test\n" << 123 << " -> test2" << "\n";
 }
 
 void Game::UpdateModel()
