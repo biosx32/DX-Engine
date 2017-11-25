@@ -1,24 +1,30 @@
 #include "Text.h"
 
 
-Text::Text(char* FileName, int W_COUNT, int H_COUNT, char* translate, int replaceColor, int newColor) : 
-	Spritesheet(FileName, W_COUNT, H_COUNT, ANY_COLOR ,replaceColor, newColor) {
-	this->translate = translate;
+GraphicLabel::GraphicLabel()
+{
 }
 
-Bitmap* Text::Get_Bitmap_Char(char c) {
-	int index = 0;
+int GraphicLabel::Load(Spritesheet* sh) {
+	this->SpriteSheetData = sh;
+	return 0;
+}
 
-	for (index = 0; index < this->SH_SLOTS_MAX; index++) {
+
+Bitmap* GraphicLabel::Get_Bitmap_Char(int c) {
+	int index = 0;
+	int maxChars = SpriteSheetData->wcount * SpriteSheetData->hcount;
+
+	for (index = 0; index < maxChars; index++) {
 		if (c == translate[index]) {
 			break;
 		}
 	}
 
-	return SPRITE_DATA[index];
+	return SpriteSheetData->SpriteData[index];
 
 }
 
-void Text::setText(char* text) {
+void GraphicLabel::setText(char* text) {
 	strcpy_s(this->text, text);
 }

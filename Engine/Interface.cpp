@@ -37,7 +37,7 @@ void Interface::DrawPixel(int x, int y, Color c) {
 
 }
 
-void Interface::set_font(Text * txt)
+void Interface::set_font(Label * txt)
 {
 	this->TextObj = txt;
 }
