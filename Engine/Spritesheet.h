@@ -11,7 +11,7 @@ public:
 	int hcount;
 
 	Bitmap* BitmapImage;
-	Bitmap* SpriteData;
+	Bitmap** SpriteData;
 	
 	void Load(Bitmap* BitmapImage);
 };

@@ -1,8 +1,9 @@
 #include "Spritesheet.h"
 
-Spritesheet::Spritesheet(int W_COUNT, int H_COUNT)
+Spritesheet::Spritesheet(int wcount, int hcount)
 {
-
+	this->wcount = wcount;
+	this->hcount = hcount;
 }
 
 Spritesheet::~Spritesheet() {
@@ -14,22 +15,27 @@ Spritesheet::~Spritesheet() {
 
 void Spritesheet::Load(Bitmap * BitmapImage)
 {
+	int SpriteCount = wcount * hcount;
+
+
 	this->BitmapImage = BitmapImage;
+	this->SpriteData = new (Bitmap*[SpriteCount]);
+	
+	int OneSpriteWidth = BitmapImage->BitmapData->width / wcount;
+	int OneSpriteHeight = BitmapImage->BitmapData->height / hcount;
+
+	for (int y = 0; y < hcount; y++) {
+		for (int x = 0; x < wcount; x++) {
+			this->SpriteData[y * wcount + x] = BitmapImage->GetBitmapPart(x * OneSpriteWidth, y * OneSpriteHeight, OneSpriteWidth, OneSpriteHeight);
+
+
+		}
+	}
 }
 
 void Spritesheet::_initialise(char* FileName, int W_COUNT, int H_COUNT)
 {
-	if (!IMG_LOADED) return;
-	
-	SPRITE_DATA = new Bitmap*[SH_SLOTS_MAX];
-	
-	SH_W_COUNT = W_COUNT;
-	SH_H_COUNT = H_COUNT;
-	SH_SLOTS_MAX = (W_COUNT*H_COUNT);
-	SH_SPRITE_W = (width / W_COUNT);
-	SH_SPRITE_H = (height / H_COUNT);
-	
-	//cache
+
 	int slot_x, slot_y, loc_x, loc_y;
 	
 	
