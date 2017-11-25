@@ -27,8 +27,6 @@ void Spritesheet::Load(Bitmap * BitmapImage)
 	for (int y = 0; y < hcount; y++) {
 		for (int x = 0; x < wcount; x++) {
 			this->SpriteData[y * wcount + x] = BitmapImage->GetBitmapPart(x * OneSpriteWidth, y * OneSpriteHeight, OneSpriteWidth, OneSpriteHeight);
-
-
 		}
 	}
 }

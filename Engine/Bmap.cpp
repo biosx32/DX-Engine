@@ -22,7 +22,7 @@ Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
-			datastruct->ptr[y*width + x] = this->BitmapData->ptr[(y + yoff)* this->BitmapData->width + (x + xoff)];
+			datastruct->ptr[y*width + x] = this->BitmapData->ptr[(y + yoff)* BitmapData->width + (x + xoff)];
 		}
 	}
 
@@ -33,7 +33,7 @@ Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 int Bitmap::Load(char * FileName)
 {
 	
-	int RotationNeeded = 0;
+	int RotationNeeded = 1;
 
 	FILE* file_read;
 	fopen_s(&file_read, FileName, "rb");
@@ -55,7 +55,7 @@ int Bitmap::Load(char * FileName)
 	
 	if (height < 0) {
 		height = -height;
-		RotationNeeded = 1;
+		RotationNeeded = 0;
 	}
 
 	this->BitmapData = new BitmapDS(width, height);

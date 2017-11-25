@@ -132,20 +132,12 @@ void drawrectangle(Interface out, int x0, int y0, int width, int height) {
 }
 
 Bitmap img;
-Bitmap* imgptr = &img;
-Bitmap* cutted;
+Spritesheet sh(16,16);
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
-	imgptr->Load("FONT\\small.bmp");
-	cutted = imgptr->GetBitmapPart(0, 0, 30, 30);
-
-
-
-    Spritesheet sh = Spritesheet(12, 12);
-	sh.Load(Bitmap_objectt);
-	*/
-
+	img.Load("FONT\\small.bmp");
+	sh.Load(&img);
 }
 
 void Game::UpdateModel()
@@ -154,7 +146,22 @@ void Game::UpdateModel()
 //test2
 void Game::ComposeFrame()
 {
-	out.Draw_Bitmap(imgptr, 30, 30);
+	out.Draw_Bitmap(sh.BitmapImage, 350, 50);
 
-	out.Draw_Bitmap(cutted, 0, 0);
+
+	for (int y = 0; y < sh.hcount; y++) {
+		for (int x = 0; x < sh.wcount; x++) {
+			int i = y * sh.wcount + x;
+			int xdst = x*sh.SpriteData[i]->BitmapData->width * 1.2;
+			int ydst = y*sh.SpriteData[i]->BitmapData->height * 1.2;
+
+			out.Draw_Bitmap(sh.SpriteData[i], 30 + xdst, 30 + ydst);
+		}
+	}
+
+	for (int i = 0; i < sh.wcount*sh.hcount; i++) {
+		
+		
+	}
+
 }

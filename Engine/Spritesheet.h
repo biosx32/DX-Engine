@@ -4,6 +4,7 @@
 
 class Spritesheet {
 public:
+	Spritesheet() = delete;
 	Spritesheet(int W_COUNT, int H_COUNT);
 	~Spritesheet();
 
