@@ -137,11 +137,13 @@ Label j;
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
+	
 	img.Load("FONT\\small.bmp");
 	
 	sh.Load(&img);
 	j.Load(&sh);
 
+	out.set_font(&j);
 }
 
 void Game::UpdateModel()
@@ -150,15 +152,9 @@ void Game::UpdateModel()
 //test2
 void Game::ComposeFrame()
 {
+	j.setText("TEXT_123");
 	out.Draw_Bitmap(sh.BitmapImage, 350, 50);
-
-
-	const char* text = "ABCDEFGH_HELLO WORLD";
-	for (int i = 0; i < strlen(text); i++) {
-		Bitmap* toDraw = j.Get_Bitmap_Char(text[i]);
-		out.Draw_Bitmap(toDraw, toDraw->BitmapData->width * i, 10);
-	
-	}
+	out.DrawLabel(30, 30);
 
 
 }

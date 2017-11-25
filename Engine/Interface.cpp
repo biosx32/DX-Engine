@@ -14,7 +14,7 @@ void Interface::DrawPixel(int x, int y, Color c) {
 	
 }
 
-/*void Interface::DrawText(char * str, int x, int y)
+void Interface::DrawLabel(int x, int y)
 {
 	
 	double POS_COUNTER = 0;
@@ -22,12 +22,11 @@ void Interface::DrawPixel(int x, int y, Color c) {
 	//cache variables
 	int BASE_W;
 	Bitmap*  B;
-	this->TextObj->setText(str);
 	char* ptr = &TextObj->text[0];
 		
 	while(*ptr++ != 0){
 		B = TextObj->Get_Bitmap_Char(* (ptr - 1));
-		BASE_W = B->width;
+		BASE_W = B->BitmapData->width;
 		Draw_Bitmap(B, x + (int) POS_COUNTER, y);
 		POS_COUNTER += BASE_W * 0.65;
 
@@ -41,9 +40,9 @@ void Interface::set_font(Label * txt)
 {
 	this->TextObj = txt;
 }
-*/
+
 void Interface::Draw_Bitmap(Bitmap* B, int fx, int fy) {
-	
+	Color READ_COLOR;
 	for (int y = 0; y < B->BitmapData->height; y++) {
 		for (int x = 0; x < B->BitmapData->width; x++) {
 
