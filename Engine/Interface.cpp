@@ -21,11 +21,11 @@ void Interface::DrawLabel(int x, int y)
 	
 	//cache variables
 	int BASE_W;
-	Bitmap*  B;
+	TransparentBitmap*  B;
 	char* ptr = &TextObj->text[0];
 		
 	while(*ptr++ != 0){
-		B = TextObj->Get_Bitmap_Char(* (ptr - 1));
+		B = new TransparentBitmap(TextObj->Get_Bitmap_Char(*(ptr - 1)));
 		BASE_W = B->BitmapData->width;
 		Draw_Bitmap(B, x + (int) POS_COUNTER, y);
 		POS_COUNTER += BASE_W * 0.65;
@@ -48,10 +48,9 @@ void Interface::Draw_Bitmap(Bitmap* B, int fx, int fy) {
 
 			READ_COLOR = B->BitmapData->ptr[y* B->BitmapData->width + x];
 			if (B->IsColorVisible(READ_COLOR) == 1) {
-				DrawPixel(x + fx, y + fy, READ_COLOR);
+				DrawPixel(x + fx , y + fy, READ_COLOR);
 			}
-			
-			
+
 			
 		}
 	}

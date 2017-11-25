@@ -20,9 +20,9 @@ public:
 class Bitmap {
 public:
 	Bitmap();
+	Bitmap(Bitmap* src);
 	~Bitmap();
 	BitmapDS* BitmapData;
-
 	Bitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT);
 	int Load(char* FileName);
 	int SetDataSource(BitmapDS* data);
@@ -31,8 +31,13 @@ public:
 };
 
 class TransparentBitmap : public Bitmap {
-	Color transparency = Color(0xb1f4b1);
+public:
+
+	TransparentBitmap(Bitmap* src);
+	Color transparency = 0xb1b1f4b1;
 	int IsColorVisible(Color color) override;
+
+	TransparentBitmap();
 };
 
 

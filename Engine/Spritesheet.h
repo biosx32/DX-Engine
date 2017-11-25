@@ -10,7 +10,7 @@ public:
 
 	int wcount;
 	int hcount;
-
+	Color transparency = 0xb1b1f4b1;
 	Bitmap* BitmapImage;
 	Bitmap** SpriteData;
 	

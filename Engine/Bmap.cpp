@@ -114,12 +114,17 @@ int Bitmap::SetDataSource(BitmapDS * data)
 
 int Bitmap::IsColorVisible(Color color)
 {
-
+	
 	return 1;
 }
 
 Bitmap::Bitmap() {
+	
+}
 
+Bitmap::Bitmap(Bitmap * src)
+{
+	*this = *src;
 }
 
 Bitmap::~Bitmap()
@@ -127,10 +132,21 @@ Bitmap::~Bitmap()
 	
 }
 
+TransparentBitmap::TransparentBitmap(Bitmap * src): Bitmap(src)
+{
+
+}
+
 int TransparentBitmap::IsColorVisible(Color color)
 {
+
 	if (color.dword == transparency.dword) {
 		return 0;
 	}
 	return 1;
+}
+
+TransparentBitmap::TransparentBitmap()
+{
+	
 }

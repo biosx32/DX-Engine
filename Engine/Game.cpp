@@ -131,7 +131,7 @@ void drawrectangle(Interface out, int x0, int y0, int width, int height) {
 
 }
 
-Bitmap img;
+TransparentBitmap img;
 Spritesheet sh(16,16);
 Label j;
 
@@ -152,7 +152,7 @@ void Game::UpdateModel()
 //test2
 void Game::ComposeFrame()
 {
-	j.setText("TEXT_123");
+	j.setText("TEXTO_123");
 	out.Draw_Bitmap(sh.BitmapImage, 350, 50);
 	out.DrawLabel(30, 30);
 
