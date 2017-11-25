@@ -152,8 +152,8 @@ void Game::ComposeFrame()
 	for (int y = 0; y < sh.hcount; y++) {
 		for (int x = 0; x < sh.wcount; x++) {
 			int i = y * sh.wcount + x;
-			int xdst = x*sh.SpriteData[i]->BitmapData->width * 1.2;
-			int ydst = y*sh.SpriteData[i]->BitmapData->height * 1.2;
+			int xdst = x*sh.SpriteData[i]->BitmapData->width * 1.25;
+			int ydst = y*sh.SpriteData[i]->BitmapData->height * 1.25;
 
 			out.Draw_Bitmap(sh.SpriteData[i], 30 + xdst, 30 + ydst);
 		}
