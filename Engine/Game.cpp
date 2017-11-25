@@ -133,11 +133,15 @@ void drawrectangle(Interface out, int x0, int y0, int width, int height) {
 
 Bitmap img;
 Spritesheet sh(16,16);
+Label j;
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
 	img.Load("FONT\\small.bmp");
+	
 	sh.Load(&img);
+	j.Load(&sh);
+
 }
 
 void Game::UpdateModel()
@@ -149,19 +153,12 @@ void Game::ComposeFrame()
 	out.Draw_Bitmap(sh.BitmapImage, 350, 50);
 
 
-	for (int y = 0; y < sh.hcount; y++) {
-		for (int x = 0; x < sh.wcount; x++) {
-			int i = y * sh.wcount + x;
-			int xdst = x*sh.SpriteData[i]->BitmapData->width * 1.25;
-			int ydst = y*sh.SpriteData[i]->BitmapData->height * 1.25;
-
-			out.Draw_Bitmap(sh.SpriteData[i], 30 + xdst, 30 + ydst);
-		}
+	const char* text = "ABCDEFGH_HELLO WORLD";
+	for (int i = 0; i < strlen(text); i++) {
+		Bitmap* toDraw = j.Get_Bitmap_Char(text[i]);
+		out.Draw_Bitmap(toDraw, toDraw->BitmapData->width * i, 10);
+	
 	}
 
-	for (int i = 0; i < sh.wcount*sh.hcount; i++) {
-		
-		
-	}
 
 }

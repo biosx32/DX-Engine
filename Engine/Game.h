@@ -26,6 +26,7 @@
 #include "Bmap.h"
 #include "Func.h"
 #include "Spritesheet.h"
+#include "Text.h"
 #include "Interface.h"
 
 

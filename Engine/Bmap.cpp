@@ -3,6 +3,7 @@
 
 BitmapDS::~BitmapDS() {
 	if (ptr) delete[] ptr;
+	
 }
 
 BitmapDS::BitmapDS(int width, int height)
@@ -117,7 +118,5 @@ Bitmap::Bitmap() {
 
 Bitmap::~Bitmap()
 {
-	if (BitmapData) {
-		delete BitmapData;
-	}
+	print << "Bitmap destructor called\n";
 }

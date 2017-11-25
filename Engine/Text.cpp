@@ -1,17 +1,17 @@
 #include "Text.h"
 
 
-GraphicLabel::GraphicLabel()
+Label::Label()
 {
 }
 
-int GraphicLabel::Load(Spritesheet* sh) {
+int Label::Load(Spritesheet* sh) {
 	this->SpriteSheetData = sh;
 	return 0;
 }
 
 
-Bitmap* GraphicLabel::Get_Bitmap_Char(int c) {
+Bitmap* Label::Get_Bitmap_Char(int c) {
 	int index = 0;
 	int maxChars = SpriteSheetData->wcount * SpriteSheetData->hcount;
 
@@ -25,6 +25,6 @@ Bitmap* GraphicLabel::Get_Bitmap_Char(int c) {
 
 }
 
-void GraphicLabel::setText(char* text) {
+void Label::setText(char* text) {
 	strcpy_s(this->text, text);
 }

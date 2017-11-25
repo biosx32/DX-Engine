@@ -3,10 +3,10 @@
 #include "Spritesheet.h"
 #include <string.h>
 
-class GraphicLabel {
+class Label {
 public:
 
-	GraphicLabel();
+	Label();
 	
 
 	char text[64];
