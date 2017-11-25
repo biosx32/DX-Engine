@@ -26,13 +26,15 @@ public:
 	Bitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT);
 	int Load(char* FileName);
 	int SetDataSource(BitmapDS* data);
+
+	virtual int IsColorVisible(Color color);
 };
 
-class BitmapPart {
-	int xoff;
-	int yoff;
-	int width;
-	int height;
+class TransparentBitmap : public Bitmap {
+	Color transparency = Color(0xb1f4b1);
+	int IsColorVisible(Color color) override;
 };
+
+
 
 #endif

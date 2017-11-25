@@ -112,11 +112,25 @@ int Bitmap::SetDataSource(BitmapDS * data)
 	return 0;
 }
 
+int Bitmap::IsColorVisible(Color color)
+{
+
+	return 1;
+}
+
 Bitmap::Bitmap() {
 
 }
 
 Bitmap::~Bitmap()
 {
-	print << "Bitmap destructor called\n";
+	
+}
+
+int TransparentBitmap::IsColorVisible(Color color)
+{
+	if (color.dword == transparency.dword) {
+		return 0;
+	}
+	return 1;
 }

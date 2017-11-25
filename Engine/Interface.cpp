@@ -47,7 +47,10 @@ void Interface::Draw_Bitmap(Bitmap* B, int fx, int fy) {
 		for (int x = 0; x < B->BitmapData->width; x++) {
 
 			READ_COLOR = B->BitmapData->ptr[y* B->BitmapData->width + x];
-			DrawPixel(x + fx, y + fy, READ_COLOR);
+			if (B->IsColorVisible(READ_COLOR) == 1) {
+				DrawPixel(x + fx, y + fy, READ_COLOR);
+			}
+			
 			
 			
 		}
