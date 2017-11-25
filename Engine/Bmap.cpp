@@ -76,8 +76,8 @@ int Bitmap::Load(char * FileName)
 		
 		for (int j = 0; j < Data->width; j++) {
 			unsigned char* datachar = &linedata[j * 3];
-			//temp_color = *(0 + datachar) << 16 | *(1 + datachar) << 8 | *(2 + datachar);
-			temp_color = *(Color*) datachar;
+			temp_color = Color(*(0 + datachar) ,*(1 + datachar) , *(2 + datachar));
+			//temp_color = *(Color*) datachar;
 			this->BitmapData->ptr[i * width + j] = temp_color;
 		}
 	}

@@ -34,7 +34,7 @@ class TransparentBitmap : public Bitmap {
 public:
 
 	TransparentBitmap(Bitmap* src);
-	Color transparency = 0xb1b1f4b1;
+	Color transparency = 0x00b1f4b1;
 	int IsColorVisible(Color color) override;
 
 	TransparentBitmap();
