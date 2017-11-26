@@ -22,7 +22,7 @@ void Interface::DrawLabel(int x, int y, Label * label)
 	//cache variables
 	int BASE_W;
 	TransparentBitmap*  B;
-	char* ptr = &TextObj->text[0];
+	char* ptr = &label->text[0];
 
 	while (*ptr++ != 0) {
 		B = new TransparentBitmap(label->Get_Bitmap_Char(*(ptr - 1)));
