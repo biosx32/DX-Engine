@@ -156,7 +156,7 @@ void Game::ComposeFrame()
 	a.Load(&sh);
 	a.setText("Palko bol clovek,");
 	Label b = Label(a);
-	b.setText("ktory nemal rad auta.");
+	b.setText("ktory nemal rad auta.\nMultiline strings are nice.");
 
 	out.DrawLabel(30, 30, &a);
 	out.DrawLabel(30, 46, &b);
