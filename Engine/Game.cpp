@@ -143,7 +143,6 @@ void Game::Initialise() {
 	sh.Load(&img);
 	j.Load(&sh);
 
-	out.set_font(&j);
 }
 
 void Game::UpdateModel()
@@ -151,18 +150,15 @@ void Game::UpdateModel()
 }
 //test2
 
-float p = 1.0;
 void Game::ComposeFrame()
 {
-	p += 0.0025;
-	out.Draw_Bitmap(sh.BitmapImage, 370, 50);
-	j.setText("TEXTO_123");
-	p += 0.0025;
-	out.Draw_Bitmap(sh.BitmapImage, 370, 50);
-	out.DrawLabel(30, 30);
+	Label a = Label();
+	a.Load(&sh);
+	a.setText("Palko bol clovek,");
+	Label b = Label(a);
+	b.setText("ktory nemal rad auta.");
 
-
-	out.DrawLabel(30, 60, &j);
-
+	out.DrawLabel(30, 30, &a);
+	out.DrawLabel(30, 46, &b);
 
 }

@@ -35,10 +35,7 @@ void Interface::DrawLabel(int x, int y, Label * label)
 	}
 }
 
-void Interface::set_font(Label * txt)
-{
-	this->TextObj = txt;
-}
+
 
 void Interface::Draw_Bitmap(Bitmap* B, int fx, int fy) {
 	Color READ_COLOR;
