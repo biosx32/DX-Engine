@@ -156,6 +156,10 @@ void Game::ComposeFrame()
 {
 	p += 0.0025;
 	out.Draw_Bitmap(sh.BitmapImage, 370, 50);
+	j.setText("TEXTO_123");
+	p += 0.0025;
+	out.Draw_Bitmap(sh.BitmapImage, 370, 50);
+	out.DrawLabel(30, 30);
 
 	for (int y = 0; y < sh.hcount; y++) {
 		for (int x = 0; x < sh.wcount; x++) {
@@ -166,4 +170,5 @@ void Game::ComposeFrame()
 			out.Draw_Bitmap(&TransparentBitmap(sh.SpriteData[i]), 30 + xdst, 80 + ydst);
 		}
 	}
+
 }
