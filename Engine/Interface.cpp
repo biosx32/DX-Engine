@@ -14,27 +14,6 @@ void Interface::DrawPixel(int x, int y, Color c) {
 	
 }
 
-void Interface::DrawLabel(int x, int y)
-{
-	
-	double POS_COUNTER = 0;
-	
-	//cache variables
-	int BASE_W;
-	TransparentBitmap*  B;
-	char* ptr = &TextObj->text[0];
-		
-	while(*ptr++ != 0){
-		B = new TransparentBitmap(TextObj->Get_Bitmap_Char(*(ptr - 1)));
-		BASE_W = B->BitmapData->width;
-		Draw_Bitmap(B, x + (int) POS_COUNTER, y);
-		POS_COUNTER += BASE_W * 0.65;
-
-		if (*ptr >= '0' && *ptr <= '9') POS_COUNTER += BASE_W * 0.20;
-		else if (*ptr >= 'A' && *ptr <= 'Z') POS_COUNTER += BASE_W * 0.05;
-	}
-
-}
 
 void Interface::DrawLabel(int x, int y, Label * label)
 {
