@@ -160,7 +160,7 @@ void Game::ComposeFrame()
 	p += 0.0025;
 	out.Draw_Bitmap(sh.BitmapImage, 370, 50);
 	out.DrawLabel(30, 30);
-
+	out.DrawLabel(30, 60, &j);
 	for (int y = 0; y < sh.hcount; y++) {
 		for (int x = 0; x < sh.wcount; x++) {
 			int i = y * sh.wcount + x;

@@ -14,6 +14,7 @@ public:
 	void set_font(Label* txt);
 	void DrawPixel(int x, int y, Color c);
 	void DrawLabel(int x, int y);
+	void DrawLabel(int x, int y, Label* label);
 	void Draw_Bitmap(Bitmap* B, int fx, int fy);
 
 protected:
