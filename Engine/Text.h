@@ -9,7 +9,7 @@ public:
 	Label();
 	
 
-	char text[64];
+	char text[1024];
 	Spritesheet* SpriteSheetData;
 
 
