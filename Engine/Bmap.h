@@ -37,16 +37,18 @@ public:
 };
 
 
-class Bitmap : BitmapProperties {
+class Bitmap : public BitmapProperties {
 public:
 	Bitmap();
-	Bitmap(Bitmap* src);
+	Bitmap(char* FileName);
+	Bitmap(int width, int height);
 	~Bitmap();
+
 	BitmapDS* BitmapData;
 	Bitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT);
 
 	int Load(char* FileName);
-	int SetDataSource(BitmapDS* data);
+	int SetDataSource(BitmapDS* ptr);
 
 	virtual int IsColorTransparent(Color color) override;
 	virtual int GetBitmapType() override;
@@ -55,10 +57,11 @@ public:
 
 class TransparentBitmap : public Bitmap {
 public:
+	TransparentBitmap() : Bitmap() {}
+	TransparentBitmap(char* FileName) : Bitmap(FileName) {}
+	TransparentBitmap(int width, int height) : Bitmap(width, height) {}
 
-	TransparentBitmap(Bitmap* src);
 	Color transparency = 0x00b1f4b1;
-	TransparentBitmap();
 
 	virtual int IsColorTransparent(Color color) override;
 	virtual int GetBitmapType() override;

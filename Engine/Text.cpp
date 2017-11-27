@@ -1,20 +1,22 @@
 #include "Text.h"
 
 
-Label::Label()
-{
-}
 
 int Label::Load(Spritesheet* sh) {
-	this->SpriteSheetData = sh;
+	this->sprite_sheet = sh;
 	return 0;
 }
 
 
+Label::Label(Spritesheet * sh)
+{
+	this->Load(sh);
+}
+
 Bitmap* Label::Get_Bitmap_Char(int c) {
 	int max = sizeof(translate) / sizeof(char);
 	int index = translate[c%max];
-	return SpriteSheetData->SpriteData[index];
+	return sprite_sheet->Data->ptr[index];
 
 }
 

@@ -2,18 +2,26 @@
 #define __SPRITESHEET_H__
 #include "Bmap.h"
 
-class Spritesheet {
+class SpritesheetDS {
 public:
-	Spritesheet() = delete;
-	Spritesheet(int W_COUNT, int H_COUNT);
-	~Spritesheet();
+	~SpritesheetDS();
 
 	int wcount;
 	int hcount;
 	Bitmap* BitmapImage;
-	Bitmap** SpriteData;
-	
-	void Load(Bitmap* BitmapImage);
+	Bitmap** ptr;
+	void Load(Bitmap* BitmapImage, int wcount, int hcount);
+};
+
+class Spritesheet {
+public:
+	Spritesheet() = delete;
+	Spritesheet(Bitmap* BitmapImage, int wcount, int hcount);
+	~Spritesheet();
+	SpritesheetDS* Data;
+
+	void Load(Bitmap* BitmapImage, int wcount, int hcount);
+	void RemoveSpriteData();
 };
 
 

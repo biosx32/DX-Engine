@@ -6,11 +6,11 @@
 class Label {
 public:
 
-	Label();
+	Label(Spritesheet* sh);
 	
 
 	char text[1024];
-	Spritesheet* SpriteSheetData;
+	Spritesheet* sprite_sheet;
 
 	Bitmap* Get_Bitmap_Char(int c);
 	void setText(char* text);

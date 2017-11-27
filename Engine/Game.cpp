@@ -131,31 +131,22 @@ void drawrectangle(Interface out, int x0, int y0, int width, int height) {
 
 }
 
-TransparentBitmap img;
-Spritesheet sh(16,16);
-Label j;
+TransparentBitmap img("FONT\\small.bmp");
+Spritesheet sh(&img, 16,16);
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
-	
-	img.Load("FONT\\small.bmp");
-	
-	sh.Load(&img);
-	j.Load(&sh);
-
 }
 
 void Game::UpdateModel()
 {
 }
-//test2
 
 void Game::ComposeFrame()
 {
-	Label a = Label();
-	a.Load(&sh);
+	Label a = Label(&sh);
+	Label b = Label(&sh);
 	a.setText("More. Convinient. Example.");
-	Label b = Label(a);
 	b.setText("1. First\n2. Second\n3. Third");
 
 	out.DrawLabel(30, 30, &a);

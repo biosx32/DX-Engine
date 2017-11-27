@@ -104,10 +104,10 @@ int Bitmap::Load(char * FileName)
 	return 0;
 }
 
-int Bitmap::SetDataSource(BitmapDS * data)
+int Bitmap::SetDataSource(BitmapDS * ptr)
 {
 	if (this->BitmapData) delete BitmapData;
-	this->BitmapData = data;
+	this->BitmapData = ptr;
 	return 0;
 }
 
@@ -131,20 +131,26 @@ Bitmap::Bitmap() {
 	
 }
 
-Bitmap::Bitmap(Bitmap * src)
+Bitmap::Bitmap(char * FileName)
 {
-	*this = *src;
+	this->Load(FileName);
 }
+
+Bitmap::Bitmap(int width, int height)
+{
+	this->BitmapData = new BitmapDS(width, height);
+}
+
 
 Bitmap::~Bitmap()
 {
+	if (this->BitmapData) {
+		delete this->BitmapData;
+	}
 	
 }
 
-TransparentBitmap::TransparentBitmap(Bitmap * src): Bitmap(src)
-{
 
-}
 
 int TransparentBitmap::IsColorTransparent(Color color)
 {
@@ -165,9 +171,5 @@ Bitmap * TransparentBitmap::GetTypeInstance()
 	return new TransparentBitmap();
 }
 
-TransparentBitmap::TransparentBitmap()
-{
-	
-}
 
 

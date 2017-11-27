@@ -1,32 +1,53 @@
 #include "Spritesheet.h"
 
-Spritesheet::Spritesheet(int wcount, int hcount)
+
+Spritesheet::Spritesheet(Bitmap * BitmapImage, int wcount, int hcount)
 {
-	this->wcount = wcount;
-	this->hcount = hcount;
+	this->Load(BitmapImage, wcount, hcount);
 }
 
 Spritesheet::~Spritesheet() {
-	
-	if (this->SpriteData) {
-		delete[] SpriteData;
+	this->RemoveSpriteData();
+}
+
+
+void Spritesheet::Load(Bitmap * BitmapImage, int wcount, int hcount)
+{
+	this->Data = new SpritesheetDS();
+	this->Data->Load(BitmapImage, wcount, hcount);
+}
+
+void Spritesheet::RemoveSpriteData()
+{
+	delete this->Data;
+
+}
+
+SpritesheetDS::~SpritesheetDS()
+{
+	if (this->ptr) {
+		delete[] ptr;
 	}
 }
 
-void Spritesheet::Load(Bitmap * BitmapImage)
+void SpritesheetDS::Load(Bitmap * BitmapImage, int wcount, int hcount)
 {
-	int SpriteCount = wcount * hcount;
 
+	this->wcount = wcount;
+	this->hcount = hcount;
+	int sprite_count = wcount * hcount;
 
 	this->BitmapImage = BitmapImage;
-	this->SpriteData = new (Bitmap*[SpriteCount]);
+
 	
-	int OneSpriteWidth = BitmapImage->BitmapData->width / wcount;
-	int OneSpriteHeight = BitmapImage->BitmapData->height / hcount;
+	this->ptr = new (Bitmap*[sprite_count]);
+
+	int sprite_width = BitmapImage->BitmapData->width / wcount;
+	int sprite_height = BitmapImage->BitmapData->height / hcount;
 
 	for (int y = 0; y < hcount; y++) {
 		for (int x = 0; x < wcount; x++) {
-			this->SpriteData[y * wcount + x] = BitmapImage->GetBitmapPart(x * OneSpriteWidth, y * OneSpriteHeight, OneSpriteWidth, OneSpriteHeight);
+			this->ptr[y * wcount + x] = BitmapImage->GetBitmapPart(x * sprite_width, y * sprite_height, sprite_width, sprite_height);
 		}
 	}
 }
