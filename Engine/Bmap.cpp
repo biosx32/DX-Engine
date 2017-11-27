@@ -16,15 +16,11 @@ BitmapDS::BitmapDS(int width, int height)
 
 Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 
-	this->
-	Bitmap* cut = new Bitmap(); 
-
-
-	''
-		//method for bytmap types: basic, transparent, animation and so... so I can determine transparency
-		//or transparent Bitmap if source is transparent
+	Bitmap* cut = this->GetTypeInstance();
+	print << cut->GetBitmapType() << "\n";
+	//'''
 		//CODE TO POSITION TRANSLATE -> unimplemented to zeroes
-		//text transparency by default
+	
 	
 	BitmapDS* datastruct = new BitmapDS(width, height);
 	cut->SetDataSource(datastruct);
@@ -131,6 +127,11 @@ int Bitmap::GetBitmapType()
 	return BitmapType::normal;
 }
 
+Bitmap * Bitmap::GetTypeInstance()
+{
+	return new Bitmap();
+}
+
 Bitmap::Bitmap() {
 	
 }
@@ -164,7 +165,14 @@ int TransparentBitmap::GetBitmapType()
 	return BitmapType::transparent;
 }
 
+Bitmap * TransparentBitmap::GetTypeInstance()
+{
+	return new TransparentBitmap();
+}
+
 TransparentBitmap::TransparentBitmap()
 {
 	
 }
+
+

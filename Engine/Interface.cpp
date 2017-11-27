@@ -29,7 +29,7 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 
 	while (*ptr++ != 0) {
 		
-		TransparentBitmap* BitmapChar = label->Get_Bitmap_Char(*(ptr - 1));
+		Bitmap* BitmapChar = label->Get_Bitmap_Char(*(ptr - 1));
 		char_width = BitmapChar->BitmapData->width;
 
 		if (*(ptr - 1) == '\n') {

@@ -12,6 +12,7 @@ enum BitmapType {
 	transparent
 };
 
+
 class BitmapDS {
 public:
 	
@@ -22,18 +23,34 @@ public:
 	Color * ptr;
 };
 
-class Bitmap {
+
+class Bitmap;
+class BitmapProperties;
+class TransparentBitmap;
+
+class BitmapProperties {
+public:
+	virtual int IsColorTransparent(Color color) = 0;
+	virtual int GetBitmapType() = 0;
+	virtual Bitmap * GetTypeInstance() = 0;
+
+};
+
+
+class Bitmap : BitmapProperties {
 public:
 	Bitmap();
 	Bitmap(Bitmap* src);
 	~Bitmap();
 	BitmapDS* BitmapData;
 	Bitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT);
+
 	int Load(char* FileName);
 	int SetDataSource(BitmapDS* data);
 
-	virtual int IsColorTransparent(Color color);
-	virtual int GetBitmapType();
+	virtual int IsColorTransparent(Color color) override;
+	virtual int GetBitmapType() override;
+	virtual Bitmap * GetTypeInstance() override;
 };
 
 class TransparentBitmap : public Bitmap {
@@ -41,10 +58,17 @@ public:
 
 	TransparentBitmap(Bitmap* src);
 	Color transparency = 0x00b1f4b1;
+	TransparentBitmap();
+
 	virtual int IsColorTransparent(Color color) override;
 	virtual int GetBitmapType() override;
-	TransparentBitmap();
+	virtual Bitmap * GetTypeInstance() override;
+	
 };
+
+
+
+
 
 
 
