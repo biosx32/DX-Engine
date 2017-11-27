@@ -27,6 +27,7 @@
 #include "Func.h"
 #include "Spritesheet.h"
 #include "Text.h"
+#include "Graphical.h"
 #include "Interface.h"
 
 

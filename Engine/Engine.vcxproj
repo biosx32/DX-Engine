@@ -146,6 +146,7 @@
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="Func.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Graphical.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Keyboard.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="Func.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Graphical.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="Keyboard.cpp" />
