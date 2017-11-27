@@ -6,54 +6,63 @@ void Interface::set_graphics(Graphics* gfx) {
 		Graphics_loaded = YES;
 	}
 }
-void Interface::DrawPixel(int x, int y, Color c) { 
+void Interface::DrawPixel(int xoff, int yoff, Color c) { 
 	if (!(Graphics_loaded == YES)) {
 		return;
 	}
-	gfx->PutPixel(x, y, c);
+	gfx->PutPixel(xoff, yoff, c);
 	
 }
 
 
-void Interface::DrawLabel(int x, int y, Label * label)
+void Interface::DrawLabel(int xoff, int yoff, Label * label)
 {
-	double POS_COUNTER_X = 0;
-	double POS_COUNTER_Y = 0;
-	//cache variables
-	int BASE_W;
-	TransparentBitmap*  B;
+	double rel_pos_x = 0;
+	double rel_pos_y = 0;
+
+
+
+	int char_width = label->Get_Bitmap_Char(0)->BitmapData->width;
+	int char_height = label->Get_Bitmap_Char(0)->BitmapData->height;
+
 	char* ptr = &label->text[0];
 
 	while (*ptr++ != 0) {
 		
-
-		B = new TransparentBitmap(label->Get_Bitmap_Char(*(ptr - 1)));
-		BASE_W = B->BitmapData->width;
+		TransparentBitmap* BitmapChar = label->Get_Bitmap_Char(*(ptr - 1));
+		char_width = BitmapChar->BitmapData->width;
 
 		if (*(ptr - 1) == '\n') {
-			POS_COUNTER_Y += B->BitmapData->height;
-			POS_COUNTER_X = 0;
+			rel_pos_y += char_height;
+			rel_pos_x = 0;
 			continue;
 		}
 
-		Draw_Bitmap(B, x + (int)POS_COUNTER_X, POS_COUNTER_Y+ y);
-		POS_COUNTER_X += BASE_W * 0.65;
-
-		if (*ptr >= '0' && *ptr <= '9') POS_COUNTER_X += BASE_W * 0.20;
-		else if (*ptr >= 'A' && *ptr <= 'Z') POS_COUNTER_X += BASE_W * 0.05;
+		Draw_Bitmap(BitmapChar, rel_pos_x + xoff, rel_pos_y + yoff);
+		
+		if (true) {
+			rel_pos_x += char_width * 0.65;
+		
+			if (*ptr >= '0' && *ptr <= '9') {
+				rel_pos_x += char_width * 0.20;
+			}
+			else if (*ptr >= 'A' && *ptr <= 'Z') {
+				rel_pos_x += char_width * 0.05;
+			}
+		}
 	}
 }
 
 
 
-void Interface::Draw_Bitmap(Bitmap* B, int fx, int fy) {
+void Interface::Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy) {
 	Color READ_COLOR;
-	for (int y = 0; y < B->BitmapData->height; y++) {
-		for (int x = 0; x < B->BitmapData->width; x++) {
+	for (int yoff = 0; yoff < BitmapChar->BitmapData->height; yoff++) {
+		for (int xoff = 0; xoff < BitmapChar->BitmapData->width; xoff++) {
 
-			READ_COLOR = B->BitmapData->ptr[y* B->BitmapData->width + x];
-			if (B->IsColorVisible(READ_COLOR) == 1) {
-				DrawPixel(x + fx , y + fy, READ_COLOR);
+			READ_COLOR = BitmapChar->BitmapData->ptr[yoff* BitmapChar->BitmapData->width + xoff];
+			if (BitmapChar->IsColorVisible(READ_COLOR) == 1) {
+				DrawPixel(xoff + fx , yoff + fy, READ_COLOR);
 			}
 
 			

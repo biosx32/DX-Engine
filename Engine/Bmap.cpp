@@ -17,7 +17,12 @@ BitmapDS::BitmapDS(int width, int height)
 Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 
 
-	Bitmap* cut = new Bitmap();
+	Bitmap* cut = new Bitmap(); 
+
+
+	''
+		//or transparent Bitmap if source is transparent
+	
 	BitmapDS* datastruct = new BitmapDS(width, height);
 	cut->SetDataSource(datastruct);
 
