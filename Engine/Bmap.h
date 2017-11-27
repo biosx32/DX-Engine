@@ -7,6 +7,11 @@
 #define ERROR_IO_READ -1
 #define ERROR_EMPTY_FILE 1
 
+enum BitmapType {
+	normal,
+	transparent
+};
+
 class BitmapDS {
 public:
 	
@@ -28,6 +33,7 @@ public:
 	int SetDataSource(BitmapDS* data);
 
 	virtual int IsColorTransparent(Color color);
+	virtual int GetBitmapType();
 };
 
 class TransparentBitmap : public Bitmap {
@@ -35,8 +41,8 @@ public:
 
 	TransparentBitmap(Bitmap* src);
 	Color transparency = 0x00b1f4b1;
-	int IsColorTransparent(Color color) override;
-
+	virtual int IsColorTransparent(Color color) override;
+	virtual int GetBitmapType() override;
 	TransparentBitmap();
 };
 
