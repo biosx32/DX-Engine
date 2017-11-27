@@ -41,11 +41,9 @@ void Game::Go()
 
 TransparentBitmap img("FONT\\small.bmp");
 Spritesheet sh(&img, 16,16);
-Draw drawer;
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
-	drawer.setOutInterface(&out);
 }
 
 void Game::UpdateModel()
@@ -59,9 +57,12 @@ void Game::ComposeFrame()
 	a.setText("More. Convinient. Example.");
 	b.setText("1. First\n2. Second\n3. Third");
 
+	
 	out.DrawLabel(30, 30, &a);
 	out.DrawLabel(30, 76, &b);
 
-	drawer.circle(80, 80, 30);
+
+	out.DrawShape->circle(200 + 120, 120, 30);
+
 
 }

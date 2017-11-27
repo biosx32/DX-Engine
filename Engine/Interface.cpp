@@ -1,6 +1,12 @@
 #include "Interface.h"
 
-void Interface::set_graphics(Graphics* gfx) { 
+Interface::Interface()
+{
+	this->DrawShape = new Draw();
+	this->DrawShape->setOutInterface(this);
+}
+
+void Interface::set_graphics(Graphics* gfx) {
 	this->gfx = gfx; 
 	if (gfx != nullptr) {
 		Graphics_loaded = YES;

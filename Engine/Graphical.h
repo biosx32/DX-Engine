@@ -3,6 +3,8 @@
 #include "Interface.h"
 #include "Colors.h"
 
+class Interface;
+
 class Draw {
 public:
 	Interface*  out;
