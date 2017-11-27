@@ -21,7 +21,7 @@ Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 
 
 	''
-		//replace IsColorVisible by IsColorTransparent
+		//replace IsColorTransparent by IsColorTransparent
 		//method for bytmap types: basic, transparent, animation and so... so I can determine transparency
 		//or transparent Bitmap if source is transparent
 		//CODE TO POSITION TRANSLATE -> unimplemented to zeroes
@@ -121,10 +121,10 @@ int Bitmap::SetDataSource(BitmapDS * data)
 	return 0;
 }
 
-int Bitmap::IsColorVisible(Color color)
+int Bitmap::IsColorTransparent(Color color)
 {
 	
-	return 1;
+	return 0;
 }
 
 Bitmap::Bitmap() {
@@ -146,13 +146,13 @@ TransparentBitmap::TransparentBitmap(Bitmap * src): Bitmap(src)
 
 }
 
-int TransparentBitmap::IsColorVisible(Color color)
+int TransparentBitmap::IsColorTransparent(Color color)
 {
 
 	if (color.dword == transparency.dword) {
-		return 0;
+		return 1;
 	}
-	return 1;
+	return 0;
 }
 
 TransparentBitmap::TransparentBitmap()

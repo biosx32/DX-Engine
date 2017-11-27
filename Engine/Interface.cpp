@@ -61,7 +61,7 @@ void Interface::Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy) {
 		for (int xoff = 0; xoff < BitmapChar->BitmapData->width; xoff++) {
 
 			READ_COLOR = BitmapChar->BitmapData->ptr[yoff* BitmapChar->BitmapData->width + xoff];
-			if (BitmapChar->IsColorVisible(READ_COLOR) == 1) {
+			if (!BitmapChar->IsColorTransparent(READ_COLOR)) {
 				DrawPixel(xoff + fx , yoff + fy, READ_COLOR);
 			}
 

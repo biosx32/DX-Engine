@@ -27,7 +27,7 @@ public:
 	int Load(char* FileName);
 	int SetDataSource(BitmapDS* data);
 
-	virtual int IsColorVisible(Color color);
+	virtual int IsColorTransparent(Color color);
 };
 
 class TransparentBitmap : public Bitmap {
@@ -35,7 +35,7 @@ public:
 
 	TransparentBitmap(Bitmap* src);
 	Color transparency = 0x00b1f4b1;
-	int IsColorVisible(Color color) override;
+	int IsColorTransparent(Color color) override;
 
 	TransparentBitmap();
 };
