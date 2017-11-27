@@ -17,12 +17,6 @@ BitmapDS::BitmapDS(int width, int height)
 Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 
 	Bitmap* cut = this->GetTypeInstance();
-	
-	//print << cut->GetBitmapType() << "\n";
-	
-	//CODE TO POSITION TRANSLATE -> unimplemented to zeroes
-	
-	
 	BitmapDS* datastruct = new BitmapDS(width, height);
 	cut->SetDataSource(datastruct);
 

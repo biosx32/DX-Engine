@@ -154,9 +154,9 @@ void Game::ComposeFrame()
 {
 	Label a = Label();
 	a.Load(&sh);
-	a.setText("PALKO\nJANKO\nMARIAS");
+	a.setText("More. Convinient. Example.");
 	Label b = Label(a);
-	b.setText("ktory nemal rad auta.\nMultiline strings are nice.\n\nPalko to je pan,\nhori ako kanvica");
+	b.setText("1. First\n2. Second\n3. Third");
 
 	out.DrawLabel(30, 30, &a);
 	out.DrawLabel(30, 76, &b);
