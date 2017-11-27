@@ -16,12 +16,16 @@ BitmapDS::BitmapDS(int width, int height)
 
 Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 
-
+	this->
 	Bitmap* cut = new Bitmap(); 
 
 
 	''
+		//replace IsColorVisible by IsColorTransparent
+		//method for bytmap types: basic, transparent, animation and so... so I can determine transparency
 		//or transparent Bitmap if source is transparent
+		//CODE TO POSITION TRANSLATE -> unimplemented to zeroes
+		//text transparency by default
 	
 	BitmapDS* datastruct = new BitmapDS(width, height);
 	cut->SetDataSource(datastruct);
