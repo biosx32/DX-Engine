@@ -45,36 +45,31 @@ Spritesheet sh(&img, 16, 16);
 TransparentBitmap HumanImg("SPRITESHEET\\Spritesheet1-512x512.bmp");
 Spritesheet Human(&HumanImg, 12, 7);
 
-TransparentBitmap runImg("SPRITESHEET\\sprite3.bmp");
-Spritesheet run;
-
-int spritenow = 0;
-int delta = 0;
-int spriteMax = 0;
+TransparentBitmap Human2IMG("SPRITESHEET\\sprite3.bmp");
+Spritesheet Human2(&Human2IMG, 8, 9);
+Animation anim1(7, &Human2, 4,11);
+Animation anim2(7, &Human2, 31, 39);
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
-	runImg.tolerance = 0.001f;
-	run.Load(&runImg, 8, 9);
-	spriteMax = run.Data->count - 8;
 }
 
 void Game::UpdateModel()
 {
+
+	//anim1.ForceStep();  //ForceStep every frame
+	run.Step();  //Step depends on animation FPS
+	jump.Step();
 }
 
 
 void Game::ComposeFrame()
 {
 
-	Bitmap*  current = run.Data->ptr[spritenow];
-	out.Draw_Bitmap(current, 30, 30);
-	delta++;
-	if (delta == 13) {
-		delta = 0;
-		spritenow++;
-		spritenow %= spriteMax;
-	}
-		
+	Bitmap*  a1 = anim1.GetCurrent();
+	Bitmap*  a2 = anim2.GetCurrent();
+
+	out.Draw_Bitmap(a1, 30, 30);
+	out.Draw_Bitmap(a2, 80, 30);
 	
 }

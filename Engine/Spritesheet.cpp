@@ -54,18 +54,40 @@ void SpritesheetDS::Load(Bitmap * BitmapImage, int wcount, int hcount)
 	}
 }
 
-Animation::Animation(Spritesheet * sh)
+Animation::Animation()
 {
-	this->Load(sh);
 }
 
-void Animation::Load(Spritesheet * sh)
+Animation::Animation(int FPS, Spritesheet * sh, int s, int e): Animation(FPS, sh)
+{
+	this->SetRange(s, e);
+}
+
+Animation::Animation(int FPS, Spritesheet * sh)
+{
+	this->Load(FPS, sh);
+}
+
+void Animation::Load(int FPS, Spritesheet * sh)
 {
 	this->spritesheet = sh;
+	this->endFrame = sh->Data->count - 1;
 
 }
 
-void Animation::Step()
+void Animation::SetRange(int s, int e)
+{
+	this->startFrame = s;
+	this->endFrame = e;
+	this->currentFrame = s;
+}
+
+void Animation::SetFPS(float FPS)
+{
+	this->FPS = FPS;
+}
+
+void Animation::ForceStep()
 {
 	currentFrame++;
 	if (currentFrame > endFrame) {
@@ -73,18 +95,18 @@ void Animation::Step()
 	}
 }
 
-void Animation::SynchronizedStep()
+void Animation::Step()
 {
-	float fps_step = FPS / FULLFPS;
+	float fps_step = FULLFPS / FPS;
 	frame_counter += 1.00f;
 
 	if (frame_counter >= fps_step) {
 		frame_counter -= fps_step;
-		Step();
+		ForceStep();
 	}
 }
 
 Bitmap * Animation::GetCurrent()
 {
-	return data->currentFrame;
+	return spritesheet->Data->ptr[currentFrame];
 }

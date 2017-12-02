@@ -28,26 +28,33 @@ public:
 
 
 class Animation {
+public:
 	Animation();
-	Animation(Spritesheet* sh);
-	void Load(Spritesheet* sh);
+	Animation(int FPS, Spritesheet* sh, int s, int e);
+	Animation(int FPS, Spritesheet* sh);
+	void Load(int FPS, Spritesheet* sh);
 
 	int startFrame = 0;
 	int endFrame = 0;
 	int currentFrame = 0;
 	float frame_counter = 0.00;
 
-	int FPS = 15;
-	const int FULLFPS = 60;
+	float FPS = 8.00f;
+	const float FULLFPS = 60.00f;
+
+	void SetRange(int s, int e);
+	void SetFPS(float FPS);
 
 
 
 
+
+	void ForceStep();
 	void Step();
-	void SynchronizedStep();
+	Bitmap* GetCurrent();
 
 	
-	Spritesheet* data = nullptr;
+	Spritesheet* spritesheet = nullptr;
 
 };
 
