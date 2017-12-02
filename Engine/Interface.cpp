@@ -43,7 +43,8 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 			continue;
 		}
 
-		Draw_Bitmap(BitmapChar, rel_pos_x + xoff, rel_pos_y + yoff);
+		Draw_Bitmap(BitmapChar, (int) (rel_pos_x + xoff), (int)
+			(rel_pos_y + yoff));
 		
 		if (true) {
 			rel_pos_x += char_width * 0.65;

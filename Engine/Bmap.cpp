@@ -39,11 +39,15 @@ int Bitmap::Load(char * FileName)
 	FILE* file_read;
 	fopen_s(&file_read, FileName, "rb");
 
-	if (file_read == nullptr) { return ERROR_IO_READ;
+	if (file_read == nullptr) { 
+		printerr << "Could not load image: " << FileName << " << FILE NOT FOUND\n";
+		return ERROR_IO_READ;
 	}
 
 	int BYTES_TO_READ = File_bytes(file_read);
-	if (BYTES_TO_READ < 1) { return ERROR_EMPTY_FILE;
+	if (BYTES_TO_READ < 1) { 
+		printerr << "Could not load image: " << FileName << " << EMPTY FILE\n";
+		return ERROR_EMPTY_FILE;
 	}
 
 	char Header[54] = {};
@@ -76,7 +80,7 @@ int Bitmap::Load(char * FileName)
 		
 		for (int j = 0; j < Data->width; j++) {
 			unsigned char* datachar = &linedata[j * 3];
-			temp_color = Color(*(0 + datachar) ,*(1 + datachar) , *(2 + datachar));
+			temp_color = Color(*(2 + datachar) ,*(1 + datachar) , *(0 + datachar));
 			//temp_color = *(Color*) datachar;
 			this->BitmapData->ptr[i * width + j] = temp_color;
 		}

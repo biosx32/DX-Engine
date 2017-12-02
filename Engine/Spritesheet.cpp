@@ -35,12 +35,12 @@ void SpritesheetDS::Load(Bitmap * BitmapImage, int wcount, int hcount)
 
 	this->wcount = wcount;
 	this->hcount = hcount;
-	int sprite_count = wcount * hcount;
+	this->count  = wcount * hcount;
 
 	this->BitmapImage = BitmapImage;
 
 	
-	this->ptr = new (Bitmap*[sprite_count]);
+	this->ptr = new (Bitmap*[count]);
 
 	int sprite_width = BitmapImage->BitmapData->width / wcount;
 	int sprite_height = BitmapImage->BitmapData->height / hcount;

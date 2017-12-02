@@ -13,8 +13,14 @@ public:
 	OutputStream& operator<<(double chr);
 };
 
-extern OutputStream print;
+class Error : public OutputStream {
+public:
+	Error& operator<<(char* str);
+	Error& operator<<(double chr);
+};
 
+extern OutputStream print;
+extern Error printerr;
 
 
 #endif

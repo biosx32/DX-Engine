@@ -8,6 +8,7 @@ public:
 
 	int wcount;
 	int hcount;
+	int count;
 	Bitmap* BitmapImage = nullptr;
 	Bitmap** ptr = nullptr;
 	void Load(Bitmap* BitmapImage, int wcount, int hcount);
