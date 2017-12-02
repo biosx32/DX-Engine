@@ -1,6 +1,10 @@
 #include "Spritesheet.h"
 
 
+Spritesheet::Spritesheet()
+{
+}
+
 Spritesheet::Spritesheet(Bitmap * BitmapImage, int wcount, int hcount)
 {
 	this->Load(BitmapImage, wcount, hcount);
@@ -38,8 +42,6 @@ void SpritesheetDS::Load(Bitmap * BitmapImage, int wcount, int hcount)
 	this->count  = wcount * hcount;
 
 	this->BitmapImage = BitmapImage;
-
-	
 	this->ptr = new (Bitmap*[count]);
 
 	int sprite_width = BitmapImage->BitmapData->width / wcount;
@@ -50,4 +52,39 @@ void SpritesheetDS::Load(Bitmap * BitmapImage, int wcount, int hcount)
 			this->ptr[y * wcount + x] = BitmapImage->GetBitmapPart(x * sprite_width, y * sprite_height, sprite_width, sprite_height);
 		}
 	}
+}
+
+Animation::Animation(Spritesheet * sh)
+{
+	this->Load(sh);
+}
+
+void Animation::Load(Spritesheet * sh)
+{
+	this->spritesheet = sh;
+
+}
+
+void Animation::Step()
+{
+	currentFrame++;
+	if (currentFrame > endFrame) {
+		currentFrame = startFrame;
+	}
+}
+
+void Animation::SynchronizedStep()
+{
+	float fps_step = FPS / FULLFPS;
+	frame_counter += 1.00f;
+
+	if (frame_counter >= fps_step) {
+		frame_counter -= fps_step;
+		Step();
+	}
+}
+
+Bitmap * Animation::GetCurrent()
+{
+	return data->currentFrame;
 }

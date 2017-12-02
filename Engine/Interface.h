@@ -6,8 +6,6 @@
 #include "Graphical.h"
 #include <string.h>
 
-#define YES 177
-
 class Draw;
 
 class Interface {

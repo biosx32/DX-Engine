@@ -157,15 +157,19 @@ Bitmap::~Bitmap()
 
 int TransparentBitmap::IsColorTransparent(Color color)
 {
-	int r1 = color.GetR();
-	int g1 = color.GetB();
-	int b1 = color.GetB();
+	int dword = color.dword;
 
-	int r2 = transparency.GetR();
-	int g2 = transparency.GetB();
-	int b2 = transparency.GetB();
+	int r1 = (dword >> 16u) & 0xFFu;
+	int g1 = (dword >> 8u) & 0xFFu;
+	int b1 = dword & 0xFFu;
 
-	double distance = pow(r2 - r1, 2) + pow(g2 - g1, 2) + pow(b2 - b1, 2);
+	dword = transparency.dword;
+
+	int r2 = (dword >> 16u) & 0xFFu;
+	int g2 = (dword >> 8u) & 0xFFu;
+	int b2 = dword & 0xFFu;
+
+	double distance = (r2 - r1) *  (r2 - r1) + (g2 - g1) *  (g2 - g1) + (b2 - b1) *  (b2 - b1);
 	double const range = pow(255, 2) + pow(255, 2) + pow(255, 2);
 	double percentage = distance / range;
 
@@ -183,6 +187,14 @@ int TransparentBitmap::GetBitmapType()
 Bitmap * TransparentBitmap::GetTypeInstance()
 {
 	return new TransparentBitmap();
+}
+
+Bitmap * TransparentBitmap::GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT)
+{
+	TransparentBitmap* cut = (TransparentBitmap*) Bitmap::GetBitmapPart(xoff, yoff, WIDTH, HEIGHT);
+	cut->tolerance = this->tolerance;
+	cut->transparency = this->transparency;
+	return (Bitmap*) cut;
 }
 
 

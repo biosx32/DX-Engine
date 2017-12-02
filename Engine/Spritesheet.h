@@ -16,7 +16,7 @@ public:
 
 class Spritesheet {
 public:
-	Spritesheet() = delete;
+	Spritesheet();
 	Spritesheet(Bitmap* BitmapImage, int wcount, int hcount);
 	~Spritesheet();
 	SpritesheetDS* Data = nullptr;
@@ -26,7 +26,28 @@ public:
 };
 
 
+
 class Animation {
+	Animation();
+	Animation(Spritesheet* sh);
+	void Load(Spritesheet* sh);
+
+	int startFrame = 0;
+	int endFrame = 0;
+	int currentFrame = 0;
+	float frame_counter = 0.00;
+
+	int FPS = 15;
+	const int FULLFPS = 60;
+
+
+
+
+	void Step();
+	void SynchronizedStep();
+
+	
+	Spritesheet* data = nullptr;
 
 };
 

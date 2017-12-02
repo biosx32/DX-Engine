@@ -46,27 +46,35 @@ TransparentBitmap HumanImg("SPRITESHEET\\Spritesheet1-512x512.bmp");
 Spritesheet Human(&HumanImg, 12, 7);
 
 TransparentBitmap runImg("SPRITESHEET\\sprite3.bmp");
-Spritesheet run (&runImg,9,9);
+Spritesheet run;
+
+int spritenow = 0;
+int delta = 0;
+int spriteMax = 0;
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
+	runImg.tolerance = 0.001f;
+	run.Load(&runImg, 8, 9);
+	spriteMax = run.Data->count - 8;
 }
 
 void Game::UpdateModel()
 {
 }
 
-int spritenow = 0;
-int delta = 0;
-int spriteMax = run.Data->count-9;
 
 void Game::ComposeFrame()
 {
 
 	Bitmap*  current = run.Data->ptr[spritenow];
 	out.Draw_Bitmap(current, 30, 30);
-
+	delta++;
+	if (delta == 13) {
+		delta = 0;
 		spritenow++;
 		spritenow %= spriteMax;
+	}
+		
 	
 }
