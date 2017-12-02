@@ -76,6 +76,36 @@ void Interface::Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy) {
 	}
 }
 
+void Interface::Draw_Bitmap(Bitmap * Bmp, int fx, int fy, int MODIF)
+{
+	
+	Color READ_COLOR;
+	int finalx; int finaly;
+
+	for (int yoff = 0; yoff < Bmp->BitmapData->height; yoff++) {
+		for (int xoff = 0; xoff < Bmp->BitmapData->width; xoff++) {
+			
+			finalx = fx + xoff;
+			if (MODIF & FLIP_HORIZONTALLY) {
+				finalx = fx + Bmp->BitmapData->width - xoff;
+			}
+			
+			
+			finaly = yoff + fy;
+			if (MODIF & FLIP_VERTICALLY) {
+				finalx = fx + Bmp->BitmapData->width - xoff;
+			}
+
+			READ_COLOR = Bmp->BitmapData->ptr[yoff* Bmp->BitmapData->width + xoff];
+			if (!Bmp->IsColorTransparent(READ_COLOR)) {
+				DrawPixel(finalx, finaly, READ_COLOR);
+			}
+
+
+		}
+	}
+}
+
 void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 {
 	Color old = this->DrawShape->brush;

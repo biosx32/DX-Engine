@@ -48,7 +48,7 @@ Spritesheet Human(&HumanImg, 12, 7);
 TransparentBitmap Human2IMG("SPRITESHEET\\sprite3.bmp");
 Spritesheet Human2(&Human2IMG, 8, 9);
 Animation run(7, &Human2, 4,11);
-Animation walk(10, &Human2, 32, 39);
+Animation walk(4, &Human2, 32, 39);
 Animation idle(1, &Human2, 64, 64);
 
 
@@ -77,6 +77,9 @@ void Game::ComposeFrame()
 
 	moving = left || right;
 
+	int modif = 0;
+
+	if (left) modif = FLIP_HORIZONTALLY;
 
 	Animation * state;
 	if (!moving) { state = &idle; }
@@ -94,6 +97,6 @@ void Game::ComposeFrame()
 
 	state->Step();
 	Bitmap*  player = state->GetCurrent();
-	out.Draw_Bitmap(player, x, y);
+	out.Draw_Bitmap(player, x, y,modif);
 	
 }
