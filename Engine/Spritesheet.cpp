@@ -60,6 +60,7 @@ Animation::Animation()
 
 Animation::Animation(int FPS, Spritesheet * sh, int s, int e): Animation(FPS, sh)
 {
+	
 	this->SetRange(s, e);
 }
 
@@ -71,6 +72,7 @@ Animation::Animation(int FPS, Spritesheet * sh)
 void Animation::Load(int FPS, Spritesheet * sh)
 {
 	this->spritesheet = sh;
+	this->FPS = FPS;
 	this->endFrame = sh->Data->count - 1;
 
 }

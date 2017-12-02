@@ -47,7 +47,7 @@ Spritesheet Human(&HumanImg, 12, 7);
 
 TransparentBitmap Human2IMG("SPRITESHEET\\sprite3.bmp");
 Spritesheet Human2(&Human2IMG, 8, 9);
-Animation anim1(7, &Human2, 4,11);
+Animation anim1(60, &Human2, 4,11);
 Animation anim2(7, &Human2, 31, 39);
 
 void Game::Initialise() {
@@ -56,15 +56,14 @@ void Game::Initialise() {
 
 void Game::UpdateModel()
 {
-
-	//anim1.ForceStep();  //ForceStep every frame
-	run.Step();  //Step depends on animation FPS
-	jump.Step();
 }
 
 
 void Game::ComposeFrame()
 {
+	anim1.Step(); 
+	anim2.Step();
+
 
 	Bitmap*  a1 = anim1.GetCurrent();
 	Bitmap*  a2 = anim2.GetCurrent();
