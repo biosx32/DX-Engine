@@ -67,6 +67,8 @@ bool right = false;
 int x = 300;
 int y = 300;
 
+int modif = 0;
+
 void Game::ComposeFrame()
 {
 
@@ -77,9 +79,10 @@ void Game::ComposeFrame()
 
 	moving = left || right;
 
-	int modif = 0;
+	
 
 	if (left) modif = FLIP_HORIZONTALLY;
+	if (right) modif = FLIP_VERTICALLY;
 
 	Animation * state;
 	if (!moving) { state = &idle; }

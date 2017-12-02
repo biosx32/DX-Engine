@@ -93,7 +93,7 @@ void Interface::Draw_Bitmap(Bitmap * Bmp, int fx, int fy, int MODIF)
 			
 			finaly = yoff + fy;
 			if (MODIF & FLIP_VERTICALLY) {
-				finalx = fx + Bmp->BitmapData->width - xoff;
+				finaly = fy + Bmp->BitmapData->height - yoff;
 			}
 
 			READ_COLOR = Bmp->BitmapData->ptr[yoff* Bmp->BitmapData->width + xoff];
