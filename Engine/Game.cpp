@@ -45,8 +45,8 @@ Spritesheet sh(&img, 16, 16);
 TransparentBitmap HumanImg("SPRITESHEET\\Spritesheet1-512x512.bmp");
 Spritesheet Human(&HumanImg, 12, 7);
 
-TransparentBitmap runImg("SPRITESHEET\\test.bmp");
-Spritesheet run (&runImg,1,1);
+TransparentBitmap runImg("SPRITESHEET\\sprite3.bmp");
+Spritesheet run (&runImg,9,9);
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
@@ -58,18 +58,15 @@ void Game::UpdateModel()
 
 int spritenow = 0;
 int delta = 0;
-int spriteMax = run.Data->count;
+int spriteMax = run.Data->count-9;
 
 void Game::ComposeFrame()
 {
 
 	Bitmap*  current = run.Data->ptr[spritenow];
-	//out.Draw_Bitmap(current, 30, 30);
-	out.Draw_Bitmap(&runImg,10,0);
-	delta++;
-	if (delta == 3) {
-		delta = 0;
+	out.Draw_Bitmap(current, 30, 30);
+
 		spritenow++;
 		spritenow %= spriteMax;
-	}
+	
 }
