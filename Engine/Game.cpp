@@ -47,8 +47,10 @@ Spritesheet Human(&HumanImg, 12, 7);
 
 TransparentBitmap Human2IMG("SPRITESHEET\\sprite3.bmp");
 Spritesheet Human2(&Human2IMG, 8, 9);
-Animation anim1(60, &Human2, 4,11);
-Animation anim2(7, &Human2, 31, 39);
+Animation run(7, &Human2, 4,11);
+Animation walk(10, &Human2, 32, 39);
+Animation idle(1, &Human2, 64, 64);
+
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
@@ -58,17 +60,40 @@ void Game::UpdateModel()
 {
 }
 
+bool running = false;
+bool moving = false;
+bool left = false;
+bool right = false;
+int x = 300;
+int y = 300;
 
 void Game::ComposeFrame()
 {
-	anim1.Step(); 
-	anim2.Step();
+
+	running = wnd.kbd.KeyIsPressed(VK_CONTROL);
+
+	left = wnd.kbd.KeyIsPressed(VK_LEFT);
+	right = wnd.kbd.KeyIsPressed(VK_RIGHT);
+
+	moving = left || right;
 
 
-	Bitmap*  a1 = anim1.GetCurrent();
-	Bitmap*  a2 = anim2.GetCurrent();
+	Animation * state;
+	if (!moving) { state = &idle; }
+	else if (!running) { state = &walk; 
+	if (left) x--;
+	if (right) x++;
+	
+	
+	}
+	else if (running) { state = &run; 
+	
+	if (left) x-=3;
+	if (right) x+=3;
+	}
 
-	out.Draw_Bitmap(a1, 30, 30);
-	out.Draw_Bitmap(a2, 80, 30);
+	state->Step();
+	Bitmap*  player = state->GetCurrent();
+	out.Draw_Bitmap(player, x, y);
 	
 }
