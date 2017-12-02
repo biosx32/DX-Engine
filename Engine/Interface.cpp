@@ -91,8 +91,8 @@ void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 
 		
 			this->Draw_Bitmap(sh->Data->ptr[i], xoff+ xdst, yoff+ ydst);
-			this->DrawShape->FastHLine(xoff + xdst, yoff + ydst, sprw+1);
-			this->DrawShape->FastVLine(xoff + xdst, yoff + ydst, sprh+1);
+			this->DrawShape->FastHLine(xoff + xdst, yoff + ydst, sprh+1);
+			this->DrawShape->FastVLine(xoff + xdst, yoff + ydst, sprw+1);
 		}
 	}
 

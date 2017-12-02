@@ -40,10 +40,12 @@ void Game::Go()
 
 
 TransparentBitmap img("FONT\\small.bmp");
-TransparentBitmap HumanImg("SPRITESHEET\\Spritesheet1-2048x2048.bmp");
-
+TransparentBitmap HumanImg("SPRITESHEET\\Spritesheet1-512x512.bmp");
+TransparentBitmap HumanImg2("SPRITESHEET\\Spritesheet1-512x512-2.bmp");
 Spritesheet sh(&img, 16,16);
-Spritesheet Human(&HumanImg, 12, 12);
+Spritesheet Human(&HumanImg, 12, 7);
+Spritesheet Human2(&HumanImg2, 12, 7);
+
 
 
 void Game::Initialise() {
@@ -65,6 +67,6 @@ void Game::ComposeFrame()
 	spritenow++;
 	spritenow %= spriteMax;*/
 
-	out.DrawSpritesheet(&sh, 0, 0);
-
+	out.DrawSpritesheet(&Human, 0, 0);
+	out.DrawSpritesheet(&Human2, 532, 0);
 }

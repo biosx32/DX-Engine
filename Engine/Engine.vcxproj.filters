@@ -155,5 +155,11 @@
     <Image Include="FONT\small.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="SPRITESHEET\Spritesheet1-512x512.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="SPRITESHEET\Spritesheet1-2048x2048.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
