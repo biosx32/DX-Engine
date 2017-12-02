@@ -18,12 +18,11 @@ public:
 	void DrawPixel(int x, int y, Color c);
 	void DrawLabel(int x, int y, Label* label);
 	void Draw_Bitmap(Bitmap* B, int fx, int fy);
-
+	void DrawSpritesheet(Spritesheet* sh, int xoff, int yoff);
 	Draw* DrawShape;
 
 protected:
-	Graphics* gfx;
-	unsigned char Graphics_loaded;
+	Graphics* gfx = nullptr;
 	
 };
 

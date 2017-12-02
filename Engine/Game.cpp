@@ -59,22 +59,12 @@ int spriteMax = Human.Data->hcount * Human.Data->wcount;
 void Game::ComposeFrame()
 {
 
-	Bitmap*  current = Human.Data->ptr[spritenow];
+	/*Bitmap*  current = Human.Data->ptr[spritenow];
+	out.Draw_Bitmap(current, 0, 0);
 
 	spritenow++;
-	spritenow %= spriteMax;
-	
-	Label a = Label(&sh);
-	Label b = Label(&sh);
-	a.setText("More. Convinient. Example.");
-	b.setText("1. First\n2. Second\n3. Third");
+	spritenow %= spriteMax;*/
 
-	
-	out.DrawLabel(30, 30, &a);
-	out.DrawLabel(30, 76, &b);
-
-
-	out.DrawShape->circle(200 + 120, 120, 30);
-
+	out.DrawSpritesheet(&sh, 0, 0);
 
 }

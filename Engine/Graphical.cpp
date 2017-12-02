@@ -3,12 +3,12 @@
 
 void Draw::FastVLine(int x0, int y0, int width) {
 	for (int i = 0; i < width; i++) {
-		this->out->DrawPixel(x0 + i, y0, Colors::Green);
+		this->out->DrawPixel(x0 + i, y0, brush);
 	}
 }
 void Draw::FastHLine(int x0, int y0, int height) {
 	for (int i = 0; i < height; i++) {
-		this->out->DrawPixel(x0, y0 + i, Colors::Green);
+		this->out->DrawPixel(x0, y0 + i, brush);
 	}
 }
 
@@ -20,14 +20,14 @@ void Draw::circle(int x0, int y0, int radius)
 
 	while (x >= y)
 	{
-		this->out->DrawPixel(x0 + x, y0 + y, Colors::Cyan);
-		this->out->DrawPixel(x0 + y, y0 + x, Colors::Cyan);
-		this->out->DrawPixel(x0 - y, y0 + x, Colors::Cyan);
-		this->out->DrawPixel(x0 - x, y0 + y, Colors::Cyan);
-		this->out->DrawPixel(x0 - x, y0 - y, Colors::Cyan);
-		this->out->DrawPixel(x0 - y, y0 - x, Colors::Cyan);
-		this->out->DrawPixel(x0 + y, y0 - x, Colors::Cyan);
-		this->out->DrawPixel(x0 + x, y0 - y, Colors::Cyan);
+		this->out->DrawPixel(x0 + x, y0 + y, brush);
+		this->out->DrawPixel(x0 + y, y0 + x, brush);
+		this->out->DrawPixel(x0 - y, y0 + x, brush);
+		this->out->DrawPixel(x0 - x, y0 + y, brush);
+		this->out->DrawPixel(x0 - x, y0 - y, brush);
+		this->out->DrawPixel(x0 - y, y0 - x, brush);
+		this->out->DrawPixel(x0 + y, y0 - x, brush);
+		this->out->DrawPixel(x0 + x, y0 - y, brush);
 
 		if (err <= 0)
 		{
@@ -73,12 +73,12 @@ void Draw::line(int x0, int y0, int width, int height)
 
 	while (x<x1) {
 		if (p >= 0) {
-			this->out->DrawPixel(x, y, Colors::Green);
+			this->out->DrawPixel(x, y, brush);
 			y = y + 1;
 			p = p + 2 * dy - 2 * dx;
 		}
 		else {
-			this->out->DrawPixel(x, y, Colors::Green);
+			this->out->DrawPixel(x, y, brush);
 			p = p + 2 * dy;
 		}
 		x = x + 1;
@@ -98,4 +98,9 @@ void Draw::rectangle(int x0, int y0, int width, int height) {
 void Draw::Draw::setOutInterface(Interface* out)
 {
 	this->out = out;
+}
+
+void Draw::SetBrushColor(Color color)
+{
+	this->brush = color;
 }

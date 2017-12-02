@@ -8,14 +8,13 @@ Interface::Interface()
 
 void Interface::set_graphics(Graphics* gfx) {
 	this->gfx = gfx; 
-	if (gfx != nullptr) {
-		Graphics_loaded = YES;
-	}
 }
 void Interface::DrawPixel(int xoff, int yoff, Color c) { 
-	if (!(Graphics_loaded == YES)) {
-		return;
-	}
+	int softdraw = 1;
+
+	if (gfx == nullptr) return;
+
+	if ( softdraw && (xoff>= gfx->ScreenWidth || xoff < 0 || yoff >= gfx->ScreenHeight || yoff < 0)) return;
 	gfx->PutPixel(xoff, yoff, c);
 	
 }
@@ -74,4 +73,28 @@ void Interface::Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy) {
 			
 		}
 	}
+}
+
+void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
+{
+	Color old = this->DrawShape->brush;
+	this->DrawShape->SetBrushColor(Colors::Red);
+
+	int sprw = sh->Data->ptr[0]->BitmapData->width;
+	int sprh = sh->Data->ptr[0]->BitmapData->height;
+
+	for (int y = 0; y < sh->Data->hcount; y++) {
+		for (int x = 0; x < sh->Data->wcount; x++) {
+			int i = y * sh->Data->wcount + x;
+			int xdst = x* sprw + 1 * x ;
+			int ydst = y* sprh + 1 * y;
+
+		
+			this->Draw_Bitmap(sh->Data->ptr[i], xoff+ xdst, yoff+ ydst);
+			this->DrawShape->FastHLine(xoff + xdst, yoff + ydst, sprw+1);
+			this->DrawShape->FastVLine(xoff + xdst, yoff + ydst, sprh+1);
+		}
+	}
+
+	this->DrawShape->SetBrushColor(old);
 }

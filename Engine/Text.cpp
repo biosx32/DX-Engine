@@ -10,8 +10,6 @@ int Label::Load(Spritesheet* sh) {
 
 Label::~Label()
 {
-	delete this->sprite_sheet;
-	this->sprite_sheet = nullptr;
 }
 
 Label::Label(Spritesheet * sh)
