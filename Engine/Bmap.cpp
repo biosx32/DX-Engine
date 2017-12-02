@@ -153,8 +153,19 @@ Bitmap::~Bitmap()
 
 int TransparentBitmap::IsColorTransparent(Color color)
 {
+	int r1 = color.GetR();
+	int g1 = color.GetB();
+	int b1 = color.GetB();
 
-	if (color.dword == transparency.dword) {
+	int r2 = transparency.GetR();
+	int g2 = transparency.GetB();
+	int b2 = transparency.GetB();
+
+	double distance = pow(r2 - r1, 2) + pow(g2 - g1, 2) + pow(b2 - b1, 2);
+	double const range = pow(255, 2) + pow(255, 2) + pow(255, 2);
+	double percentage = distance / range;
+
+	if (percentage < tolerance) {
 		return 1;
 	}
 	return 0;

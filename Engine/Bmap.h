@@ -1,6 +1,7 @@
 #ifndef __BITMAP_H__
 #define __BITMAP_H__
 #include <stdio.h>
+#include <math.h>  
 #include "Colors.h"
 #include "Func.h"
 
@@ -62,6 +63,7 @@ public:
 	TransparentBitmap(int width, int height) : Bitmap(width, height) {}
 
 	Color transparency = 0x00b1f4b1; // 177,244,177
+	double tolerance = 0.01f;
 
 	virtual int IsColorTransparent(Color color) override;
 	virtual int GetBitmapType() override;
