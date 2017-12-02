@@ -40,7 +40,11 @@ void Game::Go()
 
 
 TransparentBitmap img("FONT\\small.bmp");
+TransparentBitmap HumanImg("SPRITESHEET\\Spritesheet1-2048x2048.bmp");
+
 Spritesheet sh(&img, 16,16);
+Spritesheet Human(&HumanImg, 12, 12);
+
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
@@ -50,8 +54,16 @@ void Game::UpdateModel()
 {
 }
 
+int spritenow = 0;
+int spriteMax = Human.Data->hcount * Human.Data->wcount;
 void Game::ComposeFrame()
 {
+
+	Bitmap*  current = Human.Data->ptr[spritenow];
+
+	spritenow++;
+	spritenow %= spriteMax;
+	
 	Label a = Label(&sh);
 	Label b = Label(&sh);
 	a.setText("More. Convinient. Example.");

@@ -20,14 +20,14 @@ void Spritesheet::Load(Bitmap * BitmapImage, int wcount, int hcount)
 void Spritesheet::RemoveSpriteData()
 {
 	delete this->Data;
+	this->Data = nullptr;
 
 }
 
 SpritesheetDS::~SpritesheetDS()
 {
-	if (this->ptr) {
-		delete[] ptr;
-	}
+	delete[] ptr;
+	this->ptr = nullptr;
 }
 
 void SpritesheetDS::Load(Bitmap * BitmapImage, int wcount, int hcount)

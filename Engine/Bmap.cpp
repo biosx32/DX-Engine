@@ -2,7 +2,8 @@
 
 
 BitmapDS::~BitmapDS() {
-	if (ptr) delete[] ptr;
+	delete[] ptr;
+	this->ptr = nullptr;
 	
 }
 
@@ -106,7 +107,7 @@ int Bitmap::Load(char * FileName)
 
 int Bitmap::SetDataSource(BitmapDS * ptr)
 {
-	if (this->BitmapData) delete BitmapData;
+	delete BitmapData;
 	this->BitmapData = ptr;
 	return 0;
 }
@@ -144,10 +145,8 @@ Bitmap::Bitmap(int width, int height)
 
 Bitmap::~Bitmap()
 {
-	if (this->BitmapData) {
-		delete this->BitmapData;
-	}
-	
+	delete this->BitmapData;
+	this->BitmapData = nullptr;
 }
 
 

@@ -5,12 +5,12 @@
 
 class Label {
 public:
-
+	~Label();
 	Label(Spritesheet* sh);
 	
 
 	char text[1024];
-	Spritesheet* sprite_sheet;
+	Spritesheet* sprite_sheet = nullptr;
 
 	Bitmap* Get_Bitmap_Char(int c);
 	void setText(char* text);

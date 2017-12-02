@@ -8,8 +8,8 @@ public:
 
 	int wcount;
 	int hcount;
-	Bitmap* BitmapImage;
-	Bitmap** ptr;
+	Bitmap* BitmapImage = nullptr;
+	Bitmap** ptr = nullptr;
 	void Load(Bitmap* BitmapImage, int wcount, int hcount);
 };
 
@@ -18,10 +18,15 @@ public:
 	Spritesheet() = delete;
 	Spritesheet(Bitmap* BitmapImage, int wcount, int hcount);
 	~Spritesheet();
-	SpritesheetDS* Data;
+	SpritesheetDS* Data = nullptr;
 
 	void Load(Bitmap* BitmapImage, int wcount, int hcount);
 	void RemoveSpriteData();
+};
+
+
+class Animation {
+
 };
 
 

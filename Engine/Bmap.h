@@ -44,7 +44,7 @@ public:
 	Bitmap(int width, int height);
 	~Bitmap();
 
-	BitmapDS* BitmapData;
+	BitmapDS* BitmapData = nullptr;
 	Bitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT);
 
 	int Load(char* FileName);
@@ -61,7 +61,7 @@ public:
 	TransparentBitmap(char* FileName) : Bitmap(FileName) {}
 	TransparentBitmap(int width, int height) : Bitmap(width, height) {}
 
-	Color transparency = 0x00b1f4b1;
+	Color transparency = 0x00b1f4b1; // 177,244,177
 
 	virtual int IsColorTransparent(Color color) override;
 	virtual int GetBitmapType() override;
