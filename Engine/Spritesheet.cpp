@@ -66,7 +66,9 @@ void SpritesheetDS::Load(Bitmap * BitmapImage)
 	this->hcount = 0;
 
 	this->BitmapImage = BitmapImage;
-
+	Bitmap*  = new Bitmap(BitmapImage);
+// idea is -find first collision, then flood all points, into some list,
+	//then find topleft topright - bounds, and then make all background color, then go to next first
 	//this->count = number of sprites;
 	this->ptr = new (Bitmap*[count]);
 
