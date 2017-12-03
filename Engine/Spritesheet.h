@@ -12,6 +12,8 @@ public:
 	Bitmap* BitmapImage = nullptr;
 	Bitmap** ptr = nullptr;
 	void Load(Bitmap* BitmapImage, int wcount, int hcount);
+	void Load(Bitmap* BitmapImage);
+
 };
 
 class Spritesheet {
@@ -22,6 +24,7 @@ public:
 	SpritesheetDS* Data = nullptr;
 
 	void Load(Bitmap* BitmapImage, int wcount, int hcount);
+	void Load(Bitmap* BitmapImage);
 	void RemoveSpriteData();
 };
 
@@ -30,9 +33,9 @@ public:
 class Animation {
 public:
 	Animation();
-	Animation(int FPS, Spritesheet* sh, int s, int e);
-	Animation(int FPS, Spritesheet* sh);
-	void Load(int FPS, Spritesheet* sh);
+	Animation(float FPS, Spritesheet* sh, int s, int e);
+	Animation(float FPS, Spritesheet* sh);
+	void Load(float FPS, Spritesheet* sh);
 
 	int startFrame = 0;
 	int endFrame = 0;
@@ -44,10 +47,6 @@ public:
 
 	void SetRange(int s, int e);
 	void SetFPS(float FPS);
-
-
-
-
 
 	void ForceStep();
 	void Step();

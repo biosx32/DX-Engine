@@ -42,6 +42,7 @@ void Game::Go()
 TransparentBitmap img("FONT\\small.bmp");
 Spritesheet sh(&img, 16, 16);
 
+TransparentBitmap img("SPRITESHEET\\sprite3.bmp");
 
 
 void Game::Initialise() {

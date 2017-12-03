@@ -21,6 +21,12 @@ void Spritesheet::Load(Bitmap * BitmapImage, int wcount, int hcount)
 	this->Data->Load(BitmapImage, wcount, hcount);
 }
 
+void Spritesheet::Load(Bitmap * BitmapImage)
+{
+	this->Data = new SpritesheetDS();
+	this->Data->Load(BitmapImage);
+}
+
 void Spritesheet::RemoveSpriteData()
 {
 	delete this->Data;
@@ -54,22 +60,37 @@ void SpritesheetDS::Load(Bitmap * BitmapImage, int wcount, int hcount)
 	}
 }
 
+void SpritesheetDS::Load(Bitmap * BitmapImage)
+{
+	this->wcount = 0;
+	this->hcount = 0;
+
+	this->BitmapImage = BitmapImage;
+
+	//this->count = number of sprites;
+	this->ptr = new (Bitmap*[count]);
+
+	//this->ptr[y * wcount + x] = BitmapImage->GetBitmapPart(x * sprite_width, y * sprite_height, sprite_width, sprite_height);
+		
+	}
+}
+
 Animation::Animation()
 {
 }
 
-Animation::Animation(int FPS, Spritesheet * sh, int s, int e): Animation(FPS, sh)
+Animation::Animation(float FPS, Spritesheet * sh, int s, int e): Animation(FPS, sh)
 {
 	
 	this->SetRange(s, e);
 }
 
-Animation::Animation(int FPS, Spritesheet * sh)
+Animation::Animation(float FPS, Spritesheet * sh)
 {
 	this->Load(FPS, sh);
 }
 
-void Animation::Load(int FPS, Spritesheet * sh)
+void Animation::Load(float FPS, Spritesheet * sh)
 {
 	this->spritesheet = sh;
 	this->FPS = FPS;
