@@ -42,20 +42,29 @@ void Game::Go()
 TransparentBitmap img("FONT\\small.bmp");
 Spritesheet sh(&img, 16, 16);
 
-TransparentBitmap img("SPRITESHEET\\sprite3.bmp");
+
+
+TransparentBitmap SpriteImage("SPRITESHEET\\sprite3.bmp");
+PixelContainer pxc;
+
+
+
 
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
+	pxc.Load(&SpriteImage);
+}
+
+void Game::ComposeFrame()
+{
+	pxc.Draw(&out, 0, 0);
+	
+
 }
 
 void Game::UpdateModel()
 {
 }
 
-void Game::ComposeFrame()
-{
 
-
-	
-}

@@ -3,6 +3,7 @@
 #include "Spritesheet.h"
 #include <string.h>
 
+class Spritesheet;
 class Label {
 public:
 	~Label();

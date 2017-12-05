@@ -1,7 +1,9 @@
 #ifndef __SPRITESHEET_H__
 #define __SPRITESHEET_H__
 #include "Bmap.h"
+#include "Interface.h"
 
+class Interface;
 class SpritesheetDS {
 public:
 	~SpritesheetDS();
@@ -56,6 +58,32 @@ public:
 	Spritesheet* spritesheet = nullptr;
 
 };
+
+
+class FFPixel {
+public:
+	FFPixel();
+
+	Color color;
+	bool isBackground = false;
+	bool CheckedNeighbors = false;
+
+};
+
+class PixelContainer {
+public:
+	int pixelcount;
+	int width;
+	int height;
+	FFPixel* pixels;
+
+	Color transparency = 0x00b1f4b1;
+	
+	void Load(Bitmap* bmp);
+	void Draw(Interface* out, int fx, int fy);
+};
+
+
 
 
 #endif

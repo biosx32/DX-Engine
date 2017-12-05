@@ -66,7 +66,7 @@ void SpritesheetDS::Load(Bitmap * BitmapImage)
 	this->hcount = 0;
 
 	this->BitmapImage = BitmapImage;
-	Bitmap*  = new Bitmap(BitmapImage);
+	
 // idea is -find first collision, then flood all points, into some list,
 	//then find topleft topright - bounds, and then make all background color, then go to next first
 	//this->count = number of sprites;
@@ -74,7 +74,7 @@ void SpritesheetDS::Load(Bitmap * BitmapImage)
 
 	//this->ptr[y * wcount + x] = BitmapImage->GetBitmapPart(x * sprite_width, y * sprite_height, sprite_width, sprite_height);
 		
-	}
+	
 }
 
 Animation::Animation()
@@ -134,4 +134,44 @@ void Animation::Step()
 Bitmap * Animation::GetCurrent()
 {
 	return spritesheet->Data->ptr[currentFrame];
+}
+
+FFPixel::FFPixel()
+{
+
+}
+
+void PixelContainer::Draw(Interface * out, int fx, int fy)
+{
+	FFPixel ReadPixel;
+	for (int yoff = 0; yoff < height; yoff++) {
+		for (int xoff = 0; xoff <  width; xoff++) {
+
+			ReadPixel = pixels[yoff* width + xoff];
+
+			if (ReadPixel.isBackground == false) {
+				out->DrawPixel(xoff + fx, yoff + fy, ReadPixel.color);
+			}
+			else {
+				out->DrawPixel(xoff + fx, yoff + fy, Color(122, 255, 111));
+			}
+
+		}
+	}
+}
+
+void PixelContainer::Load(Bitmap * bmp)
+{
+	this->width = bmp->BitmapData->width;
+	this->height = bmp->BitmapData->height;
+
+	this->pixelcount = width*height;
+
+	this->pixels = new FFPixel[pixelcount];
+	for (int i = 0; i < pixelcount; i++) {
+		pixels[i].color = bmp->BitmapData->ptr[i];
+		if (pixels[i].color.dword == transparency.dword) {
+			pixels[i].isBackground = true;
+		}
+	}
 }

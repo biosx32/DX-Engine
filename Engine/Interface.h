@@ -16,7 +16,8 @@
 #define CCW_270 CW_90
 
 class Draw;
-
+class Label;
+class Spritesheet;
 class Interface {
 public:
 	Interface();
