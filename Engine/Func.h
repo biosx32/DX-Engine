@@ -15,8 +15,8 @@ public:
 
 class Error : public OutputStream {
 public:
-	Error& operator<<(char* str);
-	Error& operator<<(double chr);
+	OutputStream& operator<<(char* str);
+	OutputStream& operator<<(double chr);
 };
 
 extern OutputStream print;

@@ -31,14 +31,14 @@ OutputStream & OutputStream::operator<<(double chr)
 }
 
 
-Error & Error::operator<<(char * str)
+OutputStream & Error::operator<<(char * str)
 {
 	OutputStream::operator<<("!ERROR: ");
 	OutputStream::operator<<(str);
 	return *this;
 }
 
-Error & Error::operator<<(double chr)
+OutputStream & Error::operator<<(double chr)
 {
 	OutputStream::operator<<("!ERROR: ");
 	OutputStream::operator<<(chr);

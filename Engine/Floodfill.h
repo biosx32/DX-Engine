@@ -6,13 +6,10 @@
 
 class FFPixel {
 public:
-	FFPixel();
+	FFPixel(int x, int y, Color c);
 	int x, y;
 	Color color;
-	Color backgroundcolor;
-
-	bool IsBackgroundColor();
-	bool CheckedNeighbors = false;
+	bool checked = false;
 
 };
 
@@ -21,12 +18,22 @@ public:
 	int pixelcount;
 	int width;
 	int height;
-	FFPixel* pixels;
 
+
+	
 	Color transparency = 0x00b1f4b1;
 
-	void Load(TransparentBitmap* bmp);
+	void Load(Bitmap* bmp);
 	void Draw(Interface* out, int fx, int fy);
+
+
+	FFPixel** pixels;
+	FFPixel* getFirstPixel();
+
+	bool IsPixelBackground(FFPixel* ptr);
+
+	void CheckNeighbors(FFPixel * pixel);
+
 };
 
 
