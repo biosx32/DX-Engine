@@ -45,10 +45,11 @@ bool PixelContainer::IsPixelBackground(FFPixel* ptr)
 void PixelContainer::CheckNeighbors(FFPixel * pixel)
 {
 	int nx, ny;
+	
 	FFPixel* neighbor;
 
 	pixel->checked = true;
-
+	pixel->group = GroupIter;
 
 	for (int y = 0; y < 3; y++) {
 		for (int x = 0; x < 3; x++) {
@@ -64,6 +65,7 @@ void PixelContainer::CheckNeighbors(FFPixel * pixel)
 
 			
 			neighbor = this->pixels[ny * width + nx];
+
 			if (neighbor == nullptr) {
 				DebugBreak();
 			}

@@ -56,12 +56,6 @@ void Game::Initialise() {
 	container.Load(&SpriteImage);
 
 
-
-	while (true) {
-		FFPixel* p = container.getFirstPixel();
-		if (p == nullptr) break;
-		container.CheckNeighbors(p);
-	}
 	
 }
 
@@ -73,7 +67,9 @@ void Game::ComposeFrame()
 		int x = wnd.mouse.GetPosX();
 		int y = wnd.mouse.GetPosY();
 		if (x < container.width && y < container.height) {
+			
 			container.CheckNeighbors(container.pixels[y * container.width + x]);
+			container.GroupIter++;
 		}
 	}
 

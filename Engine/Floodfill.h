@@ -7,6 +7,7 @@
 class FFPixel {
 public:
 	FFPixel(int x, int y, Color c);
+	int group;
 	int x, y;
 	Color color;
 	bool checked = false;
@@ -19,7 +20,7 @@ public:
 	int width;
 	int height;
 
-
+	int GroupIter=0;
 	
 	Color transparency = 0x00b1f4b1;
 
