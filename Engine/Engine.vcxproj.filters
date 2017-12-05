@@ -22,6 +22,12 @@
     <Filter Include="EngineCPP">
       <UniqueIdentifier>{2d75db03-2c4a-4104-9306-48d06d0cf2d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Extended">
+      <UniqueIdentifier>{943ab2b1-b8b1-4594-91ae-cea0123b9c64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Extended">
+      <UniqueIdentifier>{82b1d44f-5070-4f01-a0bf-02e486a9f556}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChiliException.h">
@@ -69,16 +75,22 @@
     <ClInclude Include="Interface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Func.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Spritesheet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Graphical.h">
+      <Filter>Header Files\Extended</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\Extended</Filter>
+    </ClInclude>
+    <ClInclude Include="Func.h">
+      <Filter>Header Files\Extended</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\Extended</Filter>
+    </ClInclude>
+    <ClInclude Include="Floodfill.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -116,16 +128,22 @@
     <ClCompile Include="Interface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Func.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Spritesheet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\Extended</Filter>
+    </ClCompile>
+    <ClCompile Include="Func.cpp">
+      <Filter>Source Files\Extended</Filter>
     </ClCompile>
     <ClCompile Include="Graphical.cpp">
+      <Filter>Source Files\Extended</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Extended</Filter>
+    </ClCompile>
+    <ClCompile Include="Floodfill.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

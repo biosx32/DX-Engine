@@ -45,7 +45,7 @@ Spritesheet sh(&img, 16, 16);
 
 
 TransparentBitmap SpriteImage("SPRITESHEET\\sprite3.bmp");
-PixelContainer pxc;
+PixelContainer container;
 
 
 
@@ -53,12 +53,12 @@ PixelContainer pxc;
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
-	pxc.Load(&SpriteImage);
+	container.Load(&SpriteImage);
 }
 
 void Game::ComposeFrame()
 {
-	pxc.Draw(&out, 0, 0);
+	container.Draw(&out, 0, 0);
 	
 
 }

@@ -28,6 +28,7 @@
 #include "Spritesheet.h"
 #include "Text.h"
 #include "Graphical.h"
+#include "Floodfill.h"
 #include "Interface.h"
 
 
