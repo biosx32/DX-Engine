@@ -76,7 +76,7 @@ void Game::ComposeFrame()
 
 
 	if (wnd.mouse.RightIsPressed()) {
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 500; i++) {
 			FFPixel* get = container.GetPending();
 			if (get != nullptr) {
 				container.CheckPixel(get);

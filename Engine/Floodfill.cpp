@@ -96,11 +96,14 @@ void PixelContainer::CheckPixel(FFPixel * pixel)
 	int px = pixel->x;
 	int py = pixel->y;
 
-	FFPixel* arr[2] = { getPixelAt(px-1, py), 
-						getPixelAt(px+1, py)
+	FFPixel* arr[4] = { getPixelAt(px - 1, py),
+		getPixelAt(px + 1, py),
+		getPixelAt(px, py - 1),
+	nullptr//	getPixelAt(px, py + 1),
+
 	};
 
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 4; i++) {
 		FFPixel* neighbor = arr[i];
 
 		if (neighbor ==nullptr) {
