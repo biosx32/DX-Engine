@@ -4,13 +4,17 @@
 #include "Interface.h"
 #include "BMap.h"
 
+enum PixelState {
+	background, checked, pending, raw
+};
+
 class FFPixel {
 public:
-	FFPixel(int x, int y, Color c);
-	int group;
+	FFPixel(int x, int y, Color c, int state);
 	int x, y;
 	Color color;
-	bool checked = false;
+
+	int state;
 
 };
 
@@ -19,8 +23,6 @@ public:
 	int pixelcount;
 	int width;
 	int height;
-
-	int GroupIter=0;
 	
 	Color transparency = 0x00b1f4b1;
 
@@ -31,9 +33,16 @@ public:
 	FFPixel** pixels;
 	FFPixel* getFirstPixel();
 
-	bool IsPixelBackground(FFPixel* ptr);
+	FFPixel* getPixelAt(int x, int y);
 
-	void CheckNeighbors(FFPixel * pixel);
+
+	bool IsColorBackground(Color c);
+
+	void StartVirus(FFPixel * pixel);
+
+	FFPixel * GetPending();
+
+	void CheckPixel(FFPixel * pixel);
 
 };
 

@@ -44,7 +44,7 @@ Spritesheet sh(&img, 16, 16);
 
 
 
-TransparentBitmap SpriteImage("SPRITESHEET\\sprite3.bmp");
+TransparentBitmap SpriteImage("SPRITESHEET\\test.bmp");
 PixelContainer container;
 
 
@@ -64,13 +64,26 @@ void Game::ComposeFrame()
 	container.Draw(&out, 0, 0);
 
 	if (wnd.mouse.LeftIsPressed()) {
+
 		int x = wnd.mouse.GetPosX();
 		int y = wnd.mouse.GetPosY();
 		if (x < container.width && y < container.height) {
 			
-			container.CheckNeighbors(container.pixels[y * container.width + x]);
-			container.GroupIter++;
+			container.CheckPixel(container.pixels[y * container.width + x]);
+
 		}
+	}
+
+
+	if (wnd.mouse.RightIsPressed()) {
+		for (int i = 0; i < 20; i++) {
+			FFPixel* get = container.GetPending();
+			if (get != nullptr) {
+				container.CheckPixel(get);
+			}
+		}
+	
+		
 	}
 
 }

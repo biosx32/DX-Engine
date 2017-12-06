@@ -8,12 +8,15 @@ void PixelContainer::Draw(Interface * out, int fx, int fy)
 
 			ReadPixel = pixels[yoff* width + xoff];
 
-			if (this->IsPixelBackground(ReadPixel)) {
+			if (ReadPixel->state == PixelState::background) {
 				out->DrawPixel(xoff + fx, yoff + fy, Color(122, 255, 111));
 				
 			}
-			else if (ReadPixel->checked) {
-				out->DrawPixel(xoff + fx, yoff + fy, Color(255, 255, 111));
+			else if (ReadPixel->state == PixelState::checked) {
+				out->DrawPixel(xoff + fx, yoff + fy, Color(255, 0, 0));
+			}
+			else if (ReadPixel->state == PixelState::pending) {
+				out->DrawPixel(xoff + fx, yoff + fy, Color(0, 255, 255));
 			}
 			else {
 				out->DrawPixel(xoff + fx, yoff + fy, ReadPixel->color);
@@ -27,59 +30,91 @@ FFPixel * PixelContainer::getFirstPixel()
 {
 	for (int y = 0; y < this->height; y++) {
 		for (int x = 0; x < this->width; x++) {
-		FFPixel* ptr = pixels[y*width + x];
+			FFPixel* ptr = pixels[y*width + x];
 
-		if (!this->IsPixelBackground(ptr) && !ptr->checked) {
-			return ptr;
+			if (ptr->state == PixelState::raw) {
+				return ptr;
+			}
+
 		}
 	}
+
+	return nullptr;
+}
+
+FFPixel * PixelContainer::getPixelAt(int x, int y)
+{
+	if (x >= 0 && x < width && y >= 0 && y < height) {
+		return this->pixels[y*width + x];
+	}
+
+	return nullptr;
+}
+
+
+
+
+bool PixelContainer::IsColorBackground(Color c)
+{
+	return c.dword == transparency.dword;
+}
+
+void PixelContainer::StartVirus(FFPixel* pixel) {
+	CheckPixel(pixel);
+
+	while (true) {
+		FFPixel* next = GetPending();
+		if (next == nullptr) {
+			break;
+		}
+
+		CheckPixel(pixel);
+	}
+
+}
+
+
+FFPixel* PixelContainer::GetPending() {
+	for (int i = 0; i < pixelcount; i++) {
+		if (pixels[i]->state == PixelState::pending) {
+			return pixels[i];
+		}
 	}
 	return nullptr;
 }
 
-bool PixelContainer::IsPixelBackground(FFPixel* ptr)
+void PixelContainer::CheckPixel(FFPixel * pixel)
 {
-	return ptr->color.dword == this->transparency.dword;
-}
 
-void PixelContainer::CheckNeighbors(FFPixel * pixel)
-{
-	int nx, ny;
-	
-	FFPixel* neighbor;
-
-	pixel->checked = true;
-	pixel->group = GroupIter;
-
-	for (int y = 0; y < 3; y++) {
-		for (int x = 0; x < 3; x++) {
-
-
-			ny = y - 1 + pixel->y;
-			nx = x - 1 + pixel->x;
-
-			if (nx < 0 || nx >= width || ny<0 || ny>= height) {
-				continue;
-
-			}
-
-			
-			neighbor = this->pixels[ny * width + nx];
-
-			if (neighbor == nullptr) {
-				DebugBreak();
-			}
-			if (neighbor == pixel) {
-				continue;
-			}
-
-			if (!neighbor->checked && !this->IsPixelBackground(neighbor)) {
-				this->CheckNeighbors(neighbor);
-			}
-
-
-		}
+	if (pixel->state == PixelState::background || pixel->state == PixelState::checked) {
+		return;
 	}
+
+	pixel->state = PixelState::checked;
+	
+
+	int px = pixel->x;
+	int py = pixel->y;
+
+	FFPixel* arr[2] = { getPixelAt(px-1, py), 
+						getPixelAt(px+1, py)
+	};
+
+	for (int i = 0; i < 2; i++) {
+		FFPixel* neighbor = arr[i];
+
+		if (neighbor ==nullptr) {
+			continue;
+		}
+		
+		if (neighbor->state == PixelState::raw) {
+			neighbor->state = PixelState::pending;
+		}
+
+
+	}
+
+
 
 
 
@@ -98,16 +133,23 @@ void PixelContainer::Load(Bitmap * bmp)
 		for (int x = 0; x < this->width; x++) {
 			int i = y*width + x;
 			Color c = bmp->BitmapData->ptr[i];
-			pixels[i] = new FFPixel(x, y, c);
+			int state = PixelState::raw;
+
+			if (IsColorBackground(c)) {
+				state = PixelState::background;
+			}
+			
+			pixels[i] = new FFPixel(x, y, c, state);
 
 		}
 	}
 
 }
 
-FFPixel::FFPixel(int x, int y, Color c)
+FFPixel::FFPixel(int x, int y, Color c, int state)
 {
 	this->x = x;
 	this->y = y;
 	this->color = c;
+	this->state = state;
 }
