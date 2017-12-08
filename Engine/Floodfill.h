@@ -24,7 +24,7 @@ public:
 	int pixelcount;
 	int width;
 	int height;
-
+	int lastpos = 0;
 	Color transparency = 0x00b1f4b1;
 	static const int maxp = 512;
 	FFPixel* pending[maxp];

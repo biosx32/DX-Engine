@@ -48,14 +48,12 @@ void PixelContainer::Draw(Interface * out, int fx, int fy)
 
 FFPixel * PixelContainer::getFirstRawPixel()
 {
-	for (int y = 0; y < this->height; y++) {
-		for (int x = 0; x < this->width; x++) {
-			FFPixel* ptr = pixels[y*width + x];
 
-			if (ptr->state & pixelstate::raw) {
-				return ptr;
-			}
-
+	for (int i = lastpos; i < pixelcount; i++) {
+		if (pixels[i]->state & pixelstate::raw) {
+			lastpos = i;
+			return pixels[i];
+			
 		}
 	}
 

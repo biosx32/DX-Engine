@@ -55,11 +55,11 @@ void Game::Initialise() {
 	out.set_graphics(&gfx);
 	container.Load(&SpriteImage);
 
-	/*while (container.getFirstRawPixel() != nullptr) {
+	while (container.getFirstRawPixel() != nullptr) {
 		container.PendingProcess(container.getFirstRawPixel());
-
-		container.StepPending();
-	}*/
+		while (container.StepPending());
+		
+	}
 	
 }
 
