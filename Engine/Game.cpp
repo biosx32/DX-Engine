@@ -44,7 +44,7 @@ Spritesheet sh(&img, 16, 16);
 
 
 
-TransparentBitmap SpriteImage("SPRITESHEET\\sprite3.bmp");
+TransparentBitmap SpriteImage("SPRITESHEET\\test3.bmp");
 PixelContainer container;
 
 

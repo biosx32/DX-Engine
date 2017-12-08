@@ -3,9 +3,10 @@
 #include "Colors.h"
 #include "Interface.h"
 #include "BMap.h"
+#include <vector>
 
 enum pixelstate {
-	raw = 1, background = 2, pending = 4, checked = 8, stalled = 16,
+	raw = 1, background = 2, pending = 4, checked = 8, review = 16,
 };
 
 class FFPixel {
@@ -24,10 +25,12 @@ public:
 	int width;
 	int height;
 
-	int pendingcount = 0;
-	
 	Color transparency = 0x00b1f4b1;
-	FFPixel* pending[16];
+	static const int maxp = 8;
+	FFPixel* pending[maxp];
+
+	std::vector<FFPixel*> stalledPixels;
+
 	FFPixel** pixels;
 
 	void Load(Bitmap* bmp);
@@ -37,14 +40,11 @@ public:
 
 
 	bool IsColorBackground(Color c);
-
-	void StartVirus(FFPixel * pixel);
 	void StepPending();
+	void PendingProcess(FFPixel * pixel);
 	void StallCheck(FFPixel * pixel);
 	int AddToPendingTest(FFPixel * pixel);
 	void AddToPending(FFPixel * pixel);
-
-	FFPixel * GetPending();
 
 	
 
