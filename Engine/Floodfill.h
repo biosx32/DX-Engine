@@ -26,7 +26,7 @@ public:
 	int height;
 
 	Color transparency = 0x00b1f4b1;
-	static const int maxp = 20;
+	static const int maxp = 16;
 	FFPixel* pending[maxp];
 
 	std::vector<FFPixel*> stalledPixels;
@@ -41,7 +41,6 @@ public:
 
 	bool IsColorBackground(Color c);
 	FFPixel*  GetStalled();
-	void FillEmptySearchers();
 	void StepPending();
 	void PendingProcess(FFPixel * pixel);
 	void AddToStalled(FFPixel * pixel);
