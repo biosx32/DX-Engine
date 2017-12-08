@@ -44,7 +44,7 @@ Spritesheet sh(&img, 16, 16);
 
 
 
-TransparentBitmap SpriteImage("SPRITESHEET\\test3.bmp");
+TransparentBitmap SpriteImage("SPRITESHEET\\sprite3.bmp");
 PixelContainer container;
 
 
@@ -54,6 +54,13 @@ PixelContainer container;
 void Game::Initialise() {
 	out.set_graphics(&gfx);
 	container.Load(&SpriteImage);
+
+	/*while (container.getFirstRawPixel() != nullptr) {
+		container.PendingProcess(container.getFirstRawPixel());
+
+		container.StepPending();
+	}*/
+	
 }
 
 void Game::ComposeFrame()
@@ -63,8 +70,8 @@ void Game::ComposeFrame()
 	if (wnd.mouse.LeftIsPressed()) {
 
 
-		int x = wnd.mouse.GetPosX() / 4;
-		int y = wnd.mouse.GetPosY() / 4;
+		int x = wnd.mouse.GetPosX();
+		int y = wnd.mouse.GetPosY();
 
 		if (container.getPixelAt(x, y) != nullptr) {
 			container.AddToPending(container.getPixelAt(x, y));
@@ -75,7 +82,7 @@ void Game::ComposeFrame()
 	
 	if (wnd.mouse.RightIsPressed()) {
 
-		print << container.StepPending() << "\n";
+		container.StepPending();
 
 	}
 
