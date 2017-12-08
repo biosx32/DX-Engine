@@ -100,17 +100,14 @@ int PixelContainer::StepPending() {
 			pending[i] = GetStalled();
 		}
 
-		else if (pending[i]->state & pixelstate::pending) {
-			pending[i]->state &= ~pixelstate::pending;
 
-		}
 
 		else if (!(pending[i]->state & pixelstate::pending)) {
 			pending[i] = GetStalled();
 
 		}
 
-		if (pending[i]) {
+		else {
 			
 			PendingProcess(pending[i]);
 		}
@@ -125,8 +122,8 @@ int PixelContainer::StepPending() {
 void PixelContainer::PendingProcess(FFPixel* pixel) {
 	pixel->state |= pixelstate::checked;
 	pixel->state &= ~pixelstate::pending;
-
 	pixel->state &= ~pixelstate::raw;
+	pixel->state &= ~pixelstate::stalled;
 
 	if (pixel->state & pixelstate::background) {
 		return;
@@ -176,16 +173,13 @@ void PixelContainer::AddToPending(FFPixel* pixel) {
 
 	if (foundSlot) {
 		pixel->state |= pixelstate::pending;
-
-		pixel->state &= ~pixelstate::stalled;
 	}
 	else {
 		pixel->state |= pixelstate::stalled;
-		pixel->state &= ~pixelstate::pending;
-
 		stalledPixels.push_back(pixel);
 	}
 
+	pixel->state &= ~pixelstate::raw;
 	
 	
 }
