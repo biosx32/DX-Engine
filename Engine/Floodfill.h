@@ -6,7 +6,7 @@
 #include <vector>
 
 enum pixelstate {
-	raw = 1, background = 2, pending = 4, checked = 8, review = 16,
+	raw = 1, background = 2, pending = 4, checked = 8, stalled = 16,
 };
 
 class FFPixel {
@@ -40,11 +40,11 @@ public:
 
 
 	bool IsColorBackground(Color c);
+	FFPixel*  GetStalled();
+	void FillEmptySearchers();
 	void StepPending();
 	void PendingProcess(FFPixel * pixel);
-	void StallCheck(FFPixel * pixel);
-	int AddToPendingTest(FFPixel * pixel);
-	void AddToPending(FFPixel * pixel);
+	void AddToStalled(FFPixel * pixel);
 
 	
 

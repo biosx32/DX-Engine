@@ -29,7 +29,7 @@ void PixelContainer::Draw(Interface * out, int fx, int fy)
 			else if (ReadPixel->state == pixelstate::raw) {
 				out->DrawPixelM(xoff + fx, yoff + fy, color_raw);
 			}
-			else if (ReadPixel->state == pixelstate::review) {
+			else if (ReadPixel->state == pixelstate::stalled) {
 				out->DrawPixelM(xoff + fx, yoff + fy, color_review);
 			}
 			else if (ReadPixel->state == pixelstate::pending) {
@@ -75,16 +75,37 @@ bool PixelContainer::IsColorBackground(Color c)
 	return c.dword == transparency.dword;
 }
 
+FFPixel* PixelContainer::GetStalled() {
+	FFPixel* result = nullptr;
+	if (stalledPixels.size() > 0) {
+		result = stalledPixels.back();
+		stalledPixels.pop_back();
+	}
+	
+	return result;
+}
 
+void PixelContainer::FillEmptySearchers() {
+	for (int i = 0; i < maxp; i++) {
+		if (pending[i] == nullptr) {
+			pending[i] = GetStalled();
+		}
 
+		else if (pending[i]->state != pixelstate::pending) {
+			pending[i] = GetStalled();
+		}
+	}
 
+}
 void PixelContainer::StepPending() {
+
+	FillEmptySearchers();
+
 	for (int i = 0; i < maxp; i++) {
 		if (pending[i] != nullptr) {
+
 			PendingProcess(pending[i]);
-			pending[i] = nullptr;
 		}
-		
 	}
 }
 
@@ -106,7 +127,7 @@ void PixelContainer::PendingProcess(FFPixel* pixel) {
 
 
 		if (arr[i]->state & (pixelstate::raw)) {
-			this->AddToPendingTest(arr[i]);
+			this->AddToStalled(arr[i]);
 		}
 		
 	}
@@ -114,48 +135,11 @@ void PixelContainer::PendingProcess(FFPixel* pixel) {
 }
 
 
-int PixelContainer::AddToPendingTest(FFPixel* pixel) {
-	bool assign = false;
-	for (int i = 0; i < maxp; i++) {
-		if (pending[i] == nullptr) {
-			pixel->state = pixelstate::pending;
-			pending[i] = pixel;
-			assign = true;
-			break;
-		}
-	}
-
-	if (!assign) {
-		pixel->state = pixelstate::review;
-		stalledPixels.push_back(pixel);
-	
-	}
-
-
-
-	return 0;
-	
+void PixelContainer::AddToStalled(FFPixel* pixel) {
+	pixel->state = pixelstate::stalled;
+	stalledPixels.push_back(pixel);
 }
 
-
-
-void PixelContainer::AddToPending(FFPixel * pixel)
-{
-	int px = pixel->x;
-	int py = pixel->y;
-
-	if (!(pixel->state & pixelstate::raw)) {
-		return;
-	}
-
-	AddToPendingTest(pixel);
-	
-
-
-
-
-
-}
 
 
 
