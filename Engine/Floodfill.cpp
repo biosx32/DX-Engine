@@ -76,12 +76,14 @@ bool PixelContainer::IsColorBackground(Color c)
 
 FFPixel* PixelContainer::GetStalled() {
 	FFPixel* result = nullptr;
-	if (stalledPixels.size() > 0) {
+	if (stalleditems > 0) {
 		result = stalledPixels.back();
+		
 	
 		result->state &= ~pixelstate::stalled;
 		result->state |= pixelstate::pending;
 		stalledPixels.pop_back();
+		stalleditems--;
 	}
 	
 	return result;
@@ -172,6 +174,7 @@ void PixelContainer::AddToPending(FFPixel* pixel) {
 	else {
 		pixel->state |= pixelstate::stalled;
 		stalledPixels.push_back(pixel);
+		stalleditems++;
 	}
 
 	pixel->state &= ~pixelstate::raw;

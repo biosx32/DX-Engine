@@ -28,7 +28,7 @@ public:
 	Color transparency = 0x00b1f4b1;
 	static const int maxp = 512;
 	FFPixel* pending[maxp];
-
+	int stalleditems = 0;
 	std::vector<FFPixel*> stalledPixels;
 
 	FFPixel** pixels;

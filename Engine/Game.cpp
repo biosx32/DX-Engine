@@ -55,11 +55,11 @@ void Game::Initialise() {
 	out.set_graphics(&gfx);
 	container.Load(&SpriteImage);
 
-	while (container.getFirstRawPixel() != nullptr) {
+	/*while (container.getFirstRawPixel() != nullptr) {
 		container.PendingProcess(container.getFirstRawPixel());
 		while (container.StepPending());
 		
-	}
+	}*/
 	
 }
 
@@ -79,12 +79,9 @@ void Game::ComposeFrame()
 
 	}
 
+	for(int i=0;i<255;i++)container.StepPending();
+
 	
-	if (wnd.mouse.RightIsPressed()) {
-
-		container.StepPending();
-
-	}
 
 
 }
