@@ -67,15 +67,15 @@ void Game::ComposeFrame()
 		int y = wnd.mouse.GetPosY() / 4;
 
 		if (container.getPixelAt(x, y) != nullptr) {
-			container.AddToStalled(container.getPixelAt(x, y));
+			container.AddToPending(container.getPixelAt(x, y));
 		}
 
 	}
 
-
+	
 	if (wnd.mouse.RightIsPressed()) {
 
-		container.StepPending();
+		print << container.StepPending() << "\n";
 
 	}
 

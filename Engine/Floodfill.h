@@ -41,9 +41,9 @@ public:
 
 	bool IsColorBackground(Color c);
 	FFPixel*  GetStalled();
-	void StepPending();
+	int StepPending();
 	void PendingProcess(FFPixel * pixel);
-	void AddToStalled(FFPixel * pixel);
+	void AddToPending(FFPixel * pixel);
 
 	
 

@@ -24,14 +24,14 @@ void PixelContainer::Draw(Interface * out, int fx, int fy)
 			if (ReadPixel->state & pixelstate::pending) {
 				out->DrawPixelM(xoff + fx, yoff + fy, color_pending);
 			}
-			else if (ReadPixel->state & pixelstate::raw) {
-				out->DrawPixelM(xoff + fx, yoff + fy, color_raw);
-			}
 			else if (ReadPixel->state & pixelstate::stalled) {
 				out->DrawPixelM(xoff + fx, yoff + fy, color_stalled);
 			}
 			else if (ReadPixel->state & pixelstate::checked) {
 				out->DrawPixelM(xoff + fx, yoff + fy, color_checked);
+			}
+			else if (ReadPixel->state & pixelstate::raw) {
+				out->DrawPixelM(xoff + fx, yoff + fy, color_raw);
 			}
 			else if (ReadPixel->state & pixelstate::background) {
 				out->DrawPixelM(xoff + fx, yoff + fy, color_background);
@@ -90,7 +90,7 @@ FFPixel* PixelContainer::GetStalled() {
 }
 
 
-void PixelContainer::StepPending() {
+int PixelContainer::StepPending() {
 
 
 
@@ -100,18 +100,24 @@ void PixelContainer::StepPending() {
 			pending[i] = GetStalled();
 		}
 
+		else if (pending[i]->state & pixelstate::pending) {
+			pending[i]->state &= ~pixelstate::pending;
+
+		}
+
 		else if (!(pending[i]->state & pixelstate::pending)) {
 			pending[i] = GetStalled();
 
 		}
 
 		if (pending[i]) {
+			
 			PendingProcess(pending[i]);
 		}
 
 		
 	}
-
+	return stalledPixels.size();
 
 
 }
@@ -119,6 +125,7 @@ void PixelContainer::StepPending() {
 void PixelContainer::PendingProcess(FFPixel* pixel) {
 	pixel->state |= pixelstate::checked;
 	pixel->state &= ~pixelstate::pending;
+
 	pixel->state &= ~pixelstate::raw;
 
 	if (pixel->state & pixelstate::background) {
@@ -140,7 +147,7 @@ void PixelContainer::PendingProcess(FFPixel* pixel) {
 
 
 		if (arr[i]->state & (pixelstate::raw)) {
-			this->AddToStalled(arr[i]);
+			this->AddToPending(arr[i]);
 		}
 		
 	}
@@ -148,9 +155,39 @@ void PixelContainer::PendingProcess(FFPixel* pixel) {
 }
 
 
-void PixelContainer::AddToStalled(FFPixel* pixel) {
-	pixel->state = pixelstate::stalled;
-	stalledPixels.push_back(pixel);
+void PixelContainer::AddToPending(FFPixel* pixel) {
+
+	bool foundSlot = false;
+
+	for (int i = 0; i < maxp; i++) {
+		if (pending[i] == nullptr) {
+			pending[i] = pixel;
+			foundSlot = true;
+			break;
+		}
+
+		else if (!(pending[i]->state & pixelstate::pending)) {
+			pending[i] = pixel;
+			foundSlot = true;
+			break;
+		}
+
+	}
+
+	if (foundSlot) {
+		pixel->state |= pixelstate::pending;
+
+		pixel->state &= ~pixelstate::stalled;
+	}
+	else {
+		pixel->state |= pixelstate::stalled;
+		pixel->state &= ~pixelstate::pending;
+
+		stalledPixels.push_back(pixel);
+	}
+
+	
+	
 }
 
 
