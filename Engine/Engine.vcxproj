@@ -252,6 +252,9 @@
     <Image Include="SPRITESHEET\Spritesheet1-2048x2048.bmp" />
     <Image Include="SPRITESHEET\Spritesheet1-512x512.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Text.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

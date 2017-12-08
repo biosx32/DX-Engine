@@ -129,3 +129,16 @@ void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 
 	this->DrawShape->SetBrushColor(old);
 }
+
+void Interface::DrawPixelM(int xoff, int yoff, Color c)
+{
+	int m = 4;
+	xoff *= m;
+	yoff *= m;
+	for (int y = 0; y < m; y++) {
+		for (int x = 0; x < m; x++) {
+			this->DrawPixel(x + xoff, y + yoff, c);
+		}
+	}
+
+}

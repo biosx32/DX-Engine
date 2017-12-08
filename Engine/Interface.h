@@ -28,6 +28,7 @@ public:
 	void Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy);
 	void Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy, int MODIF);
 	void DrawSpritesheet(Spritesheet* sh, int xoff, int yoff);
+	void DrawPixelM(int xoff, int yoff, Color c);
 	Draw* DrawShape;
 
 protected:

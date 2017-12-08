@@ -4,8 +4,8 @@
 #include "Interface.h"
 #include "BMap.h"
 
-enum PixelState {
-	background, checked, pending, raw
+enum pixelstate {
+	raw = 1, background = 2, pending = 4, checked = 8, stalled = 16,
 };
 
 class FFPixel {
@@ -23,26 +23,30 @@ public:
 	int pixelcount;
 	int width;
 	int height;
+
+	int pendingcount = 0;
 	
 	Color transparency = 0x00b1f4b1;
+	FFPixel* pending[16];
+	FFPixel** pixels;
 
 	void Load(Bitmap* bmp);
 	void Draw(Interface* out, int fx, int fy);
-
-
-	FFPixel** pixels;
-	FFPixel* getFirstPixel();
-
 	FFPixel* getPixelAt(int x, int y);
+	FFPixel* getFirstRawPixel();
 
 
 	bool IsColorBackground(Color c);
 
 	void StartVirus(FFPixel * pixel);
+	void StepPending();
+	void StallCheck(FFPixel * pixel);
+	int AddToPendingTest(FFPixel * pixel);
+	void AddToPending(FFPixel * pixel);
 
 	FFPixel * GetPending();
 
-	void CheckPixel(FFPixel * pixel);
+	
 
 };
 
