@@ -100,11 +100,8 @@ int PixelContainer::StepPending() {
 			pending[i] = GetStalled();
 		}
 
-
-
 		else if (!(pending[i]->state & pixelstate::pending)) {
 			pending[i] = GetStalled();
-
 		}
 
 		else {
