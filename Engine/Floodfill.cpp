@@ -20,19 +20,19 @@ void PixelContainer::Draw(Interface * out, int fx, int fy)
 
 			ReadPixel = pixels[yoff* width + xoff];
 
-			if (ReadPixel->state == pixelstate::background) {
+			if (ReadPixel->state & pixelstate::background) {
 				out->DrawPixelM(xoff + fx, yoff + fy, color_background);
 			}
-			else if (ReadPixel->state == pixelstate::checked) {
+			else if (ReadPixel->state & pixelstate::checked) {
 				out->DrawPixelM(xoff + fx, yoff + fy, color_checked);
 			}
-			else if (ReadPixel->state == pixelstate::raw) {
+			else if (ReadPixel->state & pixelstate::raw) {
 				out->DrawPixelM(xoff + fx, yoff + fy, color_raw);
 			}
-			else if (ReadPixel->state == pixelstate::stalled) {
+			else if (ReadPixel->state & pixelstate::stalled) {
 				out->DrawPixelM(xoff + fx, yoff + fy, color_review);
 			}
-			else if (ReadPixel->state == pixelstate::pending) {
+			else if (ReadPixel->state & pixelstate::pending) {
 				out->DrawPixelM(xoff + fx, yoff + fy, color_pending);
 			}
 			else {
