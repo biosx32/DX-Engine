@@ -44,7 +44,7 @@ public:
 	FFPixel*  GetStalled();
 	FFPixel * getPixelAt(int x, int y);
 
-	Sprite** GetGroup();
+	TransparentBitmap** GetGroup();
 
 	unsigned int GetPendingPixelsCount();
 	bool IsColorBackground(Color c);

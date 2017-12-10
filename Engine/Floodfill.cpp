@@ -107,7 +107,8 @@ FFPixel * PixelContainer::getPixelAt(int x, int y)
 
 TransparentBitmap ** PixelContainer::GetGroup()
 {
-	Sprite** spritegroups = new TransparentBitmap([groups];
+	TransparentBitmap** spritegroups = new TransparentBitmap*[groups];
+
 	for (int i = 0; i < pixelcount;i++) {
 		
 	}
