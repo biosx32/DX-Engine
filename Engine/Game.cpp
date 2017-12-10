@@ -78,7 +78,7 @@ void Game::ComposeFrame()
 void Game::UpdateModel()
 {
 
-	framecounter.setText("JOZEF");
+	framecounter.setText(getFrameNumber());
 }
 
 
