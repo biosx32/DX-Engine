@@ -5,7 +5,7 @@ Spritesheet::Spritesheet()
 {
 }
 
-Spritesheet::Spritesheet(Bitmap * BitmapImage, int wcount, int hcount)
+Spritesheet::Spritesheet(TransparentBitmap * BitmapImage, int wcount, int hcount)
 {
 	this->Load(BitmapImage, wcount, hcount);
 }
@@ -15,17 +15,13 @@ Spritesheet::~Spritesheet() {
 }
 
 
-void Spritesheet::Load(Bitmap * BitmapImage, int wcount, int hcount)
+void Spritesheet::Load(TransparentBitmap * BitmapImage, int wcount, int hcount)
 {
-	this->datagroup = new SpritesheetDS();
+	this->datagroup = new SpritesheetDG();
 	this->datagroup->Load(BitmapImage, wcount, hcount);
 }
 
-void Spritesheet::Load(Bitmap * BitmapImage)
-{
-	this->datagroup = new SpritesheetDS();
-	this->datagroup->Load(BitmapImage);
-}
+
 
 void Spritesheet::RemoveSpriteData()
 {
@@ -34,46 +30,33 @@ void Spritesheet::RemoveSpriteData()
 
 }
 
-SpritesheetDS::~SpritesheetDS()
+SpritesheetDG::~SpritesheetDG()
 {
 	delete[] data;
 	this->data = nullptr;
 }
 
-void SpritesheetDS::Load(Bitmap * BitmapImage, int wcount, int hcount)
+void SpritesheetDG::Load(TransparentBitmap * BitmapImage, int wcount, int hcount)
 {
 
 	this->wcount = wcount;
 	this->hcount = hcount;
-	this->count  = wcount * hcount;
+	this->spritecount  = wcount * hcount;
+	this->data = new Sprite*[spritecount];
 
-	this->BitmapImage = BitmapImage;
-	this->data = new (Bitmap*[count]);
-
-	int sprite_width = BitmapImage->datagroup->width / wcount;
-	int sprite_height = BitmapImage->datagroup->height / hcount;
+	float sprite_width = BitmapImage->datagroup->width / (float) wcount;
+	float sprite_height = BitmapImage->datagroup->height / (float) hcount;
 
 	for (int y = 0; y < hcount; y++) {
 		for (int x = 0; x < wcount; x++) {
-			this->data[y * wcount + x] = BitmapImage->GetBitmapPart(x * sprite_width, y * sprite_height, sprite_width, sprite_height);
+			int xdst = (int) sprite_width * x;
+			int ydst = (int) sprite_width * y;
+			this->data[y * wcount + x] = new Sprite(BitmapImage->GetBitmapPart(xdst, ydst, (int)sprite_width, (int)sprite_height));
 		}
 	}
 }
 
-void SpritesheetDS::Load(Bitmap * BitmapImage)
+Sprite::Sprite(TransparentBitmap * TBmp)
 {
-	this->wcount = 0;
-	this->hcount = 0;
-
-	this->BitmapImage = BitmapImage;
-	
-// idea is -find first collision, then flood all points, into some list,
-	//then find topleft topright - bounds, and then make all background color, then go to next first
-	//this->count = number of sprites;
-	this->data = new (Bitmap*[count]);
-
-	//this->data[y * wcount + x] = BitmapImage->GetBitmapPart(x * sprite_width, y * sprite_height, sprite_width, sprite_height);
-		
-	
+	this->image = TBmp;
 }
-

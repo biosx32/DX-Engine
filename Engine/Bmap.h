@@ -14,12 +14,13 @@ public:
 	Color * data;
 };
 
-class Bitmap;
+class TransparentBitmap;
 class Bitmap {
 public:
 	Bitmap();
 	Bitmap(char* FileName);
 	Bitmap(int width, int height);
+	Bitmap(TransparentBitmap* bmp) = delete;
 	~Bitmap();
 
 	BitmapDS* datagroup = nullptr;
@@ -33,6 +34,7 @@ class TransparentBitmap : public Bitmap {
 public:
 	TransparentBitmap() : Bitmap() {}
 	TransparentBitmap(Bitmap* bmp) : Bitmap(*bmp) {}
+	TransparentBitmap(TransparentBitmap*) = delete;
 	TransparentBitmap(char* FileName) : Bitmap(FileName) {}
 	TransparentBitmap(int width, int height) : Bitmap(width, height) {}
 

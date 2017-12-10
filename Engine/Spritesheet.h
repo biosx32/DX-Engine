@@ -3,30 +3,32 @@
 #include "Bmap.h"
 #include "Interface.h"
 
-class Interface;
-class SpritesheetDS {
-public:
-	~SpritesheetDS();
 
-	int wcount;
-	int hcount;
-	int count;
-	Bitmap* BitmapImage = nullptr;
-	Bitmap** data = nullptr;
-	void Load(Bitmap* BitmapImage, int wcount, int hcount);
-	void Load(Bitmap* BitmapImage);
+class Sprite {
+public:
+	Sprite(TransparentBitmap* TBmp);
+	TransparentBitmap* image = nullptr;
+};
+
+class SpritesheetDG {
+public:
+	~SpritesheetDG();
+
+	int wcount, hcount, spritecount;
+	Sprite** data = nullptr;
+	void Load(TransparentBitmap* BitmapImage, int wcount, int hcount);
 
 };
 
 class Spritesheet {
 public:
 	Spritesheet();
-	Spritesheet(Bitmap* BitmapImage, int wcount, int hcount);
+	Spritesheet(TransparentBitmap* BitmapImage, int wcount, int hcount);
 	~Spritesheet();
-	SpritesheetDS* datagroup = nullptr;
 
-	void Load(Bitmap* BitmapImage, int wcount, int hcount);
-	void Load(Bitmap* BitmapImage);
+	SpritesheetDG* datagroup = nullptr;
+
+	void Load(TransparentBitmap* BitmapImage, int wcount, int hcount);
 	void RemoveSpriteData();
 };
 

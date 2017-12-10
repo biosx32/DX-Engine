@@ -1,7 +1,7 @@
 ﻿#ifndef __TEXT_H__
 #define __TEXT_H__
 #include "Spritesheet.h"
-#include <string.h>
+
 
 class Spritesheet;
 class Label {
@@ -13,7 +13,7 @@ public:
 	char text[txmax];
 	Spritesheet* sprite_sheet = nullptr;
 
-	Bitmap* Get_Bitmap_Char(unsigned int c);
+	TransparentBitmap* Get_Bitmap_Char(unsigned int c);
 	void setText(char* text);
 	int Load(Spritesheet* sh);
 
