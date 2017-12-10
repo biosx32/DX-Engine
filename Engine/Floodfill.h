@@ -5,17 +5,24 @@
 #include "BMap.h"
 #include <vector>
 
-enum pixelstate {
-	raw = 1, background = 2, pending = 4, checked = 8, stalled = 16,
+namespace pxstate
+{
+	enum Type
+	{
+		background = 1, checked = 2, unchecked = ~background & ~checked
+	};
 };
+
+
 
 class FFPixel {
 public:
-	FFPixel(int x, int y, Color c, int state);
+	int state;
 	int x, y;
 	Color color;
 
-	int state;
+	FFPixel(int x, int y, Color c, int state);
+	
 
 };
 
@@ -25,24 +32,27 @@ public:
 	int width;
 	int height;
 	int lastpos = 0;
+	int groups = 0;
+	
 	Color transparency = 0x00b1f4b1;
-	static const int maxp = 512;
-	FFPixel* pending[maxp];
-	int stalleditems = 0;
 	std::vector<FFPixel*> stalledPixels;
-
 	FFPixel** pixels;
+
 
 	void Load(Bitmap* bmp);
 	void Draw(Interface* out, int fx, int fy);
-	FFPixel* getPixelAt(int x, int y);
-	FFPixel* getFirstRawPixel();
 
+	FFPixel* getFirstRawPixel();
+	FFPixel*  GetStalled();
+	FFPixel * getPixelAt(int x, int y);
 
 	bool IsColorBackground(Color c);
-	FFPixel*  GetStalled();
-	int StepPending();
-	void PendingProcess(FFPixel * pixel);
+	
+	unsigned int GetPendingPixelsCount();
+	bool HasPendingPixels();
+
+	void IteratePendingPixels();
+	void CheckPixel(FFPixel * pixel);
 	void AddToPending(FFPixel * pixel);
 
 	

@@ -27,17 +27,17 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 
 
 
-	int char_width = label->Get_Bitmap_Char(0)->BitmapData->width;
-	int char_height = label->Get_Bitmap_Char(0)->BitmapData->height;
+	int char_width = label->Get_Bitmap_Char(0)->datagroup->width;
+	int char_height = label->Get_Bitmap_Char(0)->datagroup->height;
 
-	char* ptr = &label->text[0];
+	char* data = &label->text[0];
 
-	while (*ptr++ != 0) {
+	while (*data++ != 0) {
 		
-		Bitmap* BitmapChar = label->Get_Bitmap_Char(*(ptr - 1));
-		char_width = BitmapChar->BitmapData->width;
+		Bitmap* BitmapChar = label->Get_Bitmap_Char(*(data - 1));
+		char_width = BitmapChar->datagroup->width;
 
-		if (*(ptr - 1) == '\n') {
+		if (*(data - 1) == '\n') {
 			rel_pos_y += char_height;
 			rel_pos_x = 0;
 			continue;
@@ -49,10 +49,10 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 		if (true) {
 			rel_pos_x += char_width * 0.65;
 		
-			if (*ptr >= '0' && *ptr <= '9') {
+			if (*data >= '0' && *data <= '9') {
 				rel_pos_x += char_width * 0.20;
 			}
-			else if (*ptr >= 'A' && *ptr <= 'Z') {
+			else if (*data >= 'A' && *data <= 'Z') {
 				rel_pos_x += char_width * 0.05;
 			}
 		}
@@ -63,10 +63,10 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 
 void Interface::Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy) {
 	Color READ_COLOR;
-	for (int yoff = 0; yoff < BitmapChar->BitmapData->height; yoff++) {
-		for (int xoff = 0; xoff < BitmapChar->BitmapData->width; xoff++) {
+	for (int yoff = 0; yoff < BitmapChar->datagroup->height; yoff++) {
+		for (int xoff = 0; xoff < BitmapChar->datagroup->width; xoff++) {
 
-			READ_COLOR = BitmapChar->BitmapData->ptr[yoff* BitmapChar->BitmapData->width + xoff];
+			READ_COLOR = BitmapChar->datagroup->data[yoff* BitmapChar->datagroup->width + xoff];
 			if (!BitmapChar->IsColorTransparent(READ_COLOR)) {
 				DrawPixel(xoff + fx , yoff + fy, READ_COLOR);
 			}
@@ -82,21 +82,21 @@ void Interface::Draw_Bitmap(Bitmap * Bmp, int fx, int fy, int MODIF)
 	Color READ_COLOR;
 	int finalx; int finaly;
 
-	for (int yoff = 0; yoff < Bmp->BitmapData->height; yoff++) {
-		for (int xoff = 0; xoff < Bmp->BitmapData->width; xoff++) {
+	for (int yoff = 0; yoff < Bmp->datagroup->height; yoff++) {
+		for (int xoff = 0; xoff < Bmp->datagroup->width; xoff++) {
 			
 			finalx = fx + xoff;
 			if (MODIF & FLIP_HORIZONTALLY) {
-				finalx = fx + Bmp->BitmapData->width - xoff;
+				finalx = fx + Bmp->datagroup->width - xoff;
 			}
 			
 			
 			finaly = yoff + fy;
 			if (MODIF & FLIP_VERTICALLY) {
-				finaly = fy + Bmp->BitmapData->height - yoff;
+				finaly = fy + Bmp->datagroup->height - yoff;
 			}
 
-			READ_COLOR = Bmp->BitmapData->ptr[yoff* Bmp->BitmapData->width + xoff];
+			READ_COLOR = Bmp->datagroup->data[yoff* Bmp->datagroup->width + xoff];
 			if (!Bmp->IsColorTransparent(READ_COLOR)) {
 				DrawPixel(finalx, finaly, READ_COLOR);
 			}
@@ -111,8 +111,8 @@ void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 	Color old = this->DrawShape->brush;
 	this->DrawShape->SetBrushColor(Colors::Red);
 
-	int sprw = sh->Data->ptr[0]->BitmapData->width;
-	int sprh = sh->Data->ptr[0]->BitmapData->height;
+	int sprw = sh->Data->data[0]->datagroup->width;
+	int sprh = sh->Data->data[0]->datagroup->height;
 
 	for (int y = 0; y < sh->Data->hcount; y++) {
 		for (int x = 0; x < sh->Data->wcount; x++) {
@@ -121,7 +121,7 @@ void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 			int ydst = y* sprh + 1 * y;
 
 		
-			this->Draw_Bitmap(sh->Data->ptr[i], xoff+ xdst, yoff+ ydst);
+			this->Draw_Bitmap(sh->Data->data[i], xoff+ xdst, yoff+ ydst);
 			this->DrawShape->FastHLine(xoff + xdst, yoff + ydst, sprh+1);
 			this->DrawShape->FastVLine(xoff + xdst, yoff + ydst, sprw+1);
 		}

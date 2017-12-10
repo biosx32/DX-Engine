@@ -55,5 +55,5 @@ void Animation::Step()
 
 Bitmap * Animation::GetCurrent()
 {
-	return spritesheet->Data->ptr[currentFrame];
+	return spritesheet->Data->data[currentFrame];
 }

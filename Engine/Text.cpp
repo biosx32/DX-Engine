@@ -20,7 +20,7 @@ Label::Label(Spritesheet * sh)
 Bitmap* Label::Get_Bitmap_Char(int c) {
 	int max = sizeof(translate) / sizeof(char);
 	int index = translate[c%max];
-	return sprite_sheet->Data->ptr[index];
+	return sprite_sheet->Data->data[index];
 
 }
 

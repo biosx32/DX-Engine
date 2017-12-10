@@ -2,8 +2,8 @@
 
 
 BitmapDS::~BitmapDS() {
-	delete[] ptr;
-	this->ptr = nullptr;
+	delete[] data;
+	this->data = nullptr;
 	
 }
 
@@ -11,30 +11,31 @@ BitmapDS::BitmapDS(int width, int height)
 {
 	this->width = width;
 	this->height = height;
-	this->ptr = new Color[width* height];
-	///////////////////////////////////
+	this->pixelcount = width * height;
+	this->data = new Color[pixelcount];
 }
 
 Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 
-	Bitmap* cut = this->GetTypeInstance();
-	BitmapDS* datastruct = new BitmapDS(width, height);
-	cut->SetDataSource(datastruct);
+	Bitmap* newBitmap = new Bitmap();
+	BitmapDS* newdatagroup = new BitmapDS(width, height);
+	newBitmap->datagroup = newdatagroup;
 
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
-			datastruct->ptr[y*width + x] = this->BitmapData->ptr[(y + yoff)* BitmapData->width + (x + xoff)];
+			newdatagroup->data[y*width + x] = this->datagroup->data[(y + yoff)* datagroup->width + (x + xoff)];
 		}
 	}
 
-
-	return cut;
+	return newBitmap;
 }
 
 int Bitmap::Load(char * FileName)
 {
-	
-	int RotationNeeded = 1;
+	#define ERROR_IO_READ -1
+	#define ERROR_EMPTY_FILE -2
+
+	int rotation_correct = 0;
 
 	FILE* file_read;
 	fopen_s(&file_read, FileName, "rb");
@@ -60,11 +61,11 @@ int Bitmap::Load(char * FileName)
 	
 	if (height < 0) {
 		height = -height;
-		RotationNeeded = 0;
+		rotation_correct = 1;
 	}
 
-	this->BitmapData = new BitmapDS(width, height);
-	BitmapDS* Data = this->BitmapData;
+	this->datagroup = new BitmapDS(width, height);
+	BitmapDS* Data = this->datagroup;
 
 	int bitmap_align_bytes = Data->width % 4;
 	int size_line = width * 3;
@@ -82,7 +83,7 @@ int Bitmap::Load(char * FileName)
 			unsigned char* datachar = &linedata[j * 3];
 			temp_color = Color(*(2 + datachar) ,*(1 + datachar) , *(0 + datachar));
 			//temp_color = *(Color*) datachar;
-			this->BitmapData->ptr[i * width + j] = temp_color;
+			this->datagroup->data[i * width + j] = temp_color;
 		}
 	}
 
@@ -90,14 +91,14 @@ int Bitmap::Load(char * FileName)
 
 
 
-	if (RotationNeeded == 1) {
+	if (rotation_correct == 0) {
 
 		for (int y = 0; y <= height / 2; y++) {
 			for (int x = 0; x < width; x++) {
 				
-				temp_color = Data->ptr[(y)* width + x];
-				Data->ptr[(y)* width + x] = Data->ptr[((height-1)-y)* width + x];
-				Data->ptr[((height - 1) - y)* width + x] = temp_color;
+				temp_color = Data->data[(y)* width + x];
+				Data->data[(y)* width + x] = Data->data[((height-1)-y)* width + x];
+				Data->data[((height - 1) - y)* width + x] = temp_color;
 
 
 			}
@@ -109,28 +110,10 @@ int Bitmap::Load(char * FileName)
 	return 0;
 }
 
-int Bitmap::SetDataSource(BitmapDS * ptr)
-{
-	delete BitmapData;
-	this->BitmapData = ptr;
-	return 0;
-}
 
-int Bitmap::IsColorTransparent(Color color)
-{
-	
-	return 0;
-}
 
-int Bitmap::GetBitmapType()
-{
-	return BitmapType::normal;
-}
 
-Bitmap * Bitmap::GetTypeInstance()
-{
-	return new Bitmap();
-}
+
 
 Bitmap::Bitmap() {
 	
@@ -143,19 +126,19 @@ Bitmap::Bitmap(char * FileName)
 
 Bitmap::Bitmap(int width, int height)
 {
-	this->BitmapData = new BitmapDS(width, height);
+	this->datagroup = new BitmapDS(width, height);
 }
 
 
 Bitmap::~Bitmap()
 {
-	delete this->BitmapData;
-	this->BitmapData = nullptr;
+	delete this->datagroup;
+	this->datagroup = nullptr;
 }
 
 
 
-int TransparentBitmap::IsColorTransparent(Color color)
+bool TransparentBitmap::IsColorTransparent(Color color)
 {
 	int dword = color.dword;
 
@@ -179,22 +162,15 @@ int TransparentBitmap::IsColorTransparent(Color color)
 	return 0;
 }
 
-int TransparentBitmap::GetBitmapType()
-{
-	return BitmapType::transparent;
-}
 
-Bitmap * TransparentBitmap::GetTypeInstance()
-{
-	return new TransparentBitmap();
-}
 
-Bitmap * TransparentBitmap::GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT)
+TransparentBitmap * TransparentBitmap::GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT)
 {
-	TransparentBitmap* cut = (TransparentBitmap*) Bitmap::GetBitmapPart(xoff, yoff, WIDTH, HEIGHT);
-	cut->tolerance = this->tolerance;
-	cut->transparency = this->transparency;
-	return (Bitmap*) cut;
+	Bitmap* newBitmap = this->Bitmap::GetBitmapPart(xoff, yoff, WIDTH, HEIGHT);
+	TransparentBitmap* newBitmap_T = new TransparentBitmap(newBitmap);
+	newBitmap_T->tolerance = this->tolerance;
+	newBitmap_T->transparency = this->transparency;
+	return newBitmap_T;
 }
 
 

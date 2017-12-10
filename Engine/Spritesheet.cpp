@@ -36,8 +36,8 @@ void Spritesheet::RemoveSpriteData()
 
 SpritesheetDS::~SpritesheetDS()
 {
-	delete[] ptr;
-	this->ptr = nullptr;
+	delete[] data;
+	this->data = nullptr;
 }
 
 void SpritesheetDS::Load(Bitmap * BitmapImage, int wcount, int hcount)
@@ -48,14 +48,14 @@ void SpritesheetDS::Load(Bitmap * BitmapImage, int wcount, int hcount)
 	this->count  = wcount * hcount;
 
 	this->BitmapImage = BitmapImage;
-	this->ptr = new (Bitmap*[count]);
+	this->data = new (Bitmap*[count]);
 
-	int sprite_width = BitmapImage->BitmapData->width / wcount;
-	int sprite_height = BitmapImage->BitmapData->height / hcount;
+	int sprite_width = BitmapImage->datagroup->width / wcount;
+	int sprite_height = BitmapImage->datagroup->height / hcount;
 
 	for (int y = 0; y < hcount; y++) {
 		for (int x = 0; x < wcount; x++) {
-			this->ptr[y * wcount + x] = BitmapImage->GetBitmapPart(x * sprite_width, y * sprite_height, sprite_width, sprite_height);
+			this->data[y * wcount + x] = BitmapImage->GetBitmapPart(x * sprite_width, y * sprite_height, sprite_width, sprite_height);
 		}
 	}
 }
@@ -70,9 +70,9 @@ void SpritesheetDS::Load(Bitmap * BitmapImage)
 // idea is -find first collision, then flood all points, into some list,
 	//then find topleft topright - bounds, and then make all background color, then go to next first
 	//this->count = number of sprites;
-	this->ptr = new (Bitmap*[count]);
+	this->data = new (Bitmap*[count]);
 
-	//this->ptr[y * wcount + x] = BitmapImage->GetBitmapPart(x * sprite_width, y * sprite_height, sprite_width, sprite_height);
+	//this->data[y * wcount + x] = BitmapImage->GetBitmapPart(x * sprite_width, y * sprite_height, sprite_width, sprite_height);
 		
 	
 }

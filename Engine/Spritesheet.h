@@ -12,7 +12,7 @@ public:
 	int hcount;
 	int count;
 	Bitmap* BitmapImage = nullptr;
-	Bitmap** ptr = nullptr;
+	Bitmap** data = nullptr;
 	void Load(Bitmap* BitmapImage, int wcount, int hcount);
 	void Load(Bitmap* BitmapImage);
 

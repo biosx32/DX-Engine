@@ -3,7 +3,7 @@
 #include "Graphics.h"
 #include "Bmap.h"
 #include "Text.h"
-#include "Graphical.h"
+#include "Drawing.h"
 #include <string.h>
 
 #define FLIP_HORIZONTALLY 1

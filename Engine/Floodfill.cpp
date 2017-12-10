@@ -7,8 +7,6 @@ void PixelContainer::Draw(Interface * out, int fx, int fy)
 {
 	int color_background = Color(0,0,0).dword; //black
 	int color_checked = Color(51, 204, 51).dword; //green
-	int color_pending = Color(255, 51, 0).dword; //red
-	int color_raw = Color(255, 255, 255).dword; //white
 	int color_stalled = Color(102, 102, 153).dword; //gray
 
 	FFPixel* ReadPixel;
@@ -19,21 +17,14 @@ void PixelContainer::Draw(Interface * out, int fx, int fy)
 		for (int xoff = 0; xoff < width; xoff++) {
 
 			ReadPixel = pixels[yoff* width + xoff];
-
 	
-			if (ReadPixel->state & pixelstate::pending) {
-				out->DrawPixel(xoff + fx, yoff + fy, color_pending);
-			}
-			else if (ReadPixel->state & pixelstate::stalled) {
+			if (ReadPixel->state & pxstate::unchecked & ~pxstate::background) {
 				out->DrawPixel(xoff + fx, yoff + fy, color_stalled);
 			}
-			else if (ReadPixel->state & pixelstate::checked) {
+			else if (ReadPixel->state & pxstate::checked) {
 				out->DrawPixel(xoff + fx, yoff + fy, color_checked);
 			}
-			else if (ReadPixel->state & pixelstate::raw) {
-				out->DrawPixel(xoff + fx, yoff + fy, color_raw);
-			}
-			else if (ReadPixel->state & pixelstate::background) {
+			else if (ReadPixel->state & pxstate::background) {
 				out->DrawPixel(xoff + fx, yoff + fy, color_background);
 			}
 			else {
@@ -50,7 +41,8 @@ FFPixel * PixelContainer::getFirstRawPixel()
 {
 
 	for (int i = lastpos; i < pixelcount; i++) {
-		if (pixels[i]->state & pixelstate::raw) {
+		if (! (pixels[i]->state & pxstate::checked || 
+			   pixels[i]->state & pxstate::background)) {
 			lastpos = i;
 			return pixels[i];
 			
@@ -60,14 +52,7 @@ FFPixel * PixelContainer::getFirstRawPixel()
 	return nullptr;
 }
 
-FFPixel * PixelContainer::getPixelAt(int x, int y)
-{
-	if (x >= 0 && x < width && y >= 0 && y < height) {
-		return this->pixels[y*width + x];
-	}
 
-	return nullptr;
-}
 
 bool PixelContainer::IsColorBackground(Color c)
 {
@@ -76,135 +61,90 @@ bool PixelContainer::IsColorBackground(Color c)
 
 FFPixel* PixelContainer::GetStalled() {
 	FFPixel* result = nullptr;
-	if (stalleditems > 0) {
+	if (this->GetPendingPixelsCount() > 0) {
 		result = stalledPixels.back();
-		
-	
-		result->state &= ~pixelstate::stalled;
-		result->state |= pixelstate::pending;
 		stalledPixels.pop_back();
-		stalleditems--;
 	}
 	
 	return result;
 }
 
 
-int PixelContainer::StepPending() {
-
-
-
-	for (int i = 0; i < maxp; i++) {
-
-		if (pending[i] == nullptr) {
-			pending[i] = GetStalled();
-		}
-
-		else if (!(pending[i]->state & pixelstate::pending)) {
-			pending[i] = GetStalled();
-		}
-
-		else {
-			
-			PendingProcess(pending[i]);
-		}
-
-		
-	}
+unsigned int PixelContainer::GetPendingPixelsCount()
+{
 	return stalledPixels.size();
-
-
 }
 
-void PixelContainer::PendingProcess(FFPixel* pixel) {
-	pixel->state |= pixelstate::checked;
-	pixel->state &= ~pixelstate::pending;
-	pixel->state &= ~pixelstate::raw;
-	pixel->state &= ~pixelstate::stalled;
+bool PixelContainer::HasPendingPixels()
+{
+	return GetPendingPixelsCount() < 1;
+}
 
-	if (pixel->state & pixelstate::background) {
+void PixelContainer::IteratePendingPixels() {	
+	while (this->HasPendingPixels()) {
+		this->GetStalled();
+	}
+}
+
+FFPixel * PixelContainer::getPixelAt(int x, int y)
+{
+	if (x >= 0 && 
+		y >= 0 &&
+		  x < width && 
+	      y < height) {
+		return this->pixels[y*width + x];
+	}
+
+	return nullptr;
+}
+
+void PixelContainer::CheckPixel(FFPixel* pixel) {
+
+	if (pixel->state & pxstate::unchecked) {
 		return;
 	}
 
-	int px = pixel->x;
-	int py = pixel->y;
+	pixel->state |= pxstate::checked;
 
-	FFPixel* arr[4] = {
-		getPixelAt(px - 1, py),
-		getPixelAt(px + 1, py),
-		getPixelAt(px, py - 1),
-		getPixelAt(px, py + 1)
+	FFPixel* neighbors[4] = {
+		getPixelAt(pixel->x - 1, pixel->y),
+		getPixelAt(pixel->x + 1, pixel->y),
+		getPixelAt(pixel->x, pixel->y - 1),
+		getPixelAt(pixel->x, pixel->y + 1)
 	};
 
 	for (int i = 0; i < 4; i++) {
-		if (!arr[i]) continue;
-
-
-		if (arr[i]->state & (pixelstate::raw)) {
-			this->AddToPending(arr[i]);
+		if (neighbors[i]) {
+			if (neighbors[i]->state & pxstate::unchecked) {
+				this->AddToPending(neighbors[i]);
+			}
 		}
-		
 	}
 
 }
 
 
 void PixelContainer::AddToPending(FFPixel* pixel) {
-
-	bool foundSlot = false;
-
-	for (int i = 0; i < maxp; i++) {
-		if (pending[i] == nullptr) {
-			pending[i] = pixel;
-			foundSlot = true;
-			break;
-		}
-
-		else if (!(pending[i]->state & pixelstate::pending)) {
-			pending[i] = pixel;
-			foundSlot = true;
-			break;
-		}
-
-	}
-
-	if (foundSlot) {
-		pixel->state |= pixelstate::pending;
-	}
-	else {
-		pixel->state |= pixelstate::stalled;
-		stalledPixels.push_back(pixel);
-		stalleditems++;
-	}
-
-	pixel->state &= ~pixelstate::raw;
-	
-	
+	stalledPixels.push_back(pixel);
 }
-
-
 
 
 void PixelContainer::Load(Bitmap * bmp)
 {
-	this->width = bmp->BitmapData->width;
-	this->height = bmp->BitmapData->height;
-	this->pixelcount = width*height;
+	this->width = bmp->datagroup->width;
+	this->height = bmp->datagroup->height;
+	this->pixelcount = bmp->datagroup->pixelcount;
 	this->pixels = new FFPixel*[pixelcount];
 
 
 	for (int y = 0; y < this->height; y++) {
 		for (int x = 0; x < this->width; x++) {
 			int i = y*width + x;
-			Color c = bmp->BitmapData->ptr[i];
+			Color c = bmp->datagroup->data[i];
 			int state = 0;
 
 			if (IsColorBackground(c)) {
-				state |= pixelstate::background;
-			}
-
-			else {
-				state |= pixelstate::raw;
+				state |= pxstate::background;
 			}
 			
 			pixels[i] = new FFPixel(x, y, c, state);

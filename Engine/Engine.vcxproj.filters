@@ -78,9 +78,6 @@
     <ClInclude Include="Spritesheet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphical.h">
-      <Filter>Header Files\Extended</Filter>
-    </ClInclude>
     <ClInclude Include="Text.h">
       <Filter>Header Files\Extended</Filter>
     </ClInclude>
@@ -92,6 +89,9 @@
     </ClInclude>
     <ClInclude Include="Floodfill.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawing.h">
+      <Filter>Header Files\Extended</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,14 +137,14 @@
     <ClCompile Include="Func.cpp">
       <Filter>Source Files\Extended</Filter>
     </ClCompile>
-    <ClCompile Include="Graphical.cpp">
-      <Filter>Source Files\Extended</Filter>
-    </ClCompile>
     <ClCompile Include="Text.cpp">
       <Filter>Source Files\Extended</Filter>
     </ClCompile>
     <ClCompile Include="Floodfill.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawing.cpp">
+      <Filter>Source Files\Extended</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

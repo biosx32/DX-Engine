@@ -56,39 +56,42 @@ void Game::Initialise() {
 	container.Load(&SpriteImage);
 
 	/*while (container.getFirstRawPixel() != nullptr) {
-		container.PendingProcess(container.getFirstRawPixel());
-		while (container.StepPending());
+		container.CheckPixel(container.getFirstRawPixel());
+		while (container.IteratePendingPixels());
 		
 	}*/
 	
 }
 
+Label j(&sh);
+Label framecounter(&sh);
+int frames = 0;
+
 void Game::ComposeFrame()
 {
 	container.Draw(&out, 0, 0);
 
-	if (wnd.mouse.LeftIsPressed()) {
 
-
-		int x = wnd.mouse.GetPosX();
-		int y = wnd.mouse.GetPosY();
-
-		if (container.getPixelAt(x, y) != nullptr) {
-			container.AddToPending(container.getPixelAt(x, y));
-		}
-
-	}
-
-	for(int i=0;i<255;i++)container.StepPending();
-
-	
-
+	out.DrawLabel(0, 0, &j);
+	out.DrawLabel(0, 32, &j);
 
 }
 
 void Game::UpdateModel()
 {
-	
+	frames++;
+	frames %= 61;
+
+	char buff[64];
+	sprintf_s(buff, "Frame: %d", frames);
+	framecounter.setText(buff);
+
+	if (wnd.mouse.IsInWindow()) {
+		j.setText("In window");
+	}
+	else {
+		j.setText("Outsite window");
+	}
 }
 
 
