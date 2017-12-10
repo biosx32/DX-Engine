@@ -9,7 +9,7 @@ namespace pxstate
 {
 	enum Type
 	{
-		background = 1, checked = 2, unchecked = ~background & ~checked
+		background = 1, checked = 2, skip = (background | checked)
 	};
 };
 
@@ -17,8 +17,7 @@ namespace pxstate
 
 class FFPixel {
 public:
-	int state;
-	int x, y;
+	int state, group, x, y;
 	Color color;
 
 	FFPixel(int x, int y, Color c, int state);
@@ -38,7 +37,6 @@ public:
 	std::vector<FFPixel*> stalledPixels;
 	FFPixel** pixels;
 
-
 	void Load(Bitmap* bmp);
 	void Draw(Interface* out, int fx, int fy);
 
@@ -46,11 +44,9 @@ public:
 	FFPixel*  GetStalled();
 	FFPixel * getPixelAt(int x, int y);
 
-	bool IsColorBackground(Color c);
-	
 	unsigned int GetPendingPixelsCount();
+	bool IsColorBackground(Color c);
 	bool HasPendingPixels();
-
 	void IteratePendingPixels();
 	void CheckPixel(FFPixel * pixel);
 	void AddToPending(FFPixel * pixel);

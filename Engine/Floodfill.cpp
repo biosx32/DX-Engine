@@ -10,19 +10,29 @@ void PixelContainer::Draw(Interface * out, int fx, int fy)
 	int color_stalled = Color(102, 102, 153).dword; //gray
 
 	FFPixel* ReadPixel;
-
-
-
 	for (int yoff = 0; yoff < height; yoff++) {
 		for (int xoff = 0; xoff < width; xoff++) {
 
 			ReadPixel = pixels[yoff* width + xoff];
 	
-			if (ReadPixel->state & pxstate::unchecked & ~pxstate::background) {
+			if (!(ReadPixel->state & pxstate::skip)) {
 				out->DrawPixel(xoff + fx, yoff + fy, color_stalled);
 			}
+
 			else if (ReadPixel->state & pxstate::checked) {
-				out->DrawPixel(xoff + fx, yoff + fy, color_checked);
+				if (ReadPixel->group == 1) {
+					out->DrawPixel(xoff + fx, yoff + fy, 0xFF0000);
+				}
+				else if (ReadPixel->group == 2) {
+					out->DrawPixel(xoff + fx, yoff + fy, 0xFF00);
+				}
+				else if (ReadPixel->group == 3) {
+					out->DrawPixel(xoff + fx, yoff + fy, 0xFF);
+				}
+
+				else {
+					out->DrawPixel(xoff + fx, yoff + fy, color_checked);
+				}
 			}
 			else if (ReadPixel->state & pxstate::background) {
 				out->DrawPixel(xoff + fx, yoff + fy, color_background);
@@ -56,6 +66,7 @@ FFPixel * PixelContainer::getFirstRawPixel()
 
 bool PixelContainer::IsColorBackground(Color c)
 {
+
 	return c.dword == transparency.dword;
 }
 
@@ -77,12 +88,12 @@ unsigned int PixelContainer::GetPendingPixelsCount()
 
 bool PixelContainer::HasPendingPixels()
 {
-	return GetPendingPixelsCount() < 1;
+	return this->GetPendingPixelsCount() > 0;
 }
 
 void PixelContainer::IteratePendingPixels() {	
 	while (this->HasPendingPixels()) {
-		this->GetStalled();
+		this->CheckPixel(this->GetStalled());
 	}
 }
 
@@ -99,8 +110,8 @@ FFPixel * PixelContainer::getPixelAt(int x, int y)
 }
 
 void PixelContainer::CheckPixel(FFPixel* pixel) {
-
-	if (pixel->state & pxstate::unchecked) {
+	
+	if (pixel->state & pxstate::skip) {
 		return;
 	}
 
@@ -115,8 +126,9 @@ void PixelContainer::CheckPixel(FFPixel* pixel) {
 
 	for (int i = 0; i < 4; i++) {
 		if (neighbors[i]) {
-			if (neighbors[i]->state & pxstate::unchecked) {
+			if (!(neighbors[i]->state & pxstate::skip)) {
 				this->AddToPending(neighbors[i]);
+				neighbors[i]->group = this->groups;
 			}
 		}
 	}
@@ -159,5 +171,6 @@ FFPixel::FFPixel(int x, int y, Color c, int state)
 	this->x = x;
 	this->y = y;
 	this->color = c;
+	this->group = -1;
 	this->state = state;
 }
