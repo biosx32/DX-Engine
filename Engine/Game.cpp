@@ -69,11 +69,9 @@ int frames = 0;
 
 void Game::ComposeFrame()
 {
-	container.Draw(&out, 0, 0);
+	//container.Draw(&out, 0, 0);
 
-
-	out.DrawLabel(0, 0, &j);
-	out.DrawLabel(0, 32, &j);
+	out.DrawLabel(0, 0, &framecounter);
 
 }
 
