@@ -5,6 +5,8 @@
 #include <Windows.h>
 #include <string>
 
+char * const getFrameNumber();
+
 int File_bytes(FILE* p_file);
 
 class OutputStream {

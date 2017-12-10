@@ -9,11 +9,11 @@ public:
 	~Label();
 	Label(Spritesheet* sh);
 	
-
-	char text[1024];
+	static const int txmax= 256;
+	char text[txmax];
 	Spritesheet* sprite_sheet = nullptr;
 
-	Bitmap* Get_Bitmap_Char(int c);
+	Bitmap* Get_Bitmap_Char(unsigned int c);
 	void setText(char* text);
 	int Load(Spritesheet* sh);
 

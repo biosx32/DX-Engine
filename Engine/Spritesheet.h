@@ -23,7 +23,7 @@ public:
 	Spritesheet();
 	Spritesheet(Bitmap* BitmapImage, int wcount, int hcount);
 	~Spritesheet();
-	SpritesheetDS* Data = nullptr;
+	SpritesheetDS* datagroup = nullptr;
 
 	void Load(Bitmap* BitmapImage, int wcount, int hcount);
 	void Load(Bitmap* BitmapImage);

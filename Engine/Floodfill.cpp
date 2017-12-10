@@ -72,7 +72,7 @@ FFPixel* PixelContainer::GetStalled() {
 
 unsigned int PixelContainer::GetPendingPixelsCount()
 {
-	return stalledPixels.size();
+	return (unsigned int) stalledPixels.size();
 }
 
 bool PixelContainer::HasPendingPixels()

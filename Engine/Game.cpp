@@ -77,19 +77,8 @@ void Game::ComposeFrame()
 
 void Game::UpdateModel()
 {
-	frames++;
-	frames %= 61;
 
-	char buff[64];
-	sprintf_s(buff, "Frame: %d", frames);
-	framecounter.setText(buff);
-
-	if (wnd.mouse.IsInWindow()) {
-		j.setText("In window");
-	}
-	else {
-		j.setText("Outsite window");
-	}
+	framecounter.setText("JOZEF");
 }
 
 

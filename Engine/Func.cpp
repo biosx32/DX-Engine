@@ -3,6 +3,16 @@
 OutputStream print;
 Error printerr;
 
+int fc=0;
+char buff[64];
+char* const getFrameNumber() {
+	fc++;
+	fc %= 61;
+	
+	sprintf_s(buff, "Frame: %d", fc);
+	return buff;
+}
+
 int File_bytes(FILE* p_file)
 {
 	int RESUME = ftell(p_file);

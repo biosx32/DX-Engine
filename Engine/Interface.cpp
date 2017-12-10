@@ -30,11 +30,11 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 	int char_width = label->Get_Bitmap_Char(0)->datagroup->width;
 	int char_height = label->Get_Bitmap_Char(0)->datagroup->height;
 
-	char* data = &label->text[0];
 
-	while (*data++ != 0) {
-		
-		Bitmap* BitmapChar = label->Get_Bitmap_Char(*(data - 1));
+	for (char* data = &label->text[0]; *data != 0; data++) {
+		unsigned char udata = (unsigned char) *data;
+		data++;
+		Bitmap* BitmapChar = label->Get_Bitmap_Char(udata);
 		char_width = BitmapChar->datagroup->width;
 
 		if (*(data - 1) == '\n') {
@@ -111,17 +111,17 @@ void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 	Color old = this->DrawShape->brush;
 	this->DrawShape->SetBrushColor(Colors::Red);
 
-	int sprw = sh->Data->data[0]->datagroup->width;
-	int sprh = sh->Data->data[0]->datagroup->height;
+	int sprw = sh->datagroup->data[0]->datagroup->width;
+	int sprh = sh->datagroup->data[0]->datagroup->height;
 
-	for (int y = 0; y < sh->Data->hcount; y++) {
-		for (int x = 0; x < sh->Data->wcount; x++) {
-			int i = y * sh->Data->wcount + x;
+	for (int y = 0; y < sh->datagroup->hcount; y++) {
+		for (int x = 0; x < sh->datagroup->wcount; x++) {
+			int i = y * sh->datagroup->wcount + x;
 			int xdst = x* sprw + 1 * x ;
 			int ydst = y* sprh + 1 * y;
 
 		
-			this->Draw_Bitmap(sh->Data->data[i], xoff+ xdst, yoff+ ydst);
+			this->Draw_Bitmap(sh->datagroup->data[i], xoff+ xdst, yoff+ ydst);
 			this->DrawShape->FastHLine(xoff + xdst, yoff + ydst, sprh+1);
 			this->DrawShape->FastVLine(xoff + xdst, yoff + ydst, sprw+1);
 		}

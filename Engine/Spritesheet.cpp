@@ -17,20 +17,20 @@ Spritesheet::~Spritesheet() {
 
 void Spritesheet::Load(Bitmap * BitmapImage, int wcount, int hcount)
 {
-	this->Data = new SpritesheetDS();
-	this->Data->Load(BitmapImage, wcount, hcount);
+	this->datagroup = new SpritesheetDS();
+	this->datagroup->Load(BitmapImage, wcount, hcount);
 }
 
 void Spritesheet::Load(Bitmap * BitmapImage)
 {
-	this->Data = new SpritesheetDS();
-	this->Data->Load(BitmapImage);
+	this->datagroup = new SpritesheetDS();
+	this->datagroup->Load(BitmapImage);
 }
 
 void Spritesheet::RemoveSpriteData()
 {
-	delete this->Data;
-	this->Data = nullptr;
+	delete this->datagroup;
+	this->datagroup = nullptr;
 
 }
 
