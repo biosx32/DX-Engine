@@ -44,6 +44,8 @@ public:
 	FFPixel*  GetStalled();
 	FFPixel * getPixelAt(int x, int y);
 
+	Sprite** GetGroup();
+
 	unsigned int GetPendingPixelsCount();
 	bool IsColorBackground(Color c);
 	bool HasPendingPixels();

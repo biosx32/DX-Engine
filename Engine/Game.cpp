@@ -80,7 +80,8 @@ void Game::UpdateModel()
 	if(wnd.mouse.LeftIsPressed()){
 		FFPixel* current = container.getPixelAt(wnd.mouse.GetPosX(), wnd.mouse.GetPosY());
 		if (current != nullptr) {
-			++container.groups;
+			
+			current->group = ++container.groups;
 			container.CheckPixel(current);
 		}
 	}

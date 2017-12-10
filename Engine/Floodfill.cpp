@@ -15,18 +15,14 @@ void PixelContainer::Draw(Interface * out, int fx, int fy)
 
 			ReadPixel = pixels[yoff* width + xoff];
 	
-			if (!(ReadPixel->state & pxstate::skip)) {
-				out->DrawPixel(xoff + fx, yoff + fy, color_stalled);
-			}
-
-			else if (ReadPixel->state & pxstate::checked) {
-				if (ReadPixel->group == 1) {
+			if (ReadPixel->state & pxstate::checked) {
+				if ((ReadPixel->group % 3) ==0) {
 					out->DrawPixel(xoff + fx, yoff + fy, 0xFF0000);
 				}
-				else if (ReadPixel->group == 2) {
+				else if ((ReadPixel->group %  3) ==1) {
 					out->DrawPixel(xoff + fx, yoff + fy, 0xFF00);
 				}
-				else if (ReadPixel->group == 3) {
+				else if ((ReadPixel->group %3) == 2) {
 					out->DrawPixel(xoff + fx, yoff + fy, 0xFF);
 				}
 
@@ -109,6 +105,14 @@ FFPixel * PixelContainer::getPixelAt(int x, int y)
 	return nullptr;
 }
 
+TransparentBitmap ** PixelContainer::GetGroup()
+{
+	Sprite** spritegroups = new TransparentBitmap([groups];
+	for (int i = 0; i < pixelcount;i++) {
+		
+	}
+}
+
 void PixelContainer::CheckPixel(FFPixel* pixel) {
 	
 	if (pixel->state & pxstate::skip) {
@@ -127,8 +131,9 @@ void PixelContainer::CheckPixel(FFPixel* pixel) {
 	for (int i = 0; i < 4; i++) {
 		if (neighbors[i]) {
 			if (!(neighbors[i]->state & pxstate::skip)) {
+				neighbors[i]->group = pixel->group;
 				this->AddToPending(neighbors[i]);
-				neighbors[i]->group = this->groups;
+				
 			}
 		}
 	}
