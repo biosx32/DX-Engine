@@ -33,7 +33,7 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 
 	for (char* data = &label->text[0]; *data != 0; data++) {
 		unsigned char udata = (unsigned char) *data;
-		data++;
+
 		Bitmap* BitmapChar = label->Get_Bitmap_Char(udata);
 		char_width = BitmapChar->datagroup->width;
 
