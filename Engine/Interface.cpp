@@ -108,6 +108,13 @@ void Interface::Draw_Bitmap(Bitmap * Bmp, int fx, int fy, int MODIF)
 	}
 }
 
+void Interface::Draw_Bitmap(VectorBitmap * VBmp, int fx, int fy)
+{
+	for (std::vector<FPixel*>::iterator it = VBmp->datagroup->pixels->begin(); it != VBmp->datagroup->pixels->end(); ++it) {
+		this->DrawPixel(fx + (*it)->x, fy + (*it)->y, (*it)->color);
+	}
+}
+
 void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 {
 	Color old = this->DrawShape->brush;

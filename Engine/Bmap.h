@@ -77,11 +77,11 @@ public:
 	std::vector<FPixel*>* pixels;
 
 	int size();
-	void Load(std::vector<FPixel*>* src);	
 	
 };
 
 class VectorBitmap {
+public:
 	VectorBitmapDS* datagroup = nullptr;
 	~VectorBitmap();
 	VectorBitmap();

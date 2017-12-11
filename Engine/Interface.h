@@ -31,6 +31,7 @@ public:
 
 	void Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy);
 	void Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy, int MODIF);
+	void Draw_Bitmap(VectorBitmap* VBmp, int fx, int fy);
 
 	void DrawLabel(int x, int y, Label* label);
 	void DrawSpritesheet(Spritesheet* sh, int xoff, int yoff);

@@ -50,7 +50,7 @@ PixelContainer container;
 
 
 
-
+VectorBitmap jj;
 void Game::Initialise() {
 	out.set_graphics(&gfx);
 	container.Load(&SpriteImage);
@@ -60,16 +60,26 @@ void Game::Initialise() {
 		while (container.IteratePendingPixels());
 		
 	}*/
+
+	for (int i = 0; i < 255; i++) {
+
+		for (int q = 0; q < 25; q++) {
+			jj.datagroup->pixels->push_back(new FPixel(i, i+q, Colors::Red));
+		}
+	
+	}
+
 	
 }
 
 Label j(&sh);
 Label framecounter(&sh);
+
 int frames = 0;
 
 void Game::ComposeFrame()
 {
-	out.Draw_Bitmap(&img, 0, 0, FLIP_VERTICALLY);
+	out.Draw_Bitmap(&jj, 0, 0);
 	out.DrawLabel(0, 0, &framecounter);
 
 }
