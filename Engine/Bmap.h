@@ -38,6 +38,8 @@ public:
 	Color * data;
 };
 
+
+
 class Bitmap {
 public:
 	Bitmap();
@@ -73,8 +75,10 @@ public:
 	VectorBitmapDS();
 	VectorBitmapDS(std::vector<FPixel*>* src);
 	~VectorBitmapDS();
-
+	int width, height;
 	std::vector<FPixel*>* pixels;
+
+	void UpdateWH(); //update width and height variables
 
 	int size();
 	

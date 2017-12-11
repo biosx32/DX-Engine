@@ -78,10 +78,10 @@ void Interface::DrawPixelSpecial(int xoff, int yoff, Color c, int MODIF, int wid
 	#define SOFT_DRAW 1
 
 	if (SOFT_DRAW &&
-		(xoff >= gfx->ScreenWidth ||
-			yoff >= gfx->ScreenHeight ||
-			xoff < 0 ||
-			yoff < 0)) {
+		   (finalx >= gfx->ScreenWidth ||
+			finaly >= gfx->ScreenHeight ||
+			finalx < 0 ||
+			finaly < 0)) {
 		return;
 	}
 
@@ -110,8 +110,16 @@ void Interface::Draw_Bitmap(Bitmap * Bmp, int fx, int fy, int MODIF)
 
 void Interface::Draw_Bitmap(VectorBitmap * VBmp, int fx, int fy)
 {
+	this->Draw_Bitmap(VBmp, fx, fy, NULL);
+}
+
+void Interface::Draw_Bitmap(VectorBitmap * VBmp, int fx, int fy, int MODIF)
+{
 	for (std::vector<FPixel*>::iterator it = VBmp->datagroup->pixels->begin(); it != VBmp->datagroup->pixels->end(); ++it) {
-		this->DrawPixel(fx + (*it)->x, fy + (*it)->y, (*it)->color);
+		int width = VBmp->datagroup->width;
+		int height = VBmp->datagroup->height;
+
+		this->DrawPixelSpecial(fx + (*it)->x, fy + (*it)->y, (*it)->color, MODIF, width, height);
 	}
 }
 

@@ -68,7 +68,8 @@ void Game::Initialise() {
 		}
 	
 	}
-
+	jj.datagroup->width = 255;
+	jj.datagroup->height = 280;
 	
 }
 
@@ -80,6 +81,7 @@ int frames = 0;
 void Game::ComposeFrame()
 {
 	out.Draw_Bitmap(&jj, 0, 0);
+	out.Draw_Bitmap(&jj, 0, 0, FLIP_HORIZONTALLY);
 	out.DrawLabel(0, 0, &framecounter);
 
 }
