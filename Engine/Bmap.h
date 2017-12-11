@@ -4,6 +4,30 @@
 #include <math.h>  
 #include "Colors.h"
 #include "Func.h"
+#include <vector>
+
+namespace pxstate
+{
+	enum Type
+	{
+		background = 1, checked = 2, skip = (background | checked)
+	};
+};
+
+class FPixel {
+public:
+	int x, y;
+	Color color;
+	FPixel(int x, int y, Color c);
+};
+
+
+class FFPixel: public FPixel {
+public:
+	int state, group;
+	FFPixel(int x, int y, Color c, int state);
+};
+
 
 class BitmapDS {
 public:
@@ -14,13 +38,11 @@ public:
 	Color * data;
 };
 
-class TransparentBitmap;
 class Bitmap {
 public:
 	Bitmap();
 	Bitmap(char* FileName);
 	Bitmap(int width, int height);
-	Bitmap(TransparentBitmap* bmp) = delete;
 	~Bitmap();
 
 	BitmapDS* datagroup = nullptr;
@@ -34,7 +56,6 @@ class TransparentBitmap : public Bitmap {
 public:
 	TransparentBitmap() : Bitmap() {}
 	TransparentBitmap(Bitmap* bmp) : Bitmap(*bmp) {}
-	TransparentBitmap(TransparentBitmap*) = delete;
 	TransparentBitmap(char* FileName) : Bitmap(FileName) {}
 	TransparentBitmap(int width, int height) : Bitmap(width, height) {}
 
@@ -44,6 +65,27 @@ public:
 	TransparentBitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT) override;
 	bool IsColorTransparent(Color color) override;
 	
+};
+
+class VectorBitmapDS {
+public:
+
+	VectorBitmapDS();
+	VectorBitmapDS(std::vector<FPixel*>* src);
+	~VectorBitmapDS();
+
+	std::vector<FPixel*>* pixels;
+
+	int size();
+	void Load(std::vector<FPixel*>* src);	
+	
+};
+
+class VectorBitmap {
+	VectorBitmapDS* datagroup = nullptr;
+	~VectorBitmap();
+	VectorBitmap();
+	VectorBitmap(std::vector<FPixel*>* src);
 };
 
 

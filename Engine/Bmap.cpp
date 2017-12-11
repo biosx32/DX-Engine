@@ -173,5 +173,55 @@ TransparentBitmap * TransparentBitmap::GetBitmapPart(int xoff, int yoff, int WID
 	return newBitmap_T;
 }
 
+FPixel::FPixel(int x, int y, Color c)
+{
+	this->x = x; this->y = y; this->color = c;
+}
+
+VectorBitmapDS::VectorBitmapDS()
+{
+	this->pixels = new std::vector<FPixel*>;
+}
+
+VectorBitmapDS::VectorBitmapDS(std::vector<FPixel*>* src)
+{
+	this->pixels = new std::vector<FPixel*>(*src);
+}
+
+VectorBitmapDS::~VectorBitmapDS()
+{
+	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
+	{
+		delete *it;
+	}
+	delete this->pixels;
+	pixels = nullptr;
+}
+
+int VectorBitmapDS::size()
+{
+	return this->pixels->size();
+}
 
 
+FFPixel::FFPixel(int x, int y, Color c, int state): FPixel(x,y,c)
+{
+	this->group = -1;
+	this->state = state;
+}
+
+VectorBitmap::~VectorBitmap()
+{
+	delete datagroup;
+	datagroup = nullptr;
+}
+
+VectorBitmap::VectorBitmap()
+{
+	this->datagroup = new VectorBitmapDS();
+}
+
+VectorBitmap::VectorBitmap(std::vector<FPixel*>* src)
+{
+	this->datagroup = new VectorBitmapDS(src);
+}

@@ -5,6 +5,7 @@
 
 void PixelContainer::Draw(Interface * out, int fx, int fy)
 {
+
 	int color_background = Color(0,0,0).dword; //black
 	int color_checked = Color(51, 204, 51).dword; //green
 	int color_stalled = Color(102, 102, 153).dword; //gray
@@ -45,13 +46,10 @@ void PixelContainer::Draw(Interface * out, int fx, int fy)
 
 FFPixel * PixelContainer::getFirstRawPixel()
 {
-
 	for (int i = lastpos; i < pixelcount; i++) {
-		if (! (pixels[i]->state & pxstate::checked || 
-			   pixels[i]->state & pxstate::background)) {
+		if (!(pixels[i]->state & pxstate::skip)) {
 			lastpos = i;
 			return pixels[i];
-			
 		}
 	}
 
@@ -60,35 +58,21 @@ FFPixel * PixelContainer::getFirstRawPixel()
 
 
 
-bool PixelContainer::IsColorBackground(Color c)
-{
-
-	return c.dword == transparency.dword;
-}
-
 FFPixel* PixelContainer::GetStalled() {
-	FFPixel* result = nullptr;
-	if (this->GetPendingPixelsCount() > 0) {
-		result = stalledPixels.back();
+	if (stalledPixels.size() > 0) {
+		FFPixel* result = stalledPixels.back();
 		stalledPixels.pop_back();
+		return result;
 	}
 	
-	return result;
+	return nullptr;
 }
 
 
-unsigned int PixelContainer::GetPendingPixelsCount()
-{
-	return (unsigned int) stalledPixels.size();
-}
 
-bool PixelContainer::HasPendingPixels()
-{
-	return this->GetPendingPixelsCount() > 0;
-}
 
 void PixelContainer::IteratePendingPixels() {	
-	while (this->HasPendingPixels()) {
+	while (stalledPixels.size() > 0) {
 		this->CheckPixel(this->GetStalled());
 	}
 }
@@ -105,12 +89,14 @@ FFPixel * PixelContainer::getPixelAt(int x, int y)
 	return nullptr;
 }
 
-TransparentBitmap ** PixelContainer::GetGroup()
+void PixelContainer::GetGroup()
 {
-	TransparentBitmap** spritegroups = new TransparentBitmap*[groups];
+	groupsvec = new std::vector<FFPixel*>[groups];
 
 	for (int i = 0; i < pixelcount;i++) {
-		
+		if (pixels[i]->group > 0) {
+			groupsvec[pixels[i]->group - 1].push_back(pixels[i]);
+		}
 	}
 }
 
@@ -130,20 +116,14 @@ void PixelContainer::CheckPixel(FFPixel* pixel) {
 	};
 
 	for (int i = 0; i < 4; i++) {
-		if (neighbors[i]) {
-			if (!(neighbors[i]->state & pxstate::skip)) {
-				neighbors[i]->group = pixel->group;
-				this->AddToPending(neighbors[i]);
-				
-			}
+		if (!neighbors[i]) { continue; }
+
+		if (!(neighbors[i]->state & pxstate::skip)) {
+			neighbors[i]->group = pixel->group;
+			stalledPixels.push_back(neighbors[i]);
 		}
 	}
 
-}
-
-
-void PixelContainer::AddToPending(FFPixel* pixel) {
-	stalledPixels.push_back(pixel);
 }
 
 
@@ -161,7 +141,7 @@ void PixelContainer::Load(Bitmap * bmp)
 			Color c = bmp->datagroup->data[i];
 			int state = 0;
 
-			if (IsColorBackground(c)) {
+			if (bmp->IsColorTransparent(c)) {
 				state |= pxstate::background;
 			}
 			
@@ -172,11 +152,3 @@ void PixelContainer::Load(Bitmap * bmp)
 
 }
 
-FFPixel::FFPixel(int x, int y, Color c, int state)
-{
-	this->x = x;
-	this->y = y;
-	this->color = c;
-	this->group = -1;
-	this->state = state;
-}

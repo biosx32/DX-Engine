@@ -61,47 +61,41 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 
 
 
-void Interface::Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy) {
-	Color READ_COLOR;
-	for (int yoff = 0; yoff < BitmapChar->datagroup->height; yoff++) {
-		for (int xoff = 0; xoff < BitmapChar->datagroup->width; xoff++) {
+void Interface::Draw_Bitmap(Bitmap* Bmp, int fx, int fy) {
+	this->Draw_Bitmap(Bmp, fx, fy, 0);
+}
 
-			READ_COLOR = BitmapChar->datagroup->data[yoff* BitmapChar->datagroup->width + xoff];
-			if (!BitmapChar->IsColorTransparent(READ_COLOR)) {
-				DrawPixel(xoff + fx , yoff + fy, READ_COLOR);
-			}
+void Interface::DrawPixel(int xoff, int yoff, Color c, int MODIF, int width, int height) {
 
-			
-		}
+	int finalx = xoff;
+	int finaly = yoff;
+
+	if (MODIF & FLIP_HORIZONTALLY) {
+		finalx = width - xoff;
 	}
+
+	if (MODIF & FLIP_VERTICALLY) {
+		finaly = height - yoff;
+	}
+	DrawPixel(finalx, finaly, c);
+			
 }
 
 void Interface::Draw_Bitmap(Bitmap * Bmp, int fx, int fy, int MODIF)
 {
-	
-	Color READ_COLOR;
-	int finalx; int finaly;
+	int width = Bmp->datagroup->width;
+	int height = Bmp->datagroup->height;
 
 	for (int yoff = 0; yoff < Bmp->datagroup->height; yoff++) {
 		for (int xoff = 0; xoff < Bmp->datagroup->width; xoff++) {
 			
-			finalx = fx + xoff;
-			if (MODIF & FLIP_HORIZONTALLY) {
-				finalx = fx + Bmp->datagroup->width - xoff;
-			}
-			
-			
-			finaly = yoff + fy;
-			if (MODIF & FLIP_VERTICALLY) {
-				finaly = fy + Bmp->datagroup->height - yoff;
-			}
+			int finalx = fx + xoff;
+			int finaly = fy + yoff;
+			Color READ_COLOR = Bmp->datagroup->data[yoff* width + xoff];
 
-			READ_COLOR = Bmp->datagroup->data[yoff* Bmp->datagroup->width + xoff];
 			if (!Bmp->IsColorTransparent(READ_COLOR)) {
-				DrawPixel(finalx, finaly, READ_COLOR);
+				DrawPixel(finalx, finaly, READ_COLOR, MODIF, width, height);
 			}
-
-
 		}
 	}
 }

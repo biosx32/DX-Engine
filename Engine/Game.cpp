@@ -69,26 +69,14 @@ int frames = 0;
 
 void Game::ComposeFrame()
 {
-	//container.Draw(&out, 0, 0);
-	container.Draw(&out, 0, 0);
+	out.Draw_Bitmap(&img, 0, 0, FLIP_VERTICALLY);
 	out.DrawLabel(0, 0, &framecounter);
 
 }
 
 void Game::UpdateModel()
 {
-	if(wnd.mouse.LeftIsPressed()){
-		FFPixel* current = container.getPixelAt(wnd.mouse.GetPosX(), wnd.mouse.GetPosY());
-		if (current != nullptr) {
-			
-			current->group = ++container.groups;
-			container.CheckPixel(current);
-		}
-	}
-
-	if (wnd.mouse.RightIsPressed()) {
-		container.IteratePendingPixels();
-	}
+	
 	
 	framecounter.setText(getFrameNumber());
 }

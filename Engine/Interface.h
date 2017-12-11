@@ -23,9 +23,10 @@ public:
 	Interface();
 
 	void set_graphics(Graphics* gfx);
-	void DrawPixel(int x, int y, Color c);
+	void DrawPixel(int xoff, int yoff, Color c);
 	void DrawLabel(int x, int y, Label* label);
 	void Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy);
+	void DrawPixel(int x, int y, Color c, int MODIF, int width, int height);
 	void Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy, int MODIF);
 	void DrawSpritesheet(Spritesheet* sh, int xoff, int yoff);
 	void DrawPixelM(int xoff, int yoff, Color c);
