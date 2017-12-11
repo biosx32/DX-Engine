@@ -10,13 +10,8 @@ void Interface::set_graphics(Graphics* gfx) {
 	this->gfx = gfx; 
 }
 void Interface::DrawPixel(int xoff, int yoff, Color c) { 
-	int softdraw = 1;
+	this->DrawPixelSpecial(xoff, yoff, c, NULL, NULL, NULL);
 
-	if (gfx == nullptr) return;
-
-	if ( softdraw && (xoff>= gfx->ScreenWidth || xoff < 0 || yoff >= gfx->ScreenHeight || yoff < 0)) return;
-	gfx->PutPixel(xoff, yoff, c);
-	
 }
 
 
@@ -65,7 +60,8 @@ void Interface::Draw_Bitmap(Bitmap* Bmp, int fx, int fy) {
 	this->Draw_Bitmap(Bmp, fx, fy, 0);
 }
 
-void Interface::DrawPixel(int xoff, int yoff, Color c, int MODIF, int width, int height) {
+void Interface::DrawPixelSpecial(int xoff, int yoff, Color c, int MODIF, int width, int height) {
+	if (gfx == nullptr) return;
 
 	int finalx = xoff;
 	int finaly = yoff;
@@ -77,7 +73,19 @@ void Interface::DrawPixel(int xoff, int yoff, Color c, int MODIF, int width, int
 	if (MODIF & FLIP_VERTICALLY) {
 		finaly = height - yoff;
 	}
-	DrawPixel(finalx, finaly, c);
+
+
+	#define SOFT_DRAW 1
+
+	if (SOFT_DRAW &&
+		(xoff >= gfx->ScreenWidth ||
+			yoff >= gfx->ScreenHeight ||
+			xoff < 0 ||
+			yoff < 0)) {
+		return;
+	}
+
+	gfx->PutPixel(finalx, finaly, c);
 			
 }
 
@@ -94,7 +102,7 @@ void Interface::Draw_Bitmap(Bitmap * Bmp, int fx, int fy, int MODIF)
 			Color READ_COLOR = Bmp->datagroup->data[yoff* width + xoff];
 
 			if (!Bmp->IsColorTransparent(READ_COLOR)) {
-				DrawPixel(finalx, finaly, READ_COLOR, MODIF, width, height);
+				DrawPixelSpecial(finalx, finaly, READ_COLOR, MODIF, width, height);
 			}
 		}
 	}
