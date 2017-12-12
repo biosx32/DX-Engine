@@ -6,30 +6,28 @@
 #include <vector>
 
 
+using std::vector;
 
 class PixelContainer {
 public:
-	int pixelcount;
 	int width;
 	int height;
 	int lastpos = 0;
-	int groups = 0;
-	
-	std::vector<FFPixel*> stalledPixels;
-	FFPixel** pixels;
-	std::vector<FFPixel*>* groupsvec;
 
+	constexpr int gpixelcount();
+	
+	vector<FFPixel*> stalledPixels;
+	FFPixel** pixels;
+	vector<FFPixel*> temp_checks;
 
 	void Load(Bitmap* bmp);
 	void Draw(Interface* out, int fx, int fy);
 
 	FFPixel* getFirstRawPixel();
 	FFPixel*  GetStalled();
+	vector<FPixel*>* ProcessGroup(FFPixel * pixel);
 	FFPixel * getPixelAt(int x, int y);
 
-	void GetGroup();
-
-	void IteratePendingPixels();
 	void CheckPixel(FFPixel * pixel);
 
 	

@@ -57,19 +57,10 @@ void Game::Initialise() {
 	std::vector<FPixel*>* test = new std::vector<FPixel*>;
 
 
-	for (int i = 0; i < 255; i++) {
-
-		for (int q = 0; q < 25; q++) {
-			test->push_back(new FPixel(300 + i, 300 + i + q, Colors::Red));
-		}
-
+	FFPixel* first = container.getFirstRawPixel();
+	if (first) {
+		jj.Load(container.ProcessGroup(first));
 	}
-	//jj.datagroup->width = 255;
-	//jj.datagroup->height = 280;
-
-	jj.Load(test);
-
-
 
 	/*while (container.getFirstRawPixel() != nullptr) {
 		container.CheckPixel(container.getFirstRawPixel());

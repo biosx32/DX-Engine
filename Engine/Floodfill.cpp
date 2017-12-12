@@ -17,23 +17,13 @@ void PixelContainer::Draw(Interface * out, int fx, int fy)
 			ReadPixel = pixels[yoff* width + xoff];
 	
 			if (ReadPixel->state & pxstate::checked) {
-				if ((ReadPixel->group % 3) ==0) {
-					out->DrawPixel(xoff + fx, yoff + fy, 0xFF0000);
-				}
-				else if ((ReadPixel->group %  3) ==1) {
-					out->DrawPixel(xoff + fx, yoff + fy, 0xFF00);
-				}
-				else if ((ReadPixel->group %3) == 2) {
-					out->DrawPixel(xoff + fx, yoff + fy, 0xFF);
-				}
-
-				else {
-					out->DrawPixel(xoff + fx, yoff + fy, color_checked);
-				}
+				out->DrawPixel(xoff + fx, yoff + fy, 0xFF0000);
 			}
+
 			else if (ReadPixel->state & pxstate::background) {
 				out->DrawPixel(xoff + fx, yoff + fy, color_background);
 			}
+
 			else {
 				out->DrawPixel(xoff + fx, yoff + fy, ReadPixel->color);
 			}
@@ -46,7 +36,7 @@ void PixelContainer::Draw(Interface * out, int fx, int fy)
 
 FFPixel * PixelContainer::getFirstRawPixel()
 {
-	for (int i = lastpos; i < pixelcount; i++) {
+	for (int i = lastpos; i < gpixelcount(); i++) {
 		if (!(pixels[i]->state & pxstate::skip)) {
 			lastpos = i;
 			return pixels[i];
@@ -70,35 +60,48 @@ FFPixel* PixelContainer::GetStalled() {
 
 
 
+vector<FPixel*>* PixelContainer::ProcessGroup(FFPixel* pixel) {
+	
+	this->CheckPixel(pixel);
 
-void PixelContainer::IteratePendingPixels() {	
 	while (stalledPixels.size() > 0) {
 		this->CheckPixel(this->GetStalled());
 	}
+
+	vector<FPixel*>* result = new vector<FPixel*>;
+
+	for (std::vector<FFPixel*>::iterator it = temp_checks.begin(); it != temp_checks.end(); ++it)
+	{
+		FFPixel* current = *it;
+		result->push_back(new FPixel(*current));
+		delete *it;
+	}
+
+
+	temp_checks.clear();
+
+	return result;
 }
+
+
+
+
 
 FFPixel * PixelContainer::getPixelAt(int x, int y)
 {
 	if (x >= 0 && 
 		y >= 0 &&
-		  x < width && 
-	      y < height) {
+	    x < width && 
+	    y < height) {
 		return this->pixels[y*width + x];
 	}
 
 	return nullptr;
 }
 
-void PixelContainer::GetGroup()
-{
-	groupsvec = new std::vector<FFPixel*>[groups];
 
-	for (int i = 0; i < pixelcount;i++) {
-		if (pixels[i]->group > 0) {
-			groupsvec[pixels[i]->group - 1].push_back(pixels[i]);
-		}
-	}
-}
+
+
 
 void PixelContainer::CheckPixel(FFPixel* pixel) {
 	
@@ -119,20 +122,26 @@ void PixelContainer::CheckPixel(FFPixel* pixel) {
 		if (!neighbors[i]) { continue; }
 
 		if (!(neighbors[i]->state & pxstate::skip)) {
-			neighbors[i]->group = pixel->group;
 			stalledPixels.push_back(neighbors[i]);
 		}
 	}
 
+	this->temp_checks.push_back(pixel);
+
+
 }
 
+
+constexpr int PixelContainer::gpixelcount()
+{
+	return width * height;
+}
 
 void PixelContainer::Load(Bitmap * bmp)
 {
 	this->width = bmp->datagroup->width;
 	this->height = bmp->datagroup->height;
-	this->pixelcount = bmp->datagroup->pixelcount;
-	this->pixels = new FFPixel*[pixelcount];
+	this->pixels = new FFPixel*[gpixelcount()];
 
 
 	for (int y = 0; y < this->height; y++) {

@@ -24,9 +24,11 @@ public:
 
 class FFPixel: public FPixel {
 public:
-	int state, group;
+	int state;
 	FFPixel(int x, int y, Color c, int state);
 };
+
+
 
 
 class BitmapDS {

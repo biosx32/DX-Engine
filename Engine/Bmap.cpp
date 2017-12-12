@@ -204,7 +204,6 @@ int VectorBitmapDS::Get_pixelcount()
 
 FFPixel::FFPixel(int x, int y, Color c, int state): FPixel(x,y,c)
 {
-	this->group = -1;
 	this->state = state;
 }
 
