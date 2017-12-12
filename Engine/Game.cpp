@@ -84,7 +84,6 @@ void Game::Initialise() {
 Label j(&sh);
 Label framecounter(&sh);
 
-int frames = 0;
 
 void Game::ComposeFrame()
 {

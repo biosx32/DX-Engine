@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <Windows.h>
 #include <string>
+#include <ctime>
+
 
 char * const getFrameNumber();
 
