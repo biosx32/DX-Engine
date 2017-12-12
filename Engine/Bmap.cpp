@@ -255,6 +255,17 @@ void VectorBitmap::Load(std::vector<FPixel*>* src)
 	width = max_x - min_x;
 	height = max_y - min_y;
 
+	int offsetx = max_x - width;
+	int offsety = max_y - height;
+
+	for (std::vector<FPixel*>::iterator it = src->begin(); it != src->end(); ++it)
+	{
+		FPixel* current = *it;
+		current->x -= offsetx;
+		current->y -= offsety;
+	}
+
+
 	this->datagroup = new VectorBitmapDS(width, height);
 	this->datagroup->pixels = src;
 }

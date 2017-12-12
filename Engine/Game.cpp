@@ -87,7 +87,8 @@ Label framecounter(&sh);
 
 void Game::ComposeFrame()
 {
-	out.DrawLabel(0, 0, &framecounter);
+	out.DrawLabel(0, 
+		gfx.ScreenHeight - framecounter.sprite_sheet->datagroup->data[0]->image->datagroup->height, &framecounter);
 	out.Draw_Bitmap(&jj, 0, 0);
 }
 
