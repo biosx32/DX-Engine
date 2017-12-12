@@ -15,8 +15,11 @@ class SpritesheetDG {
 public:
 	~SpritesheetDG();
 
-	int wcount, hcount, spritecount;
-	Sprite** data = nullptr;
+	int spritecount;
+	vector<Sprite*>* data = nullptr;
+	;; TODO: vector sprites : Loading by converting bitmap to vector bitmap or
+		;; only using floodfill
+		;; should sprite be vector or transparentbitmap
 	void Load(TransparentBitmap* BitmapImage, int wcount, int hcount);
 	void Load(vector<FPixel*>* src);
 
