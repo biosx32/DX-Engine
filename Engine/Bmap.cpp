@@ -164,6 +164,14 @@ bool TransparentBitmap::IsColorTransparent(Color color)
 
 
 
+TransparentBitmap::TransparentBitmap(int width, int height, Color transparency): Bitmap(width, height)
+{
+	this->transparency = transparency.dword;
+	for (int i = 0; i < this->datagroup->pixelcount; i++) {
+		this->datagroup->data[i] = this->transparency;
+	}
+}
+
 TransparentBitmap * TransparentBitmap::GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT)
 {
 	Bitmap* newBitmap = this->Bitmap::GetBitmapPart(xoff, yoff, WIDTH, HEIGHT);
@@ -224,47 +232,8 @@ VectorBitmap::VectorBitmap(std::vector<FPixel*>* src)
 
 void VectorBitmap::Load(std::vector<FPixel*>* src)
 {
-	int width = 0;
-	int height = 0;
-	int min_x, min_y, max_x, max_y;
 
-	max_x = min_x = (*src->begin())->x;
-	max_y = min_y = (*src->begin())->y;
+	delete this->datagroup;
 
 
-	for (std::vector<FPixel*>::iterator it = src->begin(); it != src->end(); ++it)
-	{
-		FPixel* current = *it;
-		if (current->x < min_x) {
-			min_x = current->x;
-		}
-		else if (current->x > max_x) {
-			max_x = current->x;
-		}
-
-		if (current->y < min_y) {
-			min_y = current->y;
-		}
-
-		else if (current->y > max_y) {
-			max_y = current->y;
-		}
-	}
-
-	width = max_x - min_x;
-	height = max_y - min_y;
-
-	int offsetx = max_x - width;
-	int offsety = max_y - height;
-
-	for (std::vector<FPixel*>::iterator it = src->begin(); it != src->end(); ++it)
-	{
-		FPixel* current = *it;
-		current->x -= offsetx;
-		current->y -= offsety;
-	}
-
-
-	this->datagroup = new VectorBitmapDS(width, height);
-	this->datagroup->pixels = src;
 }

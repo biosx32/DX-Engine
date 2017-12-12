@@ -9,27 +9,29 @@
 using std::vector;
 
 class PixelContainer {
+protected:
+	vector<FFPixel*> stalledPixels;
+	vector<FFPixel*> temp_checks;
+	FFPixel** pixels;
+
+	int lastpos = 0;
+	constexpr int get_pixelcount();
+
+	
+	FFPixel * getPixelAt(int x, int y);
+	FFPixel* GetNextSpritePixel();
+	vector<FPixel*>* GetGroupFrom(FFPixel * pixel);
+	void CheckPixel(FFPixel * pixel);
+
 public:
 	int width;
 	int height;
-	int lastpos = 0;
-
-	constexpr int gpixelcount();
 	
-	vector<FFPixel*> stalledPixels;
-	FFPixel** pixels;
-	vector<FFPixel*> temp_checks;
-
 	void Load(Bitmap* bmp);
 	void Draw(Interface* out, int fx, int fy);
 
-	FFPixel* getFirstRawPixel();
-	FFPixel*  GetStalled();
-	vector<FPixel*>* ProcessGroup(FFPixel * pixel);
-	FFPixel * getPixelAt(int x, int y);
-
-	void CheckPixel(FFPixel * pixel);
-
+	
+	vector<FPixel*>* GetNextSpriteGroup();
 	
 
 };

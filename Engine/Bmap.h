@@ -6,6 +6,8 @@
 #include "Func.h"
 #include <vector>
 
+using std::vector;
+
 namespace pxstate
 {
 	enum Type
@@ -61,7 +63,7 @@ public:
 	TransparentBitmap() : Bitmap() {}
 	TransparentBitmap(Bitmap* bmp) : Bitmap(*bmp) {}
 	TransparentBitmap(char* FileName) : Bitmap(FileName) {}
-	TransparentBitmap(int width, int height) : Bitmap(width, height) {}
+	TransparentBitmap(int width, int height, Color transparency);
 
 	double tolerance = 0.001f;
 	Color transparency = 0x00b1f4b1; // 177,244,177

@@ -56,7 +56,109 @@ void SpritesheetDG::Load(TransparentBitmap * BitmapImage, int wcount, int hcount
 	}
 }
 
+void SpritesheetDG::Load(vector<FPixel*>* src)
+{
+	int width = 0;
+	int height = 0;
+	int min_x, min_y, max_x, max_y;
+
+	max_x = min_x = (*src->begin())->x;
+	max_y = min_y = (*src->begin())->y;
+
+
+	for (std::vector<FPixel*>::iterator it = src->begin(); it != src->end(); ++it)
+	{
+		FPixel* current = *it;
+		if (current->x < min_x) {
+			min_x = current->x;
+		}
+		else if (current->x > max_x) {
+			max_x = current->x;
+		}
+
+		if (current->y < min_y) {
+			min_y = current->y;
+		}
+
+		else if (current->y > max_y) {
+			max_y = current->y;
+		}
+	}
+
+	width = max_x - min_x;
+	height = max_y - min_y;
+
+	int offsetx = max_x - width;
+	int offsety = max_y - height;
+
+	for (std::vector<FPixel*>::iterator it = src->begin(); it != src->end(); ++it)
+	{
+		FPixel* current = *it;
+		current->x -= offsetx;
+		current->y -= offsety;
+	}
+
+	this->
+	this->datagroup = new VectorBitmapDS(width, height);
+	this->datagroup->pixels = src;
+}
+
 Sprite::Sprite(TransparentBitmap * TBmp)
 {
 	this->image = TBmp;
+}
+
+Sprite::Sprite(vector<FPixel*>* src)
+{
+
+	int width, height, min_x, min_y, max_x, max_y;
+
+	max_x = min_x = (*src->begin())->x;
+	max_y = min_y = (*src->begin())->y;
+
+
+	for (std::vector<FPixel*>::iterator it = src->begin(); it != src->end(); ++it)
+	{
+		FPixel* current = *it;
+		FPixel* current = *it;
+		if (current->x < min_x) {
+			min_x = current->x;
+		}
+		else if (current->x > max_x) {
+			max_x = current->x;
+		}
+
+		if (current->y < min_y) {
+			min_y = current->y;
+		}
+
+		else if (current->y > max_y) {
+			max_y = current->y;
+		}
+	}
+
+	width = max_x - min_x;
+	height = max_y - min_y;
+
+	int offsetx = max_x - width;
+	int offsety = max_y - height;
+
+	for (std::vector<FPixel*>::iterator it = src->begin(); it != src->end(); ++it)
+	{
+		FPixel* current = *it;
+		current->x -= offsetx;
+		current->y -= offsety;
+	}
+
+
+	this->image = new TransparentBitmap(width, height, 0x00b1f4b1);
+
+	for (std::vector<FPixel*>::iterator it = src->begin(); it != src->end(); ++it)
+	{
+		FPixel* current = *it;
+		int i = current->y * width + current->x;
+		this->image->datagroup->data[i] = current->color;
+	}
+
+
 }

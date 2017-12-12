@@ -34,9 +34,9 @@ void PixelContainer::Draw(Interface * out, int fx, int fy)
 
 }
 
-FFPixel * PixelContainer::getFirstRawPixel()
+FFPixel * PixelContainer::GetNextSpritePixel()
 {
-	for (int i = lastpos; i < gpixelcount(); i++) {
+	for (int i = lastpos; i < get_pixelcount(); i++) {
 		if (!(pixels[i]->state & pxstate::skip)) {
 			lastpos = i;
 			return pixels[i];
@@ -48,27 +48,22 @@ FFPixel * PixelContainer::getFirstRawPixel()
 
 
 
-FFPixel* PixelContainer::GetStalled() {
-	if (stalledPixels.size() > 0) {
-		FFPixel* result = stalledPixels.back();
-		stalledPixels.pop_back();
-		return result;
-	}
-	
-	return nullptr;
-}
+vector<FPixel*>* PixelContainer::GetGroupFrom(FFPixel* pixel) {
+	if (!pixel) return nullptr;
 
-
-
-vector<FPixel*>* PixelContainer::ProcessGroup(FFPixel* pixel) {
-	
 	this->CheckPixel(pixel);
 
 	while (stalledPixels.size() > 0) {
-		this->CheckPixel(this->GetStalled());
+		FFPixel* result = stalledPixels.back();
+		stalledPixels.pop_back();
+		this->CheckPixel(result);
 	}
 
-	vector<FPixel*>* result = new vector<FPixel*>;
+	vector<FPixel*>* result = nullptr;
+
+	if (temp_checks.size() > 0) {
+		result = new vector<FPixel*>;
+	}
 
 	for (std::vector<FFPixel*>::iterator it = temp_checks.begin(); it != temp_checks.end(); ++it)
 	{
@@ -81,6 +76,11 @@ vector<FPixel*>* PixelContainer::ProcessGroup(FFPixel* pixel) {
 	temp_checks.clear();
 
 	return result;
+}
+
+vector<FPixel*>* PixelContainer::GetNextSpriteGroup()
+{
+	return GetGroupFrom(GetNextSpritePixel());
 }
 
 
@@ -104,21 +104,21 @@ FFPixel * PixelContainer::getPixelAt(int x, int y)
 
 
 void PixelContainer::CheckPixel(FFPixel* pixel) {
-	
 	if (pixel->state & pxstate::skip) {
 		return;
 	}
 
 	pixel->state |= pxstate::checked;
 
-	FFPixel* neighbors[4] = {
+	const int neighborcount= 4;
+	FFPixel* neighbors[neighborcount] = {
 		getPixelAt(pixel->x - 1, pixel->y),
 		getPixelAt(pixel->x + 1, pixel->y),
 		getPixelAt(pixel->x, pixel->y - 1),
 		getPixelAt(pixel->x, pixel->y + 1)
 	};
 
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < neighborcount; i++) {
 		if (!neighbors[i]) { continue; }
 
 		if (!(neighbors[i]->state & pxstate::skip)) {
@@ -132,7 +132,7 @@ void PixelContainer::CheckPixel(FFPixel* pixel) {
 }
 
 
-constexpr int PixelContainer::gpixelcount()
+constexpr int PixelContainer::get_pixelcount()
 {
 	return width * height;
 }
@@ -141,15 +141,15 @@ void PixelContainer::Load(Bitmap * bmp)
 {
 	this->width = bmp->datagroup->width;
 	this->height = bmp->datagroup->height;
-	this->pixels = new FFPixel*[gpixelcount()];
+	this->pixels = new FFPixel*[get_pixelcount()];
 
 
 	for (int y = 0; y < this->height; y++) {
 		for (int x = 0; x < this->width; x++) {
 			int i = y*width + x;
 			Color c = bmp->datagroup->data[i];
-			int state = 0;
 
+			int state = 0;
 			if (bmp->IsColorTransparent(c)) {
 				state |= pxstate::background;
 			}

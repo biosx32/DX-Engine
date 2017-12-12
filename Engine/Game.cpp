@@ -51,16 +51,15 @@ PixelContainer container;
 
 
 VectorBitmap jj;
+
+
+int idx=0;
 void Game::Initialise() {
 	out.set_graphics(&gfx);
 	container.Load(&SpriteImage);
-	std::vector<FPixel*>* test = new std::vector<FPixel*>;
 
-
-	FFPixel* first = container.getFirstRawPixel();
-	if (first) {
-		jj.Load(container.ProcessGroup(first));
-	}
+	jj.Load(container.GetNextSpriteGroup());
+	
 
 	/*while (container.getFirstRawPixel() != nullptr) {
 		container.CheckPixel(container.getFirstRawPixel());
@@ -78,16 +77,18 @@ Label framecounter(&sh);
 
 void Game::ComposeFrame()
 {
-	out.DrawLabel(0, 
-		gfx.ScreenHeight - framecounter.sprite_sheet->datagroup->data[0]->image->datagroup->height, &framecounter);
+	out.DrawLabel(0,  gfx.ScreenHeight - framecounter.sprite_sheet->datagroup->data[0]->image->datagroup->height, &framecounter);
 	out.Draw_Bitmap(&jj, 0, 0);
 }
 
 
 void Game::UpdateModel()
 {
-	
-	
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) {
+		jj.Load(container.GetNextSpriteGroup());
+		
+	}
+
 	framecounter.setText(getFrameNumber());
 }
 

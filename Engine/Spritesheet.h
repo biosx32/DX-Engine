@@ -7,6 +7,7 @@
 class Sprite {
 public:
 	Sprite(TransparentBitmap* TBmp);
+	Sprite(vector<FPixel*>* src);
 	TransparentBitmap* image = nullptr;
 };
 
@@ -17,6 +18,7 @@ public:
 	int wcount, hcount, spritecount;
 	Sprite** data = nullptr;
 	void Load(TransparentBitmap* BitmapImage, int wcount, int hcount);
+	void Load(vector<FPixel*>* src);
 
 };
 
@@ -28,7 +30,7 @@ public:
 
 	SpritesheetDG* datagroup = nullptr;
 
-	void Load(TransparentBitmap* BitmapImage, int wcount, int hcount);
+	void Load(TransparentBitmap* BitmapImage, int wcount, int hcount)
 	void RemoveSpriteData();
 };
 
