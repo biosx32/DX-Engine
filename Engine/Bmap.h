@@ -72,15 +72,14 @@ public:
 class VectorBitmapDS {
 public:
 
-	VectorBitmapDS();
-	VectorBitmapDS(std::vector<FPixel*>* src);
+	VectorBitmapDS(int width, int height);
 	~VectorBitmapDS();
-	int width, height;
+
+	int width;
+	int height;
 	std::vector<FPixel*>* pixels;
 
-	void UpdateWH(); //update width and height variables
-
-	int size();
+	int Get_pixelcount();
 	
 };
 
@@ -90,6 +89,8 @@ public:
 	~VectorBitmap();
 	VectorBitmap();
 	VectorBitmap(std::vector<FPixel*>* src);
+	void Load(std::vector<FPixel*>* src);
+	
 };
 
 

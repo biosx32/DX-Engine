@@ -54,6 +54,22 @@ VectorBitmap jj;
 void Game::Initialise() {
 	out.set_graphics(&gfx);
 	container.Load(&SpriteImage);
+	std::vector<FPixel*>* test = new std::vector<FPixel*>;
+
+
+	for (int i = 0; i < 255; i++) {
+
+		for (int q = 0; q < 25; q++) {
+			test->push_back(new FPixel(300 + i, 300 + i + q, Colors::Red));
+		}
+
+	}
+	//jj.datagroup->width = 255;
+	//jj.datagroup->height = 280;
+
+	jj.Load(test);
+
+
 
 	/*while (container.getFirstRawPixel() != nullptr) {
 		container.CheckPixel(container.getFirstRawPixel());
@@ -61,15 +77,7 @@ void Game::Initialise() {
 		
 	}*/
 
-	for (int i = 0; i < 255; i++) {
-
-		for (int q = 0; q < 25; q++) {
-			jj.datagroup->pixels->push_back(new FPixel(i, i+q, Colors::Red));
-		}
 	
-	}
-	jj.datagroup->width = 255;
-	jj.datagroup->height = 280;
 	
 }
 
@@ -80,11 +88,10 @@ int frames = 0;
 
 void Game::ComposeFrame()
 {
-	out.Draw_Bitmap(&jj, 0, 0);
-	out.Draw_Bitmap(&jj, 0, 0, FLIP_HORIZONTALLY);
 	out.DrawLabel(0, 0, &framecounter);
-
+	out.Draw_Bitmap(&jj, 0, 0);
 }
+
 
 void Game::UpdateModel()
 {

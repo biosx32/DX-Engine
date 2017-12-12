@@ -178,14 +178,12 @@ FPixel::FPixel(int x, int y, Color c)
 	this->x = x; this->y = y; this->color = c;
 }
 
-VectorBitmapDS::VectorBitmapDS()
-{
-	this->pixels = new std::vector<FPixel*>;
-}
 
-VectorBitmapDS::VectorBitmapDS(std::vector<FPixel*>* src)
+VectorBitmapDS::VectorBitmapDS(int width, int height)
 {
-	this->pixels = new std::vector<FPixel*>(*src);
+	this->width = width;
+	this->height = height;
+	this->pixels = new std::vector<FPixel*>;
 }
 
 VectorBitmapDS::~VectorBitmapDS()
@@ -198,7 +196,7 @@ VectorBitmapDS::~VectorBitmapDS()
 	pixels = nullptr;
 }
 
-int VectorBitmapDS::size()
+int VectorBitmapDS::Get_pixelcount()
 {
 	return this->pixels->size();
 }
@@ -218,10 +216,45 @@ VectorBitmap::~VectorBitmap()
 
 VectorBitmap::VectorBitmap()
 {
-	this->datagroup = new VectorBitmapDS();
 }
 
 VectorBitmap::VectorBitmap(std::vector<FPixel*>* src)
 {
-	this->datagroup = new VectorBitmapDS(src);
+	this->Load(src);
+}
+
+void VectorBitmap::Load(std::vector<FPixel*>* src)
+{
+	int width = 0;
+	int height = 0;
+	int min_x, min_y, max_x, max_y;
+
+	max_x = min_x = (*src->begin())->x;
+	max_y = min_y = (*src->begin())->y;
+
+
+	for (std::vector<FPixel*>::iterator it = src->begin(); it != src->end(); ++it)
+	{
+		FPixel* current = *it;
+		if (current->x < min_x) {
+			min_x = current->x;
+		}
+		else if (current->x > max_x) {
+			max_x = current->x;
+		}
+
+		if (current->y < min_y) {
+			min_y = current->y;
+		}
+
+		else if (current->y > max_y) {
+			max_y = current->y;
+		}
+	}
+
+	width = max_x - min_x;
+	height = max_y - min_y;
+
+	this->datagroup = new VectorBitmapDS(width, height);
+	this->datagroup->pixels = src;
 }
