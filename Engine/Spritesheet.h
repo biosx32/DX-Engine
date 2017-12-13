@@ -8,7 +8,7 @@ class Sprite {
 public:
 	Sprite(TransparentBitmap* TBmp);
 	Sprite(vector<FPixel*>* src);
-	TransparentBitmap* image = nullptr;
+	vector<FPixel*>* data;
 };
 
 class SpritesheetDG {

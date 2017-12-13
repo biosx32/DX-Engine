@@ -103,21 +103,15 @@ void SpritesheetDG::Load(vector<FPixel*>* src)
 	this->datagroup->pixels = src;
 }
 
-Sprite::Sprite(TransparentBitmap * TBmp)
+void Sprite::Normalise()
 {
-	this->image = TBmp;
-}
-
-Sprite::Sprite(vector<FPixel*>* src)
-{
-
 	int width, height, min_x, min_y, max_x, max_y;
 
-	max_x = min_x = (*src->begin())->x;
-	max_y = min_y = (*src->begin())->y;
+	max_x = min_x = (*this->data->begin())->x;
+	max_y = min_y = (*this->data->begin())->y;
 
 
-	for (std::vector<FPixel*>::iterator it = src->begin(); it != src->end(); ++it)
+	for (std::vector<FPixel*>::iterator it = data->begin(); it != data->end(); ++it)
 	{
 		FPixel* current = *it;
 		FPixel* current = *it;
@@ -149,16 +143,35 @@ Sprite::Sprite(vector<FPixel*>* src)
 		current->x -= offsetx;
 		current->y -= offsety;
 	}
+}
 
+Sprite::Sprite(TransparentBitmap * Bmp)
+{
+	int width = Bmp->datagroup->width;
+	int height = Bmp->datagroup->height;
 
-	this->image = new TransparentBitmap(width, height, 0x00b1f4b1);
+	for (int yoff = 0; yoff < height; yoff++) {
+		for (int xoff = 0; xoff < width; xoff++) {
+
+			Color READ_COLOR = Bmp->datagroup->data[yoff* width + xoff];
+
+			if (!Bmp->IsColorTransparent(READ_COLOR)) {
+				data->push_back(new FPixel(xoff, yoff, READ_COLOR));
+			}
+		}
+	}
+
+	this->Normalise();
+}
+
+Sprite::Sprite(vector<FPixel*>* src)
+{
 
 	for (std::vector<FPixel*>::iterator it = src->begin(); it != src->end(); ++it)
 	{
 		FPixel* current = *it;
-		int i = current->y * width + current->x;
-		this->image->datagroup->data[i] = current->color;
+		this->data->push_back(current);
 	}
 
-
+	this->Normalise();
 }
