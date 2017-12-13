@@ -10,12 +10,13 @@ using std::vector;
 
 class PixelContainer {
 protected:
+	int get_pixelcount() { return width * height; }
+	int lastpos = 0;
+	FFPixel ** pixels;
 	vector<FFPixel*> stalledPixels;
 	vector<FFPixel*> temp_checks;
-	FFPixel** pixels;
 
-	int lastpos = 0;
-	int get_pixelcount() { return width * height; }
+protected:
 	
 	FFPixel * getPixelAt(int x, int y);
 	FFPixel* GetNextSpritePixel();

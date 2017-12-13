@@ -18,7 +18,7 @@ Label::Label(Spritesheet * sh)
 }
 
 
-Sprite * Label::Get_Bitmap_Char(unsigned int c)
+VectorBitmap * Label::Get_Bitmap_Char(unsigned int c)
 {
 	int max = sizeof(translate) / sizeof(char);
 	int index = translate[c%max];

@@ -70,20 +70,18 @@ void Game::Initialise() {
 Label j(&sh);
 Label framecounter(&sh);
 
-
+Spritesheet* p;
 void Game::ComposeFrame()
 {
-	out.DrawLabel(0,  gfx.ScreenHeight - framecounter.sprite_sheet->sprites[0]->height, &framecounter);
-	out.Draw_Bitmap(&jj, 0, 0);
+	out.DrawLabel(0,  0, &framecounter);
+
+	
 }
 
 
 void Game::UpdateModel()
 {
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) {
-		jj.Load(container.GetNextSpriteGroup());
-		
-	}
+
 
 	framecounter.setText(getFrameNumber());
 }

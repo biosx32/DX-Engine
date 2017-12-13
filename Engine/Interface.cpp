@@ -29,7 +29,7 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 	for (char* data = &label->text[0]; *data != 0; data++) {
 		unsigned char udata = (unsigned char) *data;
 
-		Bitmap* BitmapChar = label->Get_Bitmap_Char(udata);
+		VectorBitmap* BitmapChar = label->Get_Bitmap_Char(udata);
 		char_width = BitmapChar->width;
 
 		if (*(data - 1) == '\n') {
@@ -125,14 +125,14 @@ void Interface::Draw_Bitmap(VectorBitmap * VBmp, int fx, int fy, int MODIF)
 
 void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 {
-	Color old = this->DrawShape->brush;
+	/*Color old = this->DrawShape->brush;
 	this->DrawShape->SetBrushColor(Colors::Red);
 
 	int sprw = sh->sprites[0]->width;
 	int sprh = sh->sprites[0]->height;
 
 	REIMPLEMENT TODO
-	/*
+	
 	for (int y = 0; y < sh->datagroup->hcount; y++) {
 		for (int x = 0; x < sh->datagroup->wcount; x++) {
 			int i = y * sh->datagroup->wcount + x;
@@ -145,8 +145,8 @@ void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 			this->DrawShape->FastVLine(xoff + xdst, yoff + ydst, sprw+1);
 		}
 	}
-	*/
-	this->DrawShape->SetBrushColor(old);
+	
+	this->DrawShape->SetBrushColor(old);*/
 }
 
 void Interface::DrawPixelM(int xoff, int yoff, Color c)

@@ -15,9 +15,20 @@ Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 	return newBitmap;
 }
 
+void Bitmap::Load(int width, int height, Color bkclr)
+{
+	this->width = width;
+	this->height = height;
+	this->bkclr = bkclr;
+	this->data = new Color[pixelcount()];
+	for (int i = 0; i < pixelcount(); i++) {
+		this->data[i] = this->bkclr;
+	}
+}
+
 void Bitmap::Load(char * FileName)
 {
-	Color temp_color = Color();
+	int temp_color;
 	int width, height;
 	char Header[54] = {};
 	unsigned char temp[3] = {};
@@ -46,7 +57,7 @@ void Bitmap::Load(char * FileName)
 		rotation_correct = 1;
 	}
 
-	Bitmap(width, height, 0x00);
+	this->Load(width, height, 0x00);
 
 	bitmap_align_bytes = width % 4;
 	size_line = width * 3;
@@ -58,7 +69,7 @@ void Bitmap::Load(char * FileName)
 
 		for (int j = 0; j < width; j++) {
 			unsigned char* datachar = &linedata[j * 3];
-			temp_color = Color(*(2 + datachar), *(1 + datachar), *(0 + datachar));
+			temp_color = Color(*(2 + datachar), *(1 + datachar), *(0 + datachar)).dword;
 			this->data[i * width + j] = temp_color;
 		}
 
@@ -78,7 +89,7 @@ void Bitmap::Load(char * FileName)
 	// if wrong rotaiton, then rotate
 	for (int y = 0; y <= height / 2; y++) {
 		for (int x = 0; x < width; x++) {
-			temp_color = data[(y)* width + x];
+			temp_color = data[(y)* width + x].dword;
 			data[(y)* width + x] = data[((height-1)-y)* width + x];
 			data[((height - 1) - y)* width + x] = temp_color;
 		}
@@ -92,13 +103,7 @@ void Bitmap::Load(char * FileName)
 
 Bitmap::Bitmap(int width, int height, Color bkclr)
 {
-	this->width = width;
-	this->height = height;
-	this->bkclr = bkclr;
-	this->data = new Color[pixelcount()];
-	for (int i = 0; i < pixelcount(); i++) {
-		this->data[i] = this->bkclr;
-	}
+	this->Load(width, height, bkclr);
 }
 
 

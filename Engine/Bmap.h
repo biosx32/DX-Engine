@@ -32,6 +32,9 @@ public:
 
 
 class Bitmap {
+protected:
+	void Load(int width, int height, Color bkclr);
+	void Load(char* FileName);
 public:
 	int width, height;
 	Color bkclr, *data;
@@ -42,7 +45,7 @@ public:
 	Bitmap(int width, int height, Color bkclr);
 	~Bitmap() { delete[] this->data; }
 
-	void Load(char* FileName);
+
 public: 
 	virtual bool IsColorTransparent(Color color) { return 0; }
 	virtual Bitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT);
