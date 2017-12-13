@@ -15,7 +15,7 @@ protected:
 	FFPixel** pixels;
 
 	int lastpos = 0;
-	int constexpr get_pixelcount() { return width * height; }
+	int get_pixelcount() { return width * height; }
 	
 	FFPixel * getPixelAt(int x, int y);
 	FFPixel* GetNextSpritePixel();

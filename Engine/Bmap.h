@@ -64,12 +64,14 @@ public:
 
 
 class VectorBitmap {
+
 protected:
 	void Normalise();
+	int offx, offy;
 
 public:
-	int width, height, offx, offy;
-	std::vector<FPixel*>* pixels;
+	int width, height;
+	std::vector<FPixel*> pixels;
 
 public:
 	VectorBitmap(vector<FPixel*>* src) {this->Load(src);}

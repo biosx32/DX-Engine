@@ -18,11 +18,11 @@ Label::Label(Spritesheet * sh)
 }
 
 
-TransparentBitmap * Label::Get_Bitmap_Char(unsigned int c)
+Sprite * Label::Get_Bitmap_Char(unsigned int c)
 {
 	int max = sizeof(translate) / sizeof(char);
 	int index = translate[c%max];
-	return this->sprite_sheet->datagroup->data[index]->image;
+	return this->sprite_sheet->sprites[index];
 }
 
 void Label::setText(char* text) {

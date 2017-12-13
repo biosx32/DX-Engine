@@ -18,7 +18,7 @@ void Animation::Load(float FPS, Spritesheet * sh)
 {
 	this->spritesheet = sh;
 	this->FPS = FPS;
-	this->endFrame = sh->datagroup->spritecount - 1;
+	this->endFrame = sh->sprites.size() - 1;
 
 }
 
@@ -55,5 +55,5 @@ void Animation::Step()
 
 Sprite * Animation::GetCurrent()
 {
-	return spritesheet->datagroup->data[currentFrame];
+	return spritesheet->sprites[currentFrame];
 }

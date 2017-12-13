@@ -132,22 +132,17 @@ void PixelContainer::CheckPixel(FFPixel* pixel) {
 }
 
 
-constexpr int PixelContainer::get_pixelcount()
-{
-	return width * height;
-}
-
 void PixelContainer::Load(Bitmap * bmp)
 {
-	this->width = bmp->datagroup->width;
-	this->height = bmp->datagroup->height;
+	this->width = bmp->width;
+	this->height = bmp->height;
 	this->pixels = new FFPixel*[get_pixelcount()];
 
 
 	for (int y = 0; y < this->height; y++) {
 		for (int x = 0; x < this->width; x++) {
 			int i = y*width + x;
-			Color c = bmp->datagroup->data[i];
+			Color c = bmp->data[i];
 
 			int state = 0;
 			if (bmp->IsColorTransparent(c)) {

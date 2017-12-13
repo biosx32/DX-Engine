@@ -4,42 +4,18 @@
 #include "Interface.h"
 
 
-class Sprite {
-protected:
-	void Normalise();
-public:
-	Sprite(TransparentBitmap* Bmp);
-	Sprite(vector<FPixel*>* src);
-	vector<FPixel*>* data;
-};
-
-class SpritesheetDG {
-public:
-	~SpritesheetDG();
-
-	int spritecount;
-	vector<Sprite*>* data = nullptr;
-	;; TODO: vector sprites : Loading by converting bitmap to vector bitmap or
-		;; only using floodfill
-		;; should sprite be vector or transparentbitmap
-	void Load(TransparentBitmap* BitmapImage, int wcount, int hcount);
-	void Load(vector<FPixel*>* src);
+class Sprite: public VectorBitmap {
 
 };
 
-class Spritesheet {
+
+
+class Spritesheet{
 public:
-	Spritesheet();
-	Spritesheet(TransparentBitmap* BitmapImage, int wcount, int hcount);
+	Spritesheet(TransparentBitmap* BitmapImage);
 	~Spritesheet();
-
-	SpritesheetDG* datagroup = nullptr;
-
-	void Load(TransparentBitmap* BitmapImage, int wcount, int hcount)
-	void RemoveSpriteData();
+	vector<Sprite*> sprites;
 };
-
-
 
 
 

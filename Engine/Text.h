@@ -13,7 +13,7 @@ public:
 	char text[txmax];
 	Spritesheet* sprite_sheet = nullptr;
 
-	TransparentBitmap* Get_Bitmap_Char(unsigned int c);
+	Sprite* Get_Bitmap_Char(unsigned int c);
 	void setText(char* text);
 	int Load(Spritesheet* sh);
 

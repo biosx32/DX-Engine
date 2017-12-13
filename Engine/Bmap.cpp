@@ -22,8 +22,7 @@ void Bitmap::Load(char * FileName)
 	char Header[54] = {};
 	unsigned char temp[3] = {};
 	int bitmap_align_bytes, size_line;
-
-	int rotation_correct = 0;
+    int rotation_correct = 0;
 
 	FILE* file_read;
 	fopen_s(&file_read, FileName, "rb");
@@ -47,44 +46,45 @@ void Bitmap::Load(char * FileName)
 		rotation_correct = 1;
 	}
 
-
 	Bitmap(width, height, 0x00);
 
 	bitmap_align_bytes = width % 4;
 	size_line = width * 3;
 
 	unsigned char * linedata = new unsigned char[size_line];
+
 	for (int i = 0; i < height; i++) {
 		fread_s((void*) linedata, size_line, 1, size_line, file_read);
+
+		for (int j = 0; j < width; j++) {
+			unsigned char* datachar = &linedata[j * 3];
+			temp_color = Color(*(2 + datachar), *(1 + datachar), *(0 + datachar));
+			this->data[i * width + j] = temp_color;
+		}
 
 		if (bitmap_align_bytes) {
 			fread_s(&temp, bitmap_align_bytes, 1, bitmap_align_bytes, file_read);
 		}
 		
-		for (int j = 0; j < width; j++) {
-			unsigned char* datachar = &linedata[j * 3];
-			temp_color = Color(*(2 + datachar) ,*(1 + datachar) , *(0 + datachar));
-			this->data[i * width + j] = temp_color;
-		}
+
 	}
 
 	fclose(file_read);
 
-	if (rotation_correct == 0) {
-
-		for (int y = 0; y <= height / 2; y++) {
-			for (int x = 0; x < width; x++) {
-				
-				temp_color = data[(y)* width + x];
-				data[(y)* width + x] = data[((height-1)-y)* width + x];
-				data[((height - 1) - y)* width + x] = temp_color;
-
-
-			}
-
-		}
-		
+	if (rotation_correct) {
+		return;
 	}
+
+	// if wrong rotaiton, then rotate
+	for (int y = 0; y <= height / 2; y++) {
+		for (int x = 0; x < width; x++) {
+			temp_color = data[(y)* width + x];
+			data[(y)* width + x] = data[((height-1)-y)* width + x];
+			data[((height - 1) - y)* width + x] = temp_color;
+		}
+	}
+		
+	
 
 }
 
@@ -96,36 +96,27 @@ Bitmap::Bitmap(int width, int height, Color bkclr)
 	this->height = height;
 	this->bkclr = bkclr;
 	this->data = new Color[pixelcount()];
-
 	for (int i = 0; i < pixelcount(); i++) {
 		this->data[i] = this->bkclr;
 	}
-
 }
 
 
 bool TransparentBitmap::IsColorTransparent(Color color)
 {
-	int dword = color.dword;
+	int r1, g1, b1, r2, g2, b2, temp, distance, percentage,
+	const range = pow(255, 2) + pow(255, 2) + pow(255, 2); 
 
-	int r1 = (dword >> 16u) & 0xFFu;
-	int g1 = (dword >> 8u) & 0xFFu;
-	int b1 = dword & 0xFFu;
+	temp = color.dword;
+	r1 = (temp >> 16u) & 0xFFu; g1 = (temp >> 8u) & 0xFFu; b1 = (temp) & 0xFFu;
 
-	dword = bkclr.dword;
+	temp = bkclr.dword;
+	r2 = (temp >> 16u) & 0xFFu; g2 = (temp >> 8u) & 0xFFu; b2 = (temp) & 0xFFu;
 
-	int r2 = (dword >> 16u) & 0xFFu;
-	int g2 = (dword >> 8u) & 0xFFu;
-	int b2 = dword & 0xFFu;
+	distance = (r2 - r1) *  (r2 - r1) + (g2 - g1) *  (g2 - g1) + (b2 - b1) *  (b2 - b1);
+	percentage = distance / range;
 
-	double distance = (r2 - r1) *  (r2 - r1) + (g2 - g1) *  (g2 - g1) + (b2 - b1) *  (b2 - b1);
-	double const range = pow(255, 2) + pow(255, 2) + pow(255, 2);
-	double percentage = distance / range;
-
-	if (percentage < tolerance) {
-		return 1;
-	}
-	return 0;
+	return percentage < tolerance;
 }
 
 
@@ -142,16 +133,13 @@ VectorBitmap::VectorBitmap(TransparentBitmap * src)
 {
 	vector<FPixel*>* created = new vector<FPixel*>;
 
-	int width = src->width;
-	int height = src->height;
-
-	for (int yoff = 0; yoff < height; yoff++) {
-		for (int xoff = 0; xoff < width; xoff++) {
+	for (int yoff = 0; yoff < src->height; yoff++) {
+		for (int xoff = 0; xoff < src->width; xoff++) {
 
 			Color READ_COLOR = src->data[yoff* width + xoff];
 
 			if (!src->IsColorTransparent(READ_COLOR)) {
-				pixels->push_back(new FPixel(xoff, yoff, READ_COLOR));
+				pixels.push_back(new FPixel(xoff, yoff, READ_COLOR));
 			}
 		}
 	}
@@ -161,23 +149,21 @@ VectorBitmap::VectorBitmap(TransparentBitmap * src)
 
 VectorBitmap::~VectorBitmap()
 {
-	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
+	for (std::vector<FPixel*>::iterator it = pixels.begin(); it != pixels.end(); ++it)
 	{
 		delete *it;
 	}
-	delete this->pixels;
-	pixels = nullptr;
 }
 
 void VectorBitmap::Normalise()
 {
 	int min_x, min_y, max_x, max_y;
 
-	max_x = min_x = (*this->pixels->begin())->x;
-	max_y = min_y = (*this->pixels->begin())->y;
+	max_x = min_x = (*this->pixels.begin())->x;
+	max_y = min_y = (*this->pixels.begin())->y;
 
 
-	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
+	for (std::vector<FPixel*>::iterator it = pixels.begin(); it != pixels.end(); ++it)
 	{
 		FPixel* current = *it;
 		if (current->x < min_x) {
@@ -202,7 +188,7 @@ void VectorBitmap::Normalise()
 	int offx = min_x;
 	int offy = min_y;
 
-	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
+	for (std::vector<FPixel*>::iterator it = pixels.begin(); it != pixels.end(); ++it)
 	{
 		FPixel* current = *it;
 		current->x -= offx;
@@ -214,7 +200,7 @@ void VectorBitmap::Normalise()
 
 void VectorBitmap::Load(vector<FPixel*>* src)
 {
-	this->pixels = src;
+	this->pixels = vector<FPixel*>(*src);
 	this->Normalise();
 }
 

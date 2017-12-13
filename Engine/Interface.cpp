@@ -22,15 +22,15 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 
 
 
-	int char_width = label->Get_Bitmap_Char(0)->datagroup->width;
-	int char_height = label->Get_Bitmap_Char(0)->datagroup->height;
+	int char_width = label->Get_Bitmap_Char(0)->width;
+	int char_height = label->Get_Bitmap_Char(0)->height;
 
 
 	for (char* data = &label->text[0]; *data != 0; data++) {
 		unsigned char udata = (unsigned char) *data;
 
 		Bitmap* BitmapChar = label->Get_Bitmap_Char(udata);
-		char_width = BitmapChar->datagroup->width;
+		char_width = BitmapChar->width;
 
 		if (*(data - 1) == '\n') {
 			rel_pos_y += char_height;
@@ -91,15 +91,15 @@ void Interface::DrawPixelSpecial(int xoff, int yoff, Color c, int MODIF, int wid
 
 void Interface::Draw_Bitmap(Bitmap * Bmp, int fx, int fy, int MODIF)
 {
-	int width = Bmp->datagroup->width;
-	int height = Bmp->datagroup->height;
+	int width = Bmp->width;
+	int height = Bmp->height;
 
-	for (int yoff = 0; yoff < Bmp->datagroup->height; yoff++) {
-		for (int xoff = 0; xoff < Bmp->datagroup->width; xoff++) {
+	for (int yoff = 0; yoff < Bmp->height; yoff++) {
+		for (int xoff = 0; xoff < Bmp->width; xoff++) {
 			
 			int finalx = fx + xoff;
 			int finaly = fy + yoff;
-			Color READ_COLOR = Bmp->datagroup->data[yoff* width + xoff];
+			Color READ_COLOR = Bmp->data[yoff* width + xoff];
 
 			if (!Bmp->IsColorTransparent(READ_COLOR)) {
 				DrawPixelSpecial(finalx, finaly, READ_COLOR, MODIF, width, height);
@@ -115,9 +115,9 @@ void Interface::Draw_Bitmap(VectorBitmap * VBmp, int fx, int fy)
 
 void Interface::Draw_Bitmap(VectorBitmap * VBmp, int fx, int fy, int MODIF)
 {
-	for (std::vector<FPixel*>::iterator it = VBmp->datagroup->pixels->begin(); it != VBmp->datagroup->pixels->end(); ++it) {
-		int width = VBmp->datagroup->width;
-		int height = VBmp->datagroup->height;
+	for (std::vector<FPixel*>::iterator it = VBmp->pixels.begin(); it != VBmp->pixels.end(); ++it) {
+		int width = VBmp->width;
+		int height = VBmp->height;
 
 		this->DrawPixelSpecial(fx + (*it)->x, fy + (*it)->y, (*it)->color, MODIF, width, height);
 	}
@@ -128,9 +128,11 @@ void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 	Color old = this->DrawShape->brush;
 	this->DrawShape->SetBrushColor(Colors::Red);
 
-	int sprw = sh->datagroup->data[0]->image->datagroup->width;
-	int sprh = sh->datagroup->data[0]->image->datagroup->height;
+	int sprw = sh->sprites[0]->width;
+	int sprh = sh->sprites[0]->height;
 
+	REIMPLEMENT TODO
+	/*
 	for (int y = 0; y < sh->datagroup->hcount; y++) {
 		for (int x = 0; x < sh->datagroup->wcount; x++) {
 			int i = y * sh->datagroup->wcount + x;
@@ -143,7 +145,7 @@ void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 			this->DrawShape->FastVLine(xoff + xdst, yoff + ydst, sprw+1);
 		}
 	}
-
+	*/
 	this->DrawShape->SetBrushColor(old);
 }
 

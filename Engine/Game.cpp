@@ -40,7 +40,7 @@ void Game::Go()
 
 
 TransparentBitmap img("FONT\\small.bmp");
-Spritesheet sh(&img, 16, 16);
+Spritesheet sh(&img);
 
 
 
@@ -49,16 +49,12 @@ PixelContainer container;
 
 
 
-
-VectorBitmap jj;
-
-
 int idx=0;
 void Game::Initialise() {
 	out.set_graphics(&gfx);
 	container.Load(&SpriteImage);
 
-	jj.Load(container.GetNextSpriteGroup());
+
 	
 
 	/*while (container.getFirstRawPixel() != nullptr) {
@@ -77,7 +73,7 @@ Label framecounter(&sh);
 
 void Game::ComposeFrame()
 {
-	out.DrawLabel(0,  gfx.ScreenHeight - framecounter.sprite_sheet->datagroup->data[0]->image->datagroup->height, &framecounter);
+	out.DrawLabel(0,  gfx.ScreenHeight - framecounter.sprite_sheet->sprites[0]->height, &framecounter);
 	out.Draw_Bitmap(&jj, 0, 0);
 }
 
