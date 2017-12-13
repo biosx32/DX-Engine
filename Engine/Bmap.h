@@ -20,53 +20,42 @@ class FPixel {
 public:
 	int x, y;
 	Color color;
-	FPixel(int x, int y, Color c);
+	FPixel(int x, int y, Color c): x(x), y(y), color(c) {}
 };
 
 
 class FFPixel: public FPixel {
 public:
 	int state;
-	FFPixel(int x, int y, Color c, int state);
+	FFPixel(int x, int y, Color c, int state): FPixel(x,y,c), state(state) {}
 };
-
-
-
-
-class BitmapDS {
-public:
-	
-	BitmapDS(int width, int height);
-	~BitmapDS();
-	int width = 0, height = 0, pixelcount = 0;
-	Color * data;
-};
-
 
 
 class Bitmap {
 public:
-	Bitmap();
-	Bitmap(char* FileName);
-	Bitmap(int width, int height);
-	~Bitmap();
+	int width, height;
+	Color bkclr, *data;
+	int constexpr pixelcount() { return width * height; }
 
-	BitmapDS* datagroup = nullptr;
+public:
+	Bitmap(char* FileName) { this->Load(FileName); }
+	Bitmap(int width, int height, Color bkclr);
+	~Bitmap() { delete[] this->data; }
 
-	int Load(char* FileName);
+	void Load(char* FileName);
+public: 
 	virtual bool IsColorTransparent(Color color) { return 0; }
 	virtual Bitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT);
 };
 
+
 class TransparentBitmap : public Bitmap {
 public:
-	TransparentBitmap() : Bitmap() {}
+	double tolerance = 0.001f;
+public:
 	TransparentBitmap(Bitmap* bmp) : Bitmap(*bmp) {}
 	TransparentBitmap(char* FileName) : Bitmap(FileName) {}
-	TransparentBitmap(int width, int height, Color transparency);
-
-	double tolerance = 0.001f;
-	Color transparency = 0x00b1f4b1; // 177,244,177
+	TransparentBitmap(int width, int height, Color transp) : Bitmap(width, height, transp) {};
 
 	TransparentBitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT) override;
 	bool IsColorTransparent(Color color) override;
@@ -83,11 +72,10 @@ public:
 	std::vector<FPixel*>* pixels;
 
 public:
-	VectorBitmap(vector<FPixel*>* src);
+	VectorBitmap(vector<FPixel*>* src) {this->Load(src);}
 	VectorBitmap(TransparentBitmap* src);
 	~VectorBitmap();
 
-	
 	void Load(std::vector<FPixel*>* src);
 
 	
