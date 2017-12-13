@@ -73,27 +73,23 @@ public:
 	
 };
 
-class VectorBitmapDS {
-public:
-
-	VectorBitmapDS(int width, int height);
-	~VectorBitmapDS();
-
-	int width;
-	int height;
-	std::vector<FPixel*>* pixels;
-
-	int Get_pixelcount();
-	
-};
 
 class VectorBitmap {
+protected:
+	void Normalise();
+
 public:
-	VectorBitmapDS* datagroup = nullptr;
+	int width, height, offx, offy;
+	std::vector<FPixel*>* pixels;
+
+public:
+	VectorBitmap(vector<FPixel*>* src);
+	VectorBitmap(TransparentBitmap* src);
 	~VectorBitmap();
-	VectorBitmap();
-	VectorBitmap(std::vector<FPixel*>* src);
+
+	
 	void Load(std::vector<FPixel*>* src);
+
 	
 };
 

@@ -5,8 +5,10 @@
 
 
 class Sprite {
+protected:
+	void Normalise();
 public:
-	Sprite(TransparentBitmap* TBmp);
+	Sprite(TransparentBitmap* Bmp);
 	Sprite(vector<FPixel*>* src);
 	vector<FPixel*>* data;
 };

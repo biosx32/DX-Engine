@@ -187,14 +187,44 @@ FPixel::FPixel(int x, int y, Color c)
 }
 
 
-VectorBitmapDS::VectorBitmapDS(int width, int height)
+
+
+
+
+
+FFPixel::FFPixel(int x, int y, Color c, int state): FPixel(x,y,c)
 {
-	this->width = width;
-	this->height = height;
-	this->pixels = new std::vector<FPixel*>;
+	this->state = state;
 }
 
-VectorBitmapDS::~VectorBitmapDS()
+VectorBitmap::VectorBitmap(vector<FPixel*>* src)
+{
+	this->Load(src);
+
+}
+
+VectorBitmap::VectorBitmap(TransparentBitmap * src)
+{
+	vector<FPixel*>* created = new vector<FPixel*>;
+
+	int width = Bmp->datagroup->width;
+	int height = Bmp->datagroup->height;
+
+	for (int yoff = 0; yoff < height; yoff++) {
+		for (int xoff = 0; xoff < width; xoff++) {
+
+			Color READ_COLOR = Bmp->datagroup->data[yoff* width + xoff];
+
+			if (!Bmp->IsColorTransparent(READ_COLOR)) {
+				data->push_back(new FPixel(xoff, yoff, READ_COLOR));
+			}
+		}
+	}
+
+
+}
+
+VectorBitmap::~VectorBitmap()
 {
 	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
 	{
@@ -204,36 +234,54 @@ VectorBitmapDS::~VectorBitmapDS()
 	pixels = nullptr;
 }
 
-int VectorBitmapDS::Get_pixelcount()
+void VectorBitmap::Normalise()
 {
-	return this->pixels->size();
+	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
+	{
+		FPixel* current = *it;
+		current->x -= offx;
+		current->y -= offy;
+	}
+
+	offx = offy = 0;
+}
+
+void VectorBitmap::Load(vector<FPixel*>* src)
+{
+	int min_x, min_y, max_x, max_y;
+
+	this->pixels = new vector<FPixel*>(*src);
+
+	max_x = min_x = (*this->pixels->begin())->x;
+	max_y = min_y = (*this->pixels->begin())->y;
+
+
+	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
+	{
+		FPixel* current = *it;
+		if (current->x < min_x) {
+			min_x = current->x;
+		}
+		else if (current->x > max_x) {
+			max_x = current->x;
+		}
+
+		if (current->y < min_y) {
+			min_y = current->y;
+		}
+
+		else if (current->y > max_y) {
+			max_y = current->y;
+		}
+	}
+
+	this->width = max_x - min_x;
+	this->height = max_y - min_y;
+
+	this->offx = min_x;
+	this->offy = min_y;
+
 }
 
 
-FFPixel::FFPixel(int x, int y, Color c, int state): FPixel(x,y,c)
-{
-	this->state = state;
-}
 
-VectorBitmap::~VectorBitmap()
-{
-	delete datagroup;
-	datagroup = nullptr;
-}
-
-VectorBitmap::VectorBitmap()
-{
-}
-
-VectorBitmap::VectorBitmap(std::vector<FPixel*>* src)
-{
-	this->Load(src);
-}
-
-void VectorBitmap::Load(std::vector<FPixel*>* src)
-{
-
-	delete this->datagroup;
-
-
-}
