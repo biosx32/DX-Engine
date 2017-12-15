@@ -114,8 +114,9 @@ void Game::ComposeFrame()
 void Game::UpdateModel()
 {
 	if (wnd.mouse.LeftIsPressed()) {
-		Sleep(30);
-		jozo = container.GetGroupFrom(container.getPixelAt(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()));
+//		Sleep(30);
+		VectorBitmap* temp = container.GetGroupFrom(container.getPixelAt(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()));;
+		jozo = temp ? temp : jozo;
 	}
 
 	//framecounter.setText(getFrameNumber());
