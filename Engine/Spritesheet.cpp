@@ -5,6 +5,16 @@
 
 Spritesheet::Spritesheet(TransparentBitmap * BitmapImage)
 {
+	PixelContainer* temp = new PixelContainer(BitmapImage);
+	while (1) {
+		VectorBitmap* naw = temp->GetNextSpriteGroup();
+		if (naw == nullptr) {
+			break;
+		}
+		else {
+			this->sprites.push_back(naw);
+		}
+	}
 
 }
 
@@ -30,6 +40,10 @@ FFPixel * PixelContainer::GetNextSpritePixel()
 			}
 		}
 
+		if (lastpos.y > height) {
+			return nullptr;
+		}
+		
 		lastpos.x += gridsize;
 
 		if (!point) {
@@ -53,8 +67,6 @@ VectorBitmap* PixelContainer::GetGroupFrom(FFPixel* pixel) {
 	if (!pixel) return nullptr;
 	this->result_group = new vector<FPixel*>;
 
-	
-	
 	stalledPixels.push_back(pixel);
 
 	while (stalledPixels.size() > 0) {

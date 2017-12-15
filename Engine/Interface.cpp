@@ -17,6 +17,9 @@ void Interface::DrawPixel(int xoff, int yoff, Color c) {
 
 void Interface::DrawLabel(int xoff, int yoff, Label * label)
 {
+
+	if (strlen(label->text) < 1)return;
+
 	double rel_pos_x = 0;
 	double rel_pos_y = 0;
 
@@ -42,7 +45,7 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 			(rel_pos_y + yoff));
 		
 		if (true) {
-			rel_pos_x += char_width * 0.65;
+			rel_pos_x += char_width * 1.65;
 		
 			if (*data >= '0' && *data <= '9') {
 				rel_pos_x += char_width * 0.20;

@@ -106,7 +106,7 @@ void Game::ComposeFrame()
 	out.DrawShape->circle(container.lastpos.x, container.lastpos.y, 15);
 
 
-		//out.DrawLabel(0,  0, &framecounter);
+   out.DrawLabel(0,  0, &framecounter);
 	
 }
 
@@ -119,7 +119,7 @@ void Game::UpdateModel()
 		jozo = temp ? temp : jozo;
 	}
 
-	//framecounter.setText(getFrameNumber());
+	framecounter.setText(getFrameNumber());
 }
 
 
