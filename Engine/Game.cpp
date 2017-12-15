@@ -40,18 +40,18 @@ void Game::Go()
 
 
 TransparentBitmap img("FONT\\small.bmp",Colors::MakeRGB(177, 244, 177));
-Spritesheet sh(&img);
+Spritesheet sh(&img,16,16);
 
 
 
-TransparentBitmap SpriteImage("SPRITESHEET\\sprite3.bmp", Colors::MakeRGB(177, 244, 177));
+TransparentBitmap SpriteImage("FONT\\big.bmp", Colors::MakeRGB(177, 244, 177));
 PixelContainer container(&SpriteImage);
 
 
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
-	
+	out.Draw_Bitmap(&img, 0, 0);
 
 	/*while (container.getFirstRawPixel() != nullptr) {
 		container.CheckPixel(container.getFirstRawPixel());
@@ -63,63 +63,30 @@ void Game::Initialise() {
 	
 }
 
-Label j(&sh);
-Label framecounter(&sh);
-
-Spritesheet* p;
+//Label framecounter(&sh);
 
 FFPixel* tst = nullptr;
 VectorBitmap* jozo = nullptr;
 void Game::ComposeFrame()
 {
 
-	
-	
-	if (jozo) out.Draw_Bitmap(jozo, 550, 0);
-	for (int i = 0; i < container.pixelcount(); i++) {
-		tst = container.pixels[i];
-		if (tst->state & pxstate::background) {
-			out.DrawPixel(tst->x, tst->y, 0x000000);
-		}
-		else if (tst->state & pxstate::checked) {
-			out.DrawPixel(tst->x, tst->y, 0x0000FF);
-		}
-		else {
-			out.DrawPixel(tst->x, tst->y, tst->color);
-		}
-		
-	}
-
-	for (int i = 1; i <= container.width / container.gridsize; i++) {
-		for (int j = 1; j <= container.height / container.gridsize; j++) {
-			int im = i * container.gridsize;
-			int jm = j * container.gridsize;
-			out.DrawPixel(im,   jm +1, Colors::Magenta);
-			out.DrawPixel(im,   jm ,   Colors::Magenta);
-			out.DrawPixel(im+1, jm +1, Colors::Magenta);
-			out.DrawPixel(im+1, jm ,   Colors::Magenta);
-
-		}
-	}
-
-	out.DrawShape->SetBrushColor(Colors::Green);
-	out.DrawShape->circle(container.lastpos.x, container.lastpos.y, 15);
-
-
-   out.DrawLabel(0,  0, &framecounter);
+	out.Draw_Bitmap(&img, 0, 0);
+	if (jozo) out.Draw_Bitmap(jozo, 0, 0);
+ //  out.DrawLabel(0,  0, &framecounter);
 	
 }
 
-
+int sprcnt = 0;
 void Game::UpdateModel()
 {
 	if (wnd.mouse.LeftIsPressed()) {
-//		Sleep(30);
-		VectorBitmap* temp = container.GetGroupFrom(container.getPixelAt(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()));;
-		jozo = temp ? temp : jozo;
+		jozo = sh.sprites[sprcnt];
+		Sleep(30);
+		sprcnt++;
+		sprcnt %= sh.sprites.size();
 	}
 
-	framecounter.setText(getFrameNumber());
+//	framecounter.setText(getFrameNumber());
 }
 
 

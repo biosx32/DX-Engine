@@ -24,6 +24,7 @@ namespace pxstate
 class Spritesheet{
 public:
 	Spritesheet(TransparentBitmap* BitmapImage);
+	Spritesheet(TransparentBitmap* BitmapImage, int wcount, int hcount);
 	~Spritesheet();
 	vector<VectorBitmap*> sprites;
 };

@@ -18,6 +18,26 @@ Spritesheet::Spritesheet(TransparentBitmap * BitmapImage)
 
 }
 
+Spritesheet::Spritesheet(TransparentBitmap * BitmapImage, int wcount, int hcount)
+
+{	
+	float wsize = BitmapImage->width / float(wcount);
+	float hsize = BitmapImage->height / float(hcount);
+
+	for (int hi = 0; hi < hcount; hi++) {
+		for (int wi = 0; wi < wcount; wi++) {
+			int x = wi * wsize;
+			int y = hi * hsize;
+			TransparentBitmap* cutsprite = BitmapImage->GetBitmapPart(x, y, wsize, hsize);
+			VectorBitmap* vbmp = new VectorBitmap(cutsprite);
+			delete cutsprite;
+			this->sprites.push_back(vbmp);
+		}
+	}
+
+
+}
+
 Spritesheet::~Spritesheet() {
 	for (std::vector<VectorBitmap*>::iterator it = sprites.begin(); it != sprites.end(); ++it)
 	{

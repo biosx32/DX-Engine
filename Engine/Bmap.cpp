@@ -129,7 +129,7 @@ bool TransparentBitmap::IsColorTransparent(Color color)
 
 TransparentBitmap * TransparentBitmap::GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT)
 {
-	TransparentBitmap* newBitmap = GetBitmapPart(xoff, yoff, WIDTH, HEIGHT);
+	TransparentBitmap* newBitmap = new TransparentBitmap(Bitmap::GetBitmapPart(xoff, yoff, WIDTH, HEIGHT));
 	newBitmap->tolerance = this->tolerance;
 	return newBitmap;
 }
@@ -140,16 +140,14 @@ VectorBitmap::VectorBitmap(TransparentBitmap * src)
 {
 	this->pixels = new vector<FPixel*>;
 
-	for (int yoff = 0; yoff < src->height; yoff++) {
-		for (int xoff = 0; xoff < src->width; xoff++) {
 
-			int i = yoff * src->width + xoff;
-
-			if (!src->IsColorTransparent(src->data[i])) {
-				pixels->push_back(new FPixel(xoff, yoff, src->data[i]));
-			}
+	for (int i = 0; i < src->pixelcount(); i++) {
+		Color t = src->data[i];
+		if (!src->IsColorTransparent(t)) {
+			pixels->push_back(new FPixel(i % src->width, i / src->width, t));
 		}
 	}
+
 
 	
 	this->Normalise();
@@ -165,7 +163,7 @@ VectorBitmap::~VectorBitmap()
 
 void VectorBitmap::Normalise()
 {
-
+	if (this->pixels->size() < 1) return;
 
 	int min_x, min_y, max_x, max_y;
 
