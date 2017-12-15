@@ -21,7 +21,7 @@ public:
 
 	void ForceStep();
 	void Step();
-	Sprite* GetCurrent();
+	VectorBitmap* GetCurrent();
 
 
 	Spritesheet* spritesheet = nullptr;

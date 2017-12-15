@@ -109,8 +109,10 @@ Bitmap::Bitmap(int width, int height, Color bkclr)
 
 bool TransparentBitmap::IsColorTransparent(Color color)
 {
-	int r1, g1, b1, r2, g2, b2, temp, distance, percentage,
+	int r1, g1, b1, r2, g2, b2, temp,
 	const range = pow(255, 2) + pow(255, 2) + pow(255, 2); 
+
+	double percentage, distance;
 
 	temp = color.dword;
 	r1 = (temp >> 16u) & 0xFFu; g1 = (temp >> 8u) & 0xFFu; b1 = (temp) & 0xFFu;

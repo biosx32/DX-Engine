@@ -53,7 +53,7 @@ void Animation::Step()
 	}
 }
 
-Sprite * Animation::GetCurrent()
+VectorBitmap * Animation::GetCurrent()
 {
 	return spritesheet->sprites[currentFrame];
 }

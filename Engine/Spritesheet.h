@@ -9,7 +9,7 @@ class Spritesheet{
 public:
 	Spritesheet(TransparentBitmap* BitmapImage);
 	~Spritesheet();
-	vector<Sprite*> sprites;
+	vector<VectorBitmap*> sprites;
 };
 
 
@@ -22,25 +22,24 @@ public:
 class PixelContainer {
 protected:
 	int lastpos = 0;
-	int get_pixelcount() { return width * height; }
 
-	FFPixel ** pixels;
+	
 	vector<FFPixel*> stalledPixels;
 	vector<FPixel*>* result_group;
 
 protected:
-	
 	FFPixel* getPixelAt(int x, int y);
-	FFPixel* GetNextSpritePixel();
-	VectorBitmap* GetGroupFrom(FFPixel * pixel);
 	void CheckPixel(FFPixel * pixel);
 
 public:
+	FFPixel ** pixels;
 	int width;
 	int height;
-
+	int get_pixelcount() { return width * height; }
 public:
 	~PixelContainer();
+	FFPixel* GetNextSpritePixel();
+	VectorBitmap* GetGroupFrom(FFPixel * pixel);
 	PixelContainer(TransparentBitmap* bmp);
 	void Load(TransparentBitmap* bmp);
 	VectorBitmap* GetNextSpriteGroup();

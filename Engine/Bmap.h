@@ -47,10 +47,10 @@ public:
 
 class TransparentBitmap : public Bitmap {
 public:
-	double tolerance = 0.001f;
+	double tolerance = 0.00000000000001;
 public:
 	TransparentBitmap(Bitmap* bmp) : Bitmap(*bmp) {}
-	TransparentBitmap(char* FileName) : Bitmap(FileName) {}
+	TransparentBitmap(char* FileName, Color transp) : Bitmap(FileName) { this->bkclr = transp; }
 	TransparentBitmap(int width, int height, Color transp) : Bitmap(width, height, transp) {};
 
 	TransparentBitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT) override;

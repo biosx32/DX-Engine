@@ -115,7 +115,7 @@ void Interface::Draw_Bitmap(VectorBitmap * VBmp, int fx, int fy)
 
 void Interface::Draw_Bitmap(VectorBitmap * VBmp, int fx, int fy, int MODIF)
 {
-	for (std::vector<FPixel*>::iterator it = VBmp->pixels.begin(); it != VBmp->pixels.end(); ++it) {
+	for (std::vector<FPixel*>::iterator it = VBmp->pixels->begin(); it != VBmp->pixels->end(); ++it) {
 		int width = VBmp->width;
 		int height = VBmp->height;
 
