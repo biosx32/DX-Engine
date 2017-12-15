@@ -47,7 +47,7 @@ protected:
 	void CheckPixel(FFPixel * pixel);
 
 public:
-	const int gridsize = 12;
+	const int gridsize = 6;
 	Vector2 lastpos;
 	FFPixel ** pixels;
 	int width;

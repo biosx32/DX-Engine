@@ -49,13 +49,8 @@ PixelContainer container(&SpriteImage);
 
 
 
-int idx=0;
-VectorBitmap* test = nullptr;
 void Game::Initialise() {
 	out.set_graphics(&gfx);
-
-	
-	test = container.GetNextSpriteGroup();
 	
 
 	/*while (container.getFirstRawPixel() != nullptr) {
@@ -74,11 +69,13 @@ Label framecounter(&sh);
 Spritesheet* p;
 
 FFPixel* tst = nullptr;
+VectorBitmap* jozo = nullptr;
 void Game::ComposeFrame()
 {
 
-
-
+	
+	
+	if (jozo) out.Draw_Bitmap(jozo, 550, 0);
 	for (int i = 0; i < container.pixelcount(); i++) {
 		tst = container.pixels[i];
 		if (tst->state & pxstate::background) {
@@ -118,7 +115,7 @@ void Game::UpdateModel()
 {
 	if (wnd.mouse.LeftIsPressed()) {
 		Sleep(30);
-		container.GetNextSpriteGroup();
+		jozo = container.GetNextSpriteGroup();
 	}
 
 	//framecounter.setText(getFrameNumber());
