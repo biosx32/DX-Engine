@@ -30,11 +30,11 @@ FFPixel * PixelContainer::GetNextSpritePixel()
 			}
 		}
 
-		lastpos.x += gridsize;
+		lastpos.y += gridsize;
 
 		if (!point) {
-			lastpos.x = 0;
-			lastpos.y += gridsize;
+			lastpos.y = 0;
+			lastpos.x += gridsize;
 		}
 
 	}
