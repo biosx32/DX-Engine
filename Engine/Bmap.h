@@ -8,13 +8,6 @@
 
 using std::vector;
 
-namespace pxstate
-{
-	enum Type
-	{
-		background = 1, checked = 2, skip = (background | checked)
-	};
-};
 
 class FPixel {
 public:
@@ -30,8 +23,8 @@ protected:
 	void Load(char* FileName);
 public:
 	int width, height;
+	inline int pixelcount() { return width * height; }
 	Color bkclr, *data;
-	int constexpr pixelcount() { return width * height; }
 
 public:
 	Bitmap(char* FileName) { this->Load(FileName); }

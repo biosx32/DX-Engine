@@ -165,6 +165,8 @@ VectorBitmap::~VectorBitmap()
 
 void VectorBitmap::Normalise()
 {
+
+
 	int min_x, min_y, max_x, max_y;
 
 	max_x = min_x = (*this->pixels->begin())->x;

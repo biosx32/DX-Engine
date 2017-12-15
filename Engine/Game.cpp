@@ -39,7 +39,7 @@ void Game::Go()
 }
 
 
-TransparentBitmap img("FONT\\small.bmp", Colors::MakeRGB(177, 244, 177));
+TransparentBitmap img("FONT\\small.bmp",Colors::MakeRGB(177, 244, 177));
 Spritesheet sh(&img);
 
 
@@ -57,6 +57,7 @@ void Game::Initialise() {
 	
 	test = container.GetNextSpriteGroup();
 	
+
 	/*while (container.getFirstRawPixel() != nullptr) {
 		container.CheckPixel(container.getFirstRawPixel());
 		while (container.IteratePendingPixels());
@@ -76,31 +77,10 @@ FFPixel* tst = nullptr;
 void Game::ComposeFrame()
 {
 
-	Bitmap* Bmp = &SpriteImage;
-	int width = Bmp->width;
-	int height = Bmp->height;
 
-	for (int yoff = 0; yoff < Bmp->height; yoff++) {
-		for (int xoff = 0; xoff < Bmp->width; xoff++) {
 
-			int finalx = 0 + xoff;
-			int finaly = 0 + yoff;
-			Color READ_COLOR = Bmp->data[yoff* width + xoff];
-
-			if (!Bmp->IsColorTransparent(READ_COLOR)) {
-				out.DrawPixel(finalx, finaly, READ_COLOR);
-			}
-			else {
-				out.DrawPixel(finalx, finaly, 0xFF0000);
-			}
-		}
-	}
-
-	/*for (int i = 0; i < container.get_pixelcount(); i++) {
+	for (int i = 0; i < container.pixelcount(); i++) {
 		tst = container.pixels[i];
-
-
-
 		if (tst->state & pxstate::background) {
 			out.DrawPixel(tst->x, tst->y, 0x0000FF);
 		}
@@ -111,11 +91,12 @@ void Game::ComposeFrame()
 			out.DrawPixel(tst->x, tst->y, tst->color);
 		}
 		
-	}*/
+	}
 
-	if (wnd.mouse.LeftIsPressed()) {
-		Sleep(30);
-		container.GetNextSpriteGroup();
+	for (int i = 1; i <= container.width / 16; i++) {
+		for (int j = 1; j <= container.height / 16; j++) {
+			out.DrawPixel(i*16, j*16, Colors::Cyan);
+		}
 	}
 		//out.DrawLabel(0,  0, &framecounter);
 	
@@ -124,7 +105,10 @@ void Game::ComposeFrame()
 
 void Game::UpdateModel()
 {
-
+	if (wnd.mouse.LeftIsPressed()) {
+		Sleep(30);
+		container.GetNextSpriteGroup();
+	}
 
 	//framecounter.setText(getFrameNumber());
 }

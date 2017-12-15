@@ -4,6 +4,22 @@
 #include "Interface.h"
 
 
+class Vector2 {
+public:
+	int x=0, y=0;
+	Vector2() {}
+	Vector2(int x, int y): x(x), y(y){}
+};
+
+
+namespace pxstate
+{
+	enum Type
+	{
+		background = 1, checked = 2, skip = (background | checked)
+	};
+};
+
 
 class Spritesheet{
 public:
@@ -21,8 +37,8 @@ public:
 
 class PixelContainer {
 protected:
-	int lastpos = 0;
-
+	const int gridsize = 16;
+	Vector2 lastpos;
 	
 	vector<FFPixel*> stalledPixels;
 	vector<FPixel*>* result_group;
@@ -35,7 +51,7 @@ public:
 	FFPixel ** pixels;
 	int width;
 	int height;
-	int get_pixelcount() { return width * height; }
+	inline int pixelcount() { return width * height; }
 public:
 	~PixelContainer();
 	FFPixel* GetNextSpritePixel();

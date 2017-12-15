@@ -19,13 +19,31 @@ Spritesheet::~Spritesheet() {
 
 FFPixel * PixelContainer::GetNextSpritePixel()
 {
-	for (int i = lastpos; i < get_pixelcount(); i++) {
-		if (!(pixels[i]->state & pxstate::skip)) {
-			lastpos = i;
-			return pixels[i];
-		}
-	}
+	FFPixel* point = nullptr;
 
+	while (1) {
+		point = this->getPixelAt(lastpos.x, lastpos.y);
+
+		if(point) {
+			if (!(point->state & pxstate::skip)) {
+				return point;
+			}
+		}
+
+		lastpos.x += gridsize;
+
+		if (!point) {
+			lastpos.x = 0;
+			lastpos.y += gridsize;
+		}
+
+	}
+	
+
+
+		
+
+	
 	return nullptr;
 }
 
@@ -106,7 +124,7 @@ void PixelContainer::CheckPixel(FFPixel* pixel) {
 
 PixelContainer::~PixelContainer()
 {
-	for (int i = 0; i < get_pixelcount(); i++) {
+	for (int i = 0; i < pixelcount(); i++) {
 		delete this->pixels[i];
 	}
 
@@ -121,8 +139,8 @@ void PixelContainer::Load(TransparentBitmap * bmp)
 {
 	this->width = bmp->width;
 	this->height = bmp->height;
-	this->pixels = new FFPixel*[get_pixelcount()];
-
+	this->pixels = new FFPixel*[pixelcount()];
+	this->lastpos = Vector2(gridsize, gridsize);
 
 	for (int y = 0; y < this->height; y++) {
 		for (int x = 0; x < this->width; x++) {
