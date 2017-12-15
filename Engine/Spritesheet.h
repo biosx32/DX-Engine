@@ -37,8 +37,7 @@ public:
 
 class PixelContainer {
 protected:
-	const int gridsize = 16;
-	Vector2 lastpos;
+	
 	
 	vector<FFPixel*> stalledPixels;
 	vector<FPixel*>* result_group;
@@ -48,6 +47,8 @@ protected:
 	void CheckPixel(FFPixel * pixel);
 
 public:
+	const int gridsize = 8;
+	Vector2 lastpos;
 	FFPixel ** pixels;
 	int width;
 	int height;
