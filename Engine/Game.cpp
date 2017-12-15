@@ -115,7 +115,7 @@ void Game::UpdateModel()
 {
 	if (wnd.mouse.LeftIsPressed()) {
 		Sleep(30);
-		jozo = container.GetNextSpriteGroup();
+		jozo = container.GetGroupFrom(container.getPixelAt(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()));
 	}
 
 	//framecounter.setText(getFrameNumber());

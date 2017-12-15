@@ -43,7 +43,7 @@ protected:
 	vector<FPixel*>* result_group;
 
 protected:
-	FFPixel* getPixelAt(int x, int y);
+	
 	void CheckPixel(FFPixel * pixel);
 
 public:
@@ -55,6 +55,7 @@ public:
 	inline int pixelcount() { return width * height; }
 public:
 	~PixelContainer();
+	FFPixel* getPixelAt(int x, int y);
 	FFPixel* GetNextSpritePixel();
 	VectorBitmap* GetGroupFrom(FFPixel * pixel);
 	PixelContainer(TransparentBitmap* bmp);

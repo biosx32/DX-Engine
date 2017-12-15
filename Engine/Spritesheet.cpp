@@ -62,13 +62,15 @@ VectorBitmap* PixelContainer::GetGroupFrom(FFPixel* pixel) {
 		stalledPixels.pop_back();
 		this->CheckPixel(px);
 	}
+	VectorBitmap* result;
 
-	VectorBitmap* result = new VectorBitmap(result_group);
-
-
-	delete result_group;
-
-	return result;
+	if (result_group->size() > 0) {
+		result = new VectorBitmap(result_group);
+		delete result_group;
+		return result;
+	}
+	
+	return nullptr;
 }
 
 VectorBitmap* PixelContainer::GetNextSpriteGroup()
