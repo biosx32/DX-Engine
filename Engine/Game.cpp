@@ -73,9 +73,8 @@ Label framecounter(&sh);
 Spritesheet* p;
 void Game::ComposeFrame()
 {
-	out.DrawLabel(0,  0, &framecounter);
+	//out.DrawLabel(0,  0, &framecounter);
 
-	
 }
 
 
@@ -83,7 +82,7 @@ void Game::UpdateModel()
 {
 
 
-	framecounter.setText(getFrameNumber());
+	//framecounter.setText(getFrameNumber());
 }
 
 

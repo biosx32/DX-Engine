@@ -24,13 +24,6 @@ public:
 };
 
 
-class FFPixel: public FPixel {
-public:
-	int state;
-	FFPixel(int x, int y, Color c, int state): FPixel(x,y,c), state(state) {}
-};
-
-
 class Bitmap {
 protected:
 	void Load(int width, int height, Color bkclr);
@@ -74,7 +67,7 @@ protected:
 
 public:
 	int width, height;
-	std::vector<FPixel*> pixels;
+	std::vector<FPixel*>* pixels;
 
 public:
 	VectorBitmap(vector<FPixel*>* src) {this->Load(src);}

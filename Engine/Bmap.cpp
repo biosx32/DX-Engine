@@ -136,25 +136,26 @@ TransparentBitmap * TransparentBitmap::GetBitmapPart(int xoff, int yoff, int WID
 
 VectorBitmap::VectorBitmap(TransparentBitmap * src)
 {
-	vector<FPixel*>* created = new vector<FPixel*>;
+	this->pixels = new vector<FPixel*>;
 
 	for (int yoff = 0; yoff < src->height; yoff++) {
 		for (int xoff = 0; xoff < src->width; xoff++) {
 
-			Color READ_COLOR = src->data[yoff* width + xoff];
+			int i = yoff * src->width + xoff;
 
-			if (!src->IsColorTransparent(READ_COLOR)) {
-				pixels.push_back(new FPixel(xoff, yoff, READ_COLOR));
+			if (!src->IsColorTransparent(src->data[i])) {
+				pixels->push_back(new FPixel(xoff, yoff, src->data[i]));
 			}
 		}
 	}
 
-	this->Load(created);
+	
+	this->Normalise();
 }
 
 VectorBitmap::~VectorBitmap()
 {
-	for (std::vector<FPixel*>::iterator it = pixels.begin(); it != pixels.end(); ++it)
+	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
 	{
 		delete *it;
 	}
@@ -164,11 +165,11 @@ void VectorBitmap::Normalise()
 {
 	int min_x, min_y, max_x, max_y;
 
-	max_x = min_x = (*this->pixels.begin())->x;
-	max_y = min_y = (*this->pixels.begin())->y;
+	max_x = min_x = (*this->pixels->begin())->x;
+	max_y = min_y = (*this->pixels->begin())->y;
 
 
-	for (std::vector<FPixel*>::iterator it = pixels.begin(); it != pixels.end(); ++it)
+	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
 	{
 		FPixel* current = *it;
 		if (current->x < min_x) {
@@ -193,7 +194,7 @@ void VectorBitmap::Normalise()
 	int offx = min_x;
 	int offy = min_y;
 
-	for (std::vector<FPixel*>::iterator it = pixels.begin(); it != pixels.end(); ++it)
+	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
 	{
 		FPixel* current = *it;
 		current->x -= offx;
@@ -205,7 +206,7 @@ void VectorBitmap::Normalise()
 
 void VectorBitmap::Load(vector<FPixel*>* src)
 {
-	this->pixels = vector<FPixel*>(*src);
+	this->pixels = new vector<FPixel*>(*src);
 	this->Normalise();
 }
 

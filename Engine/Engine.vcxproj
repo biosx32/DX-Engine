@@ -145,7 +145,6 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="COMInitializer.h" />
     <ClInclude Include="DXErr.h" />
-    <ClInclude Include="Floodfill.h" />
     <ClInclude Include="Func.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Drawing.h" />
@@ -165,7 +164,6 @@
     <ClCompile Include="Bmap.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="DXErr.cpp" />
-    <ClCompile Include="Floodfill.cpp" />
     <ClCompile Include="Func.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Drawing.cpp" />
