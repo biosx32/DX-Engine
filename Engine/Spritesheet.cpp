@@ -30,12 +30,11 @@ Spritesheet::Spritesheet(TransparentBitmap * BitmapImage, int wcount, int hcount
 			int y = hi * hsize;
 			TransparentBitmap* cutsprite = BitmapImage->GetBitmapPart(x, y, wsize, hsize);
 			VectorBitmap* vbmp = new VectorBitmap(cutsprite);
-			delete cutsprite;
 			this->sprites.push_back(vbmp);
 		}
 	}
 
-
+	
 }
 
 Spritesheet::~Spritesheet() {

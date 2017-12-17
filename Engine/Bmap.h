@@ -65,6 +65,7 @@ public:
 public:
 	VectorBitmap(vector<FPixel*>* src) {this->Load(src);}
 	VectorBitmap(TransparentBitmap* src);
+	void ComputeDatas();
 	~VectorBitmap();
 
 	void Load(std::vector<FPixel*>* src);

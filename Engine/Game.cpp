@@ -41,52 +41,29 @@ void Game::Go()
 
 TransparentBitmap img("FONT\\small.bmp",Colors::MakeRGB(177, 244, 177));
 Spritesheet sh(&img,16,16);
-
+Label framecounter(&sh);
 
 
 TransparentBitmap SpriteImage("FONT\\big.bmp", Colors::MakeRGB(177, 244, 177));
 PixelContainer container(&SpriteImage);
 
-
-
 void Game::Initialise() {
 	out.set_graphics(&gfx);
-	out.Draw_Bitmap(&img, 0, 0);
-
-	/*while (container.getFirstRawPixel() != nullptr) {
-		container.CheckPixel(container.getFirstRawPixel());
-		while (container.IteratePendingPixels());
-		
-	}*/
-
-	
-	
 }
 
-//Label framecounter(&sh);
-
-FFPixel* tst = nullptr;
-VectorBitmap* jozo = nullptr;
 void Game::ComposeFrame()
 {
 
-	out.Draw_Bitmap(&img, 0, 0);
-	if (jozo) out.Draw_Bitmap(jozo, 0, 0);
- //  out.DrawLabel(0,  0, &framecounter);
+	out.Draw_Bitmap(&img, 0, 100);
+
+    out.DrawLabel(0,  0, &framecounter);
 	
 }
 
-int sprcnt = 0;
 void Game::UpdateModel()
 {
-	if (wnd.mouse.LeftIsPressed()) {
-		jozo = sh.sprites[sprcnt];
-		Sleep(30);
-		sprcnt++;
-		sprcnt %= sh.sprites.size();
-	}
 
-//	framecounter.setText(getFrameNumber());
+	framecounter.setText(getFrameNumber());
 }
 
 

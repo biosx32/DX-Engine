@@ -18,42 +18,46 @@ void Interface::DrawPixel(int xoff, int yoff, Color c) {
 void Interface::DrawLabel(int xoff, int yoff, Label * label)
 {
 
-	if (strlen(label->text) < 1)return;
+	//if (strlen(label->text) < 1)return;
 
 	double rel_pos_x = 0;
 	double rel_pos_y = 0;
 
-
-
 	int char_width = label->Get_Bitmap_Char(0)->width;
 	int char_height = label->Get_Bitmap_Char(0)->height;
 
+	int chr=0;
 
-	for (char* data = &label->text[0]; *data != 0; data++) {
-		unsigned char udata = (unsigned char) *data;
+	for (int i = 0; i < label->txmax; i++) {
+		chr = label->text[i];
 
-		VectorBitmap* BitmapChar = label->Get_Bitmap_Char(udata);
-		char_width = BitmapChar->width;
+		if (chr == '\0') {
+			continue;
+		}
 
-		if (*(data - 1) == '\n') {
+		if (chr == '\n') {
 			rel_pos_y += char_height;
 			rel_pos_x = 0;
 			continue;
 		}
 
-		Draw_Bitmap(BitmapChar, (int) (rel_pos_x + xoff), (int)
-			(rel_pos_y + yoff));
-		
-		if (true) {
-			rel_pos_x += char_width * 1.65;
-		
-			if (*data >= '0' && *data <= '9') {
-				rel_pos_x += char_width * 0.20;
-			}
-			else if (*data >= 'A' && *data <= 'Z') {
-				rel_pos_x += char_width * 0.05;
-			}
+		VectorBitmap* BitmapChar = label->Get_Bitmap_Char(chr);
+		char_width = BitmapChar->width * 1.25;
+		rel_pos_x += char_width * 0.65;
+
+		if (chr >= '0' && chr <= '9') {
+			rel_pos_x += char_width * 0.20;
 		}
+		else if (chr >= 'A' && chr <= 'Z') {
+			rel_pos_x += char_width * 0.05;
+		}
+
+		rel_pos_x += char_width;
+
+		Draw_Bitmap(BitmapChar, (int)(rel_pos_x + xoff), (int) (rel_pos_y + yoff));
+
+	
+		
 	}
 }
 

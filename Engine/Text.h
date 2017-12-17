@@ -7,6 +7,7 @@ class Spritesheet;
 class Label {
 public:
 	~Label();
+	Label() = delete;
 	Label(Spritesheet* sh);
 	
 	static const int txmax= 256;
