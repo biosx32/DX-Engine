@@ -2,26 +2,28 @@
 
 
 
-int Label::Load(Spritesheet* sh) {
-	this->sprite_sheet = sh;
-	return 0;
-}
-
-
 Label::~Label()
 {
 }
 
-Label::Label(Spritesheet * sh)
+Label::Label(TransparentBitmap * bmp, int wcount, int hcount)
 {
-	this->Load(sh);
+	this->sprite_sheet = new Spritesheet(bmp, wcount, hcount);
+
+	for (vector<VectorBitmap*>::iterator it = sprite_sheet->sprites.begin();
+		it != sprite_sheet->sprites.end(); ++it)
+	{
+		(*it)->NormalizeH();
+	}
+
+
 }
 
 
-VectorBitmap * Label::Get_Bitmap_Char(unsigned int c)
+
+VectorBitmap * Label::GetCharacterRepr(unsigned int c)
 {
-	int max = sizeof(translate) / sizeof(char);
-	int index = translate[c%max];
+	int index = translate[c%txmax];
 	return this->sprite_sheet->sprites[index];
 }
 

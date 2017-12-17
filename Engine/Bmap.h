@@ -55,7 +55,6 @@ public:
 class VectorBitmap {
 
 protected:
-	void Normalise();
 	int offx, offy;
 
 public:
@@ -63,13 +62,12 @@ public:
 	std::vector<FPixel*>* pixels;
 
 public:
-	VectorBitmap(vector<FPixel*>* src) {this->Load(src);}
+	VectorBitmap(vector<FPixel*>* src);
 	VectorBitmap(TransparentBitmap* src);
-	void ComputeDatas();
+	void ComputeSize();
+	void NormalizeV();
+	void NormalizeH();
 	~VectorBitmap();
-
-	void Load(std::vector<FPixel*>* src);
-
 	
 };
 

@@ -2,25 +2,13 @@
 #define __TEXT_H__
 #include "Spritesheet.h"
 
-
 class Spritesheet;
 class Label {
+
 public:
-	~Label();
-	Label() = delete;
-	Label(Spritesheet* sh);
-	
-	static const int txmax= 256;
+	static const int txmax = 256;
 	char text[txmax];
 	Spritesheet* sprite_sheet = nullptr;
-
-	VectorBitmap* Get_Bitmap_Char(unsigned int c);
-	void setText(char* text);
-	int Load(Spritesheet* sh);
-
-	// unimplemented 0 - 34 
-	// 126 - 255
-	
 	const int translate[256] = {
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -38,6 +26,15 @@ public:
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 	};
+
+public:
+	~Label();
+	Label() = delete;
+	Label(TransparentBitmap * bmp, int wcount, int hcount);
+	
+	VectorBitmap* GetCharacterRepr(unsigned int c);
+	void setText(char* text);
+	
 };
 
 

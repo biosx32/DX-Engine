@@ -1,8 +1,6 @@
 #ifndef __SPRITESHEET_H__
 #define __SPRITESHEET_H__
 #include "Bmap.h"
-#include "Interface.h"
-
 
 class Vector2 {
 public:
@@ -23,10 +21,12 @@ namespace pxstate
 
 class Spritesheet{
 public:
+	vector<VectorBitmap*> sprites;
+public:
 	Spritesheet(TransparentBitmap* BitmapImage);
 	Spritesheet(TransparentBitmap* BitmapImage, int wcount, int hcount);
 	~Spritesheet();
-	vector<VectorBitmap*> sprites;
+	
 };
 
 

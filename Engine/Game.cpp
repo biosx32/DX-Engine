@@ -41,10 +41,10 @@ void Game::Go()
 
 TransparentBitmap img("FONT\\small.bmp",Colors::MakeRGB(177, 244, 177));
 Spritesheet sh(&img,16,16);
-Label framecounter(&sh);
+Label framecounter(&img,16,16);
 
 
-TransparentBitmap SpriteImage("FONT\\big.bmp", Colors::MakeRGB(177, 244, 177));
+TransparentBitmap SpriteImage("FONT\\small.bmp", Colors::MakeRGB(177, 244, 177));
 PixelContainer container(&SpriteImage);
 
 void Game::Initialise() {

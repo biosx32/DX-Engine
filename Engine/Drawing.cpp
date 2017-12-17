@@ -86,12 +86,11 @@ void Draw::line(int x0, int y0, int width, int height)
 }
 
 void Draw::rectangle(int x0, int y0, int width, int height) {
-	int w2 = width / 2; int h2 = height / 2;
-	line(x0 - w2, y0 - h2, 0, height);
-	line(x0 + w2, y0 - h2, 0, height);
+	line(x0, y0, 0, height);
+	line(x0 + width, y0, 0, height);
 
-	line(x0 - w2, y0 - h2, width, 0);
-	line(x0 - w2, y0 + h2, width, 0);
+	line(x0, y0, width, 0);
+	line(x0, y0 + height, width, 0);
 
 }
 
