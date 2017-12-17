@@ -38,15 +38,19 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 		int destx = (int) (xoff + rel_pos_x);
 		int desty = (int) (yoff + rel_pos_y);
 
-		
+		int gap = 3;
 
 
 		Draw_Bitmap(CharacterRepr, destx, desty);
 
-		this->DrawShape->rectangle(destx, desty,charw, 24);
+		//this->DrawShape->rectangle(destx, desty,charw, 24);
 
-		rel_pos_x += charw;
+		rel_pos_x += charw + gap;
 
+		if (chr == '\x20') {
+			rel_pos_x += 4 * gap;
+
+		}
 
 		if (chr == '\n') {
 			rel_pos_y += charh;
