@@ -135,17 +135,7 @@ void Interface::DrawPixelSpecial(int xoff, int yoff, Color c, int MODIF, int wid
 	}
 
 
-	#define SOFT_DRAW 1
-
-	if (SOFT_DRAW &&
-		   (finalx >= gfx->ScreenWidth ||
-			finaly >= gfx->ScreenHeight ||
-			finalx < 0 ||
-			finaly < 0)) {
-		return;
-	}
-
-	gfx->PutPixel(finalx, finaly, c);
+	this->DrawPixelM(finalx, finaly, c, 1);
 			
 }
 
@@ -209,14 +199,30 @@ void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 	this->DrawShape->SetBrushColor(old);*/
 }
 
-void Interface::DrawPixelM(int xoff, int yoff, Color c)
+void Interface::DrawPixelM(int xoff, int yoff, Color c, int m)
 {
-	int m = 4;
+	#define SOFT_DRAW 1
+
 	xoff *= m;
 	yoff *= m;
+
 	for (int y = 0; y < m; y++) {
 		for (int x = 0; x < m; x++) {
-			this->DrawPixel(x + xoff, y + yoff, c);
+	
+			int finalx = xoff + x;
+			int finaly = yoff + y;
+
+			if (SOFT_DRAW &&
+				   (finalx >= gfx->ScreenWidth ||
+					finaly >= gfx->ScreenHeight ||
+					finalx < 0 ||
+					finaly < 0)) {
+				return;
+			}
+
+
+			gfx->PutPixel(finalx, finaly, c);
+
 		}
 	}
 

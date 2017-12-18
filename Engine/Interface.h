@@ -28,7 +28,7 @@ public:
 
 	void DrawPixel(int xoff, int yoff, Color c);
 	void DrawPixelContainer(PixelContainer * src, int fx, int fy);
-	void DrawPixelM(int xoff, int yoff, Color c);
+	void DrawPixelM(int xoff, int yoff, Color c, int m);
 
 	void Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy);
 	void Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy, int MODIF);
