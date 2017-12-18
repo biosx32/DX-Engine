@@ -15,6 +15,34 @@ void Interface::DrawPixel(int xoff, int yoff, Color c) {
 }
 
 
+void Interface::DrawPixelContainer(PixelContainer* src, int fx, int fy)
+{
+
+	FFPixel* ReadPixel;
+	for (int yoff = 0; yoff < src->height; yoff++) {
+		for (int xoff = 0; xoff < src->width; xoff++) {
+
+			ReadPixel = src->pixels[yoff* src->width + xoff];
+
+			if (ReadPixel->state & pxstate::checked) {
+				this->DrawPixel(xoff + fx, yoff + fy, 0x00FF00);
+			}
+
+			else if (ReadPixel->state & pxstate::background) {
+				this->DrawPixel(xoff + fx, yoff + fy, Colors::MakeRGB(177, 244, 177));
+			}
+
+			else {
+				this->DrawPixel(xoff + fx, yoff + fy, ReadPixel->color);
+			}
+
+		}
+
+	}
+
+}
+
+
 void Interface::DrawLabel(int xoff, int yoff, Label * label)
 {
 

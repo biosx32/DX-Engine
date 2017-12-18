@@ -34,7 +34,7 @@ void Bitmap::Load(char * FileName)
 	unsigned char temp[3] = {};
 	int bitmap_align_bytes, size_line;
     int rotation_correct = 0;
-
+	
 	FILE* file_read;
 	fopen_s(&file_read, FileName, "rb");
 
