@@ -135,7 +135,7 @@ void Interface::DrawPixelSpecial(int xoff, int yoff, Color c, int MODIF, int wid
 	}
 
 
-	this->DrawPixelM(finalx, finaly, c, 1);
+	this->DrawPixelM(finalx, finaly, c, 2);
 			
 }
 
