@@ -45,40 +45,52 @@ Label framecounter(&img,16,16);
 
 
 TransparentBitmap SpriteImage("SPRITESHEET\\descent_mini.bmp", Colors::MakeRGB(255, 255, 255));
-PixelContainer container(&SpriteImage);
+
+PixelContainer* container=nullptr;
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
+	out.DrawShape->SetBrushColor(Colors::Blue);
+
+	SpriteImage.tolerance = 0.0001f;
+	container = new PixelContainer(&SpriteImage);
+	
+	
 }
 
 VectorBitmap* todraw = nullptr;
 
 void Game::ComposeFrame()
 {
-	out.DrawPixelContainer(&container, 0, 0);
+	out.DrawShape->rectangle_fill(0, 0, gfx.ScreenWidth-1, gfx.ScreenHeight-1);
+
+	out.DrawPixelContainer(container, 0, 0);
     
 	out.DrawLabel(0,  500, &framecounter);
 	//out.Draw_Bitmap(&SpriteImage,0,0);
 	if (todraw) {
-		out.Draw_Bitmap(todraw, 550, 0);
+		out.Draw_Bitmap(todraw, 550, 50);
 	}
 }
 
 void Game::UpdateModel()
 {
 	if (wnd.mouse.LeftIsPressed()) {
-		Sleep(40);
+		
 		VectorBitmap* next = nullptr;
 
 		while (1) {
-			next = container.GetNextSpriteGroup();
+			next = container->GetNextSpriteGroup();
 			if (!next) break;
 			if (next->pixels->size() > 9999) {
 				todraw = next;
+				Sleep(10);
 				break;
 			}
 			
 		}
+
+		
 		
 		
 	}

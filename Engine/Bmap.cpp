@@ -123,7 +123,7 @@ bool TransparentBitmap::IsColorTransparent(Color color)
 	distance = (r2 - r1) *  (r2 - r1) + (g2 - g1) *  (g2 - g1) + (b2 - b1) *  (b2 - b1);
 	percentage = distance / range;
 
-	return percentage < tolerance;
+	return percentage < (tolerance / 10);
 }
 
 

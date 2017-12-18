@@ -12,11 +12,12 @@ public:
 
 	void setOutInterface(Interface* out);
 	void SetBrushColor(Color color);
-	void FastVLine( int x0, int y0, int width);
-	void FastHLine( int x0, int y0, int height);
-	void circle( int x0, int y0, int radius);
+	void FastHLine( int x0, int y0, int width);
+	void FastVLine( int x0, int y0, int height);
+	void circle( int xoff, int yoff, int radius);
 	void line( int x0, int y0, int width, int height);
 	void rectangle( int x0, int y0, int width, int height);
+	void rectangle_fill(int x0, int y0, int width, int height);
 };
 
 

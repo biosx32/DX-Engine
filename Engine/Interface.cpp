@@ -25,7 +25,7 @@ void Interface::DrawPixelContainer(PixelContainer* src, int fx, int fy)
 			ReadPixel = src->pixels[yoff* src->width + xoff];
 
 			if (ReadPixel->state & pxstate::checked) {
-				this->DrawPixel(xoff + fx, yoff + fy, 0x00FF00);
+				this->DrawPixel(xoff + fx, yoff + fy, 0xAC0000);
 			}
 
 			else if (ReadPixel->state & pxstate::background) {
@@ -43,9 +43,11 @@ void Interface::DrawPixelContainer(PixelContainer* src, int fx, int fy)
 }
 
 
+
+
 void Interface::DrawLabel(int xoff, int yoff, Label * label)
 {
-
+	Color old = this->DrawShape->brush;
 	this->DrawShape->SetBrushColor(Colors::Red);
 
 	double rel_pos_x = 0;
@@ -109,6 +111,7 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 
 	
 	}
+	this->DrawShape->SetBrushColor(old);
 }
 
 
@@ -198,8 +201,8 @@ void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 
 		
 			this->Draw_Bitmap(sh->datagroup->data[i]->image, xoff+ xdst, yoff+ ydst);
-			this->DrawShape->FastHLine(xoff + xdst, yoff + ydst, sprh+1);
-			this->DrawShape->FastVLine(xoff + xdst, yoff + ydst, sprw+1);
+			this->DrawShape->FastVLine(xoff + xdst, yoff + ydst, sprh+1);
+			this->DrawShape->FastHLine(xoff + xdst, yoff + ydst, sprw+1);
 		}
 	}
 	

@@ -1,12 +1,12 @@
 
 #include "Drawing.h"
 
-void Draw::FastVLine(int x0, int y0, int width) {
+void Draw::FastHLine(int x0, int y0, int width) {
 	for (int i = 0; i < width; i++) {
 		this->out->DrawPixel(x0 + i, y0, brush);
 	}
 }
-void Draw::FastHLine(int x0, int y0, int height) {
+void Draw::FastVLine(int x0, int y0, int height) {
 	for (int i = 0; i < height; i++) {
 		this->out->DrawPixel(x0, y0 + i, brush);
 	}
@@ -64,8 +64,8 @@ void Draw::line(int x0, int y0, int width, int height)
 	dx = x1 - x0;
 	dy = y1 - y0;
 
-	if (dy == 0) return FastVLine(x0, y0, width);
-	if (dx == 0) return FastHLine(x0, y0, height);
+	if (dy == 0) return FastHLine(x0, y0, width);
+	if (dx == 0) return FastVLine(x0, y0, height);
 
 	x = x0;
 	y = y0;
@@ -91,6 +91,14 @@ void Draw::rectangle(int x0, int y0, int width, int height) {
 
 	line(x0, y0, width, 0);
 	line(x0, y0 + height, width, 0);
+
+}
+
+void Draw::rectangle_fill(int xoff, int yoff, int width, int height)
+{
+	for (int i = 0; i < height; i++) {
+		this->FastHLine(xoff, yoff + i, width);
+	}
 
 }
 
