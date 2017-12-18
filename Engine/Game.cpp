@@ -44,7 +44,7 @@ Spritesheet sh(&img,16,16);
 Label framecounter(&img,16,16);
 
 
-TransparentBitmap SpriteImage("SPRITESHEET\\descent_mini.bmp", Colors::MakeRGB(255, 255, 255));
+TransparentBitmap SpriteImage("SPRITESHEET\\sprites3.bmp", Colors::MakeRGB(255, 255, 255));
 
 PixelContainer* container=nullptr;
 
@@ -52,7 +52,7 @@ void Game::Initialise() {
 	out.set_graphics(&gfx);
 	out.DrawShape->SetBrushColor(Colors::Blue);
 
-	SpriteImage.tolerance = 0.0001f;
+	SpriteImage.tolerance = 0.01f;
 	container = new PixelContainer(&SpriteImage);
 	
 	
@@ -62,15 +62,21 @@ VectorBitmap* todraw = nullptr;
 
 void Game::ComposeFrame()
 {
-	out.DrawShape->rectangle_fill(0, 0, gfx.ScreenWidth-1, gfx.ScreenHeight-1);
+	//out.DrawShape->rectangle_fill(0, 0, gfx.ScreenWidth-1, gfx.ScreenHeight-1);
 
-	out.DrawPixelContainer(container, 0, 0);
+	//out.DrawPixelContainer(container, 0, 0);
     
-	out.DrawLabel(0,  500, &framecounter);
-	//out.Draw_Bitmap(&SpriteImage,0,0);
+	
+	out.Draw_Bitmap(&SpriteImage,0,0);
+
+
+	
 	if (todraw) {
-		out.Draw_Bitmap(todraw, 550, 50);
+		out.DrawShape->rectangle_fill(0, 0, todraw->width, todraw->height);
+		out.Draw_Bitmap(todraw, 0, 0);
 	}
+
+	out.DrawLabel(0, 500, &framecounter);
 }
 
 void Game::UpdateModel()
@@ -81,10 +87,10 @@ void Game::UpdateModel()
 
 		while (1) {
 			next = container->GetNextSpriteGroup();
+			
 			if (!next) break;
-			if (next->pixels->size() > 9999) {
+			if (next->pixels->size() > 200) {
 				todraw = next;
-				Sleep(10);
 				break;
 			}
 			

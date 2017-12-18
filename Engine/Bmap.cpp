@@ -40,11 +40,13 @@ void Bitmap::Load(char * FileName)
 
 	if (file_read == nullptr) { 
 		printerr << "Could not load image: " << FileName << " << FILE NOT FOUND\n";
+		return;
 	}
 
 	int BYTES_TO_READ = File_bytes(file_read);
 	if (BYTES_TO_READ < 1) { 
 		printerr << "Could not load image: " << FileName << " << EMPTY FILE\n";
+		return;
 	}
 
 	fread_s((void*) Header, 54, sizeof(unsigned char), 54, file_read);
@@ -123,7 +125,7 @@ bool TransparentBitmap::IsColorTransparent(Color color)
 	distance = (r2 - r1) *  (r2 - r1) + (g2 - g1) *  (g2 - g1) + (b2 - b1) *  (b2 - b1);
 	percentage = distance / range;
 
-	return percentage < (tolerance / 10);
+	return percentage < (tolerance);
 }
 
 

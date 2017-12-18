@@ -40,7 +40,7 @@ public:
 
 class TransparentBitmap : public Bitmap {
 public:
-	double tolerance = 0.00000000000001;
+	double tolerance = 0.0000001;
 public:
 	TransparentBitmap(Bitmap* bmp) : Bitmap(*bmp) {}
 	TransparentBitmap(char* FileName, Color transp) : Bitmap(FileName) { this->bkclr = transp; }
