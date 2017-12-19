@@ -1,0 +1,2 @@
+#Sprites aby sa nacitaviali rovnomerne
+#Fill background as bkclr and then include bkclr in groups too..
