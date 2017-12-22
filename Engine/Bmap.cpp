@@ -15,45 +15,38 @@ Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 	return newBitmap;
 }
 
-void Bitmap::Load(int width, int height, Color bkclr)
-{
-	this->width = width;
-	this->height = height;
-	this->bkclr = bkclr;
-	this->data = new Color[pixelcount()];
-	for (int i = 0; i < pixelcount(); i++) {
-		this->data[i] = this->bkclr;
-	}
-}
 
-void Bitmap::Load(char * FileName)
+
+
+
+Bitmap::Bitmap(char * FileName)
 {
 	int temp_color;
 	int width, height;
 	char Header[54] = {};
 	unsigned char temp[3] = {};
 	int bitmap_align_bytes, size_line;
-    int rotation_correct = 0;
-	
+	int rotation_correct = 0;
+
 	FILE* file_read;
 	fopen_s(&file_read, FileName, "rb");
 
-	if (file_read == nullptr) { 
+	if (file_read == nullptr) {
 		printerr << "Could not load image: " << FileName << " << FILE NOT FOUND\n";
 		return;
 	}
 
 	int BYTES_TO_READ = File_bytes(file_read);
-	if (BYTES_TO_READ < 1) { 
+	if (BYTES_TO_READ < 1) {
 		printerr << "Could not load image: " << FileName << " << EMPTY FILE\n";
 		return;
 	}
 
-	fread_s((void*) Header, 54, sizeof(unsigned char), 54, file_read);
+	fread_s((void*)Header, 54, sizeof(unsigned char), 54, file_read);
 
 	width = *(int*)&Header[18];
 	height = *(int*)&Header[22];
-	
+
 	if (height < 0) {
 		height = -height;
 		rotation_correct = 1;
@@ -67,7 +60,7 @@ void Bitmap::Load(char * FileName)
 	unsigned char * linedata = new unsigned char[size_line];
 
 	for (int i = 0; i < height; i++) {
-		fread_s((void*) linedata, size_line, 1, size_line, file_read);
+		fread_s((void*)linedata, size_line, 1, size_line, file_read);
 
 		for (int j = 0; j < width; j++) {
 			unsigned char* datachar = &linedata[j * 3];
@@ -78,7 +71,7 @@ void Bitmap::Load(char * FileName)
 		if (bitmap_align_bytes) {
 			fread_s(&temp, bitmap_align_bytes, 1, bitmap_align_bytes, file_read);
 		}
-		
+
 
 	}
 
@@ -92,20 +85,26 @@ void Bitmap::Load(char * FileName)
 	for (int y = 0; y <= height / 2; y++) {
 		for (int x = 0; x < width; x++) {
 			temp_color = data[(y)* width + x].dword;
-			data[(y)* width + x] = data[((height-1)-y)* width + x];
+			data[(y)* width + x] = data[((height - 1) - y)* width + x];
 			data[((height - 1) - y)* width + x] = temp_color;
 		}
 	}
-		
-	
-
 }
-
-
 
 Bitmap::Bitmap(int width, int height, Color bkclr)
 {
-	this->Load(width, height, bkclr);
+	this->width = width;
+	this->height = height;
+	this->bkclr = bkclr;
+	this->data = new Color[pixelcount()];
+	for (int i = 0; i < pixelcount(); i++) {
+		this->data[i] = this->bkclr;
+	}
+}
+
+Bitmap::~Bitmap()
+{
+	delete[] this->data;
 }
 
 
@@ -129,6 +128,17 @@ bool TransparentBitmap::IsColorTransparent(Color color)
 }
 
 
+TransparentBitmap::TransparentBitmap(Bitmap * bmp):
+	Bitmap(*bmp) {}
+
+TransparentBitmap::TransparentBitmap(char * FileName, Color transp): 
+	Bitmap(FileName) {
+	this->bkclr = transp; 
+}
+
+TransparentBitmap::TransparentBitmap(int width, int height, Color transp) : 
+	Bitmap(width, height,f transp) {}
+
 TransparentBitmap * TransparentBitmap::GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT)
 {
 	TransparentBitmap* newBitmap = new TransparentBitmap(Bitmap::GetBitmapPart(xoff, yoff, WIDTH, HEIGHT));
@@ -137,100 +147,6 @@ TransparentBitmap * TransparentBitmap::GetBitmapPart(int xoff, int yoff, int WID
 }
 
 
-
-VectorBitmap::VectorBitmap(vector<FPixel*>* src)
-{
-	this->pixels = new vector<FPixel*>(*src);
-	this->ComputeSize();
-	this->NormalizeV();
-	this->NormalizeH();
-}
-
-VectorBitmap::VectorBitmap(TransparentBitmap * src)
-{
-
-	this->pixels = new vector<FPixel*>;
-	for (int i = 0; i < src->pixelcount(); i++) {
-		int x = i % src->width;
-		int y = i / src->width;
-		Color t = src->data[i];
-		if (!src->IsColorTransparent(t)) {
-			pixels->push_back(new FPixel(x, y, t));
-		}
-	}
-	
-	this->ComputeSize();
-
-}
-
-void VectorBitmap::ComputeSize() {
-	if (this->pixels->size() < 1) {
-		width = height = offx = offy = 0;
-		return;
-	}
-
-	int min_x, min_y, max_x, max_y;
-
-	max_x = min_x = (*this->pixels->begin())->x;
-	max_y = min_y = (*this->pixels->begin())->y;
-
-
-	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
-	{
-		FPixel* current = *it;
-		if (current->x < min_x) {
-			min_x = current->x;
-		}
-		else if (current->x > max_x) {
-			max_x = current->x;
-		}
-
-		if (current->y < min_y) {
-			min_y = current->y;
-		}
-
-		else if (current->y > max_y) {
-			max_y = current->y;
-		}
-	}
-
-	this->width = max_x - min_x + 1;
-	this->height = max_y - min_y + 1;
-
-	this->offx = min_x;
-	this->offy = min_y;
-}
-
-VectorBitmap::~VectorBitmap()
-{
-	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
-	{
-		delete *it;
-	}
-}
-
-void VectorBitmap::NormalizeV()
-{
-	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
-	{
-		FPixel* current = *it;
-		current->y -= offy;
-	}
-	offy = 0;
-
-}
-
-void VectorBitmap::NormalizeH()
-{
-
-	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
-	{
-		FPixel* current = *it;
-		current->x -= offx;
-	}
-
-	offx = 0;
-}
 
 
 

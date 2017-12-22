@@ -54,8 +54,10 @@ public:
 	int width;
 	int height;
 	inline int pixelcount() { return width * height; }
+
 public:
 	~PixelContainer();
+	PixelContainer(TransparentBitmap* bmp);
 	FFPixel* getPixelAt(int x, int y);
 	FFPixel* GetNextSpritePixel();
 	VectorBitmap* GetGroupFrom(FFPixel * pixel);

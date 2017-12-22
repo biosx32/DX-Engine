@@ -165,11 +165,6 @@ PixelContainer::~PixelContainer()
 
 PixelContainer::PixelContainer(TransparentBitmap * bmp)
 {
-	this->Load(bmp);
-}
-
-void PixelContainer::Load(TransparentBitmap * bmp)
-{
 	this->width = bmp->width;
 	this->height = bmp->height;
 	this->pixels = new FFPixel*[pixelcount()];
@@ -189,7 +184,5 @@ void PixelContainer::Load(TransparentBitmap * bmp)
 
 		}
 	}
-
 }
-
 

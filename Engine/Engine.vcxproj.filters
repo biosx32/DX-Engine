@@ -90,6 +90,9 @@
     <ClInclude Include="Drawing.h">
       <Filter>Header Files\Extended</Filter>
     </ClInclude>
+    <ClInclude Include="VectorBitmap.h">
+      <Filter>Header Files\Extended</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="COMInitializer.cpp">
@@ -140,6 +143,9 @@
     <ClCompile Include="Drawing.cpp">
       <Filter>Source Files\Extended</Filter>
     </ClCompile>
+    <ClCompile Include="VectorBitmap.cpp">
+      <Filter>Source Files\Extended</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
@@ -176,5 +182,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Text.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TODO.TXT">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

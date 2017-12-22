@@ -52,9 +52,9 @@ void Game::Initialise() {
 	out.set_graphics(&gfx);
 	out.DrawShape->SetBrushColor(Colors::Blue);
 
-	SpriteImage.tolerance = 0.01f;
+	SpriteImage.tolerance = 0.005f;
 	container = new PixelContainer(&SpriteImage);
-	
+
 	
 }
 
