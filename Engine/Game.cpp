@@ -40,27 +40,21 @@ void Game::Go()
 
 
 TransparentBitmap img("FONT\\small.bmp",Colors::MakeRGB(177, 244, 177));
-Spritesheet sh(&img,16,16);
 Label framecounter(&img,16,16);
-
-
 TransparentBitmap SpriteImage("SPRITESHEET\\sprites3.bmp", Colors::MakeRGB(255, 255, 255));
 
-PixelContainer* container=nullptr;
+
+TransparentBitmap scaling("FONT\\small.bmp", Colors::MakeRGB(177, 244, 177));
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
 	SpriteImage.tolerance = 0.005f;
 	container = new PixelContainer(&SpriteImage);
-
-	
 }
-
-VectorBitmap* todraw = nullptr;
 
 void Game::ComposeFrame()
 {
-	
+	out.Draw_Bitmap_M(&scaling, 0, 0,1);
 
 
 	//framecounter.setText(getFrameNumber());
