@@ -30,8 +30,9 @@ public:
 	void DrawPixelContainer(PixelContainer * src, int fx, int fy);
 	void DrawPixelM(int xoff, int yoff, Color c, int m);
 
-	void Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy);
-	void Draw_Bitmap(Bitmap* BitmapChar, int fx, int fy, int MODIF);
+	void Draw_Bitmap_M(Bitmap* bmp, int fx, int fy, float m);
+	void Draw_Bitmap(Bitmap* bmp, int fx, int fy);
+	void Draw_Bitmap(Bitmap* bmp, int fx, int fy, int MODIF);
 	void Draw_Bitmap(VectorBitmap* VBmp, int fx, int fy);
 	void Draw_Bitmap(VectorBitmap* VBmp, int fx, int fy, int MODIF);
 

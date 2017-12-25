@@ -63,38 +63,15 @@ void Game::ComposeFrame()
 	
 
 
-	
-	if (todraw) {
-		out.DrawShape->rectangle_fill(0, 0, todraw->width, todraw->height, Colors::Cyan);
-		out.Draw_Bitmap(todraw, 0, 0);
-	}
+	//framecounter.setText(getFrameNumber());
+	//out.DrawLabel(0, 0, &framecounter);
 
-	out.DrawLabel(0, 0, &framecounter);
-	f
 }
 
 void Game::UpdateModel()
 {
-	if (wnd.mouse.LeftIsPressed()) {
-		
-		VectorBitmap* next = nullptr;
 
-		while (1) {
-			next = container->GetNextSpriteGroup();
-			
-			if (!next) break;
-			if (next->pixels->size() > 200) {
-				todraw = next;
-				break;
-			}
-			
-		}
-
-		
-		
-		
-	}
-	framecounter.setText(getFrameNumber());
+	
 }
 
 

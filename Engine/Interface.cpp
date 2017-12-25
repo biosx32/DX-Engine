@@ -113,6 +113,30 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 
 
 
+void Interface::Draw_Bitmap_M(Bitmap * Bmp, int fx, int fy, float m)
+{
+
+	int width = Bmp->width;
+	int height = Bmp->height;
+
+
+	int draw_width  = (int) Bmp->width * m;
+	int draw_height = (int) Bmp->width * m;
+
+	for (int yoff = 0; yoff < Bmp->height; yoff++) {
+		for (int xoff = 0; xoff < Bmp->width; xoff++) {
+
+			int finalx = fx + xoff;
+			int finaly = fy + yoff;
+			Color READ_COLOR = *Bmp->GetDataPtr(xoff, yoff);
+			if (!Bmp->IsColorTransparent(READ_COLOR)) {
+				this->DrawPixelM(finalx, finaly, READ_COLOR, 4);
+			}
+		}
+	}
+
+}
+
 void Interface::Draw_Bitmap(Bitmap* Bmp, int fx, int fy) {
 	this->Draw_Bitmap(Bmp, fx, fy, 0);
 }
