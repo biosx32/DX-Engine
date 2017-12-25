@@ -70,7 +70,7 @@ void Game::ComposeFrame()
 	}
 
 	out.DrawLabel(0, 0, &framecounter);
-	f
+	
 }
 
 void Game::UpdateModel()
