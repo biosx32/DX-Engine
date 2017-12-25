@@ -113,27 +113,69 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 
 
 
-void Interface::Draw_Bitmap_M(Bitmap * Bmp, int fx, int fy, float m)
+void Interface::Draw_Bitmap_M(Bitmap * Bmp, int xoff, int yoff, float m)
 {
+	if (!(m > 0)) return;
 
 	int width = Bmp->width;
 	int height = Bmp->height;
 
 
-	int draw_width  = (int) Bmp->width * m;
-	int draw_height = (int) Bmp->width * m;
+	int draw_width  = (int) (Bmp->width * m);
+	int draw_height = (int) (Bmp->height * m);
 
-	for (int yoff = 0; yoff < Bmp->height; yoff++) {
-		for (int xoff = 0; xoff < Bmp->width; xoff++) {
+	int neighbors = (int) (1 / m);
 
-			int finalx = fx + xoff;
-			int finaly = fy + yoff;
-			Color READ_COLOR = *Bmp->GetDataPtr(xoff, yoff);
-			if (!Bmp->IsColorTransparent(READ_COLOR)) {
-				this->DrawPixelM(finalx, finaly, READ_COLOR, 4);
+
+	for (int y = 0; y < draw_height; y++) {
+		for (int x = 0; x < draw_width; x++) {
+			int srcx = x;
+			int srcy = y;
+
+			int dstx = (int) ((xoff + x) * m);
+			int dsty = (int) ((yoff + y) * m);
+
+			int RT=0, GT=0, BT=0;
+			int nc = 0;
+			
+			for (int nx=0; nx < neighbors; nx++) {
+				for (int ny=0; ny < neighbors; ny++) {
+					int nxo = nx - neighbors / 2;
+					int nyo = ny - neighbors / 2;
+
+					Color* neighbor = Bmp->GetDataPtr(srcx - nxo, srcy - nyo);
+					if (neighbor == nullptr) {
+						DebugBreak();
+						Color* neighbor = Bmp->GetDataPtr(srcx - nxo, srcy - nyo);
+						continue;
+					}
+					nc++;
+					if (!Bmp->IsColorTransparent(*neighbor)) {
+						
+						RT += neighbor->GetR();
+						GT += neighbor->GetG();
+						BT += neighbor->GetB();
+					}
+
+
+	
+
+				}
 			}
+
+			RT = RT / nc;
+			GT = GT / nc;
+			BT = BT / nc;
+
+			Color READ_COLOR = Colors::MakeRGB(RT, GT, BT);
+
+			if (!Bmp->IsColorTransparent(READ_COLOR)) {
+				this->DrawPixelM(dstx, dsty, READ_COLOR, 2);
+			}
+
 		}
 	}
+
 
 }
 

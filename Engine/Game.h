@@ -31,7 +31,8 @@
 #include "VectorBitmap.h"
 #include "Interface.h"
 #include <stdlib.h>     /* srand, rand */
-#include <time.h>  
+#include <time.h> 
+#include "Resource.h"
 
 class Game
 {

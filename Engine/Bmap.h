@@ -12,7 +12,7 @@ public:
 
 	inline int pixelcount() { return width * height; }
 	inline virtual bool IsColorTransparent(Color color) { return 0; }
-	inline Color* GetDataPtr(int x, int y) { return data[y * width + x]; }
+	inline Color* GetDataPtr(int x, int y);
 
 public:
 	Bitmap(char* FileName);

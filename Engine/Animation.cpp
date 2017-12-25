@@ -18,7 +18,7 @@ void Animation::Load(float FPS, Spritesheet * sh)
 {
 	this->spritesheet = sh;
 	this->FPS = FPS;
-	this->endFrame = sh->sprites.size() - 1;
+	this->endFrame = (int) (sh->sprites.size() - 1);
 
 }
 
