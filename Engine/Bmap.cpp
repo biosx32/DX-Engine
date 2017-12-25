@@ -100,7 +100,9 @@ Bitmap::Bitmap(int width, int height, Color bkclr)
 
 Bitmap::~Bitmap()
 {
-	delete[] this->data;
+	for (int i = 0; i < pixelcount(); i++) {
+		delete this->data[i];
+	}
 }
 
 inline void Bitmap::Reserve(int width, int height, Color bkclr)
