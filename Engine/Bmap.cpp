@@ -4,11 +4,12 @@
 Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 
 	Bitmap* newBitmap = new Bitmap(width, height, this->bkclr);
-	newBitmap->data = new Color[pixelcount()];
+	newBitmap->Reserve(width, height, this->bkclr);
 
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
-			newBitmap->data[y*width + x] = this->data[(y + yoff)* this->width + (x + xoff)];
+			Color* copy = this->GetDataPtr(x + xoff, y + yoff);
+			*newBitmap->GetDataPtr(x, y) = Color(*copy);
 		}
 	}
 
@@ -21,7 +22,7 @@ Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 
 Bitmap::Bitmap(char * FileName)
 {
-	int temp_color;
+	Color temp_color;
 	int width, height;
 	char Header[54] = {};
 	unsigned char temp[3] = {};
@@ -52,7 +53,7 @@ Bitmap::Bitmap(char * FileName)
 		rotation_correct = 1;
 	}
 
-	this->Load(width, height, 0x00);
+	this->Reserve(width, height, 0);
 
 	bitmap_align_bytes = width % 4;
 	size_line = width * 3;
@@ -65,7 +66,8 @@ Bitmap::Bitmap(char * FileName)
 		for (int j = 0; j < width; j++) {
 			unsigned char* datachar = &linedata[j * 3];
 			temp_color = Color(*(2 + datachar), *(1 + datachar), *(0 + datachar)).dword;
-			this->data[i * width + j] = temp_color;
+			Color* data_destination = GetDataPtr(j, i);
+			*data_destination = temp_color;
 		}
 
 		if (bitmap_align_bytes) {
@@ -81,25 +83,19 @@ Bitmap::Bitmap(char * FileName)
 		return;
 	}
 
-	// if wrong rotaiton, then rotate
+	// if it has wrong rotation, then rotate
 	for (int y = 0; y <= height / 2; y++) {
 		for (int x = 0; x < width; x++) {
-			temp_color = data[(y)* width + x].dword;
-			data[(y)* width + x] = data[((height - 1) - y)* width + x];
-			data[((height - 1) - y)* width + x] = temp_color;
+			temp_color = *this->GetDataPtr(x, y);
+			*this->GetDataPtr(x, y) = *GetDataPtr(x, height - y - 1);
+			*this->GetDataPtr(x, height - y - 1) = temp_color;
 		}
 	}
 }
 
 Bitmap::Bitmap(int width, int height, Color bkclr)
 {
-	this->width = width;
-	this->height = height;
-	this->bkclr = bkclr;
-	this->data = new Color[pixelcount()];
-	for (int i = 0; i < pixelcount(); i++) {
-		this->data[i] = this->bkclr;
-	}
+	this->Reserve(width, height, bkclr);
 }
 
 Bitmap::~Bitmap()
@@ -107,11 +103,22 @@ Bitmap::~Bitmap()
 	delete[] this->data;
 }
 
+inline void Bitmap::Reserve(int width, int height, Color bkclr)
+{
+	this->width = width;
+	this->height = height;
+	this->bkclr = bkclr;
+	this->data = new Color*[pixelcount()];
+	for (int i = 0; i < pixelcount(); i++) {
+		this->data[i] = new Color(this->bkclr);
+	}
+}
+
 
 bool TransparentBitmap::IsColorTransparent(Color color)
 {
-	int r1, g1, b1, r2, g2, b2, temp,
-	const range = pow(255, 2) + pow(255, 2) + pow(255, 2); 
+	int r1, g1, b1, r2, g2, b2, temp;
+	const int range = (int) (pow(255, 2) + pow(255, 2) + pow(255, 2)); 
 
 	double percentage, distance;
 
@@ -137,7 +144,7 @@ TransparentBitmap::TransparentBitmap(char * FileName, Color transp):
 }
 
 TransparentBitmap::TransparentBitmap(int width, int height, Color transp) : 
-	Bitmap(width, height,f transp) {}
+	Bitmap(width, height, transp) {}
 
 TransparentBitmap * TransparentBitmap::GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT)
 {

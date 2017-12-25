@@ -28,6 +28,7 @@
 #include "Spritesheet.h"
 #include "Text.h"
 #include "Drawing.h"
+#include "VectorBitmap.h"
 #include "Interface.h"
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>  

@@ -26,9 +26,9 @@ Spritesheet::Spritesheet(TransparentBitmap * BitmapImage, int wcount, int hcount
 
 	for (int hi = 0; hi < hcount; hi++) {
 		for (int wi = 0; wi < wcount; wi++) {
-			int x = wi * wsize;
-			int y = hi * hsize;
-			TransparentBitmap* cutsprite = BitmapImage->GetBitmapPart(x, y, wsize, hsize);
+			int x = (int)(wi * wsize);
+			int y =(int)( hi * hsize);
+			TransparentBitmap* cutsprite = BitmapImage->GetBitmapPart(x, y, (int)wsize, (int)hsize);
 			VectorBitmap* vbmp = new VectorBitmap(cutsprite);
 			this->sprites.push_back(vbmp);
 		}
@@ -173,7 +173,7 @@ PixelContainer::PixelContainer(TransparentBitmap * bmp)
 	for (int y = 0; y < this->height; y++) {
 		for (int x = 0; x < this->width; x++) {
 			int i = y * width + x;
-			Color color = bmp->data[i];
+			Color color = *bmp->data[i];
 
 			int state = 0;
 			if (bmp->IsColorTransparent(color)) {

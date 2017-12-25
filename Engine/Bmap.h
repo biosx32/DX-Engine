@@ -7,16 +7,19 @@
 
 class Bitmap {
 public:
-	int width, height;
-	Color bkclr, *data;
+	int width = -1, height = -1;
+	Color bkclr = 0, **data;
 
 	inline int pixelcount() { return width * height; }
 	inline virtual bool IsColorTransparent(Color color) { return 0; }
+	inline Color* GetDataPtr(int x, int y) { return data[y * width + x]; }
 
 public:
 	Bitmap(char* FileName);
 	Bitmap(int width, int height, Color bkclr);
 	~Bitmap();
+	
+	inline void Reserve(int width, int height, Color bkclr);
 
 	virtual Bitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT);
 };

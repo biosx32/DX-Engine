@@ -12,7 +12,7 @@ public:
 	FPixel(int x, int y, Color c) : x(x), y(y), color(c) {}
 };
 
-
+class Bitmap;
 class VectorBitmap {
 
 protected:

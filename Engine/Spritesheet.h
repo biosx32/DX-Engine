@@ -1,6 +1,7 @@
 #ifndef __SPRITESHEET_H__
 #define __SPRITESHEET_H__
 #include "Bmap.h"
+#include "VectorBitmap.h"
 
 class Vector2 {
 public:
@@ -61,8 +62,6 @@ public:
 	FFPixel* getPixelAt(int x, int y);
 	FFPixel* GetNextSpritePixel();
 	VectorBitmap* GetGroupFrom(FFPixel * pixel);
-	PixelContainer(TransparentBitmap* bmp);
-	void Load(TransparentBitmap* bmp);
 	VectorBitmap* GetNextSpriteGroup();
 	
 

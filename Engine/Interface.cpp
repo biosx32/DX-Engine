@@ -149,8 +149,7 @@ void Interface::Draw_Bitmap(Bitmap * Bmp, int fx, int fy, int MODIF)
 			
 			int finalx = fx + xoff;
 			int finaly = fy + yoff;
-			Color READ_COLOR = Bmp->data[yoff* width + xoff];
-
+			Color READ_COLOR = *Bmp->GetDataPtr(xoff, yoff);
 			if (!Bmp->IsColorTransparent(READ_COLOR)) {
 				DrawPixelSpecial(finalx, finaly, READ_COLOR, MODIF, width, height);
 			}

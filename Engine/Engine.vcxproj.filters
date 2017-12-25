@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{8b6c92a8-f65d-451e-80e3-d65773602b92}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EngineHPP">
       <UniqueIdentifier>{9d7c3be3-ed8c-4209-a049-ad2f078f291c}</UniqueIdentifier>
     </Filter>
@@ -27,6 +24,9 @@
     </Filter>
     <Filter Include="Source Files\Extended">
       <UniqueIdentifier>{82b1d44f-5070-4f01-a0bf-02e486a9f556}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Extended\Shaders">
+      <UniqueIdentifier>{8b6c92a8-f65d-451e-80e3-d65773602b92}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -149,10 +149,10 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
-      <Filter>Shaders</Filter>
+      <Filter>Source Files\Extended\Shaders</Filter>
     </FxCompile>
     <FxCompile Include="FramebufferVS.hlsl">
-      <Filter>Shaders</Filter>
+      <Filter>Source Files\Extended\Shaders</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

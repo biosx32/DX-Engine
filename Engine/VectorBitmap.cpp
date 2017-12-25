@@ -14,7 +14,7 @@ VectorBitmap::VectorBitmap(TransparentBitmap * src)
 	for (int i = 0; i < src->pixelcount(); i++) {
 		int x = i % src->width;
 		int y = i / src->width;
-		Color t = src->data[i];
+		Color t = *src->data[i];
 		if (!src->IsColorTransparent(t)) {
 			pixels->push_back(new FPixel(x, y, t));
 		}
