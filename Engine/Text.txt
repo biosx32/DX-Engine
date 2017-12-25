@@ -1,5 +1,0 @@
-	int color_background = Color(0,0,0).dword; //black
-	int color_checked = Color(51, 204, 51).dword; //green
-	int color_pending = Color(255, 51, 0).dword; //red
-	int color_raw = Color(255, 255, 255).dword; //white
-	int color_review = Color(102, 102, 153).dword; //gray
