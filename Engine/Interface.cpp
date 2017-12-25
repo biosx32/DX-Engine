@@ -47,9 +47,6 @@ void Interface::DrawPixelContainer(PixelContainer* src, int fx, int fy)
 
 void Interface::DrawLabel(int xoff, int yoff, Label * label)
 {
-	Color old = this->DrawShape->brush;
-	this->DrawShape->SetBrushColor(Colors::Red);
-
 	double rel_pos_x = 0;
 	double rel_pos_y = 0;
 
@@ -111,7 +108,7 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label)
 
 	
 	}
-	this->DrawShape->SetBrushColor(old);
+
 }
 
 
@@ -174,7 +171,7 @@ void Interface::Draw_Bitmap(VectorBitmap * VBmp, int fx, int fy, int MODIF)
 
 void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 {
-	/*Color old = this->DrawShape->brush;
+	/*Color old = this->DrawShape->original;
 	this->DrawShape->SetBrushColor(Colors::Red);
 
 	int sprw = sh->sprites[0]->width;
@@ -196,6 +193,13 @@ void Interface::DrawSpritesheet(Spritesheet * sh, int xoff, int yoff)
 	}
 	
 	this->DrawShape->SetBrushColor(old);*/
+}
+
+void Interface::FillScreen(Color color)
+{
+	if (gfx) {
+		this->DrawShape->rectangle_fill(0, 0, gfx->ScreenWidth - 1, gfx->ScreenHeight - 1, color);
+	}
 }
 
 void Interface::DrawPixelM(int xoff, int yoff, Color c, int m)

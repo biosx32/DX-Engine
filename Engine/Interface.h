@@ -37,7 +37,10 @@ public:
 
 	void DrawLabel(int x, int y, Label* label);
 	void DrawSpritesheet(Spritesheet* sh, int xoff, int yoff);
-	
+
+	void FillScreen(Color color);
+
+
 	Draw* DrawShape;
 
 protected:

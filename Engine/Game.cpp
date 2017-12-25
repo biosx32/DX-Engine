@@ -50,8 +50,6 @@ PixelContainer* container=nullptr;
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
-	out.DrawShape->SetBrushColor(Colors::Blue);
-
 	SpriteImage.tolerance = 0.005f;
 	container = new PixelContainer(&SpriteImage);
 
@@ -62,21 +60,17 @@ VectorBitmap* todraw = nullptr;
 
 void Game::ComposeFrame()
 {
-	//out.DrawShape->rectangle_fill(0, 0, gfx.ScreenWidth-1, gfx.ScreenHeight-1);
-
-	//out.DrawPixelContainer(container, 0, 0);
-    
 	
-	out.Draw_Bitmap(&SpriteImage,0,0);
 
 
 	
 	if (todraw) {
-		out.DrawShape->rectangle_fill(0, 0, todraw->width, todraw->height);
+		out.DrawShape->rectangle_fill(0, 0, todraw->width, todraw->height, Colors::Cyan);
 		out.Draw_Bitmap(todraw, 0, 0);
 	}
 
-	out.DrawLabel(0, 500, &framecounter);
+	out.DrawLabel(0, 0, &framecounter);
+	f
 }
 
 void Game::UpdateModel()

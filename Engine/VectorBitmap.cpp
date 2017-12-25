@@ -12,7 +12,6 @@ VectorBitmap::VectorBitmap(TransparentBitmap * src)
 
 	this->pixels = new vector<FPixel*>;
 
-
 	for (int y = 0; y < src->height; y++) {
 		for (int x = 0; x < src->width; x++) {
 			Color test_color = *src->GetDataPtr(x, y);
@@ -22,17 +21,6 @@ VectorBitmap::VectorBitmap(TransparentBitmap * src)
 			}
 
 
-		}
-	}
-
-
-	for (int i = 0; i < src->pixelcount(); i++) {
-		int x = i % src->width;
-		int y = i / src->width;
-
-		Color test_color = *src->data[i];
-		if (!src->IsColorTransparent(test_color)) {
-			pixels->push_back(new FPixel(x, y, t));
 		}
 	}
 

@@ -8,16 +8,16 @@ class Interface;
 class Draw {
 public:
 	Interface*  out;
-	Color brush;
 
+public:
 	void setOutInterface(Interface* out);
-	void SetBrushColor(Color color);
-	void FastHLine( int x0, int y0, int width);
-	void FastVLine( int x0, int y0, int height);
-	void circle( int xoff, int yoff, int radius);
-	void line( int x0, int y0, int width, int height);
-	void rectangle( int x0, int y0, int width, int height);
-	void rectangle_fill(int x0, int y0, int width, int height);
+
+	void FastHLine(int x, int y, int w, Color c); 
+	void FastVLine( int x, int y, int h, Color c);
+	void circle( int x, int y, int rad, Color c);
+	void line( int x, int y, int w, int h, Color c);
+	void rectangle( int x, int y, int w, int h, Color c);
+	void rectangle_fill(int x, int y, int w, int h, Color c);
 };
 
 
