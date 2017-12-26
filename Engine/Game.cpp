@@ -39,27 +39,25 @@ void Game::Go()
 }
 
 
-TransparentBitmap img("FONT\\small.bmp",Colors::MakeRGB(177, 244, 177));
+TransparentBitmap img("IMAGES\\FONTMAP_SMALL.bmp",Colors::MakeRGB(177, 244, 177));
 Label framecounter(&img,16,16);
-TransparentBitmap SpriteImage("IMAGES\\sprites3.bmp", Colors::MakeRGB(255, 255, 255));
-
-
-TransparentBitmap scaling("IMAGES\\FLOODFILL_TEST.bmp", Colors::MakeRGB(177, 244, 177));
+TransparentBitmap scaling("IMAGES\\RGB_TEST.bmp", Colors::MakeRGB(177, 244, 177));
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
-	SpriteImage.tolerance = 0.005f;
-
-	return;
 }
 
+double scale = 1;
 void Game::ComposeFrame()
 {
-	out.Draw_Bitmap_M(&scaling, 0, 0,0.5);
 
 
-	//framecounter.setText(getFrameNumber());
-	//out.DrawLabel(0, 0, &framecounter);
+
+	//out.Draw_Bitmap_M(&scaling, 0, 0, scale);
+
+
+	framecounter.setText(getFrameNumber());
+	out.DrawLabel(0, 2, &framecounter, 2);
 
 }
 

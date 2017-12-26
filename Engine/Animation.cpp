@@ -3,18 +3,18 @@ Animation::Animation()
 {
 }
 
-Animation::Animation(float FPS, Spritesheet * sh, int s, int e) : Animation(FPS, sh)
+Animation::Animation(float FPS, SpritesheetVec * sh, int s, int e) : Animation(FPS, sh)
 {
 
 	this->SetRange(s, e);
 }
 
-Animation::Animation(float FPS, Spritesheet * sh)
+Animation::Animation(float FPS, SpritesheetVec * sh)
 {
 	this->Load(FPS, sh);
 }
 
-void Animation::Load(float FPS, Spritesheet * sh)
+void Animation::Load(float FPS, SpritesheetVec * sh)
 {
 	this->spritesheet = sh;
 	this->FPS = FPS;

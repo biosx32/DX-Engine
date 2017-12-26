@@ -3,7 +3,7 @@
 
 
 
-Spritesheet::Spritesheet(TransparentBitmap * BitmapImage)
+SpritesheetVec::SpritesheetVec(TransparentBitmap * BitmapImage)
 {
 	PixelContainer* temp = new PixelContainer(BitmapImage);
 	while (1) {
@@ -18,7 +18,7 @@ Spritesheet::Spritesheet(TransparentBitmap * BitmapImage)
 
 }
 
-Spritesheet::Spritesheet(TransparentBitmap * BitmapImage, int wcount, int hcount)
+SpritesheetVec::SpritesheetVec(TransparentBitmap * BitmapImage, int wcount, int hcount)
 
 {	
 	float wsize = BitmapImage->width / float(wcount);
@@ -37,7 +37,7 @@ Spritesheet::Spritesheet(TransparentBitmap * BitmapImage, int wcount, int hcount
 	
 }
 
-Spritesheet::~Spritesheet() {
+SpritesheetVec::~SpritesheetVec() {
 	for (std::vector<VectorBitmap*>::iterator it = sprites.begin(); it != sprites.end(); ++it)
 	{
 		delete *it;
@@ -186,3 +186,25 @@ PixelContainer::PixelContainer(TransparentBitmap * bmp)
 	}
 }
 
+Spritesheet::Spritesheet(TransparentBitmap * BitmapImage, int wcount, int hcount)
+{
+	float wsize = BitmapImage->width / float(wcount);
+	float hsize = BitmapImage->height / float(hcount);
+
+	this->sprites = new TransparentBitmap*[wcount*hcount];
+	for (int hi = 0; hi < hcount; hi++) {
+		for (int wi = 0; wi < wcount; wi++) {
+			int x = (int)(wi * wsize);
+			int y = (int)(hi * hsize);
+			TransparentBitmap* cutsprite = BitmapImage->GetBitmapPart(x, y, (int)wsize, (int)hsize);
+			this->sprites[hcount * hi + wi] = cutsprite;
+		}
+	}
+}
+
+Spritesheet::~Spritesheet()
+{
+	for (int i = 0; i < this->count; i++) {
+		delete this->sprites[i];
+	}
+}

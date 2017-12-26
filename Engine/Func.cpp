@@ -33,7 +33,7 @@ char* const getFrameNumber() {
 
 
 
-	sprintf_s(buff, "Frame: %02d, EPS: %1.3f, FPS %2.3f", fc,elapsed_secs, FPS);
+	sprintf_s(buff, "Frame: %02d\nEPS: %1.3f\nFPS: %2.3f", fc,elapsed_secs, FPS);
 	return buff;
 }
 

@@ -20,15 +20,26 @@ namespace pxstate
 };
 
 
-class Spritesheet{
+class SpritesheetVec{
 public:
 	vector<VectorBitmap*> sprites;
 public:
-	Spritesheet(TransparentBitmap* BitmapImage);
-	Spritesheet(TransparentBitmap* BitmapImage, int wcount, int hcount);
-	~Spritesheet();
+	SpritesheetVec(TransparentBitmap* BitmapImage);
+	SpritesheetVec(TransparentBitmap* BitmapImage, int wcount, int hcount);
+	~SpritesheetVec();
 	
 };
+
+class Spritesheet {
+public:
+	TransparentBitmap * * sprites;
+	int count;
+public:
+	Spritesheet(TransparentBitmap* BitmapImage, int wcount, int hcount);
+	~Spritesheet();
+
+};
+
 
 
 class FFPixel : public FPixel {
