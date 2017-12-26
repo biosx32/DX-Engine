@@ -57,7 +57,7 @@ void Game::ComposeFrame()
 
 
 	framecounter.setText(getFrameNumber());
-	out.DrawLabel(0, 2, &framecounter, 2);
+	out.DrawLabel(gfx.ScreenWidth*1, gfx.ScreenHeight*1.17, &framecounter, 0.80);
 
 }
 
