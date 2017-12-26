@@ -39,62 +39,32 @@ void Game::Go()
 }
 
 
-TransparentBitmap img("FONT\\small.bmp",Colors::MakeRGB(177, 244, 177));
-Spritesheet sh(&img,16,16);
+TransparentBitmap img("IMAGES\\FONTMAP_SMALL.bmp",Colors::MakeRGB(177, 244, 177));
 Label framecounter(&img,16,16);
-
-
-TransparentBitmap SpriteImage("SPRITESHEET\\sprites3.bmp", Colors::MakeRGB(255, 255, 255));
-
-PixelContainer* container=nullptr;
+TransparentBitmap scaling("IMAGES\\RGB_TEST.bmp", Colors::MakeRGB(177, 244, 177));
 
 void Game::Initialise() {
 	out.set_graphics(&gfx);
-	SpriteImage.tolerance = 0.005f;
-	container = new PixelContainer(&SpriteImage);
-
-	
 }
 
-VectorBitmap* todraw = nullptr;
-
+double scale = 1;
 void Game::ComposeFrame()
 {
-	
 
 
-	
-	if (todraw) {
-		out.DrawShape->rectangle_fill(0, 0, todraw->width, todraw->height, Colors::Cyan);
-		out.Draw_Bitmap(todraw, 0, 0);
-	}
 
-	out.DrawLabel(0, 0, &framecounter);
-	f
+	//out.Draw_Bitmap_M(&scaling, 0, 0, scale);
+
+
+	framecounter.setText(getFrameNumber());
+	out.DrawLabel( (int) (gfx.ScreenWidth*0.91), (int) (gfx.ScreenHeight*1.07), &framecounter, 0.85);
+
 }
 
 void Game::UpdateModel()
 {
-	if (wnd.mouse.LeftIsPressed()) {
-		
-		VectorBitmap* next = nullptr;
 
-		while (1) {
-			next = container->GetNextSpriteGroup();
-			
-			if (!next) break;
-			if (next->pixels->size() > 200) {
-				todraw = next;
-				break;
-			}
-			
-		}
-
-		
-		
-		
-	}
-	framecounter.setText(getFrameNumber());
+	
 }
 
 

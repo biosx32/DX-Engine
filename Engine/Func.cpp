@@ -1,7 +1,9 @@
 #include "Func.h"
+SpecialCode msgbox = 1;
+SpecialCode console = 2;
+SpecialCode clear = 3;
 
-OutputStream print;
-Error printerr;
+OutputStream prints;
 
 int fc=0;
 char buff[64];
@@ -27,11 +29,11 @@ char* const getFrameNumber() {
 	    
 	}
 
-	float FPS = 15 / elapsed_secs;
+	double FPS = 15 / elapsed_secs;
 
 
 
-	sprintf_s(buff, "Frame: %02d, EPS: %1.3f, FPS %2.3f", fc,elapsed_secs, FPS);
+	sprintf_s(buff, "Frame: %02d\nEPS: %1.3f\nFPS: %2.3f", fc,elapsed_secs, FPS);
 	return buff;
 }
 
@@ -44,37 +46,38 @@ int File_bytes(FILE* p_file)
 	return size;
 }
 
-OutputStream & OutputStream::operator<<(char * str)
+wchar_t *ToLSTR(char* charArray)
 {
-	wchar_t* wString = new wchar_t[4096];
-	MultiByteToWideChar(CP_ACP, 0, str, -1, wString, 4096);
-	OutputDebugString(wString);
-	return *this;
-}
-
-OutputStream & OutputStream::operator<<(double chr)
-{
-	std::string s = std::to_string(chr);
-	char const *pchar = s.c_str();
-	wchar_t* wString = new wchar_t[128];
-	MultiByteToWideChar(CP_ACP, 0, pchar, -1, wString, 128);
-	OutputDebugString(wString);
-	return *this;
+	wchar_t *wString = new wchar_t[4096];
+	MultiByteToWideChar(CP_ACP, 0, charArray, -1, wString, 4096);
+	return wString;
 }
 
 
-OutputStream & Error::operator<<(char * str)
+
+OutputStream & OutputStream::operator<<(SpecialCode finish)
 {
-	OutputStream::operator<<("!ERROR: ");
-	OutputStream::operator<<(str);
+	if (finish == msgbox) {
+		std::wstring& wstr = stream.str(); // extends lifetime of temporary 
+		LPCWSTR p = wstr.c_str();
+		MessageBox(0, p, L"Message:", 0);
+
+	}
+
+	if (finish == console) {
+		LPCWSTR str = stream.str().c_str();
+		OutputDebugStringW(str);
+	}
+
+	if (finish == clear) {
+		stream = wstringstream();
+	}
+
 	return *this;
 }
 
-OutputStream & Error::operator<<(double chr)
+OutputStream & OutputStream::operator<<(const char * data)
 {
-	OutputStream::operator<<("!ERROR: ");
-	OutputStream::operator<<(chr);
+	stream << data;
 	return *this;
 }
-
-

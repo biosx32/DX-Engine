@@ -1,30 +1,45 @@
 #ifndef __FUNC__H__
 #define __FUNC__H__
-
 #include <stdio.h>
 #include <Windows.h>
 #include <string>
 #include <ctime>
+#include <sstream>
+using std::wstringstream;
 
+
+class SpecialCode {
+public:
+	SpecialCode(int x) { code = x; }
+	bool SpecialCode::operator==(SpecialCode& other) { return this->code == other.code; }
+	int code=-1;
+};
+
+extern SpecialCode msgbox ;
+extern SpecialCode console;
+extern SpecialCode clear;
 
 char * const getFrameNumber();
 
 int File_bytes(FILE* p_file);
 
 class OutputStream {
+protected:
+	wstringstream stream;
 public:
-	OutputStream& operator<<(char* str);
-	OutputStream& operator<<(double chr);
+
+	
+	inline OutputStream & OutputStream::operator<<(int data) { stream << data; return *this;}
+	inline OutputStream & OutputStream::operator<<(double data) { stream << data; return *this;}
+
+	OutputStream & OutputStream::operator<<(SpecialCode finish);
+	OutputStream & OutputStream::operator<<(const char*);
 };
 
-class Error : public OutputStream {
-public:
-	OutputStream& operator<<(char* str);
-	OutputStream& operator<<(double chr);
-};
 
-extern OutputStream print;
-extern Error printerr;
+wchar_t *ToLSTR(char* charArray);
+
+extern OutputStream prints;
 
 
 #endif

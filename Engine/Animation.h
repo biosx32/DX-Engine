@@ -4,9 +4,9 @@
 class Animation {
 public:
 	Animation();
-	Animation(float FPS, Spritesheet* sh, int s, int e);
-	Animation(float FPS, Spritesheet* sh);
-	void Load(float FPS, Spritesheet* sh);
+	Animation(float FPS, SpritesheetVec* sh, int s, int e);
+	Animation(float FPS, SpritesheetVec* sh);
+	void Load(float FPS, SpritesheetVec* sh);
 
 	int startFrame = 0;
 	int endFrame = 0;
@@ -24,7 +24,7 @@ public:
 	VectorBitmap* GetCurrent();
 
 
-	Spritesheet* spritesheet = nullptr;
+	SpritesheetVec* spritesheet = nullptr;
 
 };
 #endif

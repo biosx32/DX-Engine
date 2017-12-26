@@ -2,7 +2,7 @@
 #define __TEXT_H__
 #include "Spritesheet.h"
 
-class Spritesheet;
+class SpritesheetVec;
 class Label {
 
 public:
@@ -32,7 +32,7 @@ public:
 	Label() = delete;
 	Label(TransparentBitmap * bmp, int wcount, int hcount);
 	
-	VectorBitmap* GetCharacterRepr(unsigned int c);
+	TransparentBitmap* GetCharacterRepr(unsigned int c);
 	void setText(char* text);
 	
 };

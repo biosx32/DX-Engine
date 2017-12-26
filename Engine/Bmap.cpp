@@ -20,6 +20,15 @@ Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 
 
 
+inline Color * Bitmap::GetDataPtr(int x, int y)
+{
+	if (x >= 0 && y >= 0 && x < width && y < height) {
+		return data[y * width + x];
+	}
+	
+	return nullptr;
+}
+
 Bitmap::Bitmap(char * FileName)
 {
 	Color temp_color;
@@ -33,13 +42,13 @@ Bitmap::Bitmap(char * FileName)
 	fopen_s(&file_read, FileName, "rb");
 
 	if (file_read == nullptr) {
-		printerr << "Could not load image: " << FileName << " << FILE NOT FOUND\n";
+		prints << "ERROR: Could not load image: " << FileName << " << FILE NOT FOUND\n" << console << msgbox << clear;
 		return;
 	}
 
 	int BYTES_TO_READ = File_bytes(file_read);
 	if (BYTES_TO_READ < 1) {
-		printerr << "Could not load image: " << FileName << " << EMPTY FILE\n";
+		prints << "ERROR: Could not load image: " << FileName << " << EMPTY FILE\n" << console << msgbox << clear;
 		return;
 	}
 
@@ -65,7 +74,7 @@ Bitmap::Bitmap(char * FileName)
 
 		for (int j = 0; j < width; j++) {
 			unsigned char* datachar = &linedata[j * 3];
-			temp_color = Color(*(2 + datachar), *(1 + datachar), *(0 + datachar)).dword;
+			temp_color = Color(*(2 + datachar), *(1 + datachar), *(0 + datachar));
 			Color* data_destination = GetDataPtr(j, i);
 			*data_destination = temp_color;
 		}
@@ -100,6 +109,7 @@ Bitmap::Bitmap(int width, int height, Color bkclr)
 
 Bitmap::~Bitmap()
 {
+	if (!data) return;
 	for (int i = 0; i < pixelcount(); i++) {
 		delete this->data[i];
 	}
