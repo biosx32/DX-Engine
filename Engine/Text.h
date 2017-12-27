@@ -2,13 +2,13 @@
 #define __TEXT_H__
 #include "Spritesheet.h"
 
-class SpritesheetVec;
+class VectorSpriteSheet;
 class Label {
 
 public:
 	static const int txmax = 256;
 	char text[txmax];
-	Spritesheet* sprite_sheet = nullptr;
+	SymetricSpriteSheet* sprite_sheet = nullptr;
 	const int translate[256] = {
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

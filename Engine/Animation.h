@@ -4,9 +4,9 @@
 class Animation {
 public:
 	Animation();
-	Animation(float FPS, SpritesheetVec* sh, int s, int e);
-	Animation(float FPS, SpritesheetVec* sh);
-	void Load(float FPS, SpritesheetVec* sh);
+	Animation(float FPS, VectorSpriteSheet* sh, int s, int e);
+	Animation(float FPS, VectorSpriteSheet* sh);
+	void Load(float FPS, VectorSpriteSheet* sh);
 
 	int startFrame = 0;
 	int endFrame = 0;
@@ -21,10 +21,10 @@ public:
 
 	void ForceStep();
 	void Step();
-	VectorBitmap* GetCurrent();
+	Sprite* GetCurrent();
 
 
-	SpritesheetVec* spritesheet = nullptr;
+	VectorSpriteSheet* spritesheet = nullptr;
 
 };
 #endif

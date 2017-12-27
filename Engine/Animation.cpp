@@ -3,18 +3,18 @@ Animation::Animation()
 {
 }
 
-Animation::Animation(float FPS, SpritesheetVec * sh, int s, int e) : Animation(FPS, sh)
+Animation::Animation(float FPS, VectorSpriteSheet * sh, int s, int e) : Animation(FPS, sh)
 {
 
 	this->SetRange(s, e);
 }
 
-Animation::Animation(float FPS, SpritesheetVec * sh)
+Animation::Animation(float FPS, VectorSpriteSheet * sh)
 {
 	this->Load(FPS, sh);
 }
 
-void Animation::Load(float FPS, SpritesheetVec * sh)
+void Animation::Load(float FPS, VectorSpriteSheet * sh)
 {
 	this->spritesheet = sh;
 	this->FPS = FPS;
@@ -53,7 +53,7 @@ void Animation::Step()
 	}
 }
 
-VectorBitmap * Animation::GetCurrent()
+Sprite * Animation::GetCurrent()
 {
 	return spritesheet->sprites[currentFrame];
 }

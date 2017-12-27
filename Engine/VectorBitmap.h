@@ -13,7 +13,7 @@ public:
 };
 
 class Bitmap;
-class VectorBitmap {
+class Sprite {
 
 protected:
 	int offx, offy;
@@ -23,12 +23,12 @@ public:
 	std::vector<FPixel*>* pixels;
 
 public:
-	VectorBitmap(vector<FPixel*>* src);
-	VectorBitmap(TransparentBitmap* src);
+	Sprite(vector<FPixel*>* src);
+	Sprite(TransparentBitmap* src);
 	void ComputeSize();
 	void NormalizeV();
 	void NormalizeH();
-	~VectorBitmap();
+	~Sprite();
 
 };
 

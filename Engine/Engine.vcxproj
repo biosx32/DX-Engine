@@ -157,6 +157,7 @@
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="Spritesheet.h" />
+    <ClInclude Include="TestInterface.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="VectorBitmap.h" />
   </ItemGroup>
@@ -176,6 +177,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Spritesheet.cpp" />
+    <ClCompile Include="TestInterface.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="VectorBitmap.cpp" />
   </ItemGroup>

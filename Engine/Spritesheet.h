@@ -20,24 +20,23 @@ namespace pxstate
 };
 
 
-class SpritesheetVec{
+class VectorSpriteSheet{
 public:
-	vector<VectorBitmap*> sprites;
+	vector<Sprite*> sprites;
 public:
-	SpritesheetVec(TransparentBitmap* BitmapImage);
-	SpritesheetVec(TransparentBitmap* BitmapImage, int wcount, int hcount);
-	~SpritesheetVec();
+	VectorSpriteSheet(TransparentBitmap* BitmapImage);
+	VectorSpriteSheet(TransparentBitmap* BitmapImage, int wcount, int hcount);
+	~VectorSpriteSheet();
 	
 };
 
-class Spritesheet {
+class SymetricSpriteSheet {
 public:
 	TransparentBitmap * * sprites;
 	int count;
 public:
-	Spritesheet(TransparentBitmap* BitmapImage, int wcount, int hcount);
-	~Spritesheet();
-
+	SymetricSpriteSheet(TransparentBitmap* BitmapImage, int wcount, int hcount);
+	~SymetricSpriteSheet();
 };
 
 
@@ -72,8 +71,8 @@ public:
 	PixelContainer(TransparentBitmap* bmp);
 	FFPixel* getPixelAt(int x, int y);
 	FFPixel* GetNextSpritePixel();
-	VectorBitmap* GetGroupFrom(FFPixel * pixel);
-	VectorBitmap* GetNextSpriteGroup();
+	Sprite* GetGroupFrom(FFPixel * pixel);
+	Sprite* GetNextSpriteGroup();
 	
 
 };

@@ -44,20 +44,19 @@ Label framecounter(&img,16,16);
 TransparentBitmap scaling("IMAGES\\RGB_TEST.bmp", Colors::MakeRGB(177, 244, 177));
 
 void Game::Initialise() {
-	out.set_graphics(&gfx);
+	out = new TestInterface(&gfx);
 }
 
-double scale = 1;
-void Game::ComposeFrame()
-{
-
-
+void Game::ComposeFrame(){
 
 	//out.Draw_Bitmap_M(&scaling, 0, 0, scale);
 
 
 	framecounter.setText(getFrameNumber());
-	out.DrawLabel( (int) (gfx.ScreenWidth*0.91), (int) (gfx.ScreenHeight*1.07), &framecounter, 0.85);
+
+	out->Draw_Bitmap_M(&scaling, 0, 0, 1);
+	out->Draw_Bitmap_M(&scaling, 0, 500, 2);
+	//out.DrawLabel( (int) 1, (int) 1, &framecounter, 0.85);
 
 }
 

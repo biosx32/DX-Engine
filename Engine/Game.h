@@ -30,6 +30,7 @@
 #include "Drawing.h"
 #include "VectorBitmap.h"
 #include "Interface.h"
+#include "TestInterface.h"
 #include <stdlib.h>     /* srand, rand */
 #include <time.h> 
 #include "Resource.h"
@@ -44,8 +45,9 @@ public:
 	void Initialise();
 	/********************************/
 	/*  User Functions              */
+	Interface* out;
 	/********************************/
-	Interface out;
+	
 private:
 	void ComposeFrame();
 	void UpdateModel();

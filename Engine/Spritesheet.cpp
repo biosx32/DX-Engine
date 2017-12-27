@@ -3,11 +3,11 @@
 
 
 
-SpritesheetVec::SpritesheetVec(TransparentBitmap * BitmapImage)
+VectorSpriteSheet::VectorSpriteSheet(TransparentBitmap * BitmapImage)
 {
 	PixelContainer* temp = new PixelContainer(BitmapImage);
 	while (1) {
-		VectorBitmap* naw = temp->GetNextSpriteGroup();
+		Sprite* naw = temp->GetNextSpriteGroup();
 		if (naw == nullptr) {
 			break;
 		}
@@ -18,7 +18,7 @@ SpritesheetVec::SpritesheetVec(TransparentBitmap * BitmapImage)
 
 }
 
-SpritesheetVec::SpritesheetVec(TransparentBitmap * BitmapImage, int wcount, int hcount)
+VectorSpriteSheet::VectorSpriteSheet(TransparentBitmap * BitmapImage, int wcount, int hcount)
 
 {	
 	float wsize = BitmapImage->width / float(wcount);
@@ -29,7 +29,7 @@ SpritesheetVec::SpritesheetVec(TransparentBitmap * BitmapImage, int wcount, int 
 			int x = (int)(wi * wsize);
 			int y =(int)( hi * hsize);
 			TransparentBitmap* cutsprite = BitmapImage->GetBitmapPart(x, y, (int)wsize, (int)hsize);
-			VectorBitmap* vbmp = new VectorBitmap(cutsprite);
+			Sprite* vbmp = new Sprite(cutsprite);
 			this->sprites.push_back(vbmp);
 		}
 	}
@@ -37,8 +37,8 @@ SpritesheetVec::SpritesheetVec(TransparentBitmap * BitmapImage, int wcount, int 
 	
 }
 
-SpritesheetVec::~SpritesheetVec() {
-	for (std::vector<VectorBitmap*>::iterator it = sprites.begin(); it != sprites.end(); ++it)
+VectorSpriteSheet::~VectorSpriteSheet() {
+	for (std::vector<Sprite*>::iterator it = sprites.begin(); it != sprites.end(); ++it)
 	{
 		delete *it;
 	}
@@ -82,7 +82,7 @@ FFPixel * PixelContainer::GetNextSpritePixel()
 
 
 
-VectorBitmap* PixelContainer::GetGroupFrom(FFPixel* pixel) {
+Sprite* PixelContainer::GetGroupFrom(FFPixel* pixel) {
 	if (!pixel) return nullptr;
 	this->result_group = new vector<FPixel*>;
 
@@ -93,10 +93,10 @@ VectorBitmap* PixelContainer::GetGroupFrom(FFPixel* pixel) {
 		stalledPixels.pop_back();
 		this->CheckPixel(px);
 	}
-	VectorBitmap* result;
+	Sprite* result;
 
 	if (result_group->size() > 0) {
-		result = new VectorBitmap(result_group);
+		result = new Sprite(result_group);
 		delete result_group;
 		return result;
 	}
@@ -104,7 +104,7 @@ VectorBitmap* PixelContainer::GetGroupFrom(FFPixel* pixel) {
 	return nullptr;
 }
 
-VectorBitmap* PixelContainer::GetNextSpriteGroup()
+Sprite* PixelContainer::GetNextSpriteGroup()
 {
 	return GetGroupFrom(GetNextSpritePixel());
 }
@@ -186,7 +186,7 @@ PixelContainer::PixelContainer(TransparentBitmap * bmp)
 	}
 }
 
-Spritesheet::Spritesheet(TransparentBitmap * BitmapImage, int wcount, int hcount)
+SymetricSpriteSheet::SymetricSpriteSheet(TransparentBitmap * BitmapImage, int wcount, int hcount)
 {
 	float wsize = BitmapImage->width / float(wcount);
 	float hsize = BitmapImage->height / float(hcount);
@@ -202,7 +202,7 @@ Spritesheet::Spritesheet(TransparentBitmap * BitmapImage, int wcount, int hcount
 	}
 }
 
-Spritesheet::~Spritesheet()
+SymetricSpriteSheet::~SymetricSpriteSheet()
 {
 	for (int i = 0; i < this->count; i++) {
 		delete this->sprites[i];

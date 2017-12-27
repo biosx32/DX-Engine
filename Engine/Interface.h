@@ -17,32 +17,25 @@
 
 class Draw;
 class Label;
-class SpritesheetVec;
+class VectorSpriteSheet;
 class Interface {
-protected:
-	void DrawPixelSpecial(int x, int y, Color c, int MODIF, int width, int height);
 public:
-	Interface();
-
-	void set_graphics(Graphics* gfx);
+	Draw * Painter;
+public:
+	Interface(Graphics* gfx);
 
 	void DrawPixel(int xoff, int yoff, Color c);
-	void DrawPixelContainer(PixelContainer * src, int fx, int fy);
 	void DrawPixelM(int xoff, int yoff, Color c, int m);
 
 	void Draw_Bitmap_M(Bitmap* bmp, int fx, int fy, float m);
 	void Draw_Bitmap(Bitmap* bmp, int fx, int fy);
 	void Draw_Bitmap(Bitmap* bmp, int fx, int fy, int MODIF);
-	void Draw_Bitmap(VectorBitmap* VBmp, int fx, int fy);
-	void Draw_Bitmap(VectorBitmap* VBmp, int fx, int fy, int MODIF);
-
+	void Draw_Bitmap(Sprite* VBmp, int fx, int fy);
+	void Draw_Bitmap(Sprite* VBmp, int fx, int fy, int MODIF);
+	void DrawPixelSpecial(int x, int y, Color c, int MODIF, int width, int height);
 	void DrawLabel(int x, int y, Label* label, double scale);
-	void DrawSpritesheet(SpritesheetVec* sh, int xoff, int yoff);
-
+	
 	void FillScreen(Color color);
-
-
-	Draw* DrawShape;
 
 protected:
 	Graphics* gfx = nullptr;

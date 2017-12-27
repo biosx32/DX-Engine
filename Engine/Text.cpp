@@ -8,7 +8,7 @@ Label::~Label()
 
 Label::Label(TransparentBitmap * bmp, int wcount, int hcount)
 {
-	this->sprite_sheet = new Spritesheet(bmp, wcount, hcount);
+	this->sprite_sheet = new SymetricSpriteSheet(bmp, wcount, hcount);
 
 }
 

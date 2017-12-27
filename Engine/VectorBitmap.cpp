@@ -1,5 +1,5 @@
 #include "VectorBitmap.h"
-VectorBitmap::VectorBitmap(vector<FPixel*>* src)
+Sprite::Sprite(vector<FPixel*>* src)
 {
 	this->pixels = new vector<FPixel*>(*src);
 	this->ComputeSize();
@@ -7,7 +7,7 @@ VectorBitmap::VectorBitmap(vector<FPixel*>* src)
 	this->NormalizeH();
 }
 
-VectorBitmap::VectorBitmap(TransparentBitmap * src)
+Sprite::Sprite(TransparentBitmap * src)
 {
 
 	this->pixels = new vector<FPixel*>;
@@ -28,7 +28,7 @@ VectorBitmap::VectorBitmap(TransparentBitmap * src)
 
 }
 
-void VectorBitmap::ComputeSize() {
+void Sprite::ComputeSize() {
 	if (this->pixels->size() < 1) {
 		width = height = offx = offy = 0;
 		return;
@@ -66,7 +66,7 @@ void VectorBitmap::ComputeSize() {
 	this->offy = min_y;
 }
 
-VectorBitmap::~VectorBitmap()
+Sprite::~Sprite()
 {
 	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
 	{
@@ -74,7 +74,7 @@ VectorBitmap::~VectorBitmap()
 	}
 }
 
-void VectorBitmap::NormalizeV()
+void Sprite::NormalizeV()
 {
 	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
 	{
@@ -85,7 +85,7 @@ void VectorBitmap::NormalizeV()
 
 }
 
-void VectorBitmap::NormalizeH()
+void Sprite::NormalizeH()
 {
 
 	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
