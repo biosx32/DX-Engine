@@ -34,18 +34,18 @@ void TestInterface::DrawSpritesheet(SymetricSpriteSheet * sh, int xoff, int yoff
 	int sprh = sh->sprites[0]->height;
 
 
-	for (int y = 0; y < sh->; y++) {
-		for (int x = 0; x < sh->datagroup->wcount; x++) {
-			int i = y * sh->datagroup->wcount + x;
+	for (int y = 0; y < sh->hcount; y++) {
+		for (int x = 0; x < sh->wcount; x++) {
+			int i = y * sh->wcount + x;
 			int xdst = x* sprw + 1 * x ;
 			int ydst = y* sprh + 1 * y;
 
 
-	this->Draw_Bitmap(sh->datagroup->data[i]->image, xoff+ xdst, yoff+ ydst);
-	this->Painter->FastVLine(xoff + xdst, yoff + ydst, sprh+1);
-	this->Painter->FastHLine(xoff + xdst, yoff + ydst, sprw+1);
+	this->DrawBitmap(sh->sprites[i], xoff+ xdst, yoff+ ydst);
+	this->Painter->FastVLine(xoff + xdst, yoff + ydst, sprh+1,0xFFFFFF);
+	this->Painter->FastHLine(xoff + xdst, yoff + ydst, sprw+1,0xFFFFFF);
 	}
 	}
 
-	this->Painter->SetBrushColor(old);*/
+
 }

@@ -21,24 +21,19 @@ class VectorSpriteSheet;
 class Interface {
 public:
 	Draw * Painter;
+	Graphics* gfx;
 public:
 	Interface(Graphics* gfx);
 
 	void DrawPixel(int xoff, int yoff, Color c);
 	void DrawPixelM(int xoff, int yoff, Color c, int m);
 
-	void Draw_Bitmap_M(Bitmap* bmp, int fx, int fy, float m);
-	void Draw_Bitmap(Bitmap* bmp, int fx, int fy);
-	void Draw_Bitmap(Bitmap* bmp, int fx, int fy, int MODIF);
-	void Draw_Bitmap(Sprite* VBmp, int fx, int fy);
-	void Draw_Bitmap(Sprite* VBmp, int fx, int fy, int MODIF);
-	void DrawPixelSpecial(int x, int y, Color c, int MODIF, int width, int height);
+	void DrawBitmapM(Bitmap* bmp, int fx, int fy, float mx, float my);
+	void DrawBitmap(Bitmap* bmp, int fx, int fy);
+	void DrawSprite(Sprite* VBmp, int fx, int fy);
 	void DrawLabel(int x, int y, Label* label, double scale);
 	
 	void FillScreen(Color color);
-
-protected:
-	Graphics* gfx = nullptr;
 	
 };
 

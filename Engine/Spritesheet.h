@@ -25,7 +25,6 @@ public:
 	vector<Sprite*> sprites;
 public:
 	VectorSpriteSheet(TransparentBitmap* BitmapImage);
-	VectorSpriteSheet(TransparentBitmap* BitmapImage, int wcount, int hcount);
 	~VectorSpriteSheet();
 	
 };
@@ -33,7 +32,7 @@ public:
 class SymetricSpriteSheet {
 public:
 	TransparentBitmap * * sprites;
-	int count;
+	int count, wcount, hcount;
 public:
 	SymetricSpriteSheet(TransparentBitmap* BitmapImage, int wcount, int hcount);
 	~SymetricSpriteSheet();

@@ -18,24 +18,6 @@ VectorSpriteSheet::VectorSpriteSheet(TransparentBitmap * BitmapImage)
 
 }
 
-VectorSpriteSheet::VectorSpriteSheet(TransparentBitmap * BitmapImage, int wcount, int hcount)
-
-{	
-	float wsize = BitmapImage->width / float(wcount);
-	float hsize = BitmapImage->height / float(hcount);
-
-	for (int hi = 0; hi < hcount; hi++) {
-		for (int wi = 0; wi < wcount; wi++) {
-			int x = (int)(wi * wsize);
-			int y =(int)( hi * hsize);
-			TransparentBitmap* cutsprite = BitmapImage->GetBitmapPart(x, y, (int)wsize, (int)hsize);
-			Sprite* vbmp = new Sprite(cutsprite);
-			this->sprites.push_back(vbmp);
-		}
-	}
-
-	
-}
 
 VectorSpriteSheet::~VectorSpriteSheet() {
 	for (std::vector<Sprite*>::iterator it = sprites.begin(); it != sprites.end(); ++it)
@@ -188,6 +170,7 @@ PixelContainer::PixelContainer(TransparentBitmap * bmp)
 
 SymetricSpriteSheet::SymetricSpriteSheet(TransparentBitmap * BitmapImage, int wcount, int hcount)
 {
+	this->wcount = wcount; this->hcount = hcount;
 	float wsize = BitmapImage->width / float(wcount);
 	float hsize = BitmapImage->height / float(hcount);
 

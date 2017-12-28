@@ -46,16 +46,23 @@ TransparentBitmap scaling("IMAGES\\RGB_TEST.bmp", Colors::MakeRGB(177, 244, 177)
 void Game::Initialise() {
 	out = new TestInterface(&gfx);
 }
-
+float scale = 0;
 void Game::ComposeFrame(){
 
-	//out.Draw_Bitmap_M(&scaling, 0, 0, scale);
+	//out.DrawBitmapM(&scaling, 0, 0, scale);
 
+
+	prints << "PercX: " << wnd.mouse.GetPosY() << " / " << gfx.ScreenHeight << "  = " <<
+		(float)wnd.mouse.GetPosY() / gfx.ScreenHeight<< "\n" << console << clear;
 
 	framecounter.setText(getFrameNumber());
+	out->DrawBitmapM(&scaling, 0, 0, (float)wnd.mouse.GetPosX() / gfx.ScreenWidth,
+		(float)wnd.mouse.GetPosY() / gfx.ScreenHeight);
+	scale += 0.01;
+	if (scale > 2) scale = 0;
 
-	out->Draw_Bitmap_M(&scaling, 0, 0, 1);
-	out->Draw_Bitmap_M(&scaling, 0, 500, 2);
+	
+	//out->DrawBitmapM(&scaling, 0, 0, 2,2);
 	//out.DrawLabel( (int) 1, (int) 1, &framecounter, 0.85);
 
 }

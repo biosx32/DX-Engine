@@ -24,9 +24,6 @@ void Interface::DrawPixel(int xoff, int yoff, Color c) {
 
 }
 
-
-
-
 void Interface::DrawLabel(int xoff, int yoff, Label * label, double scale)
 {
 	double rel_pos_x = 0;
@@ -39,10 +36,10 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label, double scale)
 			continue;
 		}
 
-		TransparentBitmap* CharacterRepr = label->GetCharacterRepr(chr);
+		TransparentBitmap* CharBitmap = label->GetCharacterRepr(chr);
 
-		double charw = CharacterRepr->width*scale;
-		double charh = CharacterRepr->height*scale;
+		double charw = CharBitmap->width*scale;
+		double charh = CharBitmap->height*scale;
 
 		int destx = (int) (xoff + rel_pos_x);
 		int desty = (int) (yoff + rel_pos_y);
@@ -50,7 +47,7 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label, double scale)
 		double gap = 3 * scale;
 
 
-		Draw_Bitmap_M(CharacterRepr, destx, desty, scale);
+		DrawBitmapM(CharBitmap, destx, desty, scale, scale);
 
 
 		this->Painter->rectangle(destx, desty,charw, charh,Colors::White);
@@ -74,10 +71,34 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label, double scale)
 
 
 
-void Interface::Draw_Bitmap_M(Bitmap * Bmp, int xoff, int yoff, float m)
+void Interface::DrawBitmapM(Bitmap * Bmp, int xoff, int yoff, float mx, float my)
 {
-	if (!(m > 0)) return;
+	if (!(mx > 0 && my > 0)) return;
+
+	int width = Bmp->width;
+	int height = Bmp->height;
+	int draw_width = Bmp->width * mx;
+	int draw_height = Bmp->height * my;
+
+	//int magnifx = (1 / mx) > 0 ? (1 / mx) : 1;
+
+	for (int y = 0; y < draw_height;y++) {
+		int srcy = y / my;
+		for (int x = 0; x < draw_width; x++) {
+			int srcx = x / mx;	
+
+			Color pixel = *Bmp->GetDataPtr(srcx, srcy);
+			if (!Bmp->IsColorTransparent(pixel)) {
+				DrawPixelM(xoff + x, yoff + y, pixel, 1);
+			}
+
+		}
 	
+	}
+
+
+
+	/*
 	int width = Bmp->width;
 	int height = Bmp->height;
 
@@ -86,6 +107,8 @@ void Interface::Draw_Bitmap_M(Bitmap * Bmp, int xoff, int yoff, float m)
 
 	int draw_width  = (int) (Bmp->width * m);
 	int draw_height = (int) (Bmp->height * m);
+
+
 
 	int blendpx=0, RT=0, GT=0, BT=0;
 
@@ -126,36 +149,27 @@ void Interface::Draw_Bitmap_M(Bitmap * Bmp, int xoff, int yoff, float m)
 			int dsty = (int)((yoff + y) * m);
 
 			if (!Bmp->IsColorTransparent(READ_COLOR)) {
-				if (m <=1) {
+				if (m <= 1) {
 					this->DrawPixelM(dstx, dsty, READ_COLOR,1);
 				}
 				else {
-					this->DrawPixelM(dstx, dsty, Colors::White,1);
+					this->DrawPixelM(dstx, dsty, READ_COLOR, 1);
 				}
 					
 			}
-			else {
-				this->DrawPixelM(dstx, dsty, Colors::White, 1);
-			}
-			
-
-
-			
 
 		}
-	}
-
-
+	}*/
 }
 
-void Interface::Draw_Bitmap(Bitmap* Bmp, int fx, int fy) {
+void Interface::DrawBitmap(Bitmap* Bmp, int fx, int fy) {
 	for (int yoff = 0; yoff < Bmp->height; yoff++) {
 		for (int xoff = 0; xoff < Bmp->width; xoff++) {
 			int finalx = fx + xoff;
 			int finaly = fy + yoff;
-			Color READ_COLOR = *Bmp->GetDataPtr(xoff, yoff);
-			if (!Bmp->IsColorTransparent(READ_COLOR)) {
-				DrawPixel(finalx, finaly, READ_COLOR);
+			Color Pixel = *Bmp->GetDataPtr(xoff, yoff);
+			if (!Bmp->IsColorTransparent(Pixel)) {
+				DrawPixel(finalx, finaly, Pixel);
 			}
 		}
 	}
@@ -163,22 +177,14 @@ void Interface::Draw_Bitmap(Bitmap* Bmp, int fx, int fy) {
 
 
 
-Interface::Interface(Graphics * gfx)
-{
-	this->gfx = gfx;
-}
 
 
-void Interface::Draw_Bitmap(Sprite * VBmp, int fx, int fy)
+
+void Interface::DrawSprite(Sprite * VBmp, int fx, int fy)
 {
 	for (std::vector<FPixel*>::iterator it = VBmp->pixels->begin(); it != VBmp->pixels->end(); ++it) {
 		this->DrawPixel(fx + (*it)->x, fy + (*it)->y, (*it)->color);
 	}
-}
-
-void Interface::Draw_Bitmap(Sprite * VBmp, int fx, int fy, int MODIF)
-{
-
 }
 
 
@@ -191,7 +197,10 @@ void Interface::FillScreen(Color color)
 
 void Interface::DrawPixelM(int xoff, int yoff, Color c, int m)
 {
-	#define SOFT_DRAW 1
+#define SOFT_DRAW 1
+
+	xoff *= m;
+	yoff *= m;
 
 	for (int y = 0; y < m; y++) {
 		for (int x = 0; x < m; x++) {

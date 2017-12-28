@@ -5,7 +5,6 @@
 #include <string>
 #include <ctime>
 #include <sstream>
-using std::wstringstream;
 
 
 class SpecialCode {
@@ -25,7 +24,7 @@ int File_bytes(FILE* p_file);
 
 class OutputStream {
 protected:
-	wstringstream stream;
+	std::stringstream stream;
 public:
 
 	
@@ -33,7 +32,8 @@ public:
 	inline OutputStream & OutputStream::operator<<(double data) { stream << data; return *this;}
 
 	OutputStream & OutputStream::operator<<(SpecialCode finish);
-	OutputStream & OutputStream::operator<<(const char*);
+	OutputStream & operator<<(const wchar_t * data);
+	OutputStream & operator<<(const char * data);
 };
 
 

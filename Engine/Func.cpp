@@ -58,19 +58,24 @@ wchar_t *ToLSTR(char* charArray)
 OutputStream & OutputStream::operator<<(SpecialCode finish)
 {
 	if (finish == msgbox) {
-		std::wstring& wstr = stream.str(); // extends lifetime of temporary 
-		LPCWSTR p = wstr.c_str();
+		std::string& str = stream.str(); // extends lifetime of temporary 
+		std::wstring wsTmp(str.begin(), str.end());
+		
+		LPCWSTR p = wsTmp.c_str();
 		MessageBox(0, p, L"Message:", 0);
 
 	}
 
 	if (finish == console) {
-		LPCWSTR str = stream.str().c_str();
-		OutputDebugStringW(str);
+		std::string& str = stream.str(); // extends lifetime of temporary 
+		std::wstring wsTmp(str.begin(), str.end());
+
+		LPCWSTR p = wsTmp.c_str();
+		OutputDebugString(p);
 	}
 
 	if (finish == clear) {
-		stream = wstringstream();
+		stream = std::stringstream();
 	}
 
 	return *this;
@@ -78,6 +83,8 @@ OutputStream & OutputStream::operator<<(SpecialCode finish)
 
 OutputStream & OutputStream::operator<<(const char * data)
 {
+
 	stream << data;
 	return *this;
 }
+

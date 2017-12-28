@@ -34,7 +34,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h> 
 #include "Resource.h"
-
+#include <math.h>
 class Game
 {
 public:
