@@ -51,15 +51,15 @@ void Game::ComposeFrame(){
 
 	//out.DrawBitmapM(&scaling, 0, 0, scale);
 
-
-	prints << "PercX: " << wnd.mouse.GetPosY() << " / " << gfx.ScreenHeight << "  = " <<
-		(float)wnd.mouse.GetPosY() / gfx.ScreenHeight<< "\n" << console << clear;
-
 	framecounter.setText(getFrameNumber());
-	out->DrawBitmapM(&scaling, 0, 0, (float)wnd.mouse.GetPosX() / gfx.ScreenWidth,
-		(float)wnd.mouse.GetPosY() / gfx.ScreenHeight);
-	scale += 0.01;
+	scale += 0.25;
 	if (scale > 2) scale = 0;
+	float m =scale *0.5* gfx.ScreenWidth / scaling.width;;
+
+
+	out->DrawBitmapM(&scaling, 0, 0, m*(float)wnd.mouse.GetPosX() / gfx.ScreenWidth,
+		m*(float)wnd.mouse.GetPosY() / gfx.ScreenHeight);
+
 
 	
 	//out->DrawBitmapM(&scaling, 0, 0, 2,2);
