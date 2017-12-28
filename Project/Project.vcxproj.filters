@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\Assets\Bitmap.cpp">
+      <Filter>StaticSRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\D3DGraphics.cpp">
+      <Filter>StaticSRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Keyboard.cpp">
+      <Filter>StaticSRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Mouse.cpp">
+      <Filter>StaticSRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Sound.cpp">
+      <Filter>StaticSRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Timer.cpp">
+      <Filter>StaticSRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Windows.cpp">
+      <Filter>StaticSRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Func.cpp">
+      <Filter>SRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Drawing.cpp">
+      <Filter>SRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Bmap.cpp">
+      <Filter>SRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Animation.cpp">
+      <Filter>SRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Spritesheet.cpp">
+      <Filter>SRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TestInterface.cpp">
+      <Filter>SRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Text.cpp">
+      <Filter>SRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\VectorBitmap.cpp">
+      <Filter>SRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game.cpp">
+      <Filter>SRC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Interface.cpp">
+      <Filter>SRC</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Assets\D3DGraphics.h">
+      <Filter>StaticHPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\FrameTimer.h">
+      <Filter>StaticHPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Keyboard.h">
+      <Filter>StaticHPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Mouse.h">
+      <Filter>StaticHPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Sound.h">
+      <Filter>StaticHPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Surface.h">
+      <Filter>StaticHPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\SurfaceSequence.h">
+      <Filter>StaticHPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Timer.h">
+      <Filter>StaticHPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Bitmap.h">
+      <Filter>StaticHPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Animation.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Drawing.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Bmap.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Spritesheet.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\TestInterface.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Text.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\VectorBitmap.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Func.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Resource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Colors.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Interface.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="StaticSRC">
+      <UniqueIdentifier>{df551cd0-efe6-47c9-9671-241ac2d96a8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StaticHPP">
+      <UniqueIdentifier>{2385b0f1-9508-4712-879d-f723dc7787da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{8d3571fe-7cf3-4d30-8fba-2fba0db3dab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HPP">
+      <UniqueIdentifier>{709c2577-b357-4f92-8341-6d7414f9f036}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRC">
+      <UniqueIdentifier>{a8bfde38-23f7-4e41-b97d-3bd1ad2be44a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\Assets\ChiliDirectXFramework.res">
+      <Filter>Resources</Filter>
+    </Resource>
+  </ItemGroup>
+</Project>
