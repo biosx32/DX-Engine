@@ -303,7 +303,7 @@ void D3DGraphics::DrawSpriteAlpha( int xoff,int yoff,Sprite* sprite )
 			const unsigned char rltRed = (srcRed * srcAlpha + dstRed * (255 - srcAlpha)) / 255;
 			const unsigned char rltGreen = (srcGreen * srcAlpha + dstGreen * (255 - srcAlpha)) / 255;
 			const unsigned char rltBlue = (srcBlue * srcAlpha + dstBlue * (255 - srcAlpha)) / 255;
-
+		
 			// pack channels back into pixel and fire pixel onto backbuffer
 			PutPixel( x + xoff,y + yoff,D3DCOLOR_XRGB( rltRed,rltGreen,rltBlue ) );
 		}
@@ -326,6 +326,7 @@ void D3DGraphics::DrawChar( char c,int xoff,int yoff,Font* font,D3DCOLOR color )
 
 	for( int y = yStart; y < yEnd; y++ )
 	{
+		
 		for( int x = xStart; x < xEnd; x++ )
 		{
 			if( font->surface[ x + y * surfWidth ] == D3DCOLOR_XRGB( 0,0,0 ) )

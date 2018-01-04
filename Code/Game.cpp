@@ -45,9 +45,7 @@ void Game::ComposeFrame() {
 	//out.DrawBitmapM(&scaling, 0, 0, scale);
 
 	framecounter.setText(getFrameNumber());
-	scale += 0.25;
-	if (scale > 2) scale = 0;
-	float m = scale * 0.5* SCREENWIDTH / scaling.width;;
+	float m = 0.5* SCREENWIDTH / scaling.width;;
 
 	out->DrawPixel(0, 0, 0);
 	out->DrawBitmapM(&scaling, 0, 0, m*(float) mouse.GetMouseX() / SCREENWIDTH,

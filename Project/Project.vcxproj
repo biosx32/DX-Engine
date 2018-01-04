@@ -129,6 +129,9 @@
   <ItemGroup>
     <Resource Include="..\Assets\ChiliDirectXFramework.res" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Code\TODO.TXT" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

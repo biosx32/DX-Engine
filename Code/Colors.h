@@ -5,7 +5,6 @@
 
 typedef D3DCOLOR Color;
 
-
 namespace Colors
 {
 	static constexpr Color MakeARGB(unsigned char a, unsigned char r, unsigned char g, unsigned char b)

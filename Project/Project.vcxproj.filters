@@ -140,4 +140,9 @@
       <Filter>Resources</Filter>
     </Resource>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Code\TODO.TXT">
+      <Filter>Resources</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

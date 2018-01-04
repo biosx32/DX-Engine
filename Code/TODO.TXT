@@ -1,2 +1,2 @@
-#Sprites aby sa nacitaviali rovnomerne
-#Fill background as bkclr and then include bkclr in groups too..
+#Sprites aby sa nacitaviali rovnomerne - skip lines
+#Ignore sprite inner bkclr -> Fill background as bkclr and then include bkclr in groups too..
