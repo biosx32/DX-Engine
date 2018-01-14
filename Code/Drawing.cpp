@@ -14,74 +14,68 @@ void Draw::FastVLine(int x0, int y0, int height, Color c) {
 
 void Draw::circle(int x0, int y0, int radius, Color c)
 {
-	int x = radius - 1;
-	int y = 0; int dx = 1; int dy = 1;
-	int err = dx - (radius << 1);
-
-	while (x >= y)
+	int rSquared = radius * radius;
+	int xPivot = (int)(radius * 0.707107f + 0.5f);
+	for (int x = 0; x <= xPivot; x++)
 	{
+		int y = (int)(sqrt((float)(rSquared - x * x)) + 0.5f);
 		out->DrawPixel(x0 + x, y0 + y, c);
+		out->DrawPixel(x0 - x, y0 + y, c);
+		out->DrawPixel(x0 + x, y0 - y, c);
+		out->DrawPixel(x0 - x, y0 - y, c);
 		out->DrawPixel(x0 + y, y0 + x, c);
 		out->DrawPixel(x0 - y, y0 + x, c);
-		out->DrawPixel(x0 - x, y0 + y, c);
-		out->DrawPixel(x0 - x, y0 - y, c);
-		out->DrawPixel(x0 - y, y0 - x, c);
 		out->DrawPixel(x0 + y, y0 - x, c);
-		out->DrawPixel(x0 + x, y0 - y, c);
-
-		if (err <= 0)
-		{
-			y++;
-			err += dy;
-			dy += 2;
-		}
-		if (err > 0)
-		{
-			x--;
-			dx += 2;
-			err += (-radius << 1) + dx;
-		}
+		out->DrawPixel(x0 - y, y0 - x, c);
 	}
 }
-void Draw::line(int x0, int y0, int width, int height, Color c)
+void Draw::line(int x1, int y1, int x2, int y2, Color c)
 {
-	int dx, dy, p, x, y, t, y1, x1;
+	int dx = x2 - x1;
+	int dy = y2 - y1;
 
-	x1 = t = x0 + width;
-
-	if (x1 < x0) {
-		x1 = x0;
-		x0 = t;
-	}
-	y1 = t = y0 + height;
-
-	if (y1 < y0) {
-		y1 = y0;
-		y0 = t;
+	if (dy == 0 && dx == 0)
+	{
+		out->DrawPixel(x1, y1, c);
 	}
 
-
-	dx = x1 - x0;
-	dy = y1 - y0;
-
-	if (dy == 0) return FastHLine(x0, y0, width, c);
-	if (dx == 0) return FastVLine(x0, y0, height, c);
-
-	x = x0;
-	y = y0;
-	p = 2 * dy - dx;
-
-	while (x<x1) {
-		if (p >= 0) {
-			this->out->DrawPixel(x, y, c);
-			y = y + 1;
-			p = p + 2 * dy - 2 * dx;
+	else if (abs(dy) > abs(dx))
+	{
+		if (dy < 0)
+		{
+			int temp = x1;
+			x1 = x2;
+			x2 = temp;
+			temp = y1;
+			y1 = y2;
+			y2 = temp;
 		}
-		else {
-			this->out->DrawPixel(x, y, c);
-			p = p + 2 * dy;
+		float m = (float)dx / (float)dy;
+		float b = x1 - m * y1;
+		for (int y = y1; y <= y2; y = y + 1)
+		{
+			int x = (int)(m*y + b + 0.5f);
+			out->DrawPixel(x, y, c);
 		}
-		x = x + 1;
+	}
+	else
+	{
+		if (dx < 0)
+		{
+			int temp = x1;
+			x1 = x2;
+			x2 = temp;
+			temp = y1;
+			y1 = y2;
+			y2 = temp;
+		}
+		float m = (float)dy / (float)dx;
+		float b = y1 - m * x1;
+		for (int x = x1; x <= x2; x = x + 1)
+		{
+			int y = (int)(m*x + b + 0.5f);
+			out->DrawPixel(x, y, c);
+		}
 	}
 }
 

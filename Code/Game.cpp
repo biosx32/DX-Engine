@@ -20,9 +20,9 @@
  ******************************************************************************************/
 #include "Game.h"
 
-TransparentBitmap img("IMAGES\\FONTMAP_SMALL.bmp", Colors::MakeARGB(255,177, 244, 177));
-Label framecounter(&img, 16, 16);
-TransparentBitmap scaling("IMAGES\\RGB_TEST.bmp", Colors::MakeARGB(255,177, 244, 177));
+TransparentBitmap img("..\\Resources\\DOS_FONT_22_5.bmp", Colors::MakeARGB(255,255, 255, 255));
+Label framecounter(&img, 22, 5);
+TransparentBitmap scaling("..\\Resources\\RGB_TEST.bmp", Colors::MakeARGB(255,177, 244, 177));
 
 Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 :	gfx( hWnd ),
@@ -36,6 +36,7 @@ Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 
 void Game::Initialise() {
 	out = new TestInterface(&gfx);
+	srand(time(0));
 }
 
 
@@ -43,18 +44,14 @@ float scale = 0;
 void Game::ComposeFrame() {
 
 	//out.DrawBitmapM(&scaling, 0, 0, scale);
-
+	
 	framecounter.setText(getFrameNumber());
 	float m = 0.5* SCREENWIDTH / scaling.width;;
-
-	out->DrawPixel(0, 0, 0);
-	out->DrawBitmapM(&scaling, 0, 0, m*(float) mouse.GetMouseX() / SCREENWIDTH,
-		m*(float) mouse.GetMouseY() / SCREENHEIGHT);
-
+	Label* ptr = &framecounter;
+	out->DrawLabel( 1,  1, ptr, 0.25);
+	out->Painter->line(std::rand()%800, std::rand() % 600, mouse.GetMouseX(), mouse.GetMouseY(),Colors::MakeARGB(0,255,255,255));
 
 
-	//out->DrawBitmapM(&scaling, 0, 0, 2,2);
-	//out.DrawLabel( (int) 1, (int) 1, &framecounter, 0.85);
 
 }
 

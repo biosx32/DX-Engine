@@ -37,17 +37,24 @@
 #include "VectorBitmap.h"
 #include "Interface.h"
 #include "TestInterface.h"
-
+#include <thread>
 class Game
 {
 public:
 	Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer );
 	~Game() {}
-	void Go() {
-		UpdateModel();
+
+	void UpdateGraphics() {
 		gfx.BeginFrame();
 		ComposeFrame();
 		gfx.EndFrame();
+	}
+
+	void Go() {
+		UpdateModel();
+		UpdateGraphics();
+		
+		
 	}
 	void Initialise();
 	Interface* out;
@@ -55,7 +62,6 @@ public:
 private:
 	void ComposeFrame();
 	void UpdateModel();
-	
 	/********************************/
 	/*  User Functions              */
 

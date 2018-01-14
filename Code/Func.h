@@ -7,6 +7,11 @@
 #include <sstream>
 
 
+int GetDistance(int a, int b);
+
+void SwapIfLess(int* a, int*b);
+
+
 class SpecialCode {
 public:
 	SpecialCode(int x) { code = x; }

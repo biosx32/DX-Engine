@@ -20,6 +20,9 @@ void Interface::DrawPixel(int xoff, int yoff, Color c) {
 		}
 	}
 
+
+
+
 	this->gfx->PutPixel(xoff, yoff, c);
 
 }
@@ -31,39 +34,34 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label, double scale)
 
 	for (int i = 0; i < label->txmax; i++) {
 		int chr = label->text[i];
+		float charw = label->sprite_sheet->wsize * scale;
+		float charh = label->sprite_sheet->hsize * scale;
 
-		if (chr == '\0') {
+		if (chr == '\x20') {
+			rel_pos_x += charw;
+		}
+
+		else if (chr == '\n') { // \\x10
+			rel_pos_y += charh;
+			rel_pos_x = 0;
+		}
+
+		if (chr < 33) {
 			continue;
 		}
+	
 
 		TransparentBitmap* CharBitmap = label->GetCharacterRepr(chr);
 
-		double charw = CharBitmap->width*scale;
-		double charh = CharBitmap->height*scale;
 
 		int destx = (int)(xoff + rel_pos_x);
 		int desty = (int)(yoff + rel_pos_y);
 
-		double gap = 3 * scale;
-
-
 		DrawBitmapM(CharBitmap, destx, desty, scale, scale);
+		//this->Painter->rectangle(destx, desty, charw, charh, 0xFFFF0000);
+		rel_pos_x += charw;
 
-
-		this->Painter->rectangle(destx, desty, charw, charh, 0xFFFFFFFF);
-
-		rel_pos_x += charw + gap;
-
-		if (chr == '\x20') {
-			rel_pos_x += 4 * gap;
-
-		}
-
-		if (chr == '\n') {
-			rel_pos_y += charh;
-			rel_pos_x = 0;
-			continue;
-		}
+		
 
 	}
 
@@ -87,9 +85,10 @@ void Interface::DrawBitmapM(Bitmap * Bmp, int xoff, int yoff, float mx, float my
 		for (int x = 0; x < draw_width; x++) {
 			int srcx = x / mx;
 
-			Color pixel = *Bmp->GetDataPtr(srcx, srcy);
-			if (!Bmp->IsColorTransparent(pixel)) {
-				DrawPixelM(xoff + x, yoff + y, pixel, 1);
+
+			Color *pixel = Bmp->GetDataPtr(srcx, srcy);
+			if (!Bmp->IsColorTransparent(*pixel)) {
+				DrawPixelM(xoff + x, yoff + y, *pixel, 1);
 			}
 
 		}

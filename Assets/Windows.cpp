@@ -21,7 +21,7 @@
 #include <Windows.h>
 #include <wchar.h>
 #include "D3DGraphics.h"
-#include "Game.h"
+#include "..\Code\Game.h"
 #include "resource.h"
 #include "Mouse.h"
 

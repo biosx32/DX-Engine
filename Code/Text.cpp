@@ -16,7 +16,8 @@ Label::Label(TransparentBitmap * bmp, int wcount, int hcount)
 
 TransparentBitmap * Label::GetCharacterRepr(unsigned int c)
 {
-	int index = translate[c%txmax];
+	int fix = -33 + (c % txmax);
+	int index = translate[fix];
 	return this->sprite_sheet->sprites[index];
 }
 

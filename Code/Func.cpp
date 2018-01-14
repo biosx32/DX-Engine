@@ -17,6 +17,19 @@ clock_t begin = 0;
 
 double elapsed_secs = 1000;
 
+int GetDistance(int a, int b) {
+	return a >= b ? a - b : b - a;
+}
+
+void SwapIfLess(int * x1, int * x0)
+{
+	if (*x1 < *x0) {
+		int t = *x1;
+		*x1 = *x0;
+		*x0 = t;
+	}
+}
+
 char* const getFrameNumber() {
 
 	fc++;
