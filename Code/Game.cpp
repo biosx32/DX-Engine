@@ -20,9 +20,8 @@
  ******************************************************************************************/
 #include "Game.h"
 
-TransparentBitmap img("..\\Resources\\DOS_FONT_22_5.bmp", Colors::MakeARGB(255,255, 255, 255));
-Label framecounter(&img, 22, 5);
-TransparentBitmap scaling("..\\Resources\\RGB_TEST.bmp", Colors::MakeARGB(255,177, 244, 177));
+
+TransparentBitmap scaling("..\\Resources\\test_RGB.bmp", Colors::MakeARGB(255,177, 244, 177));
 
 Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 :	gfx( hWnd ),
@@ -39,19 +38,20 @@ void Game::Initialise() {
 	srand(time(0));
 }
 
-
 float scale = 0;
 void Game::ComposeFrame() {
 
-	//out.DrawBitmapM(&scaling, 0, 0, scale);
-	
-	framecounter.setText(getFrameNumber());
 	float m = 0.5* SCREENWIDTH / scaling.width;;
-	Label* ptr = &framecounter;
-	out->DrawLabel( 1,  1, ptr, 0.25);
-	out->Painter->line(std::rand()%800, std::rand() % 600, mouse.GetMouseX(), mouse.GetMouseY(),Colors::MakeARGB(0,255,255,255));
+	out->PrintText(1, 1, getFrameNumber(), 0.25, &DOS_BLACK);
+
+	Grid grid(100, 100, 20);
+	grid.Draw(out);
+	TrianglePoly* poly = new TrianglePoly(&grid, -2.5,-2.5, 2.5, -2.5, 0,2.5);
+	poly->Draw(out);
+	delete poly;
 
 
+	out->Painter->line(300, 300, mouse.GetMouseX(), mouse.GetMouseY(), Colors::Red);
 
 }
 

@@ -11,6 +11,10 @@ namespace Colors
 	{
 		return (a < 24) | (r << 16) | (g << 8) | b;
 	}
+	static constexpr Color MakeRGB(unsigned char r, unsigned char g, unsigned char b)
+	{
+		return (255 < 24) | (r << 16) | (g << 8) | b;
+	}
 	static constexpr Color White = MakeARGB(255u, 255u, 255u, 255u);
 	static constexpr Color Black = MakeARGB(255u, 0u, 0u, 0u);
 	static constexpr Color Gray = MakeARGB(255u, 0x80u, 0x80u, 0x80u);

@@ -2,12 +2,12 @@
 #define __TEXT_H__
 #include "Spritesheet.h"
 
+
+
 class VectorSpriteSheet;
-class Label {
+class FontType {
 
 public:
-	static const int txmax = 256;
-	char text[txmax];
 	SymetricSpriteSheet* sprite_sheet = nullptr;
 	const int translate[256] = {
 		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
@@ -31,15 +31,15 @@ public:
 	};
 
 public:
-	~Label();
-	Label() = delete;
-	Label(TransparentBitmap * bmp, int wcount, int hcount);
+	~FontType();
+	FontType() = delete;
+	FontType(TransparentBitmap * bmp, int wcount, int hcount);
 	
 	TransparentBitmap* GetCharacterRepr(unsigned int c);
-	void setText(char* text);
 	
 };
 
-
+extern TransparentBitmap img;
+extern FontType DOS_BLACK;
 
 #endif

@@ -9,7 +9,7 @@
 
 int GetDistance(int a, int b);
 
-void SwapIfLess(int* a, int*b);
+void SwapIntegers(int* a, int*b);
 
 
 class SpecialCode {

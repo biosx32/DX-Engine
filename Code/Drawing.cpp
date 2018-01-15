@@ -31,6 +31,9 @@ void Draw::circle(int x0, int y0, int radius, Color c)
 }
 void Draw::line(int x1, int y1, int x2, int y2, Color c)
 {
+
+	
+
 	int dx = x2 - x1;
 	int dy = y2 - y1;
 
@@ -80,11 +83,12 @@ void Draw::line(int x1, int y1, int x2, int y2, Color c)
 }
 
 void Draw::rectangle(int x0, int y0, int width, int height, Color c ) {
-	line(x0, y0, 0, height, c);
-	line(x0 + width, y0, 0, height, c);
+	FastHLine(x0, y0, width, c);
+	FastHLine(x0, y0 + height, width, c);
 
-	line(x0, y0, width, 0, c);
-	line(x0, y0 + height, width, 0,c);
+	FastVLine(x0, y0, height,c);
+	FastVLine(x0 + width, y0, height,c);
+
 
 }
 

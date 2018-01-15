@@ -37,6 +37,7 @@
 #include "VectorBitmap.h"
 #include "Interface.h"
 #include "TestInterface.h"
+
 #include <thread>
 class Game
 {

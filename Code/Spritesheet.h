@@ -33,6 +33,7 @@ class SymetricSpriteSheet {
 public:
 	TransparentBitmap * * sprites;
 	int count, wcount, hcount, wsize, hsize;
+
 public:
 	SymetricSpriteSheet(TransparentBitmap* BitmapImage, int wcount, int hcount);
 	~SymetricSpriteSheet();

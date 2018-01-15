@@ -27,15 +27,20 @@ void Interface::DrawPixel(int xoff, int yoff, Color c) {
 
 }
 
-void Interface::DrawLabel(int xoff, int yoff, Label * label, double scale)
+
+void Interface::PrintText(int x, int y, char * text, double scale, FontType* font)
 {
 	double rel_pos_x = 0;
 	double rel_pos_y = 0;
 
-	for (int i = 0; i < label->txmax; i++) {
-		int chr = label->text[i];
-		float charw = label->sprite_sheet->wsize * scale;
-		float charh = label->sprite_sheet->hsize * scale;
+
+	char buffer[256];
+	strcpy_s(buffer, text);
+
+	for (int i = 0; buffer[i] != 0; i++) {
+		int chr = buffer[i];
+		float charw = font->sprite_sheet->wsize * scale;
+		float charh = font->sprite_sheet->hsize * scale;
 
 		if (chr == '\x20') {
 			rel_pos_x += charw;
@@ -49,22 +54,19 @@ void Interface::DrawLabel(int xoff, int yoff, Label * label, double scale)
 		if (chr < 33) {
 			continue;
 		}
-	
-
-		TransparentBitmap* CharBitmap = label->GetCharacterRepr(chr);
 
 
-		int destx = (int)(xoff + rel_pos_x);
-		int desty = (int)(yoff + rel_pos_y);
+		TransparentBitmap* CharBitmap = font->GetCharacterRepr(chr);
+
+
+		int destx = (int)(x + rel_pos_x);
+		int desty = (int)(y + rel_pos_y);
 
 		DrawBitmapM(CharBitmap, destx, desty, scale, scale);
 		//this->Painter->rectangle(destx, desty, charw, charh, 0xFFFF0000);
 		rel_pos_x += charw;
 
-		
-
 	}
-
 }
 
 

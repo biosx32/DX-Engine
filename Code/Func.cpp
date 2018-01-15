@@ -21,9 +21,9 @@ int GetDistance(int a, int b) {
 	return a >= b ? a - b : b - a;
 }
 
-void SwapIfLess(int * x1, int * x0)
+void SwapIntegers(int * x1, int * x0)
 {
-	if (*x1 < *x0) {
+	if ( 1) {
 		int t = *x1;
 		*x1 = *x0;
 		*x0 = t;

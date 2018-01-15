@@ -9,7 +9,7 @@
 #include "Drawing.h"
 
 class Draw;
-class Label;
+class FontType;
 class VectorSpriteSheet;
 class Interface {
 public:
@@ -24,8 +24,7 @@ public:
 	void DrawBitmapM(Bitmap* bmp, int fx, int fy, float mx, float my);
 	void DrawBitmap(Bitmap* bmp, int fx, int fy);
 	void DrawSprite(MySprite* VBmp, int fx, int fy);
-	void DrawLabel(int x, int y, Label* label, double scale);
-
+	void PrintText(int x, int y, char* text, double scale, FontType* font);
 	void FillScreen(Color color);
 
 };
