@@ -1,0 +1,2 @@
+#Sprites aby sa nacitaviali rovnomerne - skip lines
+Ignorovanie transparentnej farby v spriteoch
