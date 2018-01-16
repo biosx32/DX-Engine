@@ -79,22 +79,14 @@ void Game::ComposeFrame() {
 		test.clr = Colors::Gray;
 	}
 	
+	test.RefreshState(mouse);
 
-	if (mouse.LeftIsPressed()) {
-		if (test.isHover(mouse)) {
-			test.clr = Colors::Blue;
-			test.depressed = true;
-		}
+
+	if (test.isRelease(mouse)) {
+		prints << "error" << msgbox << clear;
 	}
 
 	
-	if (!mouse.LeftIsPressed()) {
-		if (test.depressed) {
-			test.depressed = false;
-			prints << "error" << msgbox << clear;
-		}
-
-	}
 
 
 

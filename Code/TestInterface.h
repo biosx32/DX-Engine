@@ -91,6 +91,29 @@ public:
 		return isHover(mouse) && mouse.LeftIsPressed();
 	}
 
+	bool isRelease(MouseClient mouse) {
+		if (!mouse.LeftIsPressed()) {
+			bool r = depressed;
+			r = isHover(mouse) ? r : false;
+			depressed = false;
+			return r == true;
+		}
+		return false;
+	}
+
+	void RefreshState(MouseClient mouse) {
+		clr = Colors::LightGray;
+		if (isPress(mouse)) {
+			depressed = true;
+		}
+		else if (isHover(mouse)) {
+			clr = Colors::Gray;
+		}
+		if (depressed && isHover(mouse)) {
+			clr = Colors::Blue;
+		}
+	}
+
 	Button(int x, int y, int w, int h, char* src, FontType* font) :x(x), y(y), w(w), h(h), font(font),clr(Colors::LightGray),depressed(false) { strcpy_s(text, src); text[bfsz - 1] = 0; }
 };
 

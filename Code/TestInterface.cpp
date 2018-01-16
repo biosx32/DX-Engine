@@ -66,6 +66,7 @@ void Vertex::Draw(Interface * out)
 
 	char buffer[256];
 	sprintf_s(buffer, "x:%1.1f\ny:%1.1f", x(), y());
+	out->Painter->rectangle_fill(rx()+10, ry()-20,  55, 35, this->c);
 	out->PrintText(rx() + 15, ry() - DOS_BLACK.sprite_sheet->hsize / 4, buffer, 0.2, &DOS_BLACK);
 	out->Painter->line(rx(), ry(), rx()+2, ry()-13, this->c);
 	out->Painter->FastHLine(rx() + 2, ry() - 13, 5, this->c);
