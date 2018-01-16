@@ -39,7 +39,7 @@ void Interface::PrintText(int x, int y, char * text, double scale, FontType* fon
 
 	for (int i = 0; buffer[i] != 0; i++) {
 		int chr = buffer[i];
-		float charw = font->sprite_sheet->wsize * scale;
+		float charw = font->sprite_sheet->wsize * scale/1.25;
 		float charh = font->sprite_sheet->hsize * scale;
 
 		if (chr == '\x20') {

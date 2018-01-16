@@ -145,7 +145,7 @@ PixelContainer::~PixelContainer()
 
 }
 
-PixelContainer::PixelContainer(TransparentBitmap * bmp)
+PixelContainer::PixelContainer(TransparentBitmap * bmp) :lastpos(0, 0)
 {
 	this->width = bmp->width;
 	this->height = bmp->height;

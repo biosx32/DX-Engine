@@ -2,14 +2,7 @@
 #define __SPRITESHEET_H__
 #include "Bmap.h"
 #include "VectorBitmap.h"
-
-class Vector2 {
-public:
-	int x=0, y=0;
-	Vector2() {}
-	Vector2(int x, int y): x(x), y(y){}
-};
-
+#include "Types.h"
 
 namespace pxstate
 {

@@ -1,0 +1,56 @@
+
+# (') means after transformation
+# you have to put radians in functions sin, cos, not degrees. (e.g. 180* = pi = 3.14159)
+
+
+/////////////////////////////////////
+:::Rotation
+x,y = 0,1 => Position vector
+
+Formula
+|x'| = |x| * |cos(DEG) -sin(DEG)| = |x*cos(DEG) + y*(-sin(DEG))|
+|y'|   |y|   |sin(DEG)  cos(DEG)|   |x*sin(DEG) + y*  cos(DEG) |   
+
+Rotation by 90 degree counterclockwise.
+|x'| = |0| * |cos(-1.57) -sin(-1.57)| = |x*cos(-1.57) + y*(-sin(-1.57))|
+|y'|   |1|   |sin(-1.57)  cos(-1.57)|   |x*sin(-1.57) + y*  cos(-1.57) | 
+  
+
+/////////////////////////////////////
+:::Multiplication
+x,y => Position vector
+a,d => Multiplication vector
+|x'| = |x| * |a 0| = |xa + 0 |
+|y'|   |y|   |0 d|   |0  + yd|
+
+|x'| = |1| * |2 0| = |2 + 0|
+|y'|   |2|   |0 2|   |0 + 4|
+
+/////////////////////////////////////
+:::Translation
+x,y => Position vector
+a,e => Mul
+c,f = => Translation vector
+|x'| = |x|   |x|   |a 0 c||1 0 c|   |1x + 0y + 1c|
+|y'|   |y| * |y| * |0 e f||0 1 f| = |0x + 1y + 1f| = 
+|1|    |1|   |1|   |0 0 1||0 0 1|   |0  + 0  +  1| 
+
+Translation + multiplication by 1
+x,y = 1,2 => Position vector
+c,f = 1,1 => Translation vector
+a,e = 1,1 => Multiplication vector
+|x|   |a 0 c|   |xa + y0 + 1c|   |xa + 0  + 1c|   |1  + 0  + 1c|  =  |1 + 0 + 1|   |2|
+|y| * |0 e f| = |x0 + ye + 1f| = |0  + ye + 1f| = |0  + 2  + 1f|  =  |0 + 2 + 1| = |3|
+|1|   |0 0 1|   |0   + 0 +  1|   |0   + 0 +  1|   |0  + 0  +  1|  =  |0 + 0 + 1|   |1|
+
+
+Translation + multiplication by 2
+x,y = 1,2 => Position vector
+c,f = 1,1 => Translation vector
+a,e = 2,2 => Multiplication vector
+|x|   |a 0 c|   |xa + y0 + 1c|   |xa + 0  + 1c|   |1*2 + 0   + 1c|  =  |2 + 0 + 1|   |3|
+|y| * |0 e f| = |x0 + ye + 1f| = |0  + ye + 1f| = |0   + 2*2 + 1f|  =  |0 + 4 + 1| = |5|
+|1|   |0 0 1|   |0   + 0 +  1|   |0   + 0 +  1|   |0   + 0   +  1|  =  |0 + 0 + 1|   |1|
+
+
+                                 

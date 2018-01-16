@@ -1,6 +1,6 @@
 #include "Text.h"
 
-TransparentBitmap img("..\\Resources\\DOS_FONT_BLACK_22_5.bmp", Colors::MakeARGB(255, 0, 0, 255));
+TransparentBitmap img("..\\Resources\\DOS_FONT_WHITE_22_5.bmp", Colors::MakeARGB(255, 0, 0, 255));
 FontType DOS_BLACK(&img, 22, 5);
 
 FontType::~FontType()

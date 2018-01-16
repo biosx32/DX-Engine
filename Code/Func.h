@@ -7,9 +7,19 @@
 #include <sstream>
 
 
-int GetDistance(int a, int b);
+int chrcnt(char* src, char chr, int max);
 
-void SwapIntegers(int* a, int*b);
+float GetDistance1(float a, float b);
+
+float GetDistance1_Square(float a, float b);
+
+float distance_compare(float x0, float y0, float x1, float y1);
+
+float distance_real(float x0, float y0, float x1, float y1);
+
+int maximum(float x, float y, float z);
+int minimum(float x, float y, float z);
+void SwapNumbers(int* a, int*b);
 
 
 class SpecialCode {

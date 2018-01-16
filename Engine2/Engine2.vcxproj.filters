@@ -52,6 +52,9 @@
     <ClCompile Include="..\Code\Interface.cpp">
       <Filter>SRC</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Types.cpp">
+      <Filter>HPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Assets\D3DGraphics.h">
@@ -116,6 +119,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\Interface.h">
       <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Types.h">
+      <Filter>SRC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -39,19 +39,104 @@ void Game::Initialise() {
 }
 
 float scale = 0;
+
+
+
+Vector2 oldMousePos = Vector2(0, 0);
+Vertex* locked = nullptr;
+Grid grid(80, 0, 30);
+TrianglePoly polystat = TrianglePoly(&grid, -2.5, -2.5, 2.5, -2.5, 0, 2.5);
+Button test = Button(100, 200, 100, 100, "Javaskript", &DOS_BLACK);
 void Game::ComposeFrame() {
 
 	float m = 0.5* SCREENWIDTH / scaling.width;;
 	out->PrintText(1, 1, getFrameNumber(), 0.25, &DOS_BLACK);
 
-	Grid grid(100, 100, 20);
+
 	grid.Draw(out);
-	TrianglePoly* poly = new TrianglePoly(&grid, -2.5,-2.5, 2.5, -2.5, 0,2.5);
-	poly->Draw(out);
-	delete poly;
+
+
+	TrianglePoly* poly = &polystat;
 
 
 	out->Painter->line(300, 300, mouse.GetMouseX(), mouse.GetMouseY(), Colors::Red);
+
+	Vector2 mousePosition = Vector2(mouse.GetMouseX(), mouse.GetMouseY());
+	Vector2 difference = Vector2(mousePosition.x - oldMousePos.x, mousePosition.y - oldMousePos.y);
+	char buff[235];
+	sprintf_s(buff, "Diff, x:%d, y:%d", difference.x, difference.y);
+	out->PrintText(100, 0, buff, 0.25, &DOS_BLACK);
+	oldMousePos = mousePosition;
+
+
+	
+
+
+
+
+	test.clr = Colors::LightGray;
+	if (test.isHover(mouse)) {
+		test.clr = Colors::Gray;
+	}
+	
+
+	if (mouse.LeftIsPressed()) {
+		if (test.isHover(mouse)) {
+			test.clr = Colors::Blue;
+			test.depressed = true;
+		}
+	}
+
+	
+	if (!mouse.LeftIsPressed()) {
+		if (test.depressed) {
+			test.depressed = false;
+			prints << "error" << msgbox << clear;
+		}
+
+	}
+
+
+
+	if (locked)
+	{
+		locked->_x += (float)difference.x / locked->parent->size;
+		locked->_y += (float)difference.y / locked->parent->size;
+	}
+
+
+	
+	
+	test.Draw(out);
+	if (mouse.LeftIsPressed()) {
+		
+	
+			Vertex* checkVerts[] = { poly->a,poly->b, poly->c, poly->origin };
+			Vertex* closest = nullptr;
+			float closest_dis = 100000;
+			for (int i = 0; i < sizeof(checkVerts) /sizeof(Vertex*); i++) {
+				Vector2 pos = checkVerts[i]->GetPosition();
+				float dis = pos.DistanceCompare(mousePosition);
+				if (dis < closest_dis) {
+					closest_dis = dis;
+					closest = checkVerts[i];
+				}
+			
+			}
+			if (closest && sqrt(closest_dis) < 10) {
+				locked = closest;
+
+				
+			}
+	}
+
+	else {
+		locked = nullptr;
+	}
+
+
+
+	poly->Draw(out);
 
 }
 

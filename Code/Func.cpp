@@ -9,7 +9,15 @@ int fc=0;
 char buff[64];
 
 
+int chrcnt(char* src, char chr, int max) {
+	int counter = 0;
+	for (int i = 0; i < max; i++) {
+		char* j = &src[i];
+		if (*j == chr) counter++;
+	}
 
+	return counter;
+}
 clock_t begin = 0;
 
 
@@ -17,11 +25,33 @@ clock_t begin = 0;
 
 double elapsed_secs = 1000;
 
-int GetDistance(int a, int b) {
+float GetDistance1(float a, float b) {
 	return a >= b ? a - b : b - a;
 }
 
-void SwapIntegers(int * x1, int * x0)
+float GetDistance1_Square(float a, float b) {
+	return GetDistance1(a, b) * GetDistance1(a, b);
+}
+
+float distance_compare(float x0, float y0, float x1, float y1) {
+
+	return GetDistance1_Square(x1,x0) + GetDistance1_Square(y1, y0);
+}
+
+float distance_real(float x0, float y0, float x1, float y1) {
+	return sqrt(distance_compare(x0, y0, x1, y1));
+}
+
+
+int maximum(float x, float y, float z) {
+	return (x > y ? (x > z ? x : z) : (y > z ? y : z));
+}
+
+int minimum(float x, float y, float z) {
+	return (x < y ? (x < z ? x : z) : (y < z ? y : z));
+}
+
+void SwapNumbers(int * x1, int * x0)
 {
 	if ( 1) {
 		int t = *x1;

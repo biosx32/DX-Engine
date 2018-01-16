@@ -50,6 +50,8 @@ void TestInterface::DrawSpritesheet(SymetricSpriteSheet * sh, int xoff, int yoff
 
 }
 
+
+
 Vertex::Vertex(Grid * par, float x, float y) :parent(par) { 
 	c = Colors::Blue; _x = +parent->mid + x; _y = +parent->mid - y; 
 }
@@ -63,10 +65,10 @@ void Vertex::Draw(Interface * out)
 	}
 
 	char buffer[256];
-	sprintf(buffer, "(%2.2f,%2.2f)", x(), y());
-	out->PrintText(rx() + 15+25, ry() - DOS_BLACK.sprite_sheet->hsize / 4, buffer, 0.2, &DOS_BLACK);
-	out->Painter->line(rx(), ry(), rx()+10, ry()-13, this->c);
-	out->Painter->FastHLine(rx() + 10, ry() - 13, 30, this->c);
+	sprintf_s(buffer, "x:%1.1f\ny:%1.1f", x(), y());
+	out->PrintText(rx() + 15, ry() - DOS_BLACK.sprite_sheet->hsize / 4, buffer, 0.2, &DOS_BLACK);
+	out->Painter->line(rx(), ry(), rx()+2, ry()-13, this->c);
+	out->Painter->FastHLine(rx() + 2, ry() - 13, 5, this->c);
 
 }
 
@@ -75,8 +77,8 @@ TrianglePoly::TrianglePoly(Grid * parent, float x, float y, float xx, float yy, 
 	a = new Vertex(parent, x, y);
 	b = new Vertex(parent, xx, yy);
 	c = new Vertex(parent, xxx, yyy);
-	float xr = (x + xx + xxx) / 3;
-	float yr = (y + yy + yyy) / 3;
+	float xr = maximum(x, xx, xxx)/2 + minimum(x,xx,xxx) /2;
+	float yr = maximum(y, yy, yyy) / 2 + minimum(y, yy, yyy) / 2;
 	origin = new Vertex(parent, xr, yr);
 	origin->c = Colors::Red;
 }
@@ -100,8 +102,8 @@ void TrianglePoly::Draw(Interface * out)
 void Grid::Draw(Interface * out)
 {
 	for (int r = 1; r < 5; r++) {
-		out->Painter->circle(x + mid * wc, y + mid * wc, r, Colors::Black);
-		out->Painter->circle(x + mid * wc + 1, y + mid * wc, r, Colors::Black);
+		out->Painter->circle(x + mid * size, y + mid * size, r, Colors::Black);
+		out->Painter->circle(x + mid * size + 1, y + mid * size, r, Colors::Black);
 
 
 
@@ -113,4 +115,9 @@ void Grid::Draw(Interface * out)
 		}
 	}
 
+}
+
+float Vector2::DistanceCompare(Vector2 other)
+{
+	{ return distance_compare(this->x, this->y, other.x, other.y); }
 }

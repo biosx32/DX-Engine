@@ -102,6 +102,7 @@
     <ClCompile Include="..\Code\Spritesheet.cpp" />
     <ClCompile Include="..\Code\TestInterface.cpp" />
     <ClCompile Include="..\Code\Text.cpp" />
+    <ClCompile Include="..\Code\Types.cpp" />
     <ClCompile Include="..\Code\VectorBitmap.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +126,7 @@
     <ClInclude Include="..\Code\Spritesheet.h" />
     <ClInclude Include="..\Code\TestInterface.h" />
     <ClInclude Include="..\Code\Text.h" />
+    <ClInclude Include="..\Code\Types.h" />
     <ClInclude Include="..\Code\VectorBitmap.h" />
   </ItemGroup>
   <ItemGroup>
