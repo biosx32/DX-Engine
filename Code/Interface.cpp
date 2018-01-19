@@ -1,32 +1,10 @@
 #include "Interface.h"
 
-#define SOFT_DRAW 1
 
 Interface::Interface(D3DGraphics* gfx)
 {
-	this->gfx = gfx;
-	this->Painter = new Draw();
-	this->Painter->setOutInterface(this);
+	this->paint = new Painter(gfx);
 }
-
-void Interface::DrawPixel(int xoff, int yoff, Color c) {
-
-	if (SOFT_DRAW) {
-		if (xoff >= SCREENWIDTH ||
-			yoff >= SCREENHEIGHT ||
-			xoff < 0 ||
-			yoff < 0) {
-			return;
-		}
-	}
-
-
-
-
-	this->gfx->PutPixel(xoff, yoff, c);
-
-}
-
 
 void Interface::PrintText(int x, int y, char * text, double scale, FontType* font)
 {
@@ -90,7 +68,7 @@ void Interface::DrawBitmapM(Bitmap * Bmp, int xoff, int yoff, float mx, float my
 
 			Color *pixel = Bmp->GetDataPtr(srcx, srcy);
 			if (!Bmp->IsColorTransparent(*pixel)) {
-				DrawPixelM(xoff + x, yoff + y, *pixel, 1);
+				paint->DrawPixel(xoff + x, yoff + y, *pixel, 1);
 			}
 
 		}
@@ -170,7 +148,7 @@ void Interface::DrawBitmap(Bitmap* Bmp, int fx, int fy) {
 			int finaly = fy + yoff;
 			Color Pixel = *Bmp->GetDataPtr(xoff, yoff);
 			if (!Bmp->IsColorTransparent(Pixel)) {
-					DrawPixel(finalx, finaly, Pixel);
+				paint->DrawPixel(finalx, finaly, Pixel);
 			}
 		}
 	}
@@ -184,43 +162,14 @@ void Interface::DrawBitmap(Bitmap* Bmp, int fx, int fy) {
 void Interface::DrawSprite(MySprite * VBmp, int fx, int fy)
 {
 	for (std::vector<FPixel*>::iterator it = VBmp->pixels->begin(); it != VBmp->pixels->end(); ++it) {
-		this->DrawPixel(fx + (*it)->x, fy + (*it)->y, (*it)->color);
+		paint->DrawPixel(fx + (*it)->x, fy + (*it)->y, (*it)->color);
 	}
 }
 
 
 void Interface::FillScreen(Color color)
 {
-	if (gfx) {
-		this->Painter->rectangle_fill(0, 0, SCREENWIDTH - 1, SCREENHEIGHT - 1, color);
-	}
-}
-
-void Interface::DrawPixelM(int xoff, int yoff, Color c, int m)
-{
-#define SOFT_DRAW 1
-
-	xoff *= m;
-	yoff *= m;
-
-	for (int y = 0; y < m; y++) {
-		for (int x = 0; x < m; x++) {
-
-			int finalx = xoff + x;
-			int finaly = yoff + y;
-
-			if (SOFT_DRAW) {
-				if (finalx >= SCREENWIDTH ||
-					finaly >= SCREENHEIGHT ||
-					finalx < 0 ||
-					finaly < 0) {
-					return;
-				}
-			}
-
-			gfx->PutPixel(finalx, finaly, c);
-
-		}
-	}
+	paint->rectangle(0, 0, SCREENWIDTH - 1, SCREENHEIGHT - 1, color,true);
 
 }
+

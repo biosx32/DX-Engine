@@ -33,20 +33,23 @@ Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 }
 
 
-void Game::Initialise() {
-	out = new TestInterface(&gfx);
-	srand(time(0));
-}
 
-float scale = 0;
+
 
 
 
 Vector2 oldMousePos = Vector2(0, 0);
-Vertex* locked = nullptr;
+Vector2* locked = nullptr;
 Grid grid(80, 0, 30);
-TrianglePoly polystat = TrianglePoly(&grid, -2.5, -2.5, 2.5, -2.5, 0, 2.5);
-Button test = Button(100, 200, 100, 100, "Javaskript", &DOS_BLACK);
+TrianglePoly polystat = TrianglePoly(&grid, 307, 147,468, 137, 442, 367);
+Button test = Button(100, 200, 140, 40, "Rotate  90", &DOS_BLACK);
+Button test2 = Button(100, 250, 140, 40, "Rotate -90", &DOS_BLACK);
+float scale = 0;
+void Game::Initialise() {
+	out = new TestInterface(&gfx);
+	srand(time(0));
+}
+float deg = 0;
 void Game::ComposeFrame() {
 
 	float m = 0.5* SCREENWIDTH / scaling.width;;
@@ -54,36 +57,27 @@ void Game::ComposeFrame() {
 
 
 	grid.Draw(out);
-
-
 	TrianglePoly* poly = &polystat;
-
-
-	out->Painter->line(300, 300, mouse.GetMouseX(), mouse.GetMouseY(), Colors::Red);
 
 	Vector2 mousePosition = Vector2(mouse.GetMouseX(), mouse.GetMouseY());
 	Vector2 difference = Vector2(mousePosition.x - oldMousePos.x, mousePosition.y - oldMousePos.y);
 	char buff[235];
-	sprintf_s(buff, "Diff, x:%d, y:%d", difference.x, difference.y);
+	sprintf_s(buff, "Diff, x:%2.1f, y:%2.1f", difference.x, difference.y);
 	out->PrintText(100, 0, buff, 0.25, &DOS_BLACK);
 	oldMousePos = mousePosition;
 
-
-	
-
-
+	deg = deg*1.0001+  0.0001;
+	poly->Rotate(deg);
 
 
-	test.clr = Colors::LightGray;
-	if (test.isHover(mouse)) {
-		test.clr = Colors::Gray;
-	}
-	
 	test.RefreshState(mouse);
-
+	test2.RefreshState(mouse);
 
 	if (test.isRelease(mouse)) {
-		prints << "error" << msgbox << clear;
+		polystat.Scale(Vector2(0.5, 0.5));
+	}
+	if (test2.isRelease(mouse)) {
+		polystat.Scale(Vector2(2, 2));
 	}
 
 	
@@ -92,23 +86,23 @@ void Game::ComposeFrame() {
 
 	if (locked)
 	{
-		locked->_x += (float)difference.x / locked->parent->size;
-		locked->_y += (float)difference.y / locked->parent->size;
+		locked->x += (float)difference.x ;
+		locked->y += (float)difference.y;
 	}
 
 
 	
-	
+	test2.Draw(out);
 	test.Draw(out);
 	if (mouse.LeftIsPressed()) {
 		
 	
-			Vertex* checkVerts[] = { poly->a,poly->b, poly->c, poly->origin };
-			Vertex* closest = nullptr;
+			Vector2* checkVerts[] = { poly->a1,poly->a2, poly->a3, poly->origin };
+			Vector2* closest = nullptr;
 			float closest_dis = 100000;
-			for (int i = 0; i < sizeof(checkVerts) /sizeof(Vertex*); i++) {
-				Vector2 pos = checkVerts[i]->GetPosition();
-				float dis = pos.DistanceCompare(mousePosition);
+			for (int i = 0; i < sizeof(checkVerts) /sizeof(closest); i++) {
+				Vector2* pos = checkVerts[i];
+				float dis = pos->GetSquareDistance(mousePosition);
 				if (dis < closest_dis) {
 					closest_dis = dis;
 					closest = checkVerts[i];

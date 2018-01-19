@@ -30,6 +30,7 @@ a,d => Multiplication vector
 :::Translation
 x,y => Position vector
 a,e => Mul
+
 c,f = => Translation vector
 |x'| = |x|   |x|   |a 0 c||1 0 c|   |1x + 0y + 1c|
 |y'|   |y| * |y| * |0 e f||0 1 f| = |0x + 1y + 1f| = 
@@ -52,5 +53,21 @@ a,e = 2,2 => Multiplication vector
 |y| * |0 e f| = |x0 + ye + 1f| = |0  + ye + 1f| = |0   + 2*2 + 1f|  =  |0 + 4 + 1| = |5|
 |1|   |0 0 1|   |0   + 0 +  1|   |0   + 0 +  1|   |0   + 0   +  1|  =  |0 + 0 + 1|   |1|
 
+
+
+Translation general
+
+a,b,d,e = Rotation/multiplication vector
+x,y = 1,2 => Position vector
+c,f = 1,1 => Translation vector
+
+|x|   |(  a) (  b) (  c)|   | cos(DEG)  -sin(DEG)    c|   | x*a + y*b + c|   
+|y| * |(  d) (  e) (  f)| = | sin(DEG)   cos(DEG)    f| = | x*d + y*e + f| = 
+|1|   |(  0) (  0) (  1)|   | 0            0         1|   | 1            |     
+
+
+
+//////////////////////////////
+Linear sum + multiplication
 
                                  

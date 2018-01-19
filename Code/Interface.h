@@ -8,18 +8,15 @@
 #include "Text.h"
 #include "Drawing.h"
 
-class Draw;
+class Painter;
 class FontType;
 class VectorSpriteSheet;
 class Interface {
 public:
-	Draw * Painter;
-	D3DGraphics* gfx;
+	Painter * paint;
+	
 public:
 	Interface(D3DGraphics* gfx);
-
-	void DrawPixel(int xoff, int yoff, Color c);
-	void DrawPixelM(int xoff, int yoff, Color c, int m);
 
 	void DrawBitmapM(Bitmap* bmp, int fx, int fy, float mx, float my);
 	void DrawBitmap(Bitmap* bmp, int fx, int fy);

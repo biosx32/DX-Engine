@@ -173,8 +173,8 @@ SymetricSpriteSheet::SymetricSpriteSheet(TransparentBitmap * BitmapImage, int wc
 	this->wcount = wcount; 
 	this->hcount = hcount;
 	this->count = wcount * hcount;
-	this->wsize = BitmapImage->width / float(wcount);
-	this->hsize = BitmapImage->height / float(hcount);
+	this->wsize = BitmapImage->width /wcount;
+	this->hsize = BitmapImage->height/ hcount;
 
 	this->sprites = new TransparentBitmap*[wcount*hcount];
 	for (int y = 0; y < hcount; y++) {

@@ -53,7 +53,7 @@
       <Filter>SRC</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Types.cpp">
-      <Filter>HPP</Filter>
+      <Filter>SRC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,7 +121,7 @@
       <Filter>HPP</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Types.h">
-      <Filter>SRC</Filter>
+      <Filter>HPP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

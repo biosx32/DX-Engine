@@ -9,9 +9,9 @@ public:
 	TestInterface(D3DGraphics* gfx): Interface(gfx){}
 	void DrawPixelContainer(PixelContainer * src, int fx, int fy);
 	void DrawSpritesheet(SymetricSpriteSheet* sh, int xoff, int yoff);
-
-
 };
+
+
 class Grid {
 public:
 	int x, y, size;
@@ -23,67 +23,88 @@ public:
 
 
 
-class Vertex {
-public:
-	Color c;
-	float _x,_y;
-	Grid* parent;
-	Vertex(Grid* par, float x, float y);
-	float x() { return -parent->mid+ _x ;}
-	float y() { return +parent->mid -_y ;}
-	float rx() { return _x * parent->size + parent->x; }
-	float ry() { return _y * parent->size + parent->y; }
-
-	Vector2 GetPosition() { return Vector2(this->rx(), this->ry()); }
-	
-	void Draw(Interface* out);
-};
-
-
-
-
 class TrianglePoly {
 public:
-	Vertex * a, *b, *c;
-	Vertex* origin;
+	Vector2 * a1, *a2, *a3;
+	Vector2* origin;
 	TrianglePoly(Grid* parent, float x, float y, float xx, float yy, float xxx, float yyy);
+
+	void DrawVertex(Vector2* pos, Interface* out, Color q) {
+		out->paint->circle(pos->x, pos->y, 5,q,true);
+		char buffer[256];
+		sprintf_s(buffer, "x:%1.1f\ny:%1.1f", pos->x, pos->y);
+		out->paint->rectangle(pos->x + 10, pos->y - 20, 55, 35, q, true);
+		out->paint->line(pos->x, pos->y, pos->x + 2, pos->y - 13, q);
+		out->paint->FastHLine(pos->x + 2, pos->y - 13, 5, q);
+		out->PrintText(pos->x + 15, pos->y - DOS_BLACK.sprite_sheet->hsize / 4, buffer, 0.2, &DOS_BLACK);
+	}
+
+
+	void ApplyMatrix(float data[3][3]) {
+		Vector2* vertices[3] = { a1,a2,a3 };
+
+		for (int i = 0; i < 3; i++) {
+			Vector2* pos = vertices[i];
+			float x = pos->x - origin->x;
+			float y = pos->y - origin->y;
+			float src[3] = { x, y, 1 };
+			float xres = src[0] * data[0][0] + src[1] * data[0][1] + src[2] * data[0][2];
+			float yres = src[0] * data[1][0] + src[1] * data[1][1] + src[2] * data[1][2];
+			Vector2 npos = Vector2(xres, yres);
+			pos->x = npos.x + origin->x;
+			pos->y = npos.y + origin->y;
+		}
+	}
+
+
+	void Scale(Vector2 scale) {
+		float matrix[3][3] = {
+			{ scale.x, 0, 0 },
+			{ 0, scale.y, 0 } ,
+			{ 0,       0, 1 }
+		};
+	
+		ApplyMatrix(matrix);
+	}
+
+	void Translate(Vector2 translation) {
+		float matrix[3][3] = {
+	    { 1, 0, translation.x },
+		{ 0, 1, translation.y } ,
+		{ 0, 0,             1 }
+		};
+
+		ApplyMatrix(matrix);
+	}
+
+	void Rotate(float radian) {
+		float matrix[3][3] = {
+		{ cos(radian), -sin(radian), 0 },
+		{ sin(radian),  cos(radian), 0 } ,
+		{ 0, 0, 1 }
+		};
+
+		ApplyMatrix(matrix);
+	}
+
+	void RotateRad(float degree) {
+		Rotate(Radians(degree));
+	}
+
 
 	void Draw(Interface* out);
 };
 
-class Button {
+class ClickableRectangle {
 public:
-	int x, y;
-	int w, h;
+	int x, y,w,h;
 	bool depressed;
-	Color clr;
-	const static int bfsz = 256;
-	char text[bfsz];
 
-	FontType* font;
-	void Draw(Interface* out) {
-		int charcnt = strlen(text);
-		int textw = charcnt * font->sprite_sheet->wsize;
-		float s = (float) w/ textw;
-		out->Painter->rectangle_fill(x, y, w, h, clr);
-		for (int i = 0; i < 3; i++) {
-			out->Painter->rectangle(x + i, y + i, w - i * 2, h - i * 2, Colors::Black);
-		}
-		
-
-		int textY = y + h / 2 - s*font->sprite_sheet->hsize/2;
-
-		int textX = x + s*textw*0.1;
-
-		out->PrintText(textX, textY, text, s, font);
-
-		
-
-	}
+	ClickableRectangle(int x, int y, int w, int h) :x(x), y(y), w(w), h(h),depressed(false) {}
 
 	bool isHover(MouseClient mouse) {
 		Vector2 mousePosition = Vector2(mouse.GetMouseX(), mouse.GetMouseY());
-		return mousePosition.x >= x && mousePosition.y >= y && mousePosition.x < x + w && mousePosition.y < y+h;
+		return mousePosition.x >= x && mousePosition.y >= y && mousePosition.x < x + w && mousePosition.y < y + h;
 	}
 
 	bool isPress(MouseClient mouse) {
@@ -101,12 +122,48 @@ public:
 		return false;
 	}
 
-	void RefreshState(MouseClient mouse) {
-		clr = Colors::LightGray;
+ void RefreshState(MouseClient mouse) {
 		if (isPress(mouse)) {
 			depressed = true;
 		}
-		else if (isHover(mouse)) {
+	}
+
+	
+};
+
+class Button: public ClickableRectangle {
+public:
+	Color clr;
+	const static int bfsz = 256;
+	char text[bfsz];
+	FontType* font;
+
+	void Draw(Interface* out) {
+		int charcnt = strlen(text);
+		int textw = charcnt * font->sprite_sheet->wsize;
+		float s = (float) w/ textw;
+		out->paint->rectangle(x, y, w, h, clr,true);
+
+		for (int i = 0; i < 2; i++) {
+			out->paint->rectangle(x + i, y + i, w - i * 2, h - i * 2, Colors::Black);
+		}
+		
+		int textY = y + h / 2 - s*font->sprite_sheet->hsize/2;
+		int textX = x + s*textw*0.1;
+		out->PrintText(textX, textY, text, s, font);
+
+	}
+	
+	void RefreshState(MouseClient mouse) {
+		this->ClickableRectangle::RefreshState(mouse);
+		this->RefreshColors(mouse);
+	}
+
+	
+	
+	void RefreshColors(MouseClient mouse) {
+		clr = Colors::LightGray;
+		if (isHover(mouse)) {
 			clr = Colors::Gray;
 		}
 		if (depressed && isHover(mouse)) {
@@ -114,7 +171,10 @@ public:
 		}
 	}
 
-	Button(int x, int y, int w, int h, char* src, FontType* font) :x(x), y(y), w(w), h(h), font(font),clr(Colors::LightGray),depressed(false) { strcpy_s(text, src); text[bfsz - 1] = 0; }
+	Button(int x, int y, int w, int h, char* src, FontType* font) : ClickableRectangle(x,y,w,h), font(font),clr(Colors::LightGray) { 
+		strcpy_s(text, src); 
+		text[bfsz - 1] = 0; 
+	}
 };
 
 

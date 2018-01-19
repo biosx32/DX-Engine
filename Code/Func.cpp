@@ -18,6 +18,10 @@ int chrcnt(char* src, char chr, int max) {
 
 	return counter;
 }
+float Radians(float degree){
+	float deg = (int)degree % 360 + (degree - (int)degree);
+	return M_PI * deg / 180;
+}
 clock_t begin = 0;
 
 
@@ -25,22 +29,20 @@ clock_t begin = 0;
 
 double elapsed_secs = 1000;
 
-float GetDistance1(float a, float b) {
-	return a >= b ? a - b : b - a;
+float GetSquareDistance1(float a, float b) {
+	return a >= b ? (a - b)*(a-b) : (b - a)*(b-a);
 }
 
-float GetDistance1_Square(float a, float b) {
-	return GetDistance1(a, b) * GetDistance1(a, b);
+float GetSquareDistance2(Vector2 v1, Vector2 v2) {
+
+	return GetSquareDistance1(v2.x,v1.x) + GetSquareDistance1(v2.y, v1.y);
+}
+float GetSquareDistance3(Vector3 v1, Vector3 v2) {
+
+	return GetSquareDistance2(v1,v2) + GetSquareDistance1(v2.z,v1.z);
 }
 
-float distance_compare(float x0, float y0, float x1, float y1) {
 
-	return GetDistance1_Square(x1,x0) + GetDistance1_Square(y1, y0);
-}
-
-float distance_real(float x0, float y0, float x1, float y1) {
-	return sqrt(distance_compare(x0, y0, x1, y1));
-}
 
 
 int maximum(float x, float y, float z) {
