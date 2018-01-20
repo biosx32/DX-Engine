@@ -77,9 +77,9 @@ void TrianglePoly::Draw(Interface * out)
 	out->paint->line(v1->x, v1->y, v3->x, v3->y, Colors::Black, 6);
 	out->paint->line(v3->x, v3->y, v2->x, v2->y, Colors::Black, 6);
 
-	this->DrawVertex(v1, out, Colors::Green);
-	this->DrawVertex(v2, out, Colors::Green);
-	this->DrawVertex(v3, out, Colors::Green);
+	this->DrawVertex(v1, out, Colors::DarkGreen);
+	this->DrawVertex(v2, out, Colors::DarkGreen);
+	this->DrawVertex(v3, out, Colors::DarkGreen);
 	this->DrawVertex(origin, out, Colors::Red);
 
 }

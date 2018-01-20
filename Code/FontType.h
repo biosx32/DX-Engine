@@ -42,5 +42,6 @@ public:
 };
 
 extern FontType DOS_BLACK;
+extern FontType DOS_BLACK_MINI;
 
 #endif

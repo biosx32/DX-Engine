@@ -71,11 +71,11 @@ public:
 	void DrawVertex(Vector2* pos, Interface* out, Color q) {
 		out->paint->circle(pos->x, pos->y, 5,q,true);
 		char buffer[256];
-		sprintf_s(buffer, "x:%1.1f\ny:%1.1f", pos->x, pos->y);
-		out->paint->rectangle(pos->x + 10, pos->y - 20, 55, 35, q, true);
+		sprintf_s(buffer, "x:%3.0f\ny:%3.0f", pos->x, pos->y);
+		out->paint->rectangle(pos->x + 10, pos->y - 20, 55, 40, q, true);
 		out->paint->line(pos->x, pos->y, pos->x + 2, pos->y - 13, q);
 		out->paint->FastHLine(pos->x + 2, pos->y - 13, 5, q);
-		out->PrintText(pos->x + 15, pos->y - DOS_BLACK.sprite_sheet->hsize / 4, &DOS_BLACK, buffer);
+		out->PrintText(pos->x + 15, pos->y - DOS_BLACK_MINI.sprite_sheet->hsize, &DOS_BLACK_MINI, buffer);
 	}
 
 

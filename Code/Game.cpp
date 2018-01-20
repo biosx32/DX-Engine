@@ -42,8 +42,11 @@ Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 Vector2* locked = nullptr;
 Grid grid(80, 0, 30);
 TrianglePoly* poly = new TrianglePoly(Vector2(307, 147),Vector2(468, 137), Vector2(442, 367));
-Button Button2 = Button(100, 200, 140, 40, "Scale 0.5x", &DOS_BLACK);
-Button Button1 = Button(100, 250, 140, 40, "Scale 2.0x", &DOS_BLACK);
+
+Button Scale2x = Button(100, 240, 140, 40, "Scale 2.0x", &DOS_BLACK);
+Button Scale05x = Button(100, 200, 140, 40, "Scale 0.5x", &DOS_BLACK);
+Button RotateP15 = Button(100, 280, 140, 40, "Rotate 15*", &DOS_BLACK);
+Button RotateN15 = Button(100, 320, 140, 40, "Rotate -15*", &DOS_BLACK);
 float scale = 0;
 
 
@@ -70,8 +73,10 @@ void Game::ComposeFrame() {
 	
 	poly->Draw(out);
 
-	Button1.Draw(out);
-	Button2.Draw(out);
+	Scale2x.Draw(out);
+	Scale05x.Draw(out);
+	RotateP15.Draw(out);
+	RotateN15.Draw(out);
 
 	debuggui.Draw(out);
 
@@ -96,15 +101,26 @@ void Game::UpdateModel()
 	}
 
 
-	Button2.RefreshState(mouse);
-	Button1.RefreshState(mouse);
+	Scale05x.RefreshState(mouse);
+	Scale2x.RefreshState(mouse);
+	RotateP15.RefreshState(mouse);
+	RotateN15.RefreshState(mouse);
 
-	if (Button2.isRelease(mouse)) {
+	if (Scale05x.isRelease(mouse)) {
 		poly->Scale(Vector2(0.5, 0.5));
 	}
-	if (Button1.isRelease(mouse)) {
+	if (Scale2x.isRelease(mouse)) {
 		poly->Scale(Vector2(2, 2));
+
+	}if (RotateP15.isRelease(mouse)) {
+		poly->RotateRad(15);
 	}
+	if (RotateN15.isRelease(mouse)) {
+		poly->RotateRad(-15);
+	}
+
+
+
 
 	if (mouse.LeftIsPressed()) {
 		Vector2* checkVerts[] = { poly->v1,poly->v2, poly->v3, poly->origin };
