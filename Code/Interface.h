@@ -1,27 +1,28 @@
 #ifndef __INTERFACE_H__
 #define __INTERFACE_H__
 
-
+#include "Drawing.h"
 #include "Colors.h"
 #include "D3DGraphics.h"
 #include "Bmap.h"
-#include "Text.h"
-#include "Drawing.h"
+#include "FontType.h"
 
-class Painter;
+#define TXT_BUFFER_SIZE 1024
+
 class FontType;
 class VectorSpriteSheet;
 class Interface {
 public:
-	Painter * paint;
+	Painter *paint;
 	
 public:
-	Interface(D3DGraphics* gfx);
+	Interface(D3DGraphics* gfx) { paint = new Painter(gfx); }
 
-	void DrawBitmapM(Bitmap* bmp, int fx, int fy, float mx, float my);
+	void DrawBitmap(Bitmap* bmp, int fx, int fy, float mx, float my);
 	void DrawBitmap(Bitmap* bmp, int fx, int fy);
 	void DrawSprite(MySprite* VBmp, int fx, int fy);
-	void PrintText(int x, int y, char* text, double scale, FontType* font);
+	void PrintText(int x, int y, FontType* font, char * text);
+	void PrintText(int x, int y, FontType* font, const char *fmt, ...);
 	void FillScreen(Color color);
 
 };

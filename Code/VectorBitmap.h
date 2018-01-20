@@ -1,9 +1,8 @@
 #ifndef __VBMP_H__
 #define __VBMP_H__
-#include <vector>
 #include "Bmap.h"
+#include <vector>
 using std::vector;
-
 
 class FPixel {
 public:
@@ -12,7 +11,6 @@ public:
 	FPixel(int x, int y, Color c) : x(x), y(y), color(c) {}
 };
 
-class Bitmap;
 class MySprite {
 
 protected:
@@ -24,7 +22,7 @@ public:
 
 public:
 	MySprite(vector<FPixel*>* src);
-	MySprite(TransparentBitmap* src);
+	MySprite(Bitmap* src);
 	void ComputeSize();
 	void NormalizeV();
 	void NormalizeH();

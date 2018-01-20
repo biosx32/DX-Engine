@@ -4,27 +4,21 @@
 #include <d3d9.h>
 
 typedef D3DCOLOR Color;
+#define ColorARGB(a,r,g,b) D3DCOLOR_ARGB(a,r,g,b)
+#define ColorRGB(r,g,b) D3DCOLOR_XRGB (r,g,b)
 
 namespace Colors
 {
-	static constexpr Color MakeARGB(unsigned char a, unsigned char r, unsigned char g, unsigned char b)
-	{
-		return (a < 24) | (r << 16) | (g << 8) | b;
-	}
-	static constexpr Color MakeRGB(unsigned char r, unsigned char g, unsigned char b)
-	{
-		return (255 < 24) | (r << 16) | (g << 8) | b;
-	}
-	static constexpr Color White = MakeARGB(255u, 255u, 255u, 255u);
-	static constexpr Color Black = MakeARGB(255u, 0u, 0u, 0u);
-	static constexpr Color Gray = MakeARGB(255u, 0x80u, 0x80u, 0x80u);
-	static constexpr Color LightGray = MakeARGB(255u, 0xD3u, 0xD3u, 0xD3u);
-	static constexpr Color Red = MakeARGB(255u, 255u, 0u, 0u);
-	static constexpr Color Green = MakeARGB(255u, 0u, 255u, 0u);
-	static constexpr Color Blue = MakeARGB(255u, 0u, 0u, 255u);
-	static constexpr Color Yellow = MakeARGB(255u, 255u, 255u, 0u);
-	static constexpr Color Cyan = MakeARGB(255u, 0u, 255u, 255u);
-	static constexpr Color Magenta = MakeARGB(255u,255u, 0u, 255u);
+	static constexpr Color White = D3DCOLOR_XRGB(255u, 255u, 255u);
+	static constexpr Color Black = D3DCOLOR_XRGB(0u, 0u, 0u);
+	static constexpr Color Gray = D3DCOLOR_XRGB(0x80u, 0x80u, 0x80u);
+	static constexpr Color LightGray = D3DCOLOR_XRGB(0xD3u, 0xD3u, 0xD3u);
+	static constexpr Color Red = D3DCOLOR_XRGB(255u, 0u, 0u);
+	static constexpr Color Green = D3DCOLOR_XRGB(0u, 255u, 0u);
+	static constexpr Color Blue = D3DCOLOR_XRGB(0u, 0u, 255u);
+	static constexpr Color Yellow = D3DCOLOR_XRGB(255u, 255u, 0u);
+	static constexpr Color Cyan = D3DCOLOR_XRGB(0u, 255u, 255u);
+	static constexpr Color Magenta = D3DCOLOR_XRGB(255u, 0u, 255u);
 }
 
 

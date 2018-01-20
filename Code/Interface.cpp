@@ -1,24 +1,29 @@
 #include "Interface.h"
 
 
-Interface::Interface(D3DGraphics* gfx)
-{
-	this->paint = new Painter(gfx);
-}
 
-void Interface::PrintText(int x, int y, char * text, double scale, FontType* font)
+void Interface::PrintText(int x, int y, FontType* font, const char *fmt, ...) {
+		char buffer[TXT_BUFFER_SIZE];
+		va_list args;
+		va_start(args, fmt);
+		int rc = vsnprintf(buffer, sizeof(buffer), fmt, args);
+		va_end(args);
+		PrintText(x, y, font, buffer);
+}
+void Interface::PrintText(int x, int y, FontType* font, char * text)
 {
 	double rel_pos_x = 0;
 	double rel_pos_y = 0;
 
 
-	char buffer[256];
+	char buffer[TXT_BUFFER_SIZE];
 	strcpy_s(buffer, text);
 
 	for (int i = 0; buffer[i] != 0; i++) {
 		int chr = buffer[i];
-		float charw = font->sprite_sheet->wsize * scale/1.25;
-		float charh = font->sprite_sheet->hsize * scale;
+
+		float charw = font->sprite_sheet->wsize;
+		float charh = font->sprite_sheet->hsize;
 
 		if (chr == '\x20') {
 			rel_pos_x += charw;
@@ -33,14 +38,13 @@ void Interface::PrintText(int x, int y, char * text, double scale, FontType* fon
 			continue;
 		}
 
-
-		TransparentBitmap* CharBitmap = font->GetCharacterRepr(chr);
+		Bitmap* CharBitmap = font->GetCharacterRepr(chr);
 
 
 		int destx = (int)(x + rel_pos_x);
 		int desty = (int)(y + rel_pos_y);
 
-		DrawBitmapM(CharBitmap, destx, desty, scale, scale);
+		DrawBitmap(CharBitmap, destx, desty);
 		//this->Painter->rectangle(destx, desty, charw, charh, 0xFFFF0000);
 		rel_pos_x += charw;
 
@@ -49,7 +53,7 @@ void Interface::PrintText(int x, int y, char * text, double scale, FontType* fon
 
 
 
-void Interface::DrawBitmapM(Bitmap * Bmp, int xoff, int yoff, float mx, float my)
+void Interface::DrawBitmap(Bitmap * Bmp, int xoff, int yoff, float mx, float my)
 {
 	if (!(mx > 0 && my > 0)) return;
 
@@ -58,16 +62,12 @@ void Interface::DrawBitmapM(Bitmap * Bmp, int xoff, int yoff, float mx, float my
 	int draw_width = Bmp->width * mx;
 	int draw_height = Bmp->height * my;
 
-	//int magnifx = (1 / mx) > 0 ? (1 / mx) : 1;
-
 	for (int y = 0; y < draw_height; y++) {
 		int srcy = y / my;
 		for (int x = 0; x < draw_width; x++) {
 			int srcx = x / mx;
-
-
-			Color *pixel = Bmp->GetDataPtr(srcx, srcy);
-			if (!Bmp->IsColorTransparent(*pixel)) {
+			Color *pixel = Bmp->GetPixelPointer(srcx, srcy);
+			if (!Bmp->GetIsBackground(*pixel)) {
 				paint->DrawPixel(xoff + x, yoff + y, *pixel, 1);
 			}
 
@@ -75,83 +75,21 @@ void Interface::DrawBitmapM(Bitmap * Bmp, int xoff, int yoff, float mx, float my
 
 	}
 
-
-
-	/*
-	int width = Bmp->width;
-	int height = Bmp->height;
-
-	int neighbors = (int)(1 / m);
-	if (neighbors == 0) neighbors = m;
-
-	int draw_width  = (int) (Bmp->width * m);
-	int draw_height = (int) (Bmp->height * m);
-
-
-
-	int blendpx=0, RT=0, GT=0, BT=0;
-
-
-	for (int y = 0; y < draw_height; y++) {
-	for (int x = 0; x < draw_width; x++) {
-	int srcx = (int) (x * (1/m));
-	int srcy = (int) (y * (1/m));
-
-	int RT= GT= BT= blendpx = 0;
-
-	for (int nx = 0; nx < neighbors; nx++) {
-	for (int ny = 0; ny < neighbors; ny++) {
-	int nxo = nx - neighbors / 2;
-	int nyo = ny - neighbors / 2;
-
-	Color* neighbor = Bmp->GetDataPtr(srcx - nxo, srcy - nyo);
-	if (neighbor == nullptr) {
-	continue;
-	}
-
-	if (!Bmp->IsColorTransparent(*neighbor)) {
-	blendpx += 1;
-	RT += neighbor->GetR(); GT += neighbor->GetG(); BT += neighbor->GetB();
-	}
-
-
-
-
-	}
-	}
-	if (blendpx == 0) continue;
-	RT /= blendpx; GT /= blendpx; BT /= blendpx;
-
-	Color READ_COLOR = Colors::MakeRGB(RT, GT, BT);
-
-	int dstx = (int)((xoff + x) * m);
-	int dsty = (int)((yoff + y) * m);
-
-	if (!Bmp->IsColorTransparent(READ_COLOR)) {
-	if (m <= 1) {
-	this->DrawPixelM(dstx, dsty, READ_COLOR,1);
-	}
-	else {
-	this->DrawPixelM(dstx, dsty, READ_COLOR, 1);
-	}
-
-	}
-
-	}
-	}*/
 }
 
 void Interface::DrawBitmap(Bitmap* Bmp, int fx, int fy) {
+	
 	for (int yoff = 0; yoff < Bmp->height; yoff++) {
 		for (int xoff = 0; xoff < Bmp->width; xoff++) {
 			int finalx = fx + xoff;
 			int finaly = fy + yoff;
-			Color Pixel = *Bmp->GetDataPtr(xoff, yoff);
-			if (!Bmp->IsColorTransparent(Pixel)) {
+			Color Pixel = *Bmp->GetPixelPointer(xoff, yoff);
+			if (!Bmp->GetIsBackground(Pixel)) {
 				paint->DrawPixel(finalx, finaly, Pixel);
 			}
 		}
 	}
+
 }
 
 

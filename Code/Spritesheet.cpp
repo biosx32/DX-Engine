@@ -3,7 +3,7 @@
 
 
 
-VectorSpriteSheet::VectorSpriteSheet(TransparentBitmap * BitmapImage)
+VectorSpriteSheet::VectorSpriteSheet(Bitmap * BitmapImage)
 {
 	PixelContainer* temp = new PixelContainer(BitmapImage);
 	while (1) {
@@ -145,7 +145,7 @@ PixelContainer::~PixelContainer()
 
 }
 
-PixelContainer::PixelContainer(TransparentBitmap * bmp) :lastpos(0, 0)
+PixelContainer::PixelContainer(Bitmap * bmp)
 {
 	this->width = bmp->width;
 	this->height = bmp->height;
@@ -155,10 +155,10 @@ PixelContainer::PixelContainer(TransparentBitmap * bmp) :lastpos(0, 0)
 	for (int y = 0; y < this->height; y++) {
 		for (int x = 0; x < this->width; x++) {
 			int i = y * width + x;
-			Color color = *bmp->data[i];
+			Color color = bmp->data[i];
 
 			int state = 0;
-			if (bmp->IsColorTransparent(color)) {
+			if (bmp->GetIsBackground(color)) {
 				state |= pxstate::background;
 			}
 
@@ -168,28 +168,33 @@ PixelContainer::PixelContainer(TransparentBitmap * bmp) :lastpos(0, 0)
 	}
 }
 
-SymetricSpriteSheet::SymetricSpriteSheet(TransparentBitmap * BitmapImage, int wcount, int hcount)
-{
-	this->wcount = wcount; 
-	this->hcount = hcount;
-	this->count = wcount * hcount;
-	this->wsize = BitmapImage->width /wcount;
-	this->hsize = BitmapImage->height/ hcount;
 
-	this->sprites = new TransparentBitmap*[wcount*hcount];
+
+FixedSpriteArray::FixedSpriteArray(Bitmap * sourceImage, int wcount, int hcount, float m_size):
+	wcount(wcount),hcount(hcount)
+{
+
+	int src_wsize = sourceImage->width / wcount;
+	int src_hsize = sourceImage->height / hcount;
+	this->wsize = src_wsize * m_size;
+	this->hsize = src_hsize * m_size;
+
+	this->sprites = new Bitmap*[this->count()];
+
 	for (int y = 0; y < hcount; y++) {
 		for (int x = 0; x < wcount; x++) {
-			int dstx = x * wsize;
-			int dsty = y * hsize;
-			TransparentBitmap* cutsprite = BitmapImage->GetBitmapPart(dstx, dsty, wsize, hsize);
-			this->sprites[y * wcount + x] = cutsprite;
+			int srcX = x * src_wsize;
+			int srcY = y * src_hsize;
+			Bitmap* newBitmap = sourceImage->GetBitmapPart(srcX, srcY, src_wsize, src_hsize, m_size);
+			
+			*this->GetAddrOfBitmapPointer(x, y) = newBitmap;
 		}
 	}
 }
 
-SymetricSpriteSheet::~SymetricSpriteSheet()
+FixedSpriteArray::~FixedSpriteArray()
 {
-	for (int i = 0; i < this->count; i++) {
+	for (int i = 0; i < this->count(); i++) {
 		delete this->sprites[i];
 	}
 }

@@ -13,7 +13,7 @@ void TestInterface::DrawPixelContainer(PixelContainer* src, int fx, int fy)
 			}
 
 			else if (ReadPixel->state & pxstate::background) {
-				paint->DrawPixel(xoff + fx, yoff + fy, Colors::MakeARGB(255,177, 244, 177));
+				paint->DrawPixel(xoff + fx, yoff + fy, ColorARGB(255,177, 244, 177));
 			}
 
 			else {
@@ -28,7 +28,7 @@ void TestInterface::DrawPixelContainer(PixelContainer* src, int fx, int fy)
 
 
 
-void TestInterface::DrawSpritesheet(SymetricSpriteSheet * sh, int xoff, int yoff)
+void TestInterface::DrawSpritesheet(FixedSpriteArray * sh, int xoff, int yoff)
 {
 	int sprw = sh->sprites[0]->width;
 	int sprh = sh->sprites[0]->height;
@@ -50,31 +50,42 @@ void TestInterface::DrawSpritesheet(SymetricSpriteSheet * sh, int xoff, int yoff
 
 }
 
-
-
-
-TrianglePoly::TrianglePoly(Grid * parent, float x, float y, float xx, float yy, float xxx, float yyy)
+void TestInterface::DrawLabel(Label * label)
 {
-	a1 = new Vector2(x,y);
-	a2 = new Vector2(xx,yy);
-	a3 = new Vector2(xxx,yyy);
-	float xr = maximum(x, xx, xxx)/2 + minimum(x,xx,xxx) /2;
-	float yr = maximum(y, yy, yyy) / 2 + minimum(y, yy, yyy) / 2;
+	this->PrintText(label->x, label->y, label->font, label->text);
+}
+
+
+
+
+
+
+TrianglePoly::TrianglePoly(Vector2 vs1, Vector2 vs2, Vector2 vs3)
+{
+	v1 = new Vector2(vs1);
+	v2 = new Vector2(vs2);
+	v3 = new Vector2(vs3);
+
+	float xr = maximum(v1->x, v2->x, v3->x)/2 + minimum(v1->x, v2->x, v3->x) /2;
+	float yr = maximum(v1->y, v2->y, v3->y) / 2 + minimum(v1->y, v2->y, v3->y) / 2;
 	origin = new Vector2(xr, yr);
 }
 
 void TrianglePoly::Draw(Interface * out)
 {
-	out->paint->line(a1->x, a1->y, a2->x, a2->y, Colors::Black,6);
-	out->paint->line(a1->x, a1->y, a3->x, a3->y, Colors::Black, 6);
-	out->paint->line(a3->x, a3->y, a2->x, a2->y, Colors::Black, 6);
+	out->paint->line(v1->x, v1->y, v2->x, v2->y, Colors::Black,6);
+	out->paint->line(v1->x, v1->y, v3->x, v3->y, Colors::Black, 6);
+	out->paint->line(v3->x, v3->y, v2->x, v2->y, Colors::Black, 6);
 
-	this->DrawVertex(a1, out, Colors::Green);
-	this->DrawVertex(a2, out, Colors::Green);
-	this->DrawVertex(a3, out, Colors::Green);
+	this->DrawVertex(v1, out, Colors::Green);
+	this->DrawVertex(v2, out, Colors::Green);
+	this->DrawVertex(v3, out, Colors::Green);
 	this->DrawVertex(origin, out, Colors::Red);
 
 }
+
+
+
 
 void Grid::Draw(Interface * out)
 {
@@ -93,3 +104,4 @@ void Grid::Draw(Interface * out)
 	}
 
 }
+

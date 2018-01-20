@@ -3,12 +3,10 @@
 #include "Spritesheet.h"
 
 
-
-class VectorSpriteSheet;
 class FontType {
 
 public:
-	SymetricSpriteSheet* sprite_sheet = nullptr;
+	FixedSpriteArray* sprite_sheet = nullptr;
 	int translate[256] = {
 	  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,
 	 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
@@ -39,15 +37,10 @@ public:
 	};
 
 public:
-	~FontType();
-	FontType() = delete;
-	FontType(TransparentBitmap * bmp, int wcount, int hcount);
-	
-	TransparentBitmap* GetCharacterRepr(unsigned int c);
-	
+	FontType(char* image_src,int wcount, int hcount, float size, Color bckclr);
+	Bitmap* GetCharacterRepr(unsigned int c);
 };
 
-extern TransparentBitmap img;
 extern FontType DOS_BLACK;
 
 #endif

@@ -1,21 +1,22 @@
 #ifndef __TYPEZ_H__PRIM__
 #define __TYPEZ_H__PRIM__
-#include  "Func.h"
-class Vector2;
+#include "CustomMath.h"
 
 class Vector2 {
 public:
 	float x, y;
 	Vector2(float x, float y) :x(x), y(y) {}
-	float GetSquareDistance(Vector2 other);
-
+	float DistanceFrom(Vector2 other);
+	float GetSquareDistance2(Vector2 v1, Vector2 v2);
+	
 };
 
 class Vector3: public Vector2 {
 public:
 	float z;
 	Vector3(float x, float y, float z) :Vector2(x,y),z(z){}
-	float GetSquareDistance(Vector3 other);
+	float DistanceFrom(Vector3 other);
+	float GetSquareDistance3(Vector3 v1, Vector3 v2);
 };
 
 

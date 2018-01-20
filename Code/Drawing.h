@@ -1,8 +1,9 @@
-#ifndef __GRAPHICAL_H__
-#define __GRAPHICAL_H__
-#include "Interface.h"
+#ifndef __MY_DRAWING_H__
+#define __MY_DRAWING_H__
+#include "..\Assets\D3DGraphics.h"
+#include  "Colors.h"
+#include <math.h>
 
-class Interface;
 class Painter {
 public:
 	D3DGraphics * gfx;
@@ -20,8 +21,6 @@ public:
 	void rectangle( int x, int y, int w, int h, Color c);
 	void rectangle(int x, int y, int w, int h, Color c, bool fill);
 };
-
-
 
 
 #endif 

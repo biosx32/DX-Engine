@@ -21,7 +21,7 @@
 #include "Game.h"
 
 
-TransparentBitmap scaling("..\\Resources\\test_RGB.bmp", Colors::MakeARGB(255,177, 244, 177));
+Bitmap scaling("..\\Resources\\test_RGB.bmp",ColorARGB(255,177, 244, 177));
 
 Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 :	gfx( hWnd ),
@@ -38,97 +38,95 @@ Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 
 
 
-Vector2 oldMousePos = Vector2(0, 0);
+
 Vector2* locked = nullptr;
 Grid grid(80, 0, 30);
-TrianglePoly polystat = TrianglePoly(&grid, 307, 147,468, 137, 442, 367);
-Button test = Button(100, 200, 140, 40, "Rotate  90", &DOS_BLACK);
-Button test2 = Button(100, 250, 140, 40, "Rotate -90", &DOS_BLACK);
+TrianglePoly* poly = new TrianglePoly(Vector2(307, 147),Vector2(468, 137), Vector2(442, 367));
+Button Button2 = Button(100, 200, 140, 40, "Scale 0.5x", &DOS_BLACK);
+Button Button1 = Button(100, 250, 140, 40, "Scale 2.0x", &DOS_BLACK);
 float scale = 0;
+
+
+Vector2 mouseOld(0, 0);
+Vector2 mousePosition(0, 0);
+Vector2 mouseDifference(0,0);
+
+
+
+Label MousePosLabel(0, 72, &DOS_BLACK, "NO_MOUSE_UPDATE");
+DebugGUI debuggui = DebugGUI();
+
 void Game::Initialise() {
 	out = new TestInterface(&gfx);
 	srand(time(0));
 }
-float deg = 0;
+
 void Game::ComposeFrame() {
 
-	float m = 0.5* SCREENWIDTH / scaling.width;;
-	out->PrintText(1, 1, getFrameNumber(), 0.25, &DOS_BLACK);
-
-
+	
+	out->DrawLabel(&MousePosLabel);
 	grid.Draw(out);
-	TrianglePoly* poly = &polystat;
-
-	Vector2 mousePosition = Vector2(mouse.GetMouseX(), mouse.GetMouseY());
-	Vector2 difference = Vector2(mousePosition.x - oldMousePos.x, mousePosition.y - oldMousePos.y);
-	char buff[235];
-	sprintf_s(buff, "Diff, x:%2.1f, y:%2.1f", difference.x, difference.y);
-	out->PrintText(100, 0, buff, 0.25, &DOS_BLACK);
-	oldMousePos = mousePosition;
-
-	deg = deg*1.0001+  0.0001;
-	poly->Rotate(deg);
-
-
-	test.RefreshState(mouse);
-	test2.RefreshState(mouse);
-
-	if (test.isRelease(mouse)) {
-		polystat.Scale(Vector2(0.5, 0.5));
-	}
-	if (test2.isRelease(mouse)) {
-		polystat.Scale(Vector2(2, 2));
-	}
-
 	
-
-
-
-	if (locked)
-	{
-		locked->x += (float)difference.x ;
-		locked->y += (float)difference.y;
-	}
-
-
 	
-	test2.Draw(out);
-	test.Draw(out);
-	if (mouse.LeftIsPressed()) {
-		
-	
-			Vector2* checkVerts[] = { poly->a1,poly->a2, poly->a3, poly->origin };
-			Vector2* closest = nullptr;
-			float closest_dis = 100000;
-			for (int i = 0; i < sizeof(checkVerts) /sizeof(closest); i++) {
-				Vector2* pos = checkVerts[i];
-				float dis = pos->GetSquareDistance(mousePosition);
-				if (dis < closest_dis) {
-					closest_dis = dis;
-					closest = checkVerts[i];
-				}
-			
-			}
-			if (closest && sqrt(closest_dis) < 10) {
-				locked = closest;
-
-				
-			}
-	}
-
-	else {
-		locked = nullptr;
-	}
-
-
-
 	poly->Draw(out);
+
+	Button1.Draw(out);
+	Button2.Draw(out);
+
+	debuggui.Draw(out);
 
 }
 
 void Game::UpdateModel()
 {
+	debuggui.UpdateFrameInfo();
 
+
+	mousePosition.x = mouse.GetMouseX();
+	mousePosition.y = mouse.GetMouseY();
+	mouseDifference.x = mousePosition.x - mouseOld.x;
+	mouseDifference.y = mousePosition.y - mouseOld.y;
+	mouseOld = mousePosition;
+	MousePosLabel.SetText("MouseX: %3.0f + %3.0f\nMouseY: %3.0f + %3.0f\0", mousePosition.x, mouseDifference.x, mousePosition.y, mouseDifference.y);
+
+	if (locked)
+	{
+		locked->x += (float)mouseDifference.x;
+		locked->y += (float)mouseDifference.y;
+	}
+
+
+	Button2.RefreshState(mouse);
+	Button1.RefreshState(mouse);
+
+	if (Button2.isRelease(mouse)) {
+		poly->Scale(Vector2(0.5, 0.5));
+	}
+	if (Button1.isRelease(mouse)) {
+		poly->Scale(Vector2(2, 2));
+	}
+
+	if (mouse.LeftIsPressed()) {
+		Vector2* checkVerts[] = { poly->v1,poly->v2, poly->v3, poly->origin };
+		Vector2* closest = nullptr;
+		float closest_dis = 100000;
+		for (int i = 0; i < sizeof(checkVerts) / sizeof(closest); i++) {
+			Vector2* pos = checkVerts[i];
+			float dis = pos->DistanceFrom(mousePosition);
+			if (dis < closest_dis) {
+				closest_dis = dis;
+				closest = checkVerts[i];
+			}
+
+		}
+		if (closest && sqrt(closest_dis) < 10) {
+			locked = closest;
+		}
+	}
+
+	else {
+		locked = nullptr;
+	}
 
 }
 

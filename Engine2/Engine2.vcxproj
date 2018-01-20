@@ -95,14 +95,18 @@
     <ClCompile Include="..\Code\Bmap.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">G:\DX-Engine\Code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\Code\CustomMath.cpp" />
+    <ClCompile Include="..\Code\DebugGUI.cpp" />
     <ClCompile Include="..\Code\Drawing.cpp" />
     <ClCompile Include="..\Code\Func.cpp" />
     <ClCompile Include="..\Code\Game.cpp" />
     <ClCompile Include="..\Code\Interface.cpp" />
+    <ClCompile Include="..\Code\Labelz.cpp" />
+    <ClCompile Include="..\Code\OutputStream.cpp" />
     <ClCompile Include="..\Code\Spritesheet.cpp" />
     <ClCompile Include="..\Code\TestInterface.cpp" />
-    <ClCompile Include="..\Code\Text.cpp" />
-    <ClCompile Include="..\Code\Types.cpp" />
+    <ClCompile Include="..\Code\FontType.cpp" />
+    <ClCompile Include="..\Code\Vectors.cpp" />
     <ClCompile Include="..\Code\VectorBitmap.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -119,14 +123,18 @@
     <ClInclude Include="..\Code\Animation.h" />
     <ClInclude Include="..\Code\Bmap.h" />
     <ClInclude Include="..\Code\Colors.h" />
+    <ClInclude Include="..\Code\CustomMath.h" />
+    <ClInclude Include="..\Code\DebugGUI.h" />
     <ClInclude Include="..\Code\Drawing.h" />
     <ClInclude Include="..\Code\Func.h" />
     <ClInclude Include="..\Code\Game.h" />
     <ClInclude Include="..\Code\Interface.h" />
+    <ClInclude Include="..\Code\Labelz.h" />
+    <ClInclude Include="..\Code\OutputStream.h" />
     <ClInclude Include="..\Code\Spritesheet.h" />
     <ClInclude Include="..\Code\TestInterface.h" />
-    <ClInclude Include="..\Code\Text.h" />
-    <ClInclude Include="..\Code\Types.h" />
+    <ClInclude Include="..\Code\FontType.h" />
+    <ClInclude Include="..\Code\Vectors.h" />
     <ClInclude Include="..\Code\VectorBitmap.h" />
   </ItemGroup>
   <ItemGroup>

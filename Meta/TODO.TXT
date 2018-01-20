@@ -1,3 +1,5 @@
 #Sprites aby sa nacitaviali rovnomerne - skip lines
 Ignorovanie transparentnej farby v spriteoch
 Butttons and textbox
+Add labels with format like printf(...)
+--Rectangle select cursor

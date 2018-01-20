@@ -32,13 +32,14 @@
 #include "Bmap.h"
 #include "Func.h"
 #include "Spritesheet.h"
-#include "Text.h"
+#include "FontType.h"
 #include "Drawing.h"
 #include "VectorBitmap.h"
 #include "Interface.h"
 #include "TestInterface.h"
-
+#include "DebugGUI.h"
 #include <thread>
+
 class Game
 {
 public:
@@ -58,7 +59,7 @@ public:
 		
 	}
 	void Initialise();
-	Interface* out;
+	TestInterface* out;
 
 private:
 	void ComposeFrame();

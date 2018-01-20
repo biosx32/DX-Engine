@@ -1,14 +1,18 @@
 #ifndef __T_INTERF_H__
 #define __T_INTERF_H__
 #include "Interface.h"
-#include "Types.h"
+#include "Vectors.h"
+#include "Labelz.h"
 #include "..\Assets\Mouse.h"
+#include <stdio.h>
 
 class TestInterface : public Interface {
 public:
 	TestInterface(D3DGraphics* gfx): Interface(gfx){}
 	void DrawPixelContainer(PixelContainer * src, int fx, int fy);
-	void DrawSpritesheet(SymetricSpriteSheet* sh, int xoff, int yoff);
+	void DrawSpritesheet(FixedSpriteArray* sh, int xoff, int yoff);
+	void DrawLabel(Label* label);
+	
 };
 
 
@@ -25,9 +29,44 @@ public:
 
 class TrianglePoly {
 public:
-	Vector2 * a1, *a2, *a3;
+	Vector2 * v1, *v2, *v3;
+	Vector2* Vertices[3] ={ v1, v2, v3 };
 	Vector2* origin;
-	TrianglePoly(Grid* parent, float x, float y, float xx, float yy, float xxx, float yyy);
+	TrianglePoly(Vector2 v1, Vector2 v2, Vector2 v3);
+
+
+	void DrawTexture(Bitmap* source) {
+		Vector2* a, *b, *c;
+		//zorad podla y
+		Vector2* sorted[3] = { v1, v2, v3 };
+
+		float smallest = 999999999.0f;
+		int sortI = 0;
+		while (sortI < 3) {
+			for (int i = sortI; i < 3; i++) {
+				if (Vertices[i]->x <= smallest) {
+					sorted[sortI] = Vertices[i];
+					smallest = Vertices[i]->x;
+					sortI++;
+				}
+			}
+		}
+		int j = 00;
+
+
+		//ak nie su dve rovnake y
+		//najdi vektor stredneho y
+		//ak current y pri kresleni = vektoru stredneho y tak prepni deltu
+
+		bool flat = v1->y == v2->y || v1->y == v3->y || v2->y == v3->y;
+
+		float deltaXstart = 0;
+		for (int i = 0; i < 3; i++) {
+			
+		}
+
+
+	}
 
 	void DrawVertex(Vector2* pos, Interface* out, Color q) {
 		out->paint->circle(pos->x, pos->y, 5,q,true);
@@ -36,12 +75,12 @@ public:
 		out->paint->rectangle(pos->x + 10, pos->y - 20, 55, 35, q, true);
 		out->paint->line(pos->x, pos->y, pos->x + 2, pos->y - 13, q);
 		out->paint->FastHLine(pos->x + 2, pos->y - 13, 5, q);
-		out->PrintText(pos->x + 15, pos->y - DOS_BLACK.sprite_sheet->hsize / 4, buffer, 0.2, &DOS_BLACK);
+		out->PrintText(pos->x + 15, pos->y - DOS_BLACK.sprite_sheet->hsize / 4, &DOS_BLACK, buffer);
 	}
 
 
 	void ApplyMatrix(float data[3][3]) {
-		Vector2* vertices[3] = { a1,a2,a3 };
+		Vector2* vertices[3] = { v1,v2,v3 };
 
 		for (int i = 0; i < 3; i++) {
 			Vector2* pos = vertices[i];
@@ -150,7 +189,7 @@ public:
 		
 		int textY = y + h / 2 - s*font->sprite_sheet->hsize/2;
 		int textX = x + s*textw*0.1;
-		out->PrintText(textX, textY, text, s, font);
+		out->PrintText(textX, textY, font,text);
 
 	}
 	
@@ -175,7 +214,13 @@ public:
 		strcpy_s(text, src); 
 		text[bfsz - 1] = 0; 
 	}
+
+
+
+
 };
+
+
 
 
 

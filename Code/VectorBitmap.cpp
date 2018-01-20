@@ -7,16 +7,14 @@ MySprite::MySprite(vector<FPixel*>* src)
 	this->NormalizeH();
 }
 
-MySprite::MySprite(TransparentBitmap * src)
+MySprite::MySprite(Bitmap * src)
 {
-
 	this->pixels = new vector<FPixel*>;
-
 	for (int y = 0; y < src->height; y++) {
 		for (int x = 0; x < src->width; x++) {
-			Color test_color = *src->GetDataPtr(x, y);
+			Color test_color = *src->GetPixelPointer(x, y);
 
-			if (!src->IsColorTransparent(test_color)) {
+			if (!src->GetIsBackground(test_color)) {
 				pixels->push_back(new FPixel(x, y, test_color));
 			}
 
