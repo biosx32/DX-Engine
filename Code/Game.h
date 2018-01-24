@@ -38,6 +38,7 @@
 #include "Interface.h"
 #include "TestInterface.h"
 #include "DebugGUI.h"
+#include "GuiBuilder.h"
 #include <thread>
 
 class Game

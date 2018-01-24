@@ -67,6 +67,9 @@
     <ClCompile Include="..\Code\Labelz.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\GuiBuilder.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Assets\D3DGraphics.h">
@@ -145,6 +148,9 @@
       <Filter>HPP</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Labelz.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GuiBuilder.h">
       <Filter>HPP</Filter>
     </ClInclude>
   </ItemGroup>

@@ -36,6 +36,26 @@ public:
 
 
 	void DrawTexture(Bitmap* source) {
+
+		Vector2* v1r = new Vector2(*v1);
+		Vector2* v2r = new Vector2(*v2);
+		Vector2* v3r = new Vector2(*v3);
+
+		if (v1r->x < 0) v1r->x = 0;
+		if (v2r->x < 0) v2r->x = 0;
+		if (v3r->x < 0) v3r->x = 0;
+		if (v1r->x >= SCREENWIDTH) v1r->x = SCREENWIDTH - 1;
+		if (v2r->x >= SCREENWIDTH) v2r->x = SCREENWIDTH - 1;
+		if (v3r->x >= SCREENWIDTH) v3r->x = SCREENWIDTH - 1;
+
+		if (v1r->y < 0) v1r->y = 0;
+		if (v2r->y < 0) v2r->y = 0;
+		if (v3r->y < 0) v3r->y = 0;
+		if (v1r->y >= SCREENHEIGHT) v1r->y = SCREENHEIGHT - 1;
+		if (v2r->y >= SCREENHEIGHT) v2r->y = SCREENHEIGHT - 1;
+		if (v3r->y >= SCREENHEIGHT) v3r->y = SCREENHEIGHT - 1;
+
+
 		Vector2* a, *b, *c;
 		//zorad podla y
 		Vector2* sorted[3] = { v1, v2, v3 };
@@ -134,91 +154,6 @@ public:
 	void Draw(Interface* out);
 };
 
-class ClickableRectangle {
-public:
-	int x, y,w,h;
-	bool depressed;
-
-	ClickableRectangle(int x, int y, int w, int h) :x(x), y(y), w(w), h(h),depressed(false) {}
-
-	bool isHover(MouseClient mouse) {
-		Vector2 mousePosition = Vector2(mouse.GetMouseX(), mouse.GetMouseY());
-		return mousePosition.x >= x && mousePosition.y >= y && mousePosition.x < x + w && mousePosition.y < y + h;
-	}
-
-	bool isPress(MouseClient mouse) {
-		Vector2 mousePosition = Vector2(mouse.GetMouseX(), mouse.GetMouseY());
-		return isHover(mouse) && mouse.LeftIsPressed();
-	}
-
-	bool isRelease(MouseClient mouse) {
-		if (!mouse.LeftIsPressed()) {
-			bool r = depressed;
-			r = isHover(mouse) ? r : false;
-			depressed = false;
-			return r == true;
-		}
-		return false;
-	}
-
- void RefreshState(MouseClient mouse) {
-		if (isPress(mouse)) {
-			depressed = true;
-		}
-	}
-
-	
-};
-
-class Button: public ClickableRectangle {
-public:
-	Color clr;
-	const static int bfsz = 256;
-	char text[bfsz];
-	FontType* font;
-
-	void Draw(Interface* out) {
-		int charcnt = strlen(text);
-		int textw = charcnt * font->sprite_sheet->wsize;
-		float s = (float) w/ textw;
-		out->paint->rectangle(x, y, w, h, clr,true);
-
-		for (int i = 0; i < 2; i++) {
-			out->paint->rectangle(x + i, y + i, w - i * 2, h - i * 2, Colors::Black);
-		}
-		
-		int textY = y + h / 2 - s*font->sprite_sheet->hsize/2;
-		int textX = x + s*textw*0.1;
-		out->PrintText(textX, textY, font,text);
-
-	}
-	
-	void RefreshState(MouseClient mouse) {
-		this->ClickableRectangle::RefreshState(mouse);
-		this->RefreshColors(mouse);
-	}
-
-	
-	
-	void RefreshColors(MouseClient mouse) {
-		clr = Colors::LightGray;
-		if (isHover(mouse)) {
-			clr = Colors::Gray;
-		}
-		if (depressed && isHover(mouse)) {
-			clr = Colors::Blue;
-		}
-	}
-
-	Button(int x, int y, int w, int h, char* src, FontType* font) : ClickableRectangle(x,y,w,h), font(font),clr(Colors::LightGray) { 
-		strcpy_s(text, src); 
-		text[bfsz - 1] = 0; 
-	}
-
-
-
-
-};
 
 
 

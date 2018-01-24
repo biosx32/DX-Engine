@@ -100,6 +100,7 @@
     <ClCompile Include="..\Code\Drawing.cpp" />
     <ClCompile Include="..\Code\Func.cpp" />
     <ClCompile Include="..\Code\Game.cpp" />
+    <ClCompile Include="..\Code\GuiBuilder.cpp" />
     <ClCompile Include="..\Code\Interface.cpp" />
     <ClCompile Include="..\Code\Labelz.cpp" />
     <ClCompile Include="..\Code\OutputStream.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="..\Code\Drawing.h" />
     <ClInclude Include="..\Code\Func.h" />
     <ClInclude Include="..\Code\Game.h" />
+    <ClInclude Include="..\Code\GuiBuilder.h" />
     <ClInclude Include="..\Code\Interface.h" />
     <ClInclude Include="..\Code\Labelz.h" />
     <ClInclude Include="..\Code\OutputStream.h" />
