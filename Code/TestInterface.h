@@ -81,12 +81,7 @@ public:
 							}
 
 							if (*bitmap.GetPixelPointer(x + xt, y) == Colors::Black) {
-								if (y % 2) {
-									bitmapdrawer.paint->line(x, y, x + xt, y, Colors::Red);
-								}
-								else {
-									bitmapdrawer.paint->line(x, y, x + xt, y, Colors::Blue);
-								}
+							
 								for (int i = 0; i < xt; i++) {
 
 									float radian = -1.57f;
@@ -97,18 +92,22 @@ public:
 									};
 									
 									Color* srcc = source->GetPixelPointer(x + i + origin.x, y + origin.y);
-
+									Vector2 dest = Vector2(x + i, y);
+									Vector2 fest = Vector2(dest.x + xmin, dest.y + ymin);
+									Vector2 rotated = GetTransformation(fest, matrix);
 									if (!srcc) {
-										i = xt;
+										int dstn = (xt-i);
+										int mm = (y/4 + (int)origin.y)%2 * (x/4+i/4 + (int)origin.x)%2;
+										if (mm == 0) {
+											out->paint->DrawPixel(fest.x, fest.y, Colors::Gray);
+										}
+										if (mm == 1) {
+											out->paint->DrawPixel(fest.x, fest.y, Colors::White);
+										}
+		
+										
 										continue;
 									}
-
-				
-									Vector2 dest = Vector2(x + i, y);
-									Vector2 fest = Vector2(dest.x + xmin,dest.y + ymin);
-
-									Vector2 rotated = GetTransformation(fest, matrix);
-								
 								
 									out->paint->DrawPixel(fest.x , fest.y, *srcc);
 									
