@@ -3,8 +3,7 @@
 SpecialCode msgbox = { 1 };
 SpecialCode console = { 2 };
 
-OutputStream output= OutputStream();
-OutputStream & OutputStream::operator>>(SpecialCode finish)
+OutputStream & OutputStream::operator<<(SpecialCode finish)
 {
 	std::string& str = stream.str(); // extends lifetime of temporary 
 	std::wstring wsTmp(str.begin(), str.end());
@@ -21,7 +20,7 @@ OutputStream & OutputStream::operator>>(SpecialCode finish)
 	return *this;
 }
 
-OutputStream & OutputStream::operator>>(char * data)
+OutputStream & OutputStream::operator<<(char * data)
 {
 	const std::string temp = data;
 	stream << temp;

@@ -17,12 +17,12 @@ public:
 		stream = std::stringstream("", std::ios_base::app | std::ios_base::out);
 	}
 
-	OutputStream & OutputStream::operator>>(int data) { stream << data; return *this; }
-	OutputStream & OutputStream::operator>>(double data) { stream << data; return *this; }
-	OutputStream & OutputStream::operator>>(SpecialCode finish);
-	OutputStream & operator>>(char * data);
+	OutputStream & OutputStream::operator<<(int data) { stream << data; return *this; }
+	OutputStream & OutputStream::operator<<(double data) { stream << data; return *this; }
+	OutputStream & OutputStream::operator<<(SpecialCode finish);
+	OutputStream & OutputStream::operator<<(char * data);
 };
 
-extern OutputStream output;
+
 
 #endif // !__OUTPUT_STREAM_H_322__

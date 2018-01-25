@@ -5,7 +5,10 @@
 class Vector2 {
 public:
 	float x, y;
+	Vector2() :Vector2(0, 0){}
 	Vector2(float x, float y) :x(x), y(y) {}
+
+
 	float DistanceFrom(Vector2 other);
 	float GetSquareDistance2(Vector2 v1, Vector2 v2);
 	

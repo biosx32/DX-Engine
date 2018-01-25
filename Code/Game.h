@@ -28,7 +28,7 @@
 #include "FrameTimer.h"
 #include "SurfaceSequence.h"
 
-
+#include "OutputStream.h"
 #include "Bmap.h"
 #include "Func.h"
 #include "Spritesheet.h"

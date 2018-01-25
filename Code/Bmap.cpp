@@ -57,14 +57,16 @@ Bitmap::Bitmap(char * FileName)
 	FILE* file_read;
 	fopen_s(&file_read, FileName, "rb");
 
+	OutputStream output = OutputStream();
+
 	if (file_read == nullptr) {
-		output >> "ERROR: Could not load image: " >> FileName >> " << FILE NOT FOUND\n" >> msgbox;
+		output << "ERROR: Could not load image: " << FileName << " FILE NOT FOUND\n" << msgbox;
 		return;
 	}
 
 	int BYTES_TO_READ = File_bytes(file_read);
 	if (BYTES_TO_READ < 1) {
-		output >> "ERROR: Could not load image: " >> FileName >> " >> EMPTY FILE\n" >> msgbox;
+		output << "ERROR: Could not load image: " << FileName << " EMPTY FILE\n" << msgbox;
 		return;
 	}
 

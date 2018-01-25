@@ -43,12 +43,15 @@ Vector2 mousePosition(0, 0);
 Vector2 mouseDifference(0,0);
 
 
-ButtonManager b = ButtonManager();
+ButtonManager MyButtons = ButtonManager();
 Label MousePosLabel(0, 72, &DOS_BLACK, "NO_MOUSE_UPDATE");
 DebugGUI debuggui = DebugGUI();
 
+Bitmap TestBitmap("..\\Resources\\test_SPRITES.bmp",ColorRGB(177,244,177));
+
 void Game::Initialise() {
-	out = new TestInterface(&gfx);
+	PixelDest screen = PixelDest(&gfx);
+	out = new TestInterface(screen);
 	srand(time(0));
 }
 
@@ -59,17 +62,16 @@ void Game::ComposeFrame() {
 	
 	
 	poly->Draw(out);
-	b.RefreshState(mouse);
-	b.Draw(out);
-
+	poly->DrawTexture(out, &TestBitmap);
+	MyButtons.Draw(out);
 	debuggui.Draw(out);
 
 }
 
 void Game::UpdateModel()
 {
+	MyButtons.RefreshState(mouse);
 	debuggui.UpdateFrameInfo();
-
 
 	mousePosition.x = mouse.GetMouseX();
 	mousePosition.y = mouse.GetMouseY();
@@ -80,8 +82,14 @@ void Game::UpdateModel()
 
 	if (locked)
 	{
-		locked->x += (float)mouseDifference.x;
-		locked->y += (float)mouseDifference.y;
+
+	
+		Vector2* checkVerts[] = { &poly->v1,&poly->v2, &poly->v3, &poly->origin };
+		for (int i = 0; i < sizeof(checkVerts) / sizeof(checkVerts[0]); i++) {
+
+			checkVerts[i]->x += (float)mouseDifference.x;
+			checkVerts[i]->y += (float)mouseDifference.y;
+		}
 	}
 
 
@@ -93,7 +101,7 @@ void Game::UpdateModel()
 
 
 	if (mouse.LeftIsPressed()) {
-		Vector2* checkVerts[] = { poly->v1,poly->v2, poly->v3, poly->origin };
+		Vector2* checkVerts[] = { &poly->v1,&poly->v2, &poly->v3, &poly->origin };
 		Vector2* closest = nullptr;
 		float closest_dis = 100000;
 		for (int i = 0; i < sizeof(checkVerts) / sizeof(closest); i++) {

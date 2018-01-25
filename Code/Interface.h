@@ -16,7 +16,9 @@ public:
 	Painter *paint;
 	
 public:
-	Interface(D3DGraphics* gfx) { paint = new Painter(gfx); }
+	Interface(PixelDest dest) { 
+		paint = new Painter(dest); 
+	}
 
 	void DrawBitmap(Bitmap* bmp, int fx, int fy, float mx, float my);
 	void DrawBitmap(Bitmap* bmp, int fx, int fy);

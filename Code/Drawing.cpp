@@ -14,18 +14,7 @@ void Painter::FastVLine(int x0, int y0, int height, Color c) {
 
 void Painter::DrawPixel(int xoff, int yoff, Color c)
 {
-	#define SOFT_DRAW 1
-
-	if (SOFT_DRAW) {
-		if (xoff >= SCREENWIDTH ||
-			yoff >= SCREENHEIGHT ||
-			xoff < 0 ||
-			yoff < 0) {
-			return;
-		}
-	}
-
-	this->gfx->PutPixel(xoff, yoff, c);
+	this->pxd.DrawPixel(xoff, yoff, c);
 }
 
 void Painter::DrawPixel(int xoff, int yoff, Color c, int m)
@@ -124,7 +113,6 @@ void Painter::line(int x1, int y1, int x2, int y2, Color c)
 
 void Painter::line(int x1, int y1, int x2, int y2, Color c, int width)
 {
-	width = 2;
 	for (int i = 0; i < width; i++) {
 		int delta = -width / 2 + i;
 		line(x1, y1+delta, x2, y2 + delta, c);
@@ -151,4 +139,48 @@ void Painter::rectangle(int xoff, int yoff, int width, int height, Color c, bool
 
 }
 
+void PixelDest::DrawPixel(int xoff, int yoff, Color c)
+{
+	if (gfx) {
+		#define SOFT_DRAW 1
 
+		if (SOFT_DRAW) {
+			if (xoff >= SCREENWIDTH ||
+				yoff >= SCREENHEIGHT ||
+				xoff < 0 ||
+				yoff < 0) {
+				return;
+			}
+		}
+
+		this->gfx->PutPixel(xoff, yoff, c);
+	}
+
+	if (bmp) {
+		if (xoff >= bmp->width ||
+			yoff >= bmp->height ||
+			xoff < 0 ||
+			yoff < 0) {
+			return;
+		}
+
+		*bmp->GetPixelPointer(xoff, yoff) = c;
+	}
+}
+
+void PixelDest::DrawPixel(int xoff, int yoff, Color c, int m)
+{
+	xoff *= m;
+	yoff *= m;
+
+	for (int y = 0; y < m; y++) {
+		for (int x = 0; x < m; x++) {
+
+			int finalx = xoff + x;
+			int finaly = yoff + y;
+
+			DrawPixel(finalx, finaly, c);
+
+		}
+	}
+}

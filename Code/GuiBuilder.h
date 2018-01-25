@@ -112,10 +112,10 @@ public:
 
 
 	void Init() {
-		buttons.push_back(new Button(100, 240, 140, 40, "Scale 2.0x", &DOS_BLACK, &ScalePoly20x));
-		buttons.push_back(new Button(100, 200, 140, 40, "Scale 0.5x", &DOS_BLACK, &ScalePoly05x));
-		buttons.push_back(new Button(100, 280, 140, 40, "Rotate 15*", &DOS_BLACK,  &RotatePolyP15));
-		buttons.push_back(new Button(100, 320, 140, 40, "Rotate -15*", &DOS_BLACK, &RotatePolyN15));
+		buttons.push_back(new Button(150, 0, 135, 40, "Scale 2.0x",   &DOS_BLACK, &ScalePoly20x));
+		buttons.push_back(new Button(280, 0, 135, 40, "Scale 0.5x", &DOS_BLACK, &ScalePoly05x));
+		buttons.push_back(new Button(410, 0, 135, 40, "Rotate 15*", &DOS_BLACK,  &RotatePolyP15));
+		buttons.push_back(new Button(540, 0, 135, 40, "Rotate -15*", &DOS_BLACK, &RotatePolyN15));
 	}
 
 	void RefreshState(MouseClient mouse) {
