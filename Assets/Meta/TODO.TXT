@@ -3,3 +3,6 @@ Ignorovanie transparentnej farby v spriteoch
 Butttons and textbox
 Add labels with format like printf(...)
 --Rectangle select cursor
+
+Check for drawing triangles function chilli
+Check if triangles are necessary
