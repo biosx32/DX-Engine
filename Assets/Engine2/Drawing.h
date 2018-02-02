@@ -1,6 +1,6 @@
 #ifndef __MY_DRAWING_H__
 #define __MY_DRAWING_H__
-#include "..\Assets\D3DGraphics.h"
+#include "D3DGraphics.h"
 #include  "Colors.h"
 #include "Bmap.h"
 #include <math.h>

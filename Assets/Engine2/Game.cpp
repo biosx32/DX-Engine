@@ -47,7 +47,7 @@ ButtonManager MyButtons = ButtonManager();
 Label MousePosLabel(0, 72, &DOS_BLACK, "NO_MOUSE_UPDATE");
 DebugGUI debuggui = DebugGUI();
 
-Bitmap TestBitmap("..\\Resources\\test_SPRITES.bmp",ColorRGB(177,244,177));
+Bitmap TestBitmap("..\\Assets\\Resources\\test_SPRITES.bmp",ColorRGB(177,244,177));
 
 void Game::Initialise() {
 	PixelDest screen = PixelDest(&gfx);

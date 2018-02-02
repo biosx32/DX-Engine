@@ -1,7 +1,7 @@
 #include "FontType.h"
 
-FontType DOS_BLACK("..\\Resources\\DOS_FONT_WHITE_22_5.bmp", 22, 5, 0.25, Colors::Blue);
-FontType DOS_BLACK_MINI("..\\Resources\\DOS_FONT_WHITE_22_5.bmp", 22, 5, 0.2, Colors::Blue);
+FontType DOS_BLACK("..\\Assets\\Resources\\DOS_FONT_WHITE_22_5.bmp", 22, 5, 0.25, Colors::Blue);
+FontType DOS_BLACK_MINI("..\\Assets\\Resources\\DOS_FONT_WHITE_22_5.bmp", 22, 5, 0.2, Colors::Blue);
 
 FontType::FontType(char* image_src,int wcount, int hcount, float size, Color bckclr)
 {

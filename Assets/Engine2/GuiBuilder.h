@@ -2,7 +2,7 @@
 #define _GUI_BUILDER_H__N__
 
 #include "Vectors.h"
-#include "..\Assets\Mouse.h"
+#include "Mouse.h"
 #include "Colors.h"
 #include "FontType.h"
 #include "TestInterface.h"

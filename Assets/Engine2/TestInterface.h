@@ -3,7 +3,7 @@
 #include "Interface.h"
 #include "Vectors.h"
 #include "Labelz.h"
-#include "..\Assets\Mouse.h"
+#include "Mouse.h"
 #include <stdio.h>
 
 class TestInterface : public Interface {
