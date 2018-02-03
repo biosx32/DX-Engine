@@ -37,7 +37,9 @@ public:
 	void rectangleBorder( int x, int y, int w, int h, Color c, int r);
 	void rectangle(int x, int y, int w, int h, Color c);
 
-	void ellipseBorder(int xoff, int yoff, int width, int height, Color c);
+	void ellipseBorder(int xoff, int yoff, int width, int height, Color c, int r);
+	void ellipse(int xoff, int yoff, int width, int height, Color c);
+
 };
 
 

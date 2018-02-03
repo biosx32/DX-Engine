@@ -16,14 +16,13 @@ public:
 		int charcnt = strlen(text);
 		int textw = charcnt * font->charw;
 		out->paint->rectangle(x, y, w, h, clr);
-
-		for (int i = 0; i < 2; i++) {
-			out->paint->rectangleBorder(x + i, y + i, w - i * 2, h - i * 2, Colors::Black,2);
-		}
+        out->paint->rectangleBorder(x , y , w , h , Colors::Black,2);
+	
 
 		int textY = y + h / 2 - font->charh / 2;
 		int textX = x + (this->w- textw) / 2;
 		out->PrintText(textX, textY, font, text);
+
 
 	}
 

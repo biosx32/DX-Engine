@@ -56,8 +56,11 @@ void Game::ComposeFrame() {
 	test->Draw();
 }
 
+
+
 void Game::UpdateModel()
 {
+	
 	debuggui->Update();
 	test->Update();
 }

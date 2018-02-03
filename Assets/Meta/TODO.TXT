@@ -1,8 +1,3 @@
-#Sprites aby sa nacitaviali rovnomerne - skip lines
-Ignorovanie transparentnej farby v spriteoch
-Butttons and textbox
-Add labels with format like printf(...)
+Textbox
 --Rectangle select cursor
-
-Check for drawing triangles function chilli
-Check if triangles are necessary
+Bitmap buttons -> draw corners and then repeat middle IF !!! textSize > BitmapSize --> kopiruj

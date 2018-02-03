@@ -8,7 +8,7 @@ class DebugGUI {
 protected:
 	int FPS_frame = 0;
 	float FPS_elapsed_from_last_update = 0;
-	clock_t begin = 0;
+	clock_t begin = -1;
 	MouseClient* mouse;
 	Vector2 mouseOld;
 public:

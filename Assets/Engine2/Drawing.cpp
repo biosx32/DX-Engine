@@ -17,46 +17,73 @@ void Painter::DrawPixel(int xoff, int yoff, Color c)
 	this->pxd.DrawPixel(xoff, yoff, c);
 }
 
-
-
-void Painter::ellipseBorder(int xoff, int yoff, int width, int height, Color c)
+void Painter::ellipse(int ox, int oy, int width, int height, Color c)
 {
-	int size = width * width;
-	int hsquared = height * height;
-	int fa2 = 4 * size, fb2 = 4 * hsquared;
-	int x, y, th;
 
-	y = height;
-	th = 2 * hsquared + size * (1 - 2 * height);
-	for (x = 0; hsquared*x <= size * y; x++)
-	{
-		DrawPixel(xoff + x, yoff + y, c);
-		DrawPixel(xoff - x, yoff + y, c);
-		DrawPixel(xoff + x, yoff - y, c);
-		DrawPixel(xoff - x, yoff - y, c);
-		if (th >= 0)
-		{
-			th += fa2 * (1 - y);
-			y--;
-		}
-		th += hsquared * ((4 * x) + 6);
-	}
+	for(int y=-height; y<=height; y++) {
+    for(int x=-width; x<=width; x++) {
+        double dx = (double)x / (double)width;
+        double dy = (double)y / (double)height;
+        if(dx*dx+dy*dy <= 1)
+            DrawPixel(ox+x, oy+y,c);
+    }
+}
 
-	y = 0;
-	th = 2 * size + hsquared * (1 - 2 * width);
-	for (x = width; size*y <= hsquared * x; y++)
-	{
-		DrawPixel(xoff + x, yoff + y, c);
-		DrawPixel(xoff - x, yoff + y, c);
-		DrawPixel(xoff + x, yoff - y, c);
-		DrawPixel(xoff - x, yoff - y, c);
-		if (th >= 0)
+}
+
+
+void Painter::ellipseBorder(int x, int y, int owidth, int oheight, Color c, int r)
+{
+
+
+	for (int i = 0; i < r; i++) {
+		int delta = i;
+		int xoff = x + delta;
+		int yoff = y + delta;
+
+		int width = owidth;
+		int height = oheight;
+
+		int size = width * width;
+		int hsquared = height * height;
+		int fa2 = 4 * size, fb2 = 4 * hsquared;
+		int x, y, th;
+
+		y = height;
+		th = 2 * hsquared + size * (1 - 2 * height);
+
+
+		for (x = 0; hsquared*x <= size * y; x++)
 		{
-			th += fb2 * (1 - x);
-			x--;
+			DrawPixel(xoff + x, yoff + y, c);
+			DrawPixel(xoff - x, yoff + y, c);
+			DrawPixel(xoff + x, yoff - y, c);
+			DrawPixel(xoff - x, yoff - y, c);
+			if (th >= 0)
+			{
+				th += fa2 * (1 - y);
+				y--;
+			}
+			th += hsquared * ((4 * x) + 6);
 		}
-		th += size * ((4 * y) + 6);
+
+		y = 0;
+		th = 2 * size + hsquared * (1 - 2 * width);
+		for (x = width; size*y <= hsquared * x; y++)
+		{
+			DrawPixel(xoff + x, yoff + y, c);
+			DrawPixel(xoff - x, yoff + y, c);
+			DrawPixel(xoff + x, yoff - y, c);
+			DrawPixel(xoff - x, yoff - y, c);
+			if (th >= 0)
+			{
+				th += fb2 * (1 - x);
+				x--;
+			}
+			th += size * ((4 * y) + 6);
+		}
 	}
+	
 }
 
 
