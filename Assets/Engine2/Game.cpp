@@ -30,31 +30,36 @@ Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 }
 
 Grid grid(80, 0, 30);
-ButtonManager* MyButtons = nullptr;
-DebugGUI* debuggui;
-
+DebugGUI* debuggui = nullptr;
+GUI*test = nullptr;
 void Game::Initialise() {
 	PixelDest screen = PixelDest(&gfx);
 	out = new TestInterface(screen);
-	MyButtons = new ButtonManager(&mouse);
 	debuggui = new DebugGUI(&mouse);
+	test = new GUI();
 	srand(time(0));
+
+
+	test->buttonManager->Add(new Button(150, 0, 135, 40, "Scale 2.0x", &DOS_BLACK, nullptr));
+	test->buttonManager->Add(new Button(280, 0, 135, 40, "Scale 0.5x", &DOS_BLACK_MINI, nullptr));
+	test->buttonManager->Add(new Button(410, 0, 135, 40, "Rotate 15*", &DOS_WHITE, nullptr));
+	test->buttonManager->Add(new Button(540, 0, 135, 40, "Rotate -15*", &DOS_WHITE_MINI, nullptr));
+	test->out = out;
+	test->mouse = &mouse;
+
 }
 
 void Game::ComposeFrame() {
 	
 	grid.Draw(out);
-	MyButtons->Draw(out);
 	debuggui->Draw(out);
-
+	test->Draw();
 }
 
 void Game::UpdateModel()
 {
-	MyButtons->RefreshState();
 	debuggui->Update();
-	
-
+	test->Update();
 }
 
 

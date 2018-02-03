@@ -7,59 +7,31 @@
 #include "RasterFont.h"
 #include "TestInterface.h"
 #include "Button.h"
+#include "ButtonManager.h"
 #include <vector>
 using std::vector;
-
 
 extern RasterFont DOS_BLACK_MINI;
 extern RasterFont DOS_BLACK     ;
 extern RasterFont DOS_WHITE_MINI;
 extern RasterFont DOS_WHITE     ;
 
-
-
-class ButtonManager {
+class GUI {
 public:
-	MouseClient* mouse;
-	vector<Button*> buttons;
-	
 
-	void Init() {
-		buttons.push_back(new Button(150, 0, 135, 40, "Scale 2.0x", &DOS_BLACK, nullptr));
-		buttons.push_back(new Button(280, 0, 135, 40, "Scale 0.5x", &DOS_BLACK_MINI, nullptr));
-		buttons.push_back(new Button(410, 0, 135, 40, "Rotate 15*", &DOS_WHITE, nullptr));
-		buttons.push_back(new Button(540, 0, 135, 40, "Rotate -15*", &DOS_WHITE_MINI, nullptr));
-	}
+	MouseClient* mouse = nullptr;
+	ButtonManager* buttonManager = nullptr;;
+	Interface* out = nullptr;
 
-	void RefreshState() {
-		for (std::vector<Button*>::iterator it = buttons.begin(); it != buttons.end(); ++it) {
-			(*it)->RefreshState(*mouse);
-			if ((*it)->isRelease(*mouse)) {
-				if ((*it)->function) {
-					(*it)->function();
-				}
-			}
-		}
-
-	
-	}
-
-	void Draw(Interface* out) {
-		for (std::vector<Button*>::iterator it = buttons.begin(); it != buttons.end(); ++it) {
-			(*it)->Draw(out);
-		}
-	}
-
-	ButtonManager(MouseClient* mouse) {
-		this->mouse = mouse;
-		this->Init();
-	}
-
-	~ButtonManager(){
-		for (std::vector<Button*>::iterator it = buttons.begin(); it != buttons.end(); ++it) {
-			delete (*it);
-		}
+	void InitGUI();
+	void Update();
+	void Draw();
+	GUI(){
+		InitGUI();
 	}
 };
 
 #endif
+
+
+

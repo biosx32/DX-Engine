@@ -8,11 +8,11 @@
 
 class PixelDest {
 public:
-	D3DGraphics* gfx;
-	Bitmap* bmp;
+	D3DGraphics* gfx = nullptr;
+	Bitmap* bmp = nullptr;
 
-	PixelDest(Bitmap* bmp) :bmp(bmp),gfx(0) {}
-	PixelDest(D3DGraphics* gfx) :gfx(gfx),bmp(0) {}
+	PixelDest(Bitmap* bmp) :bmp(bmp),gfx(nullptr) {}
+	PixelDest(D3DGraphics* gfx) :gfx(gfx),bmp(nullptr) {}
 
 	void DrawPixel(int xoff, int yoff, Color c);
 	void DrawPixel(int xoff, int yoff, Color c, int m);

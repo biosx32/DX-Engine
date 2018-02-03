@@ -37,12 +37,14 @@
     <ClInclude Include="..\Assets\Engine2\Animation.h" />
     <ClInclude Include="..\Assets\Engine2\Bmap.h" />
     <ClInclude Include="..\Assets\Engine2\Button.h" />
+    <ClInclude Include="..\Assets\Engine2\ButtonManager.h" />
     <ClInclude Include="..\Assets\Engine2\ClickableRectangle.h" />
     <ClInclude Include="..\Assets\Engine2\Colors.h" />
     <ClInclude Include="..\Assets\Engine2\ConfigFile.h" />
     <ClInclude Include="..\Assets\Engine2\CustomMath.h" />
     <ClInclude Include="..\Assets\Engine2\DebugGUI.h" />
     <ClInclude Include="..\Assets\Engine2\Drawing.h" />
+    <ClInclude Include="..\Assets\Engine2\Manager.h" />
     <ClInclude Include="..\Assets\Engine2\RasterFont.h" />
     <ClInclude Include="..\Assets\Engine2\Func.h" />
     <ClInclude Include="..\Assets\Engine2\Game.h" />

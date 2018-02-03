@@ -182,9 +182,7 @@ void Painter::rectangle(int xoff, int yoff, int width, int height, Color c)
 void PixelDest::DrawPixel(int xoff, int yoff, Color c)
 {
 	if (gfx) {
-		#define SOFT_DRAW 1
-
-		if (SOFT_DRAW) {
+		if (1) {
 			if (xoff >= SCREENWIDTH ||
 				yoff >= SCREENHEIGHT ||
 				xoff < 0 ||
@@ -196,15 +194,11 @@ void PixelDest::DrawPixel(int xoff, int yoff, Color c)
 		this->gfx->PutPixel(xoff, yoff, c);
 	}
 
-	if (bmp) {
-		if (xoff >= bmp->width ||
-			yoff >= bmp->height ||
-			xoff < 0 ||
-			yoff < 0) {
-			return;
+	else if (bmp) {
+		Color * dst = bmp->GetPixelPointer(xoff, yoff);
+		if (dst != nullptr) {
+			*dst = c;
 		}
-
-		*bmp->GetPixelPointer(xoff, yoff) = c;
 	}
 }
 

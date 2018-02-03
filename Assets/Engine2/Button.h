@@ -30,6 +30,12 @@ public:
 	void RefreshState(MouseClient mouse) {
 		this->ClickableRectangle::RefreshState(mouse);
 		this->RefreshColors(mouse);
+
+		if (isRelease(mouse)) {
+			if (function) {
+				function();
+			}
+		}
 	}
 
 
