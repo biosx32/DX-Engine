@@ -1,6 +1,6 @@
 #include "Labelz.h"
 
-Label::Label(int x, int y, FontType * font, char * default_text) :x(x), y(y), font(font) {
+Label::Label(int x, int y, RasterFont * font, char * default_text) :x(x), y(y), font(font) {
 	memset(text, 1, sizeof(text));
 	strcpy_s(text, default_text);
 }

@@ -5,11 +5,11 @@
 #include "Colors.h"
 #include "D3DGraphics.h"
 #include "Bmap.h"
-#include "FontType.h"
+#include "RasterFont.h"
 
 #define TXT_BUFFER_SIZE 1024
 
-class FontType;
+class RasterFont;
 class VectorSpriteSheet;
 class Interface {
 public:
@@ -23,8 +23,8 @@ public:
 	void DrawBitmap(Bitmap* bmp, int fx, int fy, float mx, float my);
 	void DrawBitmap(Bitmap* bmp, int fx, int fy);
 	void DrawSprite(MySprite* VBmp, int fx, int fy);
-	void PrintText(int x, int y, FontType* font, char * text);
-	void PrintText(int x, int y, FontType* font, const char *fmt, ...);
+	void PrintText(int x, int y, RasterFont* font, char * text);
+	void PrintText(int x, int y, RasterFont* font, const char *fmt, ...);
 	void FillScreen(Color color);
 
 };

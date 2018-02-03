@@ -28,6 +28,39 @@
     <Filter Include="Assets\META">
       <UniqueIdentifier>{d801954d-6667-4cf1-b69d-0217dde18141}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\Engine2\GUI">
+      <UniqueIdentifier>{c4ae3eb1-084c-4a7d-a2c6-eb2053bac364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Engine2\GUI\C">
+      <UniqueIdentifier>{5b1048a5-153a-477b-9b2f-8372c84bc828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Engine2\GUI\H">
+      <UniqueIdentifier>{76fa8e89-cf70-4cfc-ab98-ef84209673e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Engine2\GUI\parts">
+      <UniqueIdentifier>{f1ff5ae4-1c48-4ba9-b05c-1aeba469bb91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Engine2\GUI\parts\ClickableRectangle">
+      <UniqueIdentifier>{efec8aaf-a179-4a97-9c7c-eb739b6f8a8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Engine2\GUI\parts\ClickableRectangle\Button">
+      <UniqueIdentifier>{8cad12af-13ae-4200-b50c-26ba35194bb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Engine2\GUI\parts\Label">
+      <UniqueIdentifier>{d27f6d0f-5606-4806-845f-6bc86177f49d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Engine2\CustomClass">
+      <UniqueIdentifier>{9bbecff0-b05d-4300-8600-d3cf80a0de46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Engine2\CustomClass\C">
+      <UniqueIdentifier>{99137909-0348-4320-b2b6-63f16334353b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Engine2\CustomClass\H">
+      <UniqueIdentifier>{54b0ab9f-bde5-4b19-9933-9f95ee99f40e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Engine2\GUI\parts\Font">
+      <UniqueIdentifier>{c8e670db-0152-4222-b43f-9116316e5691}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Assets\Meta\Sources.txt">
@@ -97,56 +130,65 @@
     <ClInclude Include="..\Assets\Engine2\CustomMath.h">
       <Filter>Assets\Engine2\H</Filter>
     </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\DebugGUI.h">
-      <Filter>Assets\Engine2\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Drawing.h">
-      <Filter>Assets\Engine2\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\FontType.h">
-      <Filter>Assets\Engine2\H</Filter>
-    </ClInclude>
     <ClInclude Include="..\Assets\Engine2\Func.h">
       <Filter>Assets\Engine2\H</Filter>
     </ClInclude>
     <ClInclude Include="..\Assets\Engine2\Game.h">
       <Filter>Assets\Engine2\H</Filter>
     </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\GraphicsTest.h">
-      <Filter>Assets\Engine2\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\GuiBuilder.h">
-      <Filter>Assets\Engine2\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Header.h">
-      <Filter>Assets\Engine2\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Interface.h">
-      <Filter>Assets\Engine2\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Labelz.h">
-      <Filter>Assets\Engine2\H</Filter>
-    </ClInclude>
     <ClInclude Include="..\Assets\Engine2\OutputStream.h">
       <Filter>Assets\Engine2\H</Filter>
     </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Spritesheet.h">
-      <Filter>Assets\Engine2\H</Filter>
+    <ClInclude Include="..\Assets\Engine2\DebugGUI.h">
+      <Filter>Assets\Engine2\GUI\H</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\GuiBuilder.h">
+      <Filter>Assets\Engine2\GUI\H</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\Drawing.h">
+      <Filter>Assets\Engine2\GUI\H</Filter>
     </ClInclude>
     <ClInclude Include="..\Assets\Engine2\TestInterface.h">
-      <Filter>Assets\Engine2\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\VectorBitmap.h">
-      <Filter>Assets\Engine2\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Vectors.h">
-      <Filter>Assets\Engine2\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Animation.h">
-      <Filter>Assets\Engine2\H</Filter>
+      <Filter>Assets\Engine2\GUI\H</Filter>
     </ClInclude>
     <ClInclude Include="..\Assets\Engine2\Bmap.h">
-      <Filter>Assets\Engine2\H</Filter>
+      <Filter>Assets\Engine2\CustomClass\H</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\Animation.h">
+      <Filter>Assets\Engine2\CustomClass\H</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\Vectors.h">
+      <Filter>Assets\Engine2\CustomClass\H</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\VectorBitmap.h">
+      <Filter>Assets\Engine2\CustomClass\H</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\Spritesheet.h">
+      <Filter>Assets\Engine2\CustomClass\H</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\Interface.h">
+      <Filter>Assets\Engine2\GUI\H</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\UserInterface.h">
+      <Filter>Assets\Engine2\GUI\H</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\Button.h">
+      <Filter>Assets\Engine2\GUI\parts\ClickableRectangle\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\ClickableRectangle.h">
+      <Filter>Assets\Engine2\GUI\parts\ClickableRectangle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\Labelz.h">
+      <Filter>Assets\Engine2\GUI\parts\Label</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\RasterFont.h">
+      <Filter>Assets\Engine2\GUI\parts\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\TrianglePoly.h">
+      <Filter>Assets\Engine2\GUI\H</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\ConfigFile.h">
+      <Filter>Assets\Engine2\CustomClass\H</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -174,53 +216,65 @@
     <ClCompile Include="..\Assets\Engine2\Game.cpp">
       <Filter>Assets\Engine2\C</Filter>
     </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\GraphicsTest.cpp">
-      <Filter>Assets\Engine2\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\GuiBuilder.cpp">
-      <Filter>Assets\Engine2\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\Interface.cpp">
-      <Filter>Assets\Engine2\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\Labelz.cpp">
-      <Filter>Assets\Engine2\C</Filter>
-    </ClCompile>
     <ClCompile Include="..\Assets\Engine2\OutputStream.cpp">
-      <Filter>Assets\Engine2\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\Spritesheet.cpp">
-      <Filter>Assets\Engine2\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\TestInterface.cpp">
-      <Filter>Assets\Engine2\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\VectorBitmap.cpp">
-      <Filter>Assets\Engine2\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\Vectors.cpp">
-      <Filter>Assets\Engine2\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\Animation.cpp">
-      <Filter>Assets\Engine2\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\Bmap.cpp">
       <Filter>Assets\Engine2\C</Filter>
     </ClCompile>
     <ClCompile Include="..\Assets\Engine2\CustomMath.cpp">
       <Filter>Assets\Engine2\C</Filter>
     </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\DebugGUI.cpp">
-      <Filter>Assets\Engine2\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\Drawing.cpp">
-      <Filter>Assets\Engine2\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\FontType.cpp">
-      <Filter>Assets\Engine2\C</Filter>
-    </ClCompile>
     <ClCompile Include="..\Assets\Engine2\Func.cpp">
       <Filter>Assets\Engine2\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\GuiBuilder.cpp">
+      <Filter>Assets\Engine2\GUI\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\DebugGUI.cpp">
+      <Filter>Assets\Engine2\GUI\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\Animation.cpp">
+      <Filter>Assets\Engine2\CustomClass\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\Bmap.cpp">
+      <Filter>Assets\Engine2\CustomClass\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\Spritesheet.cpp">
+      <Filter>Assets\Engine2\CustomClass\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\Vectors.cpp">
+      <Filter>Assets\Engine2\CustomClass\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\VectorBitmap.cpp">
+      <Filter>Assets\Engine2\CustomClass\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\Interface.cpp">
+      <Filter>Assets\Engine2\GUI\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\TestInterface.cpp">
+      <Filter>Assets\Engine2\GUI\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\Drawing.cpp">
+      <Filter>Assets\Engine2\GUI\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\UserInterface.cpp">
+      <Filter>Assets\Engine2\GUI\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\Button.cpp">
+      <Filter>Assets\Engine2\GUI\parts\ClickableRectangle\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\ClickableRectangle.cpp">
+      <Filter>Assets\Engine2\GUI\parts\ClickableRectangle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\Labelz.cpp">
+      <Filter>Assets\Engine2\GUI\parts\Label</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\RasterFont.cpp">
+      <Filter>Assets\Engine2\GUI\parts\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\TrianglePoly.cpp">
+      <Filter>Assets\Engine2\GUI\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\ConfigFile.cpp">
+      <Filter>Assets\Engine2\CustomClass\C</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

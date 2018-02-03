@@ -20,6 +20,7 @@ namespace Colors
 	static constexpr Color Cyan = D3DCOLOR_XRGB(0u, 255u, 255u);
 	static constexpr Color Magenta = D3DCOLOR_XRGB(255u, 0u, 255u);
 	static constexpr Color DarkGreen = D3DCOLOR_XRGB(50u, 205u, 50u);
+	static constexpr Color TKEY = D3DCOLOR_XRGB(177u, 244u, 177u);
 }
 
 

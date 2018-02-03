@@ -43,16 +43,22 @@ Vector2 mousePosition(0, 0);
 Vector2 mouseDifference(0,0);
 
 
-ButtonManager MyButtons = ButtonManager();
+ButtonManager* MyButtons = nullptr;
 Label MousePosLabel(0, 72, &DOS_BLACK, "NO_MOUSE_UPDATE");
 DebugGUI debuggui = DebugGUI();
 
-Bitmap TestBitmap("..\\Assets\\Resources\\test_SPRITES.bmp",ColorRGB(177,244,177));
-
+Bitmap TestBitmap("..\\Assets\\Resources\\test_SPRITES.bmp", Colors::TKEY);
+TrianglePoly* poly = nullptr;
+RasterFont2 rf = RasterFont2("..\\Assets\\Resources\\DOS_FONT.bin");
 void Game::Initialise() {
 	PixelDest screen = PixelDest(&gfx);
 	out = new TestInterface(screen);
+	MyButtons = new ButtonManager(&mouse);
+	poly = new TrianglePoly(Vector2(0, 500), Vector2(100, 500), Vector2(50, 600));
 	srand(time(0));
+
+	ConfigFile j = ConfigFile("..\\Assets\\Resources\\DOS_FONT.bin");
+	int p;
 }
 
 void Game::ComposeFrame() {
@@ -63,14 +69,17 @@ void Game::ComposeFrame() {
 	
 	poly->Draw(out);
 	poly->DrawTexture(out, &TestBitmap);
-	MyButtons.Draw(out);
+	MyButtons->Draw(out);
 	debuggui.Draw(out);
+
+	Vector2 mousepos = Vector2(mouse.GetMouseX(), mouse.GetMouseY());
+	out->paint->line(mousepos.x, mousepos.y, 300, 300, Colors::Red, 5);
 
 }
 
 void Game::UpdateModel()
 {
-	MyButtons.RefreshState(mouse);
+	MyButtons->RefreshState();
 	debuggui.UpdateFrameInfo();
 
 	mousePosition.x = mouse.GetMouseX();
@@ -82,7 +91,7 @@ void Game::UpdateModel()
 
 	if (locked)
 	{
-
+	
 	
 		Vector2* checkVerts[] = { &poly->v1,&poly->v2, &poly->v3, &poly->origin };
 		for (int i = 0; i < sizeof(checkVerts) / sizeof(checkVerts[0]); i++) {
@@ -96,9 +105,6 @@ void Game::UpdateModel()
 
 
 	
-
-
-
 
 	if (mouse.LeftIsPressed()) {
 		Vector2* checkVerts[] = { &poly->v1,&poly->v2, &poly->v3, &poly->origin };

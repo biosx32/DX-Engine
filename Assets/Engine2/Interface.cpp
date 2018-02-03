@@ -2,7 +2,7 @@
 
 
 
-void Interface::PrintText(int x, int y, FontType* font, const char *fmt, ...) {
+void Interface::PrintText(int x, int y, RasterFont* font, const char *fmt, ...) {
 		char buffer[TXT_BUFFER_SIZE];
 		va_list args;
 		va_start(args, fmt);
@@ -10,7 +10,7 @@ void Interface::PrintText(int x, int y, FontType* font, const char *fmt, ...) {
 		va_end(args);
 		PrintText(x, y, font, buffer);
 }
-void Interface::PrintText(int x, int y, FontType* font, char * text)
+void Interface::PrintText(int x, int y, RasterFont* font, char * text)
 {
 	double rel_pos_x = 0;
 	double rel_pos_y = 0;
@@ -20,10 +20,10 @@ void Interface::PrintText(int x, int y, FontType* font, char * text)
 	strcpy_s(buffer, text);
 
 	for (int i = 0; buffer[i] != 0; i++) {
-		int chr = buffer[i];
+		char chr = buffer[i];
 
-		float charw = font->sprite_sheet->wsize;
-		float charh = font->sprite_sheet->hsize;
+		float charw = font->character_map->wsize;
+		float charh = font->character_map->hsize;
 
 		if (chr == '\x20') {
 			rel_pos_x += charw;
@@ -107,7 +107,7 @@ void Interface::DrawSprite(MySprite * VBmp, int fx, int fy)
 
 void Interface::FillScreen(Color color)
 {
-	paint->rectangle(0, 0, SCREENWIDTH - 1, SCREENHEIGHT - 1, color,true);
+	paint->rectangle(0, 0, SCREENWIDTH - 1, SCREENHEIGHT - 1, color);
 
 }
 

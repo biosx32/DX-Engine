@@ -1,4 +1,5 @@
 #include "TestInterface.h"
+#include "TrianglePoly.h"
 
 void TestInterface::DrawPixelContainer(PixelContainer* src, int fx, int fy)
 {
@@ -60,34 +61,6 @@ void TestInterface::DrawLabel(Label * label)
 
 
 
-TrianglePoly::TrianglePoly(Vector2 vs1, Vector2 vs2, Vector2 vs3)
-{
-	v1 = Vector2(vs1);
-	v2 = Vector2(vs2);
-	v3 = Vector2(vs3);
-
-	float xr = maximum(v1.x, v2.x, v3.x)/2 +   minimum(v1.x, v2.x, v3.x) /2;
-	float yr = maximum(v1.y, v2.y, v3.y) / 2 + minimum(v1.y, v2.y, v3.y) /2;
-	origin = Vector2(xr, yr);
-}
-
-void TrianglePoly::Draw(Interface * out)
-{
-	
-
-	out->paint->line(v1.x, v1.y, v2.x, v2.y, Colors::Black,6);
-	out->paint->line(v1.x, v1.y, v3.x, v3.y, Colors::Black, 6);
-	out->paint->line(v3.x, v3.y, v2.x, v2.y, Colors::Black, 6);
-
-
-	this->DrawVertex(&v1, out, Colors::DarkGreen);
-	this->DrawVertex(&v2, out, Colors::DarkGreen);
-	this->DrawVertex(&v3, out, Colors::DarkGreen);
-	this->DrawVertex(&origin, out, Colors::Red);
-
-}
-
-
 
 
 void Grid::Draw(Interface * out)
@@ -101,7 +74,7 @@ void Grid::Draw(Interface * out)
 	}
 	for (int ty = 0; ty < wc; ty++) {
 		for (int tx = 0; tx < wc; tx++) {
-			out->paint->rectangle(x + tx * size, y + ty * size, size, size, Colors::Black);
+			out->paint->rectangleBorder(x + tx * size, y + ty * size, size, size, Colors::Black,1);
 
 		}
 	}

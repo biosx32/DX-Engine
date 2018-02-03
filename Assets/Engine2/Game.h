@@ -32,13 +32,15 @@
 #include "Bmap.h"
 #include "Func.h"
 #include "Spritesheet.h"
-#include "FontType.h"
+#include "RasterFont.h"
 #include "Drawing.h"
 #include "VectorBitmap.h"
 #include "Interface.h"
 #include "TestInterface.h"
 #include "DebugGUI.h"
+#include "ConfigFile.h"
 #include "GuiBuilder.h"
+#include "TrianglePoly.h"
 #include <thread>
 
 class Game

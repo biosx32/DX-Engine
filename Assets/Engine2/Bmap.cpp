@@ -61,13 +61,13 @@ Bitmap::Bitmap(char * FileName)
 
 	if (file_read == nullptr) {
 		output << "ERROR: Could not load image: " << FileName << " FILE NOT FOUND\n" << msgbox;
-		return;
+		goto End;
 	}
 
 	int BYTES_TO_READ = File_bytes(file_read);
 	if (BYTES_TO_READ < 1) {
 		output << "ERROR: Could not load image: " << FileName << " EMPTY FILE\n" << msgbox;
-		return;
+		goto End;
 	}
 
 	fread_s((void*)Header, 54, sizeof(unsigned char), 54, file_read);
@@ -104,20 +104,20 @@ Bitmap::Bitmap(char * FileName)
 
 	}
 
-	fclose(file_read);
-
-	if (rotation_correct) {
-		return;
-	}
-
-	// if it has wrong rotation, then rotate
-	for (int y = 0; y <= height / 2; y++) {
-		for (int x = 0; x < width; x++) {
-			temp_color = *this->GetPixelPointer(x, y);
-			*this->GetPixelPointer(x, y) = *GetPixelPointer(x, height - y - 1);
-			*this->GetPixelPointer(x, height - y - 1) = temp_color;
+	
+	if (!rotation_correct) {
+		for (int y = 0; y <= height / 2; y++) {
+			for (int x = 0; x < width; x++) {
+				temp_color = *this->GetPixelPointer(x, y);
+				*this->GetPixelPointer(x, y) = *GetPixelPointer(x, height - y - 1);
+				*this->GetPixelPointer(x, height - y - 1) = temp_color;
+			}
 		}
 	}
+
+End:
+	fclose(file_read);
+
 }
 
 

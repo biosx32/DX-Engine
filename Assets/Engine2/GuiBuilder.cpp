@@ -1,16 +1,4 @@
 #include "GuiBuilder.h"
 
-TrianglePoly* poly = new  TrianglePoly(Vector2(307, 147), Vector2(468, 137), Vector2(442, 367));
-void ScalePoly20x() {
-	poly->Scale(Vector2(2, 2));
-}
-void ScalePoly05x() {
-	poly->Scale(Vector2(0.5, 0.5));
-}
-
-void RotatePolyP15() {
-	poly->RotateRad(15);
-}
-void RotatePolyN15() {
-	poly->RotateRad(-15);
-}
+RasterFont DOS_BLACK_MINI("..\\Assets\\Resources\\Fonts\\DOS_FONT_WHITE.bmp", 22, 5, 0.2, Colors::Blue);
+RasterFont DOS_BLACK("..\\Assets\\Resources\\Fonts\\DOS_FONT_WHITE.bmp", 22, 5, 0.3, Colors::Blue);
