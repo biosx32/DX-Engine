@@ -68,8 +68,8 @@ public:
 		OutputStream output = OutputStream();
 
 		if (fread == nullptr) {
-		//	output << "ERROR: Could not load config: " << config_file << msgbox;
-			goto End;
+			output << "ERROR: Could not load config: " << config_file << msgbox;
+			return;
 		}
 
 		if (!HasNextLn(fread)) {

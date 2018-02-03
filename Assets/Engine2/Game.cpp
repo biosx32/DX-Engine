@@ -29,102 +29,31 @@ Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 	srand( (unsigned int)time( NULL ) );
 }
 
-
-Vector2* locked = nullptr;
 Grid grid(80, 0, 30);
-
-
-
-float scale = 0;
-
-
-Vector2 mouseOld(0, 0);
-Vector2 mousePosition(0, 0);
-Vector2 mouseDifference(0,0);
-
-
 ButtonManager* MyButtons = nullptr;
-Label MousePosLabel(0, 72, &DOS_BLACK, "NO_MOUSE_UPDATE");
-DebugGUI debuggui = DebugGUI();
-
-Bitmap TestBitmap("..\\Assets\\Resources\\test_SPRITES.bmp", Colors::TKEY);
-TrianglePoly* poly = nullptr;
-RasterFont rf = RasterFont("..\\Assets\\Resources\\DOS_FONT.bin");
+DebugGUI* debuggui;
 
 void Game::Initialise() {
 	PixelDest screen = PixelDest(&gfx);
 	out = new TestInterface(screen);
 	MyButtons = new ButtonManager(&mouse);
-	poly = new TrianglePoly(Vector2(0, 500), Vector2(100, 500), Vector2(50, 600));
+	debuggui = new DebugGUI(&mouse);
 	srand(time(0));
 }
 
 void Game::ComposeFrame() {
 	
-	out->DrawLabel(&MousePosLabel);
 	grid.Draw(out);
-	
-	
-	poly->Draw(out);
-	poly->DrawTexture(out, &TestBitmap);
 	MyButtons->Draw(out);
-	debuggui.Draw(out);
-
-	Vector2 mousepos = Vector2(mouse.GetMouseX(), mouse.GetMouseY());
-	out->paint->line(mousepos.x, mousepos.y, 300, 300, Colors::Red, 5);
+	debuggui->Draw(out);
 
 }
 
 void Game::UpdateModel()
 {
 	MyButtons->RefreshState();
-	debuggui.UpdateFrameInfo();
-
-	mousePosition.x = mouse.GetMouseX();
-	mousePosition.y = mouse.GetMouseY();
-	mouseDifference.x = mousePosition.x - mouseOld.x;
-	mouseDifference.y = mousePosition.y - mouseOld.y;
-	mouseOld = mousePosition;
-	MousePosLabel.SetText("MouseX: %3.0f + %3.0f\nMouseY: %3.0f + %3.0f\0", mousePosition.x, mouseDifference.x, mousePosition.y, mouseDifference.y);
-
-	if (locked)
-	{
+	debuggui->Update();
 	
-	
-		Vector2* checkVerts[] = { &poly->v1,&poly->v2, &poly->v3, &poly->origin };
-		for (int i = 0; i < sizeof(checkVerts) / sizeof(checkVerts[0]); i++) {
-
-			checkVerts[i]->x += (float)mouseDifference.x;
-			checkVerts[i]->y += (float)mouseDifference.y;
-		}
-	}
-
-
-
-
-	
-
-	if (mouse.LeftIsPressed()) {
-		Vector2* checkVerts[] = { &poly->v1,&poly->v2, &poly->v3, &poly->origin };
-		Vector2* closest = nullptr;
-		float closest_dis = 100000;
-		for (int i = 0; i < sizeof(checkVerts) / sizeof(closest); i++) {
-			Vector2* pos = checkVerts[i];
-			float dis = pos->DistanceFrom(mousePosition);
-			if (dis < closest_dis) {
-				closest_dis = dis;
-				closest = checkVerts[i];
-			}
-
-		}
-		if (closest && sqrt(closest_dis) < 10) {
-			locked = closest;
-		}
-	}
-
-	else {
-		locked = nullptr;
-	}
 
 }
 

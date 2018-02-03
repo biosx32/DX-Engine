@@ -100,11 +100,21 @@ public:
 			char location[512] = {};
 			int namelen = strlen(image_src_info);
 			int lastbs = FindLastChar(image_src_info, '\\');
-			if (lastbs == -1) lastbs = 0;
-			int fullLen = lastbs + strlen(slocation);
-			strncpy_s(location, image_src_info, lastbs);
+			int fullLen;
+
+			if (lastbs == -1) {
+				fullLen = strlen(slocation) + 2;
+				strcat_s(location, ".\\");
+			}
+			else {
+				fullLen = lastbs + strlen(slocation) + 1;
+				strncpy_s(location, image_src_info, lastbs+1);
+				
+			}
+			
 			strcat_s(location, slocation);
 			location[fullLen] = 0;
+		
 
 			this->characters = new Bitmap*[count];
 			Bitmap* basebmp = new Bitmap(location, bkclr);

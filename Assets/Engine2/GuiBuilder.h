@@ -12,7 +12,10 @@ using std::vector;
 
 
 extern RasterFont DOS_BLACK_MINI;
-extern RasterFont DOS_BLACK;
+extern RasterFont DOS_BLACK     ;
+extern RasterFont DOS_WHITE_MINI;
+extern RasterFont DOS_WHITE     ;
+
 
 
 class ButtonManager {
@@ -23,9 +26,9 @@ public:
 
 	void Init() {
 		buttons.push_back(new Button(150, 0, 135, 40, "Scale 2.0x", &DOS_BLACK, nullptr));
-		buttons.push_back(new Button(280, 0, 135, 40, "Scale 0.5x", &DOS_BLACK, nullptr));
-		buttons.push_back(new Button(410, 0, 135, 40, "Rotate 15*", &DOS_BLACK, nullptr));
-		buttons.push_back(new Button(540, 0, 135, 40, "Rotate -15*", &DOS_BLACK, nullptr));
+		buttons.push_back(new Button(280, 0, 135, 40, "Scale 0.5x", &DOS_BLACK_MINI, nullptr));
+		buttons.push_back(new Button(410, 0, 135, 40, "Rotate 15*", &DOS_WHITE, nullptr));
+		buttons.push_back(new Button(540, 0, 135, 40, "Rotate -15*", &DOS_WHITE_MINI, nullptr));
 	}
 
 	void RefreshState() {

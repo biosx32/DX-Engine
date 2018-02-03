@@ -10,6 +10,6 @@ void Label::SetText(const char * fmt, ...)
 {
 	va_list args;
 	va_start(args, fmt);
-	int rc = vsnprintf(text, sizeof(text), fmt, args);
+	int rc = vsnprintf(text, TXT_BUFFER_SIZE-1, fmt, args);
 	va_end(args);
 }

@@ -15,15 +15,14 @@ public:
 	void Draw(Interface* out) {
 		int charcnt = strlen(text);
 		int textw = charcnt * font->charw;
-		float s = (float)w / textw;
 		out->paint->rectangle(x, y, w, h, clr);
 
 		for (int i = 0; i < 2; i++) {
 			out->paint->rectangleBorder(x + i, y + i, w - i * 2, h - i * 2, Colors::Black,2);
 		}
 
-		int textY = y + h / 2 - s * font->charh / 2;
-		int textX = x + s * textw*0.1;
+		int textY = y + h / 2 - font->charh / 2;
+		int textX = x + (this->w- textw) / 2;
 		out->PrintText(textX, textY, font, text);
 
 	}
