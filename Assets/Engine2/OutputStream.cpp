@@ -22,6 +22,12 @@ OutputStream & OutputStream::operator<<(SpecialCode finish)
 
 OutputStream & OutputStream::operator<<(char * data)
 {
+
+	return this->operator<<( (const char*) data);
+}
+
+OutputStream & OutputStream::operator<<(const char * data)
+{
 	const std::string temp = data;
 	stream << temp;
 	return *this;

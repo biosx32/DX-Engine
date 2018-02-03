@@ -28,7 +28,7 @@ void Painter::ellipseBorder(int xoff, int yoff, int width, int height, Color c)
 
 	y = height;
 	th = 2 * hsquared + size * (1 - 2 * height);
-	for (int x = 0; hsquared*x <= size * y; x++)
+	for (x = 0; hsquared*x <= size * y; x++)
 	{
 		DrawPixel(xoff + x, yoff + y, c);
 		DrawPixel(xoff - x, yoff + y, c);
@@ -44,7 +44,7 @@ void Painter::ellipseBorder(int xoff, int yoff, int width, int height, Color c)
 
 	y = 0;
 	th = 2 * size + hsquared * (1 - 2 * width);
-	for (int x = width; size*y <= hsquared * x; y++)
+	for (x = width; size*y <= hsquared * x; y++)
 	{
 		DrawPixel(xoff + x, yoff + y, c);
 		DrawPixel(xoff - x, yoff + y, c);

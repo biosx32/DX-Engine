@@ -22,8 +22,8 @@ void Interface::PrintText(int x, int y, RasterFont* font, char * text)
 	for (int i = 0; buffer[i] != 0; i++) {
 		char chr = buffer[i];
 
-		float charw = font->character_map->wsize;
-		float charh = font->character_map->hsize;
+		float charw = font->charw;
+		float charh = font->charh;
 
 		if (chr == '\x20') {
 			rel_pos_x += charw;
@@ -34,7 +34,7 @@ void Interface::PrintText(int x, int y, RasterFont* font, char * text)
 			rel_pos_x = 0;
 		}
 
-		if (chr < 33) {
+		if (chr < font->offset) {
 			continue;
 		}
 

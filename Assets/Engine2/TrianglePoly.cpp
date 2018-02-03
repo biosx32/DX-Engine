@@ -128,7 +128,7 @@ void TrianglePoly::DrawVertex(Vector2 * pos, Interface * out, Color q)
 	out->paint->rectangle(pos->x + 10, pos->y - 20, 55, 40, q);
 	out->paint->line(pos->x, pos->y, pos->x + 2, pos->y - 13, q);
 	out->paint->FastHLine(pos->x + 2, pos->y - 13, 5, q);
-	out->PrintText(pos->x + 15, pos->y - DOS_BLACK_MINI.character_map->hsize, &DOS_BLACK_MINI, buffer);
+	out->PrintText(pos->x + 15, pos->y - DOS_BLACK_MINI.charh, &DOS_BLACK_MINI, buffer);
 }
 
 Vector2 TrianglePoly::GetTransformation(Vector2 orignal, float data[3][3])

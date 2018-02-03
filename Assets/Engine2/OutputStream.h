@@ -21,6 +21,7 @@ public:
 	OutputStream & OutputStream::operator<<(double data) { stream << data; return *this; }
 	OutputStream & OutputStream::operator<<(SpecialCode finish);
 	OutputStream & OutputStream::operator<<(char * data);
+	OutputStream & OutputStream::operator<<(const char * data);
 };
 
 

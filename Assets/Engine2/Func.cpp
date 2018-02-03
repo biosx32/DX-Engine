@@ -64,6 +64,25 @@ int FindFirstChar(char* str, char chr) {
 	return pos;
 }
 
+int FindLastChar(char * str, char chr)
+{
+	int size = strlen(str);
+	int pos = -1;
+	if (size <= 0) {
+		return -2;
+	}
+
+	for (int i = size-1; i >= 0; i--) {
+		if (str[i] == chr) {
+			pos = i;
+			break;
+
+		}
+	}
+
+	return pos;
+}
+
 
 int GetNextLineOffset(FILE* file) {
 	char str[8196]; int pos = -1;

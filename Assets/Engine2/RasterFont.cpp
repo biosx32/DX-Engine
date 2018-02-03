@@ -1,6 +1,6 @@
 #include "RasterFont.h"
 
-
+/*
 RasterFont::RasterFont(char* image_src,int wcount, int hcount, float size, Color bckclr)
 {
 	Bitmap* font_bitmap = new Bitmap(image_src,bckclr);
@@ -15,3 +15,4 @@ Bitmap * RasterFont::GetCharacterRepr(char c)
 	int index = translate[fix];
 	return this->character_map->sprites[index];
 }
+*/

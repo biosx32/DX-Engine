@@ -49,16 +49,14 @@ DebugGUI debuggui = DebugGUI();
 
 Bitmap TestBitmap("..\\Assets\\Resources\\test_SPRITES.bmp", Colors::TKEY);
 TrianglePoly* poly = nullptr;
-RasterFont2 rf = RasterFont2("..\\Assets\\Resources\\DOS_FONT.bin");
+RasterFont rf = RasterFont("..\\Assets\\Resources\\DOS_FONT.bin");
+
 void Game::Initialise() {
 	PixelDest screen = PixelDest(&gfx);
 	out = new TestInterface(screen);
 	MyButtons = new ButtonManager(&mouse);
 	poly = new TrianglePoly(Vector2(0, 500), Vector2(100, 500), Vector2(50, 600));
 	srand(time(0));
-
-	ConfigFile j = ConfigFile("..\\Assets\\Resources\\DOS_FONT.bin");
-	int p;
 }
 
 void Game::ComposeFrame() {

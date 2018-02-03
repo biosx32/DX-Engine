@@ -20,4 +20,5 @@ int File_to_end(FILE* file);
 bool Startswith(char * a, char * b, int sublen);
 void File_Setpos(FILE * p_file, int pos);
 int FindFirstChar(char * str, char chr);
+int FindLastChar(char * str, char chr);
 #endif

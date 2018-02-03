@@ -68,7 +68,7 @@ public:
 		OutputStream output = OutputStream();
 
 		if (fread == nullptr) {
-			output << "ERROR: Could not load config: " << config_file << msgbox;
+		//	output << "ERROR: Could not load config: " << config_file << msgbox;
 			goto End;
 		}
 
@@ -138,4 +138,35 @@ public:
 		goto End;
 
 	}
+
+	bool HasKey(char* key) {
+		int len = strlen(key);
+		if (len > 0) {
+			for (vector<KeyData>::iterator it = configvalues.begin(); it != configvalues.end(); ++it) {
+				char* cmp = (*it).keyb;
+				int kwlen = strlen(cmp);
+				if (strncmp(cmp, key,kwlen) == 0) {
+					return true;
+				}
+
+			}
+		}
+		return false;
+	}
+
+	char* GetValue(char* key) {
+
+		for (vector<KeyData>::iterator it = configvalues.begin(); it != configvalues.end(); ++it) {
+			char* cmp = (*it).keyb;
+			int kwlen = strlen(cmp);
+			if (strncmp(cmp, key, kwlen) == 0) {
+				return (*it).datab;
+			}
+
+		}
+
+		return nullptr;
+	}
+
+
 };
