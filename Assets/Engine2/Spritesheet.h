@@ -16,7 +16,7 @@ namespace pxstate
 
 class VectorSpriteSheet{
 public:
-	vector<MySprite*> sprites;
+	vector<FPixelMap*> sprites;
 public:
 	VectorSpriteSheet(Bitmap* BitmapImage);
 	~VectorSpriteSheet();
@@ -68,8 +68,8 @@ public:
 	PixelContainer(Bitmap* bmp);
 	FFPixel* getPixelAt(int x, int y);
 	FFPixel* GetNextSpritePixel();
-	MySprite* GetGroupFrom(FFPixel * pixel);
-	MySprite* GetNextSpriteGroup();
+	FPixelMap* GetGroupFrom(FFPixel * pixel);
+	FPixelMap* GetNextSpriteGroup();
 	
 
 };

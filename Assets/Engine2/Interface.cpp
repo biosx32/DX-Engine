@@ -97,7 +97,7 @@ void Interface::DrawBitmap(Bitmap* Bmp, int fx, int fy) {
 
 
 
-void Interface::DrawSprite(MySprite * VBmp, int fx, int fy)
+void Interface::DrawSprite(FPixelMap * VBmp, int fx, int fy)
 {
 	for (std::vector<FPixel*>::iterator it = VBmp->pixels->begin(); it != VBmp->pixels->end(); ++it) {
 		paint->DrawPixel(fx + (*it)->x, fy + (*it)->y, (*it)->color);

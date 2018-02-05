@@ -53,7 +53,7 @@ void Animation::Step()
 	}
 }
 
-MySprite * Animation::GetCurrent()
+FPixelMap * Animation::GetCurrent()
 {
 	return spritesheet->sprites[currentFrame];
 }

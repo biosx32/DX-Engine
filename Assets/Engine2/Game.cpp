@@ -32,13 +32,16 @@ Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 Grid grid(80, 0, 30);
 DebugGUI* debuggui = nullptr;
 GUI*test = nullptr;
+
+
+Bitmap button = Bitmap("..\\Assets\\Resources\\Buttons\\test.bmp",Colors::White);
 void Game::Initialise() {
 	PixelDest screen = PixelDest(&gfx);
 	out = new TestInterface(screen);
 	debuggui = new DebugGUI(&mouse);
 	test = new GUI();
 	srand(time(0));
-
+	button.tolerance = 0.001f;
 
 	test->buttonManager->Add(new Button(150, 0, 135, 40, "Scale 2.0x", &DOS_BLACK, nullptr));
 	test->buttonManager->Add(new Button(280, 0, 135, 40, "Scale 0.5x", &DOS_BLACK_MINI, nullptr));
@@ -50,7 +53,9 @@ void Game::Initialise() {
 }
 
 void Game::ComposeFrame() {
-	
+	out->DrawBitmap(&button, 50, 100, 0.25, 0.25);
+	out->DrawBitmap(&button, 50, 150, 0.5, 0.25);
+	out->DrawBitmap(&button, 50, 200, 0.99, 0.25);
 	grid.Draw(out);
 	debuggui->Draw(out);
 	test->Draw();

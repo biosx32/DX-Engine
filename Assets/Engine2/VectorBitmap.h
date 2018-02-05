@@ -11,7 +11,7 @@ public:
 	FPixel(int x, int y, Color c) : x(x), y(y), color(c) {}
 };
 
-class MySprite {
+class FPixelMap {
 
 protected:
 	int offx, offy;
@@ -21,12 +21,12 @@ public:
 	std::vector<FPixel*>* pixels;
 
 public:
-	MySprite(vector<FPixel*>* src);
-	MySprite(Bitmap* src);
+	FPixelMap(vector<FPixel*>* src);
+	FPixelMap(Bitmap* src);
 	void ComputeSize();
 	void NormalizeV();
 	void NormalizeH();
-	~MySprite();
+	~FPixelMap();
 
 };
 

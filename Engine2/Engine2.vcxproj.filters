@@ -40,12 +40,6 @@
     <Filter Include="Assets\Engine2\GUI\parts">
       <UniqueIdentifier>{f1ff5ae4-1c48-4ba9-b05c-1aeba469bb91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\Engine2\GUI\parts\ClickableRectangle">
-      <UniqueIdentifier>{efec8aaf-a179-4a97-9c7c-eb739b6f8a8f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Engine2\GUI\parts\ClickableRectangle\Button">
-      <UniqueIdentifier>{8cad12af-13ae-4200-b50c-26ba35194bb0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Assets\Engine2\GUI\parts\Label">
       <UniqueIdentifier>{d27f6d0f-5606-4806-845f-6bc86177f49d}</UniqueIdentifier>
     </Filter>
@@ -63,6 +57,9 @@
     </Filter>
     <Filter Include="Assets\Engine2\GUI\parts\Managers">
       <UniqueIdentifier>{e63c5256-994a-411f-84a8-9c1f8f120d16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Engine2\GUI\parts\Button">
+      <UniqueIdentifier>{8cad12af-13ae-4200-b50c-26ba35194bb0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -176,10 +173,7 @@
       <Filter>Assets\Engine2\GUI\H</Filter>
     </ClInclude>
     <ClInclude Include="..\Assets\Engine2\Button.h">
-      <Filter>Assets\Engine2\GUI\parts\ClickableRectangle\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\ClickableRectangle.h">
-      <Filter>Assets\Engine2\GUI\parts\ClickableRectangle</Filter>
+      <Filter>Assets\Engine2\GUI\parts\Button</Filter>
     </ClInclude>
     <ClInclude Include="..\Assets\Engine2\Labelz.h">
       <Filter>Assets\Engine2\GUI\parts\Label</Filter>
@@ -198,6 +192,15 @@
     </ClInclude>
     <ClInclude Include="..\Assets\Engine2\Manager.h">
       <Filter>Assets\Engine2\GUI\parts\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Assets\Engine2\CustomClass\H</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\ColorButton.h">
+      <Filter>Assets\Engine2\GUI\parts\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\ImageButton.h">
+      <Filter>Assets\Engine2\GUI\parts\Button</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -268,10 +271,7 @@
       <Filter>Assets\Engine2\GUI\C</Filter>
     </ClCompile>
     <ClCompile Include="..\Assets\Engine2\Button.cpp">
-      <Filter>Assets\Engine2\GUI\parts\ClickableRectangle\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\ClickableRectangle.cpp">
-      <Filter>Assets\Engine2\GUI\parts\ClickableRectangle</Filter>
+      <Filter>Assets\Engine2\GUI\parts\Button</Filter>
     </ClCompile>
     <ClCompile Include="..\Assets\Engine2\Labelz.cpp">
       <Filter>Assets\Engine2\GUI\parts\Label</Filter>
@@ -284,6 +284,12 @@
     </ClCompile>
     <ClCompile Include="..\Assets\Engine2\ConfigFile.cpp">
       <Filter>Assets\Engine2\CustomClass\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\ColorButton.cpp">
+      <Filter>Assets\Engine2\GUI\parts\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\ImageButton.cpp">
+      <Filter>Assets\Engine2\GUI\parts\Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

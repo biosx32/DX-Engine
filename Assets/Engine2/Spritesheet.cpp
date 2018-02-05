@@ -7,7 +7,7 @@ VectorSpriteSheet::VectorSpriteSheet(Bitmap * BitmapImage)
 {
 	PixelContainer* temp = new PixelContainer(BitmapImage);
 	while (1) {
-		MySprite* naw = temp->GetNextSpriteGroup();
+		FPixelMap* naw = temp->GetNextSpriteGroup();
 		if (naw == nullptr) {
 			break;
 		}
@@ -20,7 +20,7 @@ VectorSpriteSheet::VectorSpriteSheet(Bitmap * BitmapImage)
 
 
 VectorSpriteSheet::~VectorSpriteSheet() {
-	for (std::vector<MySprite*>::iterator it = sprites.begin(); it != sprites.end(); ++it)
+	for (std::vector<FPixelMap*>::iterator it = sprites.begin(); it != sprites.end(); ++it)
 	{
 		delete *it;
 	}
@@ -64,7 +64,7 @@ FFPixel * PixelContainer::GetNextSpritePixel()
 
 
 
-MySprite* PixelContainer::GetGroupFrom(FFPixel* pixel) {
+FPixelMap* PixelContainer::GetGroupFrom(FFPixel* pixel) {
 	if (!pixel) return nullptr;
 	this->result_group = new vector<FPixel*>;
 
@@ -75,10 +75,10 @@ MySprite* PixelContainer::GetGroupFrom(FFPixel* pixel) {
 		stalledPixels.pop_back();
 		this->CheckPixel(px);
 	}
-	MySprite* result;
+	FPixelMap* result;
 
 	if (result_group->size() > 0) {
-		result = new MySprite(result_group);
+		result = new FPixelMap(result_group);
 		delete result_group;
 		return result;
 	}
@@ -86,7 +86,7 @@ MySprite* PixelContainer::GetGroupFrom(FFPixel* pixel) {
 	return nullptr;
 }
 
-MySprite* PixelContainer::GetNextSpriteGroup()
+FPixelMap* PixelContainer::GetNextSpriteGroup()
 {
 	return GetGroupFrom(GetNextSpritePixel());
 }

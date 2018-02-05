@@ -22,7 +22,7 @@ public:
 
 	void DrawBitmap(Bitmap* bmp, int fx, int fy, float mx, float my);
 	void DrawBitmap(Bitmap* bmp, int fx, int fy);
-	void DrawSprite(MySprite* VBmp, int fx, int fy);
+	void DrawSprite(FPixelMap* VBmp, int fx, int fy);
 	void PrintText(int x, int y, RasterFont* font, char * text);
 	void PrintText(int x, int y, RasterFont* font, const char *fmt, ...);
 	void FillScreen(Color color);

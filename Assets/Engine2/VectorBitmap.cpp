@@ -1,5 +1,5 @@
 #include "VectorBitmap.h"
-MySprite::MySprite(vector<FPixel*>* src)
+FPixelMap::FPixelMap(vector<FPixel*>* src)
 {
 	this->pixels = new vector<FPixel*>(*src);
 	this->ComputeSize();
@@ -7,7 +7,7 @@ MySprite::MySprite(vector<FPixel*>* src)
 	this->NormalizeH();
 }
 
-MySprite::MySprite(Bitmap * src)
+FPixelMap::FPixelMap(Bitmap * src)
 {
 	this->pixels = new vector<FPixel*>;
 	for (int y = 0; y < src->height; y++) {
@@ -26,7 +26,7 @@ MySprite::MySprite(Bitmap * src)
 
 }
 
-void MySprite::ComputeSize() {
+void FPixelMap::ComputeSize() {
 	if (this->pixels->size() < 1) {
 		width = height = offx = offy = 0;
 		return;
@@ -64,7 +64,7 @@ void MySprite::ComputeSize() {
 	this->offy = min_y;
 }
 
-MySprite::~MySprite()
+FPixelMap::~FPixelMap()
 {
 	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
 	{
@@ -72,7 +72,7 @@ MySprite::~MySprite()
 	}
 }
 
-void MySprite::NormalizeV()
+void FPixelMap::NormalizeV()
 {
 	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)
 	{
@@ -83,7 +83,7 @@ void MySprite::NormalizeV()
 
 }
 
-void MySprite::NormalizeH()
+void FPixelMap::NormalizeH()
 {
 
 	for (std::vector<FPixel*>::iterator it = pixels->begin(); it != pixels->end(); ++it)

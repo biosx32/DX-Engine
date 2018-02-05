@@ -38,7 +38,7 @@
     <ClInclude Include="..\Assets\Engine2\Bmap.h" />
     <ClInclude Include="..\Assets\Engine2\Button.h" />
     <ClInclude Include="..\Assets\Engine2\ButtonManager.h" />
-    <ClInclude Include="..\Assets\Engine2\ClickableRectangle.h" />
+    <ClInclude Include="..\Assets\Engine2\ColorButton.h" />
     <ClInclude Include="..\Assets\Engine2\Colors.h" />
     <ClInclude Include="..\Assets\Engine2\ConfigFile.h" />
     <ClInclude Include="..\Assets\Engine2\CustomMath.h" />
@@ -48,6 +48,7 @@
     <ClInclude Include="..\Assets\Engine2\RasterFont.h" />
     <ClInclude Include="..\Assets\Engine2\Func.h" />
     <ClInclude Include="..\Assets\Engine2\Game.h" />
+    <ClInclude Include="..\Assets\Engine2\ImageButton.h" />
     <ClInclude Include="..\Assets\Engine2\TrianglePoly.h" />
     <ClInclude Include="..\Assets\Engine2\UserInterface.h" />
     <ClInclude Include="..\Assets\Engine2\GuiBuilder.h" />
@@ -58,6 +59,7 @@
     <ClInclude Include="..\Assets\Engine2\TestInterface.h" />
     <ClInclude Include="..\Assets\Engine2\VectorBitmap.h" />
     <ClInclude Include="..\Assets\Engine2\Vectors.h" />
+    <ClInclude Include="Sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Assets\ChilliFramework\Bitmap.cpp" />
@@ -70,7 +72,7 @@
     <ClCompile Include="..\Assets\Engine2\Animation.cpp" />
     <ClCompile Include="..\Assets\Engine2\Bmap.cpp" />
     <ClCompile Include="..\Assets\Engine2\Button.cpp" />
-    <ClCompile Include="..\Assets\Engine2\ClickableRectangle.cpp" />
+    <ClCompile Include="..\Assets\Engine2\ColorButton.cpp" />
     <ClCompile Include="..\Assets\Engine2\ConfigFile.cpp" />
     <ClCompile Include="..\Assets\Engine2\CustomMath.cpp" />
     <ClCompile Include="..\Assets\Engine2\DebugGUI.cpp" />
@@ -78,6 +80,7 @@
     <ClCompile Include="..\Assets\Engine2\RasterFont.cpp" />
     <ClCompile Include="..\Assets\Engine2\Func.cpp" />
     <ClCompile Include="..\Assets\Engine2\Game.cpp" />
+    <ClCompile Include="..\Assets\Engine2\ImageButton.cpp" />
     <ClCompile Include="..\Assets\Engine2\TrianglePoly.cpp" />
     <ClCompile Include="..\Assets\Engine2\UserInterface.cpp" />
     <ClCompile Include="..\Assets\Engine2\GuiBuilder.cpp" />
