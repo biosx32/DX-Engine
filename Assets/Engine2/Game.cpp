@@ -35,6 +35,14 @@ GUI*test = nullptr;
 
 
 Bitmap button = Bitmap("..\\Assets\\Resources\\Buttons\\test.bmp",Colors::White);
+
+
+
+Button* TestButton = new ColorButton(100, 300, 135, 40, "Jozef", &DOS_WHITE, nullptr);
+
+void RemoveJozef() {
+	test->buttonManager->Remove(TestButton);
+}
 void Game::Initialise() {
 	PixelDest screen = PixelDest(&gfx);
 	out = new TestInterface(screen);
@@ -43,10 +51,13 @@ void Game::Initialise() {
 	srand(time(0));
 	button.tolerance = 0.001f;
 
-	test->buttonManager->Add(new Button(150, 0, 135, 40, "Scale 2.0x", &DOS_BLACK, nullptr));
-	test->buttonManager->Add(new Button(280, 0, 135, 40, "Scale 0.5x", &DOS_BLACK_MINI, nullptr));
-	test->buttonManager->Add(new Button(410, 0, 135, 40, "Rotate 15*", &DOS_WHITE, nullptr));
-	test->buttonManager->Add(new Button(540, 0, 135, 40, "Rotate -15*", &DOS_WHITE_MINI, nullptr));
+
+
+	test->buttonManager->Add(new ColorButton(235, 300, 135, 40, "Delete Jozef", &DOS_WHITE, RemoveJozef));
+	test->buttonManager->Add(new ColorButton(150, 0, 135, 40, "Scale 2.0x", &DOS_BLACK,nullptr));
+	test->buttonManager->Add(new ColorButton(280, 0, 135, 40, "Scale 0.5x", &DOS_BLACK_MINI, nullptr));
+	test->buttonManager->Add(new ColorButton(410, 0, 135, 40, "Rotate 15*", &DOS_WHITE, nullptr));
+	test->buttonManager->Add(new ColorButton(540, 0, 135, 40, "Rotate -15*", &DOS_WHITE_MINI, nullptr));
 	test->out = out;
 	test->mouse = &mouse;
 

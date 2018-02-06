@@ -11,11 +11,9 @@ extern SpecialCode console;
 
 class OutputStream {
 protected:
-	std::stringstream stream;
+	std::stringstream stream = std::stringstream("", std::ios_base::app | std::ios_base::out);;
 public:
-	OutputStream() {
-		stream = std::stringstream("", std::ios_base::app | std::ios_base::out);
-	}
+	OutputStream() {}
 
 	OutputStream & OutputStream::operator<<(int data) { stream << data; return *this; }
 	OutputStream & OutputStream::operator<<(double data) { stream << data; return *this; }
@@ -24,6 +22,6 @@ public:
 	OutputStream & OutputStream::operator<<(const char * data);
 };
 
-
+extern OutputStream DebugPrint;
 
 #endif // !__OUTPUT_STREAM_H_322__

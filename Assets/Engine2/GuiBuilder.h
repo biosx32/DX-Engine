@@ -20,7 +20,7 @@ class GUI {
 public:
 
 	MouseClient* mouse = nullptr;
-	ButtonManager* buttonManager = nullptr;;
+	ButtonManager* buttonManager = nullptr;
 	Interface* out = nullptr;
 
 	void InitGUI();

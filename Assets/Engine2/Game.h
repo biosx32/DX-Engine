@@ -41,6 +41,7 @@
 #include "ConfigFile.h"
 #include "GuiBuilder.h"
 #include "TrianglePoly.h"
+#include "ColorButton.h"
 #include <thread>
 
 class Game

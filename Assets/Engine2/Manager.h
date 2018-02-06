@@ -3,24 +3,43 @@
 template <class T>
 class Manager {
 public:
-	typedef T MTYPE;
+	vector<T*> Items;
+	typename vector<T*>::iterator Iter;
 
-	vector<T> items;
-	typename vector<T>::iterator Iter;
+	~Manager() {
+		for (T* ItemPtr : Items) {
+			delete ItemPtr;
+		}
+		Items.clear();
+	}
 
-	void Add(T btn) {
-		items.push_back(btn);
+
+	void Add(T item) {
+		T* b = &item;
+		Items.push_back(b);
+
+	}
+
+	void Remove(T item) {
+		T* itemAddr = &item;
+		int index = 0;
+		for (T* ItemPtr: Items) {
+			if (itemAddr == ItemPtr) {
+				DebugPrint << "Delete item At: " << index << console;
+			}
+			index++;
+		}
 	}
 
 	void Update() {
-		for (std::vector<T>::iterator it = items.begin(); it != items.end(); ++it) {
-			UpdateOne(*it);
+		for (T* ItemPtr : Items) {
+			UpdateOne(*ItemPtr);
 		}
 	}
 
 	void Draw() {
-		for (std::vector<T>::iterator it = items.begin(); it != items.end(); ++it) {
-			DrawOne(*it);
+		for (T* ItemPtr : Items) {
+			DrawOne(*ItemPtr);
 		}
 	}
 
@@ -30,10 +49,5 @@ public:
 
 	Manager() {}
 
-	~Manager() {
-		for (std::vector<T>::iterator it = items.begin(); it != items.end(); ++it) {
-			delete (*it);
-		}
-	}
 
 };

@@ -3,7 +3,7 @@
 #include "Colors.h"
 
 
-class ColorButton : public BaseButton {
+class ColorButton : public Button {
 public:
 	void Draw(Interface* out) {
 		Color drawColor = GetStateColor();
@@ -19,19 +19,25 @@ public:
 
 	Color GetStateColor() {
 		switch (state) {
-			case ButtonState::hover:
-				return Colors::LightLightGray;
-			case ButtonState::press:
-				return Colors::Gray;
-			case ButtonState::release:
-				return Colors::Red;
-			default:
-				return Colors::LightGray;
+		case ButtonState::normal:
+			return Colors::LightLightGray;
+
+		case ButtonState::hover:
+			return Colors::LightGray;
+
+		case ButtonState::press:
+			return Colors::Gray;
+
+		case ButtonState::release:
+			return Colors::Red;
+
+		default:
+			return Colors::White;
 		}
 	}
 
 	ColorButton(int x, int y, int w, int h, char* src, RasterFont* font, void(*function)()) :
-		BaseButton(x,y,w,h,src,font,function){
+		Button(x,y,w,h,src,font,function){
 	}
 
 };
