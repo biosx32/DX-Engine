@@ -14,14 +14,18 @@ public:
 
 	Bitmap* image;
 	Bitmap *cleft, *cright, *cmiddle;
+	bool autosize = false;
 	float corners = 0.33f;
 	ImageDisplay display = ImageDisplay::stretch;
 
 	void Draw(Interface* out) {
+		if (autosize) {
+			size = Vector2(font->charw * text.size() * 1.25, font->charh*1.5);
+		}
 		int textWidth = text.size() * font->charw;
 		int textY = pos.y + size.y / 2 - font->charh / 2;
 		int textX = pos.x + (size.x - textWidth) / 2;
-
+		
 		this->DrawImage(out);
 		out->PrintText(textX, textY, font, text);
 	}
@@ -63,11 +67,14 @@ public:
 		}
 	}
 
-
 	ImageButton(Vector2 position, Vector2 size, void(*function)(), char* textsrc, RasterFont* font, Bitmap* image) :
-		Button(position, size, function, textsrc, font), image(image),
+		Button(position, size, function, textsrc, font), image(image), autosize(false),
 		cleft(nullptr),cright(nullptr), cmiddle(nullptr){
 	}
 
+	ImageButton(Vector2 position, void(*function)(), string textsrc, RasterFont* font, Bitmap* image) :
+		Button(position,V2(), function, textsrc, font), image(image), autosize(true),
+		cleft(nullptr), cright(nullptr), cmiddle(nullptr) {
+	}
 
 };

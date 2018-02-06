@@ -46,8 +46,6 @@ void RemoveJozef() {
 	test->btnManager->Remove(TestButton);
 }
 
-ImageButton* jozef = new ImageButton(pos(0, 400), size(20, 80), 0, "Rotate -15*", &DOS_WHITE, &button);
-ImageButton* jozef2 = new ImageButton(pos(0, 350), size(20, 80), 0, "Rotate -15*", &DOS_WHITE, &button);
 void Game::Initialise() {
 	PixelDest screen = PixelDest(&gfx);
 	out = new TestInterface(screen);
@@ -62,29 +60,17 @@ void Game::Initialise() {
 	button.tolerance = 0.001f;
 	out->Test("blah");
 	test->btnManager->Add(TestButton);
-	test->btnManager->Add(new ColorButton(pos(235,300), size(135, 40), RemoveJozef,  "Delete Jozef", &DOS_WHITE));
-	test->btnManager->Add(new ColorButton(pos(150, 0),  size(135, 40), 0,"Scale 2.0x", &DOS_BLACK));
-	test->btnManager->Add(new ColorButton(pos(280, 0),  size(135, 40), 0, "Scale 0.5x", &DOS_BLACK_MINI));
-	test->btnManager->Add(new ColorButton(pos(410, 0),  size(135, 40), 0, "Rotate 15*", &DOS_WHITE));
-	test->btnManager->Add(new ColorButton(pos(540, 0), size(135, 40), 0, "Rotate -15*", &DOS_WHITE_MINI));
+	test->btnManager->Add(new ImageButton(pos(235,300), RemoveJozef,  "Delete Jozef", &DOS_WHITE,&button));
+	test->btnManager->Add(new ImageButton(pos(500,150),  0,"Scale 2.0x" , &DOS_BLACK , &button));
+	test->btnManager->Add(new ImageButton(pos(500,280),  0, "Scale 0.5x", &DOS_BLACK_MINI, &button));
+	test->btnManager->Add(new ImageButton(pos(500,410),  0, "Rotate 15*", &DOS_WHITE, &button));
+	test->btnManager->Add(new ImageButton(pos(500,540),  0, "Rotate -15*", &DOS_WHITE_MINI, &button));
 
-
-
-
-	test->btnManager->Add(new ImageButton(pos(300, 200), size(200, 80), 0, "Rotate -15*", &DOS_WHITE_MINI, &button));
-	
-	jozef->display = ImageDisplay::stretch_corners;
-	test->btnManager->Add(jozef);
-	test->btnManager->Add(jozef2);
 
 	
 }
-int sizec = 0;
+
 void Game::ComposeFrame() {
-	sizec+=16;
-	sizec %= 800;
-	jozef->size.x = sizec;
-	jozef2->size.x = sizec;
 	grid.Draw(out);
 	debuggui->Draw(out);
 	test->Draw();
