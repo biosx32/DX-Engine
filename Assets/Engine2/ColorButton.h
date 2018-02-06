@@ -7,12 +7,13 @@ class ColorButton : public Button {
 public:
 	void Draw(Interface* out) {
 		Color drawColor = GetStateColor();
-		int charcnt = strlen(text);
-		int textw = charcnt * font->charw;
-		out->paint->rectangle(x, y, w, h, drawColor);
-		out->paint->rectangleBorder(x, y, w, h, Colors::Black, 2);
-		int textY = y + h / 2 - font->charh / 2;
-		int textX = x + (this->w - textw) / 2;
+		
+		out->paint->rectangle(pos.x, pos.y, size.x, size.y, drawColor);
+		out->paint->rectangleBorder(pos.x, pos.y, size.x, size.y, Colors::Black, 2);
+
+		int textWidth = text.size() * font->charw;
+		int textY = pos.y + size.y / 2 - font->charh / 2;
+		int textX = pos.x + (size.x - textWidth) / 2;
 		out->PrintText(textX, textY, font, text);
 
 	}
@@ -36,8 +37,8 @@ public:
 		}
 	}
 
-	ColorButton(int x, int y, int w, int h, char* src, RasterFont* font, void(*function)()) :
-		Button(x,y,w,h,src,font,function){
+	ColorButton(Vector2 position, Vector2 size, void(*function)(), string textsrc, RasterFont* font) :
+		Button(position,size,function,textsrc, font){
 	}
 
 };

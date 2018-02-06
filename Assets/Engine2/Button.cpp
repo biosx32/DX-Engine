@@ -17,20 +17,20 @@ void Button::RefreshClickState(MouseClient mouse)
 	}
 
 	else { //!isHover(mouse)
+
 		if (isPress(mouse)) {
 			state = ButtonState::press;
 		}
 
 		else { // !isPress(mouse)
+
 			if (state == ButtonState::press) {
 				state = ButtonState::release;
 			}
+
 			else { //state != ButtonState::press
 				state = ButtonState::hover;
 			}
 		}
-
 	}
-
-
 }

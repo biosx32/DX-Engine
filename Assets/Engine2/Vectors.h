@@ -24,4 +24,9 @@ public:
 
 
 
+typedef Vector2 V2;
+typedef Vector3 V3;
+typedef V2 pos;
+typedef V2 size;
+
 #endif

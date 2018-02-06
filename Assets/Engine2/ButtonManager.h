@@ -6,28 +6,21 @@
 #include "Manager.h"
 
 using std::vector;
-typedef Button* ManagerType;
 
-class ButtonManager : public Manager<ManagerType> {
+class ButtonManager : public Manager<Button> {
 public:
-	MouseClient * mouse = nullptr;
-	Interface* out = nullptr;
-
-	void UpdateOne(ManagerType item) {
-		if (mouse) {
-			item->RefreshState(*mouse);
+	
+	using Manager::Manager;
+	void UpdateOne(ItemsType* item) {
+		if (ioif.mouse) {
+			(*item).RefreshState(*ioif.mouse);
 		}
 	}
 
-	void DrawOne(ManagerType item) {
-		if (out) {
-			item->Draw(out);
+	void DrawOne(ItemsType* item) {
+		if (ioif.out) {
+			(*item).Draw(ioif.out);
 		}
-	}
-
-	void SetIO(MouseClient* mouse, Interface* out){
-		this->mouse = mouse;
-		this->out = out;
 	}
 	
 };

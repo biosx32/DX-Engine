@@ -3,7 +3,7 @@
 
 void DebugGUI::UpdateFrameInfo()
 {
-	const int UpdatesPerSecond = 4;
+	const int UpdatesPerSecond = 30;
 	const int FrameLimit = 60;
 	const int UpdateEveryN = 60 / UpdatesPerSecond;
 

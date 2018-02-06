@@ -1,5 +1,7 @@
 #include "Vectors.h"
 
+
+
 float Vector2::DistanceFrom(Vector2 other)
 {
 	return GetSquareDistance2(*this, other);

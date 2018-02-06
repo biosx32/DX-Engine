@@ -2,25 +2,20 @@
 
 
 
-void Interface::PrintText(int x, int y, RasterFont* font, const char *fmt, ...) {
+void Interface::PrintText(int x, int y, RasterFont* font, string *fmt, ...) {
 		char buffer[TXT_BUFFER_SIZE];
 		va_list args;
 		va_start(args, fmt);
-		int rc = vsnprintf(buffer, sizeof(buffer), fmt, args);
+		int rc = vsnprintf(buffer, TXT_BUFFER_SIZE, fmt->c_str(), args);
 		va_end(args);
 		PrintText(x, y, font, buffer);
 }
-void Interface::PrintText(int x, int y, RasterFont* font, char * text)
+void Interface::PrintText(int x, int y, RasterFont* font, string text)
 {
 	double rel_pos_x = 0;
 	double rel_pos_y = 0;
 
-
-	char buffer[TXT_BUFFER_SIZE];
-	strcpy_s(buffer, text);
-
-	for (int i = 0; buffer[i] != 0; i++) {
-		char chr = buffer[i];
+	for (char chr : text) {
 
 		float charw = font->charw;
 		float charh = font->charh;

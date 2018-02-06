@@ -16,19 +16,21 @@ extern RasterFont DOS_BLACK     ;
 extern RasterFont DOS_WHITE_MINI;
 extern RasterFont DOS_WHITE     ;
 
+
 class GUI {
 public:
+	vector<ManagerBase*> managers;
+	ButtonManager* btnManager = nullptr;
+	IO_interface ioif;
 
-	MouseClient* mouse = nullptr;
-	ButtonManager* buttonManager = nullptr;
-	Interface* out = nullptr;
-
-	void InitGUI();
 	void Update();
 	void Draw();
-	GUI(){
-		InitGUI();
+	void Init();
+
+	GUI(IO_interface ioif): ioif(ioif) {
+		this->Init();
 	}
+
 };
 
 #endif

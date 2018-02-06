@@ -1,53 +1,56 @@
 #pragma once
 
-template <class T>
-class Manager {
+struct IO_interface {
+	Interface* out = nullptr;
+	MouseClient* mouse = nullptr;
+};
+
+
+class ManagerBase {
 public:
-	vector<T*> Items;
-	typename vector<T*>::iterator Iter;
+	IO_interface ioif;
+	ManagerBase(IO_interface ioif) : ioif(ioif) {}
+	virtual void Update() =0;
+	virtual void Draw() = 0;
+};
 
-	~Manager() {
-		for (T* ItemPtr : Items) {
-			delete ItemPtr;
+template <class T>
+class Manager : public ManagerBase {
+public:
+
+	typedef T ItemsType;
+	vector<ItemsType*> Items;
+	using ManagerBase::ManagerBase;
+
+	void Update() {
+		for (ItemsType* Item : Items) {
+			UpdateOne(Item);
 		}
-		Items.clear();
 	}
 
+	void Draw() {
+		for (ItemsType* Item : Items) {
+			DrawOne(Item);
+		}
+	}	
+	
+	virtual void UpdateOne(ItemsType* one) = 0;
+	virtual void DrawOne(ItemsType* one) = 0;
 
-	void Add(T item) {
-		T* b = &item;
-		Items.push_back(b);
-
+	void Add(ItemsType* item) {
+		Items.push_back(item);
 	}
 
-	void Remove(T item) {
-		T* itemAddr = &item;
+	void Remove(ItemsType* eitem) {
 		int index = 0;
-		for (T* ItemPtr: Items) {
-			if (itemAddr == ItemPtr) {
-				DebugPrint << "Delete item At: " << index << console;
+		for (ItemsType* Item : Items) {
+			if (eitem == Item) {
+				Items.erase(Items.begin() + index);
 			}
 			index++;
 		}
 	}
 
-	void Update() {
-		for (T* ItemPtr : Items) {
-			UpdateOne(*ItemPtr);
-		}
-	}
-
-	void Draw() {
-		for (T* ItemPtr : Items) {
-			DrawOne(*ItemPtr);
-		}
-	}
-
-	virtual void UpdateOne(T one) = 0;
-	virtual void DrawOne(T one) = 0;
-
-
-	Manager() {}
 
 
 };

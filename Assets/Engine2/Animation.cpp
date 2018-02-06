@@ -5,7 +5,6 @@ Animation::Animation()
 
 Animation::Animation(float FPS, VectorSpriteSheet * sh, int s, int e) : Animation(FPS, sh)
 {
-
 	this->SetRange(s, e);
 }
 
