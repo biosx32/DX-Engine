@@ -208,6 +208,9 @@
     <ClInclude Include="..\Assets\Engine2\ImageButton.h">
       <Filter>Assets\Engine2\GUI\parts\Button</Filter>
     </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\GlobalObjects.h">
+      <Filter>Assets\Engine2\GUI\Main\H</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Assets\ChilliFramework\Windows.cpp">
@@ -296,6 +299,9 @@
     </ClCompile>
     <ClCompile Include="..\Assets\Engine2\ImageButton.cpp">
       <Filter>Assets\Engine2\GUI\parts\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\Engine2\GlobalObjects.cpp">
+      <Filter>Assets\Engine2\GUI\Main\C</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

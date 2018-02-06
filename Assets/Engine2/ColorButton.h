@@ -37,8 +37,8 @@ public:
 		}
 	}
 
-	ColorButton(Vector2 position, Vector2 size, void(*function)(), string textsrc, RasterFont* font) :
-		Button(position,size,function,textsrc, font){
+	ColorButton(Vector2 position, Vector2 size, void(*function)(), string textsrc) :
+		Button(position,size,function,textsrc){
 	}
 
 };

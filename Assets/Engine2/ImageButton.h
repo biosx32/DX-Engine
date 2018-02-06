@@ -2,6 +2,7 @@
 #include "Button.h"
 #include "Bmap.h"
 #include "RasterFont.h"
+#include "GlobalObjects.h"
 
 enum class ImageDisplay : int {
 	stretch,
@@ -12,11 +13,15 @@ enum class ImageDisplay : int {
 class ImageButton : public Button {
 public:
 
-	Bitmap* image;
+	Bitmap * image = &DEFAULT_BUTTON;
 	Bitmap *cleft, *cright, *cmiddle;
 	bool autosize = false;
 	float corners = 0.33f;
 	ImageDisplay display = ImageDisplay::stretch;
+
+	void SetImage(Bitmap* image) {
+		this->image = image;
+	}
 
 	void Draw(Interface* out) {
 		if (autosize) {
@@ -25,16 +30,30 @@ public:
 		int textWidth = text.size() * font->charw;
 		int textY = pos.y + size.y / 2 - font->charh / 2;
 		int textX = pos.x + (size.x - textWidth) / 2;
-		
+
 		this->DrawImage(out);
 		out->PrintText(textX, textY, font, text);
 	}
 
-	void DrawImage(Interface* out){
+	void DrawSpecial(Interface* out, Bitmap* img, int x, int y, float rx, float ry) {
+		if (state == ButtonState::normal) {
+			out->DrawBitmap(img, x, y, rx, ry);
+		}
+		
+		else if (state == ButtonState::press) {
+			out->DrawBitmap(img, x + img->width *0.1*rx / 2, y + img->height *0.1*ry / 2, rx*0.9, ry*0.9);
+		}
+		else /*(state == ButtonState::hover)*/ {
+			out->DrawBitmap(img, x - img->width *0.1*rx / 2, y - img->height *0.1*ry / 2, rx*1.1, ry*1.1);
+		}
+
+	}
+
+	void DrawImage(Interface* out) {
 		if (display == ImageDisplay::stretch) {
 			float ratiox = size.x / image->width;
 			float ratioy = size.y / image->height;
-			out->DrawBitmap(image, pos.x, pos.y, ratiox, ratioy);
+			DrawSpecial(out,image, pos.x, pos.y, ratiox, ratioy);
 		}
 
 		if (display == ImageDisplay::stretch_corners) {
@@ -49,31 +68,31 @@ public:
 				cmiddle = image->GetBitmapPart(0 + sidew, 0, middlew, image->height);
 			}
 
-			float sidescale = corners/2;
+			float sidescale = corners / 2;
 			int sidew_scaled = cleft->width * sidescale;
 
-			float ratiox = (size.x - sidew_scaled*2) / cmiddle->width;
+			float ratiox = (size.x - sidew_scaled * 2) / cmiddle->width;
 			float ratioy = size.y / cmiddle->height;
 
 			int leftx = pos.x;
 			int middlex = leftx + sidew_scaled;
 			int rightx = middlex + cmiddle->width* ratiox;
 
-			out->DrawBitmap(cleft, leftx, pos.y, sidescale, ratioy);
-			out->DrawBitmap(cmiddle, middlex, pos.y, ratiox, ratioy);
-			out->DrawBitmap(cright, rightx , pos.y, sidescale, ratioy);
-			
+			DrawSpecial(out,cleft, leftx, pos.y, sidescale, ratioy);
+			DrawSpecial(out,cmiddle, middlex, pos.y, ratiox, ratioy);
+			DrawSpecial(out,cright, rightx, pos.y, sidescale, ratioy);
+
 
 		}
 	}
 
-	ImageButton(Vector2 position, Vector2 size, void(*function)(), char* textsrc, RasterFont* font, Bitmap* image) :
-		Button(position, size, function, textsrc, font), image(image), autosize(false),
-		cleft(nullptr),cright(nullptr), cmiddle(nullptr){
+	ImageButton(Vector2 position, void(*function)(), char* textsrc) :
+		Button(position, V2(), function, textsrc), autosize(true),
+		cleft(nullptr), cright(nullptr), cmiddle(nullptr) {
 	}
 
-	ImageButton(Vector2 position, void(*function)(), string textsrc, RasterFont* font, Bitmap* image) :
-		Button(position,V2(), function, textsrc, font), image(image), autosize(true),
+	ImageButton(Vector2 position, void(*function)(), char* textsrc, Vector2 size) :
+		Button(position,size, function, textsrc), autosize(false),
 		cleft(nullptr), cright(nullptr), cmiddle(nullptr) {
 	}
 

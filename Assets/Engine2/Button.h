@@ -2,6 +2,7 @@
 #include "Vectors.h"
 #include "Mouse.h"
 #include "Interface.h"
+#include "GlobalObjects.h"
 
 
 enum class ButtonState : int {
@@ -18,16 +19,21 @@ public:
 	Vector2 pos;
 	Vector2 size;
 	ButtonState state = ButtonState::normal;
+	RasterFont* font = &DOS_WHITE;
 
-	RasterFont* font = nullptr;
+
 	void(*function)() = nullptr;
 
 	std::string text = "";
 
 	virtual void Draw(Interface* out) = 0;
 
-	Button(Vector2 position, Vector2 size, void(*function)(), string textsrc, RasterFont* font) :
-		pos(position), size(size), text(textsrc), function(function), font(font) {}
+	void SetFont(RasterFont* font) {
+		this->font = font;
+	}
+
+	Button(Vector2 position, Vector2 size, void(*function)(), string textsrc) :
+		pos(position), size(size), text(textsrc), function(function){}
 
 
 	inline bool isHover(MouseClient mouse) {

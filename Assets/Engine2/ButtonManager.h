@@ -11,13 +11,13 @@ class ButtonManager : public Manager<Button> {
 public:
 	
 	using Manager::Manager;
-	void UpdateOne(ItemsType* item) {
+	void UpdateOne(ItemsType* item) override {
 		if (ioif.mouse) {
 			(*item).RefreshState(*ioif.mouse);
 		}
 	}
 
-	void DrawOne(ItemsType* item) {
+	void DrawOne(ItemsType* item) override {
 		if (ioif.out) {
 			(*item).Draw(ioif.out);
 		}

@@ -40,11 +40,22 @@ Bitmap button = Bitmap("..\\Assets\\Resources\\Buttons\\test.bmp",Colors::White)
 string j = "aa";
 
 //Vector2 position, Vector2 size, void(*function)(), char* textsrc, RasterFont* font
-Button* TestButton = new ColorButton(Vector2(100,300), Vector2(135,40),nullptr,(char*)j.c_str(), &DOS_WHITE);
+Button* TestButton = new ColorButton(Vector2(100,300), Vector2(135,40),nullptr,(char*)j.c_str());
 
 void RemoveJozef() {
-	test->btnManager->Remove(TestButton);
+	if (test->btnManager->Items.size() > 0) {
+		test->btnManager->Items.pop_back();
+	}
+	
 }
+
+void AddJozef() {
+	Vector2 pos= Vector2(rand()%800,rand()%600);
+	
+	Button* random = new ImageButton(pos, 0, "Random");
+	test->btnManager->Add(random);
+}
+
 
 void Game::Initialise() {
 	PixelDest screen = PixelDest(&gfx);
@@ -60,11 +71,12 @@ void Game::Initialise() {
 	button.tolerance = 0.001f;
 	out->Test("blah");
 	test->btnManager->Add(TestButton);
-	test->btnManager->Add(new ImageButton(pos(235,300), RemoveJozef,  "Delete Jozef", &DOS_WHITE,&button));
-	test->btnManager->Add(new ImageButton(pos(500,150),  0,"Scale 2.0x" , &DOS_BLACK , &button));
-	test->btnManager->Add(new ImageButton(pos(500,280),  0, "Scale 0.5x", &DOS_BLACK_MINI, &button));
-	test->btnManager->Add(new ImageButton(pos(500,410),  0, "Rotate 15*", &DOS_WHITE, &button));
-	test->btnManager->Add(new ImageButton(pos(500,540),  0, "Rotate -15*", &DOS_WHITE_MINI, &button));
+	test->btnManager->Add(new ImageButton(pos(235,300), RemoveJozef,  "Delete Jozef"));
+	test->btnManager->Add(new ImageButton(pos(235, 360), AddJozef, "Add Jozef"));
+	test->btnManager->Add(new ImageButton(pos(500,150),  0,"Scale 2.0x"));
+	test->btnManager->Add(new ImageButton(pos(500,280),  0, "Scale 0.5x"));
+	test->btnManager->Add(new ImageButton(pos(500,410),  0, "Rotate 15*"));
+	test->btnManager->Add(new ImageButton(pos(500,540),  0, "Rotate -15*"));
 
 
 	

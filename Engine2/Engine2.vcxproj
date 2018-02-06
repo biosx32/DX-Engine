@@ -44,6 +44,7 @@
     <ClInclude Include="..\Assets\Engine2\CustomMath.h" />
     <ClInclude Include="..\Assets\Engine2\DebugGUI.h" />
     <ClInclude Include="..\Assets\Engine2\Drawing.h" />
+    <ClInclude Include="..\Assets\Engine2\GlobalObjects.h" />
     <ClInclude Include="..\Assets\Engine2\Manager.h" />
     <ClInclude Include="..\Assets\Engine2\RasterFont.h" />
     <ClInclude Include="..\Assets\Engine2\Func.h" />
@@ -77,6 +78,7 @@
     <ClCompile Include="..\Assets\Engine2\CustomMath.cpp" />
     <ClCompile Include="..\Assets\Engine2\DebugGUI.cpp" />
     <ClCompile Include="..\Assets\Engine2\Drawing.cpp" />
+    <ClCompile Include="..\Assets\Engine2\GlobalObjects.cpp" />
     <ClCompile Include="..\Assets\Engine2\RasterFont.cpp" />
     <ClCompile Include="..\Assets\Engine2\Func.cpp" />
     <ClCompile Include="..\Assets\Engine2\Game.cpp" />

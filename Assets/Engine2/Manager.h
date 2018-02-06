@@ -22,15 +22,15 @@ public:
 	vector<ItemsType*> Items;
 	using ManagerBase::ManagerBase;
 
-	void Update() {
-		for (ItemsType* Item : Items) {
-			UpdateOne(Item);
+	void Update() override{
+		for (int i = 0; i < Items.size();i++) {
+			this->UpdateOne(Items[i]);
 		}
 	}
 
-	void Draw() {
-		for (ItemsType* Item : Items) {
-			DrawOne(Item);
+	void Draw() override {
+		for (int i = 0; i < Items.size(); i++) {
+			this->DrawOne(Items[i]);
 		}
 	}	
 	
