@@ -6,21 +6,69 @@
 
 enum class ImageDisplay : int {
 	stretch,
-	stretch_corners,
-	dynamicExtend
+	scale_middle,
 };
 
-class ImageButton : public Button {
+class ImageButton : public Button{
 public:
-
-	Bitmap * image = &DEFAULT_BUTTON;
-	Bitmap *cleft, *cright, *cmiddle;
-	bool autosize = false;
-	float corners = 0.33f;
 	ImageDisplay display = ImageDisplay::stretch;
+	bool autosize = true;
+	float corners = 0.33f;
+	ButtonImageGroup * StateImages = &DEFAULT_BUTTON_MULTI;
+	
+	ImageButton(Vector2 position, void(*function)(), char* textsrc) :
+		Button(position, V2(), function, textsrc) {
+	}
 
-	void SetImage(Bitmap* image) {
-		this->image = image;
+	ImageButton(Vector2 position, void(*function)(), char* textsrc, Vector2 size) :
+		Button(position, size, function, textsrc), autosize(false) {
+	}
+
+
+
+	void DrawSpecial(Interface* out, Bitmap* img, int x, int y, float rx, float ry) {
+		if (state == ButtonState::normal) {
+			out->DrawBitmap(img, x, y, rx, ry);
+		}
+		else if (state == ButtonState::press) {
+			out->DrawBitmap(img, x+1, y+2, rx, ry);
+		}
+		else if (state == ButtonState::hover) {
+			out->DrawBitmap(img, x - img->width *0.15*rx / 2, y - img->height *0.15*ry / 2, rx*1.15, ry*1.15);
+		}
+
+	}
+
+	void DrawImage(Interface* out) {
+		ImageSplitCorners * img = StateImages->normal;
+		if (state == ButtonState::press) {
+			img = StateImages->press;
+		}
+		else if (state == ButtonState::hover){
+			img = StateImages->hover;
+		}
+
+
+		float ratiox = size.x / img->width;
+		float ratioy = size.y / img->height;
+		float ratiocorner = ratiox;
+
+		if (display == ImageDisplay::scale_middle) {
+			float sidescale = corners / 2;
+			int sidew_scaled = img->cleft->width * sidescale;
+			ratiox = (size.x - sidew_scaled * 2) / img->cmiddle->width;
+			ratiocorner = sidescale;
+		}
+
+		int leftx = pos.x;
+		int middlex = leftx + img->cleft->width * ratiocorner;
+		int rightx = middlex + img->cmiddle->width* ratiox;
+
+		DrawSpecial(out,img->cleft, leftx, pos.y, ratiocorner, ratioy);
+		DrawSpecial(out,img->cmiddle, middlex, pos.y, ratiox, ratioy);
+		DrawSpecial(out,img->cright, rightx, pos.y, ratiocorner, ratioy);
+
+		
 	}
 
 	void Draw(Interface* out) {
@@ -34,66 +82,4 @@ public:
 		this->DrawImage(out);
 		out->PrintText(textX, textY, font, text);
 	}
-
-	void DrawSpecial(Interface* out, Bitmap* img, int x, int y, float rx, float ry) {
-		if (state == ButtonState::normal) {
-			out->DrawBitmap(img, x, y, rx, ry);
-		}
-		
-		else if (state == ButtonState::press) {
-			out->DrawBitmap(img, x + img->width *0.1*rx / 2, y + img->height *0.1*ry / 2, rx*0.9, ry*0.9);
-		}
-		else /*(state == ButtonState::hover)*/ {
-			out->DrawBitmap(img, x - img->width *0.1*rx / 2, y - img->height *0.1*ry / 2, rx*1.1, ry*1.1);
-		}
-
-	}
-
-	void DrawImage(Interface* out) {
-		if (display == ImageDisplay::stretch) {
-			float ratiox = size.x / image->width;
-			float ratioy = size.y / image->height;
-			DrawSpecial(out,image, pos.x, pos.y, ratiox, ratioy);
-		}
-
-		if (display == ImageDisplay::stretch_corners) {
-
-			if (!cleft || !cright || !cmiddle) {
-				float perOne = corners / 2;
-				float perMid = 1 - corners;
-				int sidew = perOne * image->width;
-				int middlew = perMid * image->width;
-				cleft = image->GetBitmapPart(0, 0, sidew, image->height);
-				cright = image->GetBitmapPart(0 + sidew + middlew, 0, sidew, image->height);
-				cmiddle = image->GetBitmapPart(0 + sidew, 0, middlew, image->height);
-			}
-
-			float sidescale = corners / 2;
-			int sidew_scaled = cleft->width * sidescale;
-
-			float ratiox = (size.x - sidew_scaled * 2) / cmiddle->width;
-			float ratioy = size.y / cmiddle->height;
-
-			int leftx = pos.x;
-			int middlex = leftx + sidew_scaled;
-			int rightx = middlex + cmiddle->width* ratiox;
-
-			DrawSpecial(out,cleft, leftx, pos.y, sidescale, ratioy);
-			DrawSpecial(out,cmiddle, middlex, pos.y, ratiox, ratioy);
-			DrawSpecial(out,cright, rightx, pos.y, sidescale, ratioy);
-
-
-		}
-	}
-
-	ImageButton(Vector2 position, void(*function)(), char* textsrc) :
-		Button(position, V2(), function, textsrc), autosize(true),
-		cleft(nullptr), cright(nullptr), cmiddle(nullptr) {
-	}
-
-	ImageButton(Vector2 position, void(*function)(), char* textsrc, Vector2 size) :
-		Button(position,size, function, textsrc), autosize(false),
-		cleft(nullptr), cright(nullptr), cmiddle(nullptr) {
-	}
-
 };

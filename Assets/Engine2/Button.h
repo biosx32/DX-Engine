@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __BUTTON_H__
+#define __BUTTON_H__
 #include "Vectors.h"
 #include "Mouse.h"
 #include "Interface.h"
@@ -55,3 +56,4 @@ public:
 	}
 
 };
+#endif

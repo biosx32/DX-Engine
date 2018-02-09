@@ -1,8 +1,48 @@
 Textbox
 --Rectangle select cursor
-Bitmap buttons -> draw corners and then repeat middle IF !!! textSize > BitmapSize --> kopiruj
-Bitmap buttons type:
-A) Stretch
-B) Cut out n% of sides and then repeat only middle part
 Bitmap buttons -> on pressed state:: draw darker, on hover draw lighter by maths
 Replace floodfill by: Make line around sprite, then scanlinefill
+
+#pragma once
+
+class ElementController {
+	int selectedID; //is modified if control has select event
+};
+
+
+class GlobalInfo {
+public:
+	int SelectedID;
+}
+
+class ElementGroup {
+	int GroupID;
+	inf x,y;
+	vector<GuiElement*> elements;
+
+}
+
+class GuiElement {
+protected:
+	int x,y;
+	bool visible;
+	int ID;
+	ElementGroup* parent = nullptr; //podla group offsetni suradnice pri kresleni gui
+	ElementInfo* LocalInfo = this;
+	virtual void Draw() = 0;
+public:
+	static SelectedElement
+
+	bool Selected
+}
+
+class GuiElement {
+public:
+	GlobalInfo* info;
+}
+
+class GroupBox {
+  implement
+};
+
+class 

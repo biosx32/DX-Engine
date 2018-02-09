@@ -41,6 +41,7 @@ string j = "aa";
 
 //Vector2 position, Vector2 size, void(*function)(), char* textsrc, RasterFont* font
 Button* TestButton = new ColorButton(Vector2(100,300), Vector2(135,40),nullptr,(char*)j.c_str());
+ImageButton* TestImgButton = new ImageButton(Vector2(400, 150), 0, "HAHAHA");
 
 void RemoveJozef() {
 	if (test->btnManager->Items.size() > 0) {
@@ -54,6 +55,7 @@ void AddJozef() {
 	
 	Button* random = new ImageButton(pos, 0, "Random");
 	test->btnManager->Add(random);
+
 }
 
 
@@ -70,6 +72,8 @@ void Game::Initialise() {
 	srand(time(0));
 	button.tolerance = 0.001f;
 	out->Test("blah");
+	TestImgButton->display = ImageDisplay::scale_middle;
+	test->btnManager->Add(TestImgButton);
 	test->btnManager->Add(TestButton);
 	test->btnManager->Add(new ImageButton(pos(235,300), RemoveJozef,  "Delete Jozef"));
 	test->btnManager->Add(new ImageButton(pos(235, 360), AddJozef, "Add Jozef"));

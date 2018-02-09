@@ -45,6 +45,7 @@
     <ClInclude Include="..\Assets\Engine2\DebugGUI.h" />
     <ClInclude Include="..\Assets\Engine2\Drawing.h" />
     <ClInclude Include="..\Assets\Engine2\GlobalObjects.h" />
+    <ClInclude Include="..\Assets\Engine2\GUIElement.h" />
     <ClInclude Include="..\Assets\Engine2\Manager.h" />
     <ClInclude Include="..\Assets\Engine2\RasterFont.h" />
     <ClInclude Include="..\Assets\Engine2\Func.h" />
