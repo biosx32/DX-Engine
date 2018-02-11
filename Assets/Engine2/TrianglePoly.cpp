@@ -120,22 +120,22 @@ void TrianglePoly::DrawTexture(Interface * out, Bitmap * source)
 
 }
 
-void TrianglePoly::DrawVertex(Vector2 * pos, Interface * out, Color q)
+void TrianglePoly::DrawVertex(Vector2 * Pos, Interface * out, Color q)
 {
-	out->paint->circle(pos->x, pos->y, 5, q, true);
+	out->paint->circle(Pos->x, Pos->y, 5, q);
 	char buffer[256];
-	sprintf_s(buffer, "x:%3.0f\ny:%3.0f", pos->x, pos->y);
-	out->paint->rectangle(pos->x + 10, pos->y - 20, 55, 40, q);
-	out->paint->line(pos->x, pos->y, pos->x + 2, pos->y - 13, q);
-	out->paint->FastHLine(pos->x + 2, pos->y - 13, 5, q);
-	out->PrintText(pos->x + 15, pos->y - DOS_BLACK_MINI.charh, &DOS_BLACK_MINI, buffer);
+	sprintf_s(buffer, "x:%3.0f\ny:%3.0f", Pos->x, Pos->y);
+	out->paint->rectangle(Pos->x + 10, Pos->y - 20, 55, 40, q);
+	out->paint->line(Pos->x, Pos->y, Pos->x + 2, Pos->y - 13, q);
+	out->paint->FastHLine(Pos->x + 2, Pos->y - 13, 5, q);
+	out->PrintText(Pos->x + 15, Pos->y - DOS_BLACK_MINI.charh, &DOS_BLACK_MINI, buffer);
 }
 
 Vector2 TrianglePoly::GetTransformation(Vector2 orignal, float data[3][3])
 {
-	Vector2* pos = &orignal;
-	float x = pos->x - origin.x;
-	float y = pos->y - origin.y;
+	Vector2* Pos = &orignal;
+	float x = Pos->x - origin.x;
+	float y = Pos->y - origin.y;
 	float src[3] = { x, y, 1 };
 	float xres = src[0] * data[0][0] + src[1] * data[0][1] + src[2] * data[0][2];
 	float yres = src[0] * data[1][0] + src[1] * data[1][1] + src[2] * data[1][2];
@@ -146,15 +146,15 @@ Vector2 TrianglePoly::GetTransformation(Vector2 orignal, float data[3][3])
 void TrianglePoly::ApplyMatrix(float data[3][3])
 {
 	for (int i = 0; i < 3; i++) {
-		Vector2* pos = Vertices[i];
-		float x = pos->x - origin.x;
-		float y = pos->y - origin.y;
+		Vector2* Pos = Vertices[i];
+		float x = Pos->x - origin.x;
+		float y = Pos->y - origin.y;
 		float src[3] = { x, y, 1 };
 		float xres = src[0] * data[0][0] + src[1] * data[0][1] + src[2] * data[0][2];
 		float yres = src[0] * data[1][0] + src[1] * data[1][1] + src[2] * data[1][2];
 		Vector2 npos = Vector2(xres, yres);
-		pos->x = npos.x + origin.x;
-		pos->y = npos.y + origin.y;
+		Pos->x = npos.x + origin.x;
+		Pos->y = npos.y + origin.y;
 	}
 }
 

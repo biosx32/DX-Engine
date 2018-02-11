@@ -2,7 +2,7 @@
 
 
 
-void Interface::PrintText(int x, int y, RasterFont* font, string *fmt, ...) {
+void Interface::PrintText(int x, int y, BitmapFont* font, string *fmt, ...) {
 		char buffer[TXT_BUFFER_SIZE];
 		va_list args;
 		va_start(args, fmt);
@@ -10,7 +10,7 @@ void Interface::PrintText(int x, int y, RasterFont* font, string *fmt, ...) {
 		va_end(args);
 		PrintText(x, y, font, buffer);
 }
-void Interface::PrintText(int x, int y, RasterFont* font, string text)
+void Interface::PrintText(int x, int y, BitmapFont* font, string text)
 {
 	double rel_pos_x = 0;
 	double rel_pos_y = 0;
@@ -92,7 +92,7 @@ void Interface::DrawBitmap(Bitmap* Bmp, int fx, int fy) {
 
 
 
-void Interface::DrawSprite(FPixelMap * VBmp, int fx, int fy)
+void Interface::DrawSprite(PixelMap * VBmp, int fx, int fy)
 {
 	for (std::vector<FPixel*>::iterator it = VBmp->pixels->begin(); it != VBmp->pixels->end(); ++it) {
 		paint->DrawPixel(fx + (*it)->x, fy + (*it)->y, (*it)->color);

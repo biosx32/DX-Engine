@@ -7,8 +7,6 @@ struct SpecialCode { int code; };
 extern SpecialCode msgbox ;
 extern SpecialCode console;
 
-
-
 class OutputStream {
 protected:
 	std::stringstream stream = std::stringstream("", std::ios_base::app | std::ios_base::out);;

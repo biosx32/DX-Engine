@@ -104,7 +104,7 @@ void Painter::DrawPixel(int xoff, int yoff, Color c, int m)
 	}
 }
 
-void Painter::circle(int x0, int y0, int radius, Color c)
+void Painter::circleBorder(int x0, int y0, int radius, Color c)
 {
 	float r2 = radius * radius;
 	int center = (int)(radius * 0.707107f + 0.5f);
@@ -123,12 +123,11 @@ void Painter::circle(int x0, int y0, int radius, Color c)
 		DrawPixel(x0 - y, y0 - x, c);
 	}
 }
-void Painter::circle(int x, int y, int rad, Color c, bool fill)
+void Painter::circle(int x, int y, int rad, Color c)
 {
-	if (!fill) return circle(x, y, rad, c);
 	for (int r = 1; r < rad; r++) {
-		circle(x, y, r, c);
-		circle(x + 1, y, r, c);
+		circleBorder(x, y, r, c);
+		circleBorder(x + 1, y, r, c);
 	}
 }
 
@@ -188,12 +187,14 @@ void Painter::line(int x1, int y1, int x2, int y2, Color c, int width)
 }
 
 void Painter::rectangleBorder(int x0, int y0, int width, int height, Color c, int r) {
+
+
 	for (int i = 0; i < r; i++) {
-		int q = i - r / 2;
-		FastHLine(x0+q, y0, width, c);
-		FastHLine(x0+2*q, y0 + height, width, c);
-		FastVLine(x0+q, y0, height, c);
-		FastVLine(x0+2*q + width, y0, height, c);
+		int OF = i;
+		FastHLine(x0, y0 + OF, width, c);
+		FastHLine(x0, y0 + height - OF, width, c);
+		FastVLine(x0 + OF, y0, height, c);
+		FastVLine(x0 + width - OF, y0, height, c);
 	}
 	
 }

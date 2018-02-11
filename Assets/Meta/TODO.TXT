@@ -1,7 +1,8 @@
-Textbox
 --Rectangle select cursor
-Bitmap buttons -> on pressed state:: draw darker, on hover draw lighter by maths
 Replace floodfill by: Make line around sprite, then scanlinefill
+Checkbox, radiobutton
+
+Manažment lokálnosti pre radiobutton apod, prípadne keypress
 
 #pragma once
 

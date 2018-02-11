@@ -1,41 +1,15 @@
-#include "Spritesheet.h"
+#include "FloodfillMap.h"
 
 
 
-
-VectorSpriteSheet::VectorSpriteSheet(Bitmap * BitmapImage)
-{
-	PixelContainer* temp = new PixelContainer(BitmapImage);
-	while (1) {
-		FPixelMap* naw = temp->GetNextSpriteGroup();
-		if (naw == nullptr) {
-			break;
-		}
-		else {
-			this->sprites.push_back(naw);
-		}
-	}
-
-}
-
-
-VectorSpriteSheet::~VectorSpriteSheet() {
-	for (std::vector<FPixelMap*>::iterator it = sprites.begin(); it != sprites.end(); ++it)
-	{
-		delete *it;
-	}
-}
-
-
-
-FFPixel * PixelContainer::GetNextSpritePixel()
+FFPixel * FloodFillMap::GetNextSpritePixel()
 {
 	FFPixel* point = nullptr;
 
 	while (1) {
 		point = this->getPixelAt(lastpos.x, lastpos.y);
 
-		if(point) {
+		if (point) {
 			if (!(point->state & pxstate::skip)) {
 				return point;
 			}
@@ -44,7 +18,7 @@ FFPixel * PixelContainer::GetNextSpritePixel()
 		if (lastpos.y > height) {
 			return nullptr;
 		}
-		
+
 		lastpos.x += gridsize;
 
 		if (!point) {
@@ -53,18 +27,18 @@ FFPixel * PixelContainer::GetNextSpritePixel()
 		}
 
 	}
-	
 
 
-		
 
-	
+
+
+
 	return nullptr;
 }
 
 
 
-FPixelMap* PixelContainer::GetGroupFrom(FFPixel* pixel) {
+PixelMap* FloodFillMap::GetGroupFrom(FFPixel* pixel) {
 	if (!pixel) return nullptr;
 	this->result_group = new vector<FPixel*>;
 
@@ -75,23 +49,23 @@ FPixelMap* PixelContainer::GetGroupFrom(FFPixel* pixel) {
 		stalledPixels.pop_back();
 		this->CheckPixel(px);
 	}
-	FPixelMap* result;
+	PixelMap* result;
 
 	if (result_group->size() > 0) {
-		result = new FPixelMap(result_group);
+		result = new PixelMap(result_group);
 		delete result_group;
 		return result;
 	}
-	
+
 	return nullptr;
 }
 
-FPixelMap* PixelContainer::GetNextSpriteGroup()
+PixelMap* FloodFillMap::GetNextSpriteGroup()
 {
 	return GetGroupFrom(GetNextSpritePixel());
 }
 
-FFPixel * PixelContainer::getPixelAt(int x, int y)
+FFPixel * FloodFillMap::getPixelAt(int x, int y)
 {
 	if (x >= 0 &&
 		y >= 0 &&
@@ -104,10 +78,7 @@ FFPixel * PixelContainer::getPixelAt(int x, int y)
 }
 
 
-
-
-
-void PixelContainer::CheckPixel(FFPixel* pixel) {
+void FloodFillMap::CheckPixel(FFPixel* pixel) {
 	if (pixel->state & pxstate::skip) {
 		return;
 	}
@@ -137,7 +108,7 @@ void PixelContainer::CheckPixel(FFPixel* pixel) {
 }
 
 
-PixelContainer::~PixelContainer()
+FloodFillMap::~FloodFillMap()
 {
 	for (int i = 0; i < pixelcount(); i++) {
 		delete this->pixels[i];
@@ -145,7 +116,7 @@ PixelContainer::~PixelContainer()
 
 }
 
-PixelContainer::PixelContainer(Bitmap * bmp)
+FloodFillMap::FloodFillMap(Bitmap * bmp)
 {
 	this->width = bmp->width;
 	this->height = bmp->height;
@@ -165,36 +136,5 @@ PixelContainer::PixelContainer(Bitmap * bmp)
 			pixels[i] = new FFPixel(x, y, color, state);
 
 		}
-	}
-}
-
-
-
-FixedSpriteArray::FixedSpriteArray(Bitmap * sourceImage, int wcount, int hcount, float m_size):
-	wcount(wcount),hcount(hcount)
-{
-
-	int src_wsize = sourceImage->width / wcount;
-	int src_hsize = sourceImage->height / hcount;
-	this->wsize = src_wsize * m_size;
-	this->hsize = src_hsize * m_size;
-
-	this->sprites = new Bitmap*[this->count()];
-
-	for (int y = 0; y < hcount; y++) {
-		for (int x = 0; x < wcount; x++) {
-			int srcX = x * src_wsize;
-			int srcY = y * src_hsize;
-			Bitmap* newBitmap = sourceImage->GetBitmapPart(srcX, srcY, src_wsize, src_hsize, m_size);
-			
-			*this->GetAddrOfBitmapPointer(x, y) = newBitmap;
-		}
-	}
-}
-
-FixedSpriteArray::~FixedSpriteArray()
-{
-	for (int i = 0; i < this->count(); i++) {
-		delete this->sprites[i];
 	}
 }

@@ -5,11 +5,12 @@
 #include "Colors.h"
 #include "D3DGraphics.h"
 #include "Bmap.h"
-#include "RasterFont.h"
+#include "BitmapFont.h"
+#include "PixelMap.h"
 using std::string;
 #define TXT_BUFFER_SIZE 4096
 
-class RasterFont;
+class BitmapFont;
 class VectorSpriteSheet;
 class Interface {
 public:
@@ -22,14 +23,11 @@ public:
 
 	void DrawBitmap(Bitmap* bmp, int fx, int fy, float mx, float my);
 	void DrawBitmap(Bitmap* bmp, int fx, int fy);
-	void DrawSprite(FPixelMap* VBmp, int fx, int fy);
-	void PrintText(int x, int y, RasterFont* font, string text);
-	void PrintText(int x, int y, RasterFont* font, string *fmt, ...);
+	void DrawSprite(PixelMap* VBmp, int fx, int fy);
+	void PrintText(int x, int y, BitmapFont* font, string text);
+	void PrintText(int x, int y, BitmapFont* font, string *fmt, ...);
 	void FillScreen(Color color);
 
-	void Test(string jozef) {
-
-	}
 };
 
 #endif

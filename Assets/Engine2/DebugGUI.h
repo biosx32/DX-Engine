@@ -2,62 +2,69 @@
 #define __DEBUG_GUI_H__
 #include <time.h>
 #include "TestInterface.h"
-#include "Labelz.h"
+#include "Label.h"
+#include "GUI.h"
 #include <vector>
-class DebugGUI {
+#include "Vectors.h"
+
+
+class DebugGUI: public GUI {
 protected:
 	int FPS_frame = 0;
 	float FPS_elapsed_from_last_update = 0;
 	clock_t begin = -1;
-	MouseClient* mouse;
-	Vector2 mouseOld;
+	Vector2 mouseOld = Vector2(0,0);
 public:
-	Label * MousePosLabel;
+	Label* MousePosLabel;
 	Label* FRA_label;
 	Label* FPS_label;
 	Label* EPS_label;
-	std::vector<Label*> AutoDrawL;
 
-	
+	DebugGUI(IoGroup* ig) : GUI(ig) { BuildGUI(); }
 
-	void Init() {
-		FRA_label = new Label(0, 0, &DOS_BLACK, "NO_FRAME_UPDATE");
-		FPS_label = new Label(0, 24, &DOS_BLACK, "NO_FPS_UPDATE");
-		EPS_label = new Label(0, 48, &DOS_BLACK, "NO_EPS_UPDATE");
-	    MousePosLabel = new Label(0, 72, &DOS_BLACK, "NO_MOUSE_UPDATE");
+	void BuildGUI() override {
+		FRA_label = new Label(Pos(0, 0),"NO_FRAME_UPDATE");
+		FPS_label = new Label(Pos(0, 24), "NO_FPS_UPDATE");
+		EPS_label = new Label(Pos(0, 48), "NO_EPS_UPDATE");
+	    MousePosLabel = new Label(Pos(0, 72), "NO_MOUSE_UPDATE");
 		
-		AutoDrawL.push_back(FRA_label);
-		AutoDrawL.push_back(FPS_label);
-		AutoDrawL.push_back(EPS_label);
-		AutoDrawL.push_back(MousePosLabel);
-	}
-
-	DebugGUI(MouseClient* mouse){
-		mouseOld= Vector2(0, 0);
-		this->mouse = mouse;
-		Init();
+		manager->Add(FRA_label);
+		manager->Add(FPS_label);
+		manager->Add(EPS_label);
+		manager->Add(MousePosLabel);
 	}
 	
-	void Update() {
+	void UpdateFrameInfo() {
+		const int UpdatesPerSecond = 30;
+		const int FrameLimit = 60;
+		const int UpdateEveryN = 60 / UpdatesPerSecond;
+
+
+		FPS_frame++;
+		if (FPS_frame > FrameLimit) FPS_frame = 1;
+
+		if (FPS_frame % UpdateEveryN == 0) {
+			clock_t end = clock();
+			FPS_elapsed_from_last_update = double(end - begin) / CLOCKS_PER_SEC;
+			begin = end;
+		}
+		float FPS_real_elapsed = FPS_elapsed_from_last_update / UpdateEveryN;
+		float FPS_fps = UpdateEveryN / FPS_elapsed_from_last_update;
+		FRA_label->SetText("Frame: %02d", FPS_frame);
+		EPS_label->SetText("EPS: %0.4f", FPS_real_elapsed);
+		FPS_label->SetText("FPS: %2.3f", FPS_fps);
+	}
+
+	void SelfUpdate() {
 		UpdateFrameInfo();
-		Vector2 mousepos = Vector2(mouse->GetMouseX(), mouse->GetMouseY());
+		Vector2 mousepos = Vector2(iog->mouse->GetMouseX(), iog->mouse->GetMouseY());
 		float diffx = mousepos.x - mouseOld.x;
 		float diffy = mousepos.y - mouseOld.y;
 		mouseOld = mousepos;
 		MousePosLabel->SetText("MouseX: %3.0f + %3.0f\nMouseY: %3.0f + %3.0f\0", mousepos.x, diffx, mousepos.y, diffy);
-		
 	}
 
-	void UpdateFrameInfo();
-
-	void Draw(TestInterface *out) {
-		
-		
-		
-		for (std::vector<Label*>::iterator it = AutoDrawL.begin(); it != AutoDrawL.end(); ++it) {
-			out->DrawLabel(*it);
-		}
-	}
+	
 
 };
 

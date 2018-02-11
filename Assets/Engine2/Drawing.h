@@ -31,8 +31,8 @@ public:
 	void line(int x1, int y1, int x2, int y2, Color c);
 	void line(int x1, int y1, int x2, int y2, Color c, int width);
 
-    void circle(int x, int y, int rad, Color c);
-	void circle(int x, int y, int rad, Color c, bool fill);
+    void circleBorder(int x, int y, int rad, Color c);
+	void circle(int x, int y, int rad, Color c);
 
 	void rectangleBorder( int x, int y, int w, int h, Color c, int r);
 	void rectangle(int x, int y, int w, int h, Color c);

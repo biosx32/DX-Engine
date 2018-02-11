@@ -18,7 +18,7 @@ bool HasNextLn(FILE* file);
 int File_pos(FILE* p_file);
 int File_to_end(FILE* file);
 bool Startswith(char * a, char * b, int sublen);
-void File_Setpos(FILE * p_file, int pos);
+void File_Setpos(FILE * p_file, int Pos);
 int FindFirstChar(char * str, char chr);
 int FindLastChar(char * str, char chr);
 #endif

@@ -31,18 +31,14 @@
 #include "OutputStream.h"
 #include "Bmap.h"
 #include "Func.h"
-#include "Spritesheet.h"
-#include "RasterFont.h"
 #include "Drawing.h"
-#include "VectorBitmap.h"
 #include "Interface.h"
 #include "TestInterface.h"
 #include "DebugGUI.h"
 #include "ImageButton.h"
-#include "ConfigFile.h"
-#include "GuiBuilder.h"
-#include "TrianglePoly.h"
+#include "Element.h"
 #include "ColorButton.h"
+#include "Textbox.h"
 #include <thread>
 
 class Game

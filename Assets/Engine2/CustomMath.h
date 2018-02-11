@@ -1,6 +1,5 @@
 #ifndef _MY_CUST_MATH__
 #define _MY_CUST_MATH__
-#include "Vectors.h"
 #include <math.h>
 #define MM_PI 3.14159265358979323846
 

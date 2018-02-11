@@ -37,7 +37,6 @@
     <ClInclude Include="..\Assets\Engine2\Animation.h" />
     <ClInclude Include="..\Assets\Engine2\Bmap.h" />
     <ClInclude Include="..\Assets\Engine2\Button.h" />
-    <ClInclude Include="..\Assets\Engine2\ButtonManager.h" />
     <ClInclude Include="..\Assets\Engine2\ColorButton.h" />
     <ClInclude Include="..\Assets\Engine2\Colors.h" />
     <ClInclude Include="..\Assets\Engine2\ConfigFile.h" />
@@ -45,23 +44,25 @@
     <ClInclude Include="..\Assets\Engine2\DebugGUI.h" />
     <ClInclude Include="..\Assets\Engine2\Drawing.h" />
     <ClInclude Include="..\Assets\Engine2\GlobalObjects.h" />
-    <ClInclude Include="..\Assets\Engine2\GUIElement.h" />
+    <ClInclude Include="..\Assets\Engine2\Element.h" />
+    <ClInclude Include="..\Assets\Engine2\KeyData.h" />
     <ClInclude Include="..\Assets\Engine2\Manager.h" />
-    <ClInclude Include="..\Assets\Engine2\RasterFont.h" />
+    <ClInclude Include="..\Assets\Engine2\BitmapFont.h" />
     <ClInclude Include="..\Assets\Engine2\Func.h" />
     <ClInclude Include="..\Assets\Engine2\Game.h" />
     <ClInclude Include="..\Assets\Engine2\ImageButton.h" />
+    <ClInclude Include="..\Assets\Engine2\Textbox.h" />
     <ClInclude Include="..\Assets\Engine2\TrianglePoly.h" />
-    <ClInclude Include="..\Assets\Engine2\UserInterface.h" />
-    <ClInclude Include="..\Assets\Engine2\GuiBuilder.h" />
+    <ClInclude Include="..\Assets\Engine2\GUI.h" />
     <ClInclude Include="..\Assets\Engine2\Interface.h" />
-    <ClInclude Include="..\Assets\Engine2\Labelz.h" />
+    <ClInclude Include="..\Assets\Engine2\Label.h" />
     <ClInclude Include="..\Assets\Engine2\OutputStream.h" />
-    <ClInclude Include="..\Assets\Engine2\Spritesheet.h" />
+    <ClInclude Include="..\Assets\Engine2\BitmapArray.h" />
     <ClInclude Include="..\Assets\Engine2\TestInterface.h" />
-    <ClInclude Include="..\Assets\Engine2\VectorBitmap.h" />
+    <ClInclude Include="..\Assets\Engine2\PixelMap.h" />
     <ClInclude Include="..\Assets\Engine2\Vectors.h" />
-    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="..\Assets\Engine2\FloodfillMap.h" />
+    <ClInclude Include="..\Assets\Engine2\VectorSpritesheet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Assets\ChilliFramework\Bitmap.cpp" />
@@ -71,29 +72,21 @@
     <ClCompile Include="..\Assets\ChilliFramework\Sound.cpp" />
     <ClCompile Include="..\Assets\ChilliFramework\Timer.cpp" />
     <ClCompile Include="..\Assets\ChilliFramework\Windows.cpp" />
-    <ClCompile Include="..\Assets\Engine2\Animation.cpp" />
     <ClCompile Include="..\Assets\Engine2\Bmap.cpp" />
-    <ClCompile Include="..\Assets\Engine2\Button.cpp" />
-    <ClCompile Include="..\Assets\Engine2\ColorButton.cpp" />
-    <ClCompile Include="..\Assets\Engine2\ConfigFile.cpp" />
     <ClCompile Include="..\Assets\Engine2\CustomMath.cpp" />
-    <ClCompile Include="..\Assets\Engine2\DebugGUI.cpp" />
     <ClCompile Include="..\Assets\Engine2\Drawing.cpp" />
+    <ClCompile Include="..\Assets\Engine2\Element.cpp" />
+    <ClCompile Include="..\Assets\Engine2\FloodfillMap.cpp" />
     <ClCompile Include="..\Assets\Engine2\GlobalObjects.cpp" />
-    <ClCompile Include="..\Assets\Engine2\RasterFont.cpp" />
     <ClCompile Include="..\Assets\Engine2\Func.cpp" />
     <ClCompile Include="..\Assets\Engine2\Game.cpp" />
-    <ClCompile Include="..\Assets\Engine2\ImageButton.cpp" />
+    <ClCompile Include="..\Assets\Engine2\PixelMap.cpp" />
     <ClCompile Include="..\Assets\Engine2\TrianglePoly.cpp" />
-    <ClCompile Include="..\Assets\Engine2\UserInterface.cpp" />
-    <ClCompile Include="..\Assets\Engine2\GuiBuilder.cpp" />
     <ClCompile Include="..\Assets\Engine2\Interface.cpp" />
-    <ClCompile Include="..\Assets\Engine2\Labelz.cpp" />
     <ClCompile Include="..\Assets\Engine2\OutputStream.cpp" />
-    <ClCompile Include="..\Assets\Engine2\Spritesheet.cpp" />
+    <ClCompile Include="..\Assets\Engine2\BitmapArray.cpp" />
     <ClCompile Include="..\Assets\Engine2\TestInterface.cpp" />
-    <ClCompile Include="..\Assets\Engine2\VectorBitmap.cpp" />
-    <ClCompile Include="..\Assets\Engine2\Vectors.cpp" />
+    <ClCompile Include="..\Assets\Engine2\VectorSpritesheet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="..\Assets\Resources\ChiliDirectXFramework.res" />

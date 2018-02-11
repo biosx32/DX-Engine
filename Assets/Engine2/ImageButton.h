@@ -1,7 +1,7 @@
 #pragma once
 #include "Button.h"
 #include "Bmap.h"
-#include "RasterFont.h"
+#include "BitmapFont.h"
 #include "GlobalObjects.h"
 
 enum class ImageDisplay : int {
@@ -9,7 +9,7 @@ enum class ImageDisplay : int {
 	scale_middle,
 };
 
-class ImageButton : public Button{
+class ImageButton : public Button {
 public:
 	ImageDisplay display = ImageDisplay::stretch;
 	bool autosize = true;
@@ -71,7 +71,7 @@ public:
 		
 	}
 
-	void Draw(Interface* out) {
+	void Draw(IoGroup* iog) {
 		if (autosize) {
 			size = Vector2(font->charw * text.size() * 1.25, font->charh*1.5);
 		}
@@ -79,7 +79,7 @@ public:
 		int textY = pos.y + size.y / 2 - font->charh / 2;
 		int textX = pos.x + (size.x - textWidth) / 2;
 
-		this->DrawImage(out);
-		out->PrintText(textX, textY, font, text);
+		this->DrawImage(iog->out);
+		iog->out->PrintText(textX, textY, font, text);
 	}
 };

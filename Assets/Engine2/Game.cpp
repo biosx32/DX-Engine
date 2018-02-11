@@ -29,77 +29,50 @@ Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 	srand( (unsigned int)time( NULL ) );
 }
 
-Grid grid(80, 0, 30);
 DebugGUI* debuggui = nullptr;
-GUI*test = nullptr;
-
-
-Bitmap button = Bitmap("..\\Assets\\Resources\\Buttons\\test.bmp",Colors::White);
-
-
-string j = "aa";
-
-//Vector2 position, Vector2 size, void(*function)(), char* textsrc, RasterFont* font
-Button* TestButton = new ColorButton(Vector2(100,300), Vector2(135,40),nullptr,(char*)j.c_str());
+GUI*TestGUI = nullptr;
 ImageButton* TestImgButton = new ImageButton(Vector2(400, 150), 0, "HAHAHA");
-
-void RemoveJozef() {
-	if (test->btnManager->Items.size() > 0) {
-		test->btnManager->Items.pop_back();
-	}
-	
-}
+IoGroup* IOG = nullptr;
 
 void AddJozef() {
-	Vector2 pos= Vector2(rand()%800,rand()%600);
-	
-	Button* random = new ImageButton(pos, 0, "Random");
-	test->btnManager->Add(random);
+	Vector2 Pos= Vector2(rand()%800,rand()%600);
+	Button* random = new ImageButton(Pos, 0, "Random");
+	TestGUI->manager->Add(random);
 
 }
-
-
 void Game::Initialise() {
+	srand(time(0));
 	PixelDest screen = PixelDest(&gfx);
 	out = new TestInterface(screen);
-	debuggui = new DebugGUI(&mouse);
-
-	IO_interface IOIF;
-	IOIF.mouse = &mouse;
-	IOIF.out = out;
-
-	test = new GUI(IOIF);
-	srand(time(0));
-	button.tolerance = 0.001f;
-	out->Test("blah");
-	TestImgButton->display = ImageDisplay::scale_middle;
-	test->btnManager->Add(TestImgButton);
-	test->btnManager->Add(TestButton);
-	test->btnManager->Add(new ImageButton(pos(235,300), RemoveJozef,  "Delete Jozef"));
-	test->btnManager->Add(new ImageButton(pos(235, 360), AddJozef, "Add Jozef"));
-	test->btnManager->Add(new ImageButton(pos(500,150),  0,"Scale 2.0x"));
-	test->btnManager->Add(new ImageButton(pos(500,280),  0, "Scale 0.5x"));
-	test->btnManager->Add(new ImageButton(pos(500,410),  0, "Rotate 15*"));
-	test->btnManager->Add(new ImageButton(pos(500,540),  0, "Rotate -15*"));
-
-
 	
+	IOG = new IoGroup();
+	IOG->mouse = &mouse;
+	IOG->out = out;
+	IOG->kbd = &kbd;
+	debuggui = new DebugGUI(IOG);
+	TestGUI = new GUI(IOG);
+	
+	TestImgButton->display = ImageDisplay::scale_middle;
+	TestGUI->manager->Add(TestImgButton);
+	TestGUI->manager->Add(new ImageButton(Pos(235, 360), AddJozef, "Add Jozef"));
+	TestGUI->manager->Add(new ImageButton(Pos(500,150),  0,"Scale 2.0x"));
+	TestGUI->manager->Add(new ImageButton(Pos(500,280),  0, "Scale 0.5x"));
+	TestGUI->manager->Add(new ImageButton(Pos(500,410),  0, "Rotate 15*"));
+	TestGUI->manager->Add(new ImageButton(Pos(500,540),  0, "Rotate -15*"));
+
+
+	TestGUI->manager->Add(new TextBox(Pos(200, 250), 15));
 }
 
 void Game::ComposeFrame() {
-	grid.Draw(out);
-	debuggui->Draw(out);
-	test->Draw();
-	
+	debuggui->Draw();
+	TestGUI->Draw();
 }
-
-
 
 void Game::UpdateModel()
 {
-	
 	debuggui->Update();
-	test->Update();
+	TestGUI->Update();
 }
 
 

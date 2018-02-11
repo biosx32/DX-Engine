@@ -2,8 +2,8 @@
 #include "Bmap.h"
 #include "Vectors.h"
 #include "Func.h"
-#include "GuiBuilder.h"
 #include "Interface.h"
+#include "GlobalObjects.h"
 
 class TrianglePoly {
 public:
@@ -15,7 +15,7 @@ public:
 
 	void DrawTexture(Interface* out, Bitmap* source);
 
-	void DrawVertex(Vector2* pos, Interface* out, Color q);
+	void DrawVertex(Vector2* Pos, Interface* out, Color q);
 
 	Vector2 GetTransformation(Vector2 orignal, float data[3][3]);
 

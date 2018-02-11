@@ -1,10 +1,10 @@
 ﻿#ifndef __TEXT_H__
 #define __TEXT_H__
 #include <vector>
-#include "Spritesheet.h"
+#include "BitmapArray.h"
 #include "ConfigFile.h"
 
-class RasterFont {
+class BitmapFont {
 public:
 	Bitmap * * characters = nullptr;
 	int charw;
@@ -12,9 +12,8 @@ public:
 	int count;
 	int offset;
 
-
 	bool valid = false;
-
+	
 	void LoadFromBMP(Bitmap* src, int wcount, int hcount, float size, Color bkclr) {
 		int src_wsize = src->width / wcount;
 		int src_hsize = src->height / hcount;
@@ -40,7 +39,7 @@ public:
 
 
 
-	RasterFont(char* image_src_info) {
+	BitmapFont(char* image_src_info) {
 
 		ConfigFile config = ConfigFile(image_src_info);
 		OutputStream output = OutputStream();
@@ -124,16 +123,10 @@ public:
 
 		}
 
-		catch (const std::invalid_argument& ia) {
+		catch (const std::logic_error& ia) {
 			output << "ERROR: Cannot convert config value from cfg (IA): " << config.name << " "<< ia.what() << msgbox;
 			return;
 		}
-	//	catch (...) {
-	//		output << "ERROR: Cannot convert config value  from cfg"<<config.name  << msgbox;
-	//		return;
-	//	}
-	
-		
 	}
 
 	Bitmap* GetCharacterRepr(char c) {

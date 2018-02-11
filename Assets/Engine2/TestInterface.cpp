@@ -1,7 +1,7 @@
 #include "TestInterface.h"
 #include "TrianglePoly.h"
 
-void TestInterface::DrawPixelContainer(PixelContainer* src, int fx, int fy)
+void TestInterface::DrawPixelContainer(FloodFillMap* src, int fx, int fy)
 {
 	FFPixel* ReadPixel;
 	for (int yoff = 0; yoff < src->height; yoff++) {
@@ -29,7 +29,7 @@ void TestInterface::DrawPixelContainer(PixelContainer* src, int fx, int fy)
 
 
 
-void TestInterface::DrawSpritesheet(FixedSpriteArray * sh, int xoff, int yoff)
+void TestInterface::DrawSpritesheet(BitmapArray * sh, int xoff, int yoff)
 {
 	int sprw = sh->sprites[0]->width;
 	int sprh = sh->sprites[0]->height;
@@ -51,11 +51,6 @@ void TestInterface::DrawSpritesheet(FixedSpriteArray * sh, int xoff, int yoff)
 
 }
 
-void TestInterface::DrawLabel(Label * label)
-{
-	this->PrintText(label->x, label->y, label->font, label->text);
-}
-
 
 
 
@@ -65,17 +60,11 @@ void TestInterface::DrawLabel(Label * label)
 
 void Grid::Draw(Interface * out)
 {
-	for (int r = 1; r < 5; r++) {
-		out->paint->circle(x + mid * size, y + mid * size, r, Colors::Black);
-		out->paint->circle(x + mid * size + 1, y + mid * size, r, Colors::Black);
+	out->paint->circle(x + mid * size, y + mid * size,5,Colors::Gray);
 
-
-
-	}
 	for (int ty = 0; ty < wc; ty++) {
 		for (int tx = 0; tx < wc; tx++) {
 			out->paint->rectangleBorder(x + tx * size, y + ty * size, size, size, Colors::Black,1);
-
 		}
 	}
 

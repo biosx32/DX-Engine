@@ -61,7 +61,7 @@ Bitmap::Bitmap(char * FileName)
 
 	if (file_read == nullptr) {
 		output << "ERROR: Could not load image: " << FileName << " FILE NOT FOUND\n" << msgbox;
-		goto End;
+		return;
 	}
 
 	int BYTES_TO_READ = File_bytes(file_read);

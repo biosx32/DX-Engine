@@ -2,6 +2,7 @@
 #define __BUTTON_H__
 #include "Vectors.h"
 #include "Mouse.h"
+#include "Manager.h"
 #include "Interface.h"
 #include "GlobalObjects.h"
 
@@ -14,45 +15,64 @@ enum class ButtonState : int {
 };
 
 
-class Button {
+class Button : public Manageable{
 public:
 
-	Vector2 pos;
 	Vector2 size;
 	ButtonState state = ButtonState::normal;
-	RasterFont* font = &DOS_WHITE;
+	BitmapFont* font = &DOS_WHITE;
 
 
 	void(*function)() = nullptr;
 
 	std::string text = "";
 
-	virtual void Draw(Interface* out) = 0;
-
-	void SetFont(RasterFont* font) {
-		this->font = font;
-	}
+	virtual void Draw(IoGroup* iog) = 0;
 
 	Button(Vector2 position, Vector2 size, void(*function)(), string textsrc) :
-		pos(position), size(size), text(textsrc), function(function){}
+		Manageable(position), size(size), text(textsrc), function(function){}
 
 
-	inline bool isHover(MouseClient mouse) {
-		int mx = mouse.GetMouseX(), 
-			my = mouse.GetMouseY();
+	inline bool isHover(MouseClient* mouse) {
+		int mx = mouse->GetMouseX(), 
+			my = mouse->GetMouseY();
 		return mx >= pos.x && my >= pos.y && mx < pos.x + size.x && my < pos.y + size.y;
 	}
 
-	inline bool isPress(MouseClient mouse) {
-		return mouse.LeftIsPressed();
+	inline bool isPress(MouseClient*  mouse) {
+		return mouse->LeftIsPressed();
 	}
 
-	virtual void RefreshFunction();
-	virtual void RefreshClickState(MouseClient mouse);
+	virtual void UpdateOnClick(){
+		if (state == ButtonState::release) {
+			if (function) {
+				function();
+			}
+		}
+	}
 
-	void RefreshState(MouseClient mouse) {
-		this->RefreshClickState(mouse);
-		this->RefreshFunction();
+	virtual void UpdateClickState(MouseClient* mouse) {
+		if (!isHover(mouse)) {
+			state = ButtonState::normal;
+		}
+		else {
+			if (isPress(mouse)) {
+				state = ButtonState::press;
+			}
+			else {
+				if (state == ButtonState::press) {
+					state = ButtonState::release;
+				}
+				else {
+					state = ButtonState::hover;
+				}
+			}
+		}
+	}
+
+	void Update(IoGroup* iog) {
+		this->UpdateClickState(iog->mouse);
+		this->UpdateOnClick();
 	}
 
 };

@@ -3,65 +3,13 @@
 #include "Func.h"
 #include <vector>
 #include "OutputStream.h"
-
-class KeyData {
-public:
-
-	char keyb[256] = {};
-	char datab[256] = {};
-
-
-	KeyData(char* sourceStr) {
-		int len = strlen(sourceStr);
-		if (len <= 0) {
-			goto WrongData;
-		}
-
-		int sep_pos = FindFirstChar(sourceStr, '=');
-		if (sep_pos < 0 || sep_pos + 1 >= len) {
-			goto WrongData;
-		}
-		int datalen = len - (sep_pos+1);
-
-		strncpy_s(keyb, sourceStr, sep_pos);
-		keyb[sep_pos] = 0;
-		strcpy_s(datab, &sourceStr[sep_pos + 1]);
-		datab[datalen] = 0;
-	End:
-		return;
-	WrongData:
-		sprintf_s(keyb, "ERROR");
-		sprintf_s(datab, "NULL");
-
-		goto End;
-
-	}
-	//compare
-	/*
-	char keyword[256];
-	sprintf_s(keyword, "FONT_INFO");
-	if (!strnicmp(linebuffer, keyword, strlen(keyword))) {
-	goto End;
-	}
-	if (strnicmp(linebuffer, keyword, strlen(keyword))) {
-	char location[256];
-	int kwlen = strlen(keyword);
-	int linelen = strlen(linebuffer);
-	int datalen = linelen - kwlen;
-
-	strncpy_s(location, &linebuffer[0 + kwlen], datalen);
-	printf("jj");
-	}
-	sprintf_s(keyword, "LOCATION");*/
-};
+#include "KeyData.h"
 using std::vector;
 class ConfigFile {
 
 public:
-	char nameb[256] = {};
-	const char* name = nameb;
+	char name[256] = {};
 	bool valid = false;
-
 	vector<KeyData> configvalues;
 	ConfigFile(char* config_file) {
 		FILE* fread;
@@ -85,8 +33,8 @@ public:
 		char linebuffer[256] = {};
 		{   //read name
 			fread_s(linebuffer, 256, 1, toRead, fread);
-			strncpy_s(nameb, linebuffer, toRead);
-			nameb[toRead] = 0;
+			strncpy_s(name, linebuffer, toRead);
+			name[toRead] = 0;
 			char t[1];
 			fread_s(t, 1, 1, 1, fread);
 			if (t[0] == '\r') {

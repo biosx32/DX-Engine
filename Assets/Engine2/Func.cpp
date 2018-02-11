@@ -41,51 +41,51 @@ bool Startswith(char*a, char*b, int sublen) {
 	return true;
 }
 
-void File_Setpos(FILE* p_file,int pos)
+void File_Setpos(FILE* p_file,int Pos)
 {
-	fseek(p_file, 0 + pos, SEEK_SET);
+	fseek(p_file, 0 + Pos, SEEK_SET);
 }
 
 int FindFirstChar(char* str, char chr) {
 	int size = strlen(str);
-	int pos = -1;
+	int Pos = -1;
 	if (size <= 0) {
 		return -2;
 	}
 
 	for (int i = 0; i < size; i++) {
 		if (str[i] == chr) {
-			pos = i;
+			Pos = i;
 			break;
 	
 		}
 	}
 
-	return pos;
+	return Pos;
 }
 
 int FindLastChar(char * str, char chr)
 {
 	int size = strlen(str);
-	int pos = -1;
+	int Pos = -1;
 	if (size <= 0) {
 		return -2;
 	}
 
 	for (int i = size-1; i >= 0; i--) {
 		if (str[i] == chr) {
-			pos = i;
+			Pos = i;
 			break;
 
 		}
 	}
 
-	return pos;
+	return Pos;
 }
 
 
 int GetNextLineOffset(FILE* file) {
-	char str[8196]; int pos = -1;
+	char str[8196]; int Pos = -1;
 
 	int size = File_bytes(file);
 	if (size > 8196) {
@@ -101,7 +101,7 @@ int GetNextLineOffset(FILE* file) {
 		if (str[i] == '\r') {
 			if (i + 1 < size) {
 				if (str[i + 1] == '\n') {
-					pos = i;
+					Pos = i;
 					break;
 				}
 			}
@@ -109,12 +109,12 @@ int GetNextLineOffset(FILE* file) {
 			
 		}
 		else if (str[i] == '\n') {
-			pos = i;
+			Pos = i;
 			break;
 		}
 	}
 
-	return pos;
+	return Pos;
 }
 
 wchar_t *CSTR_to_LSTR(char* charArray)

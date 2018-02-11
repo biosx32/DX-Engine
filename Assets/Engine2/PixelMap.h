@@ -4,6 +4,15 @@
 #include <vector>
 using std::vector;
 
+namespace pxstate
+{
+	enum Type
+	{
+		background = 1, checked = 2, skip = (background | checked)
+	};
+};
+
+
 class FPixel {
 public:
 	int x, y;
@@ -11,22 +20,29 @@ public:
 	FPixel(int x, int y, Color c) : x(x), y(y), color(c) {}
 };
 
-class FPixelMap {
+class FFPixel : public FPixel {
+public:
+	int state;
+	FFPixel(int x, int y, Color c, int state) : FPixel(x, y, c), state(state) {}
+};
+
+
+
+class PixelMap {
 
 protected:
 	int offx, offy;
-
 public:
 	int width, height;
 	std::vector<FPixel*>* pixels;
 
 public:
-	FPixelMap(vector<FPixel*>* src);
-	FPixelMap(Bitmap* src);
+	PixelMap(vector<FPixel*>* src);
+	PixelMap(Bitmap* src);
 	void ComputeSize();
 	void NormalizeV();
 	void NormalizeH();
-	~FPixelMap();
+	~PixelMap();
 
 };
 
