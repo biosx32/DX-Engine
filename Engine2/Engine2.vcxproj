@@ -37,6 +37,11 @@
     <ClInclude Include="..\Assets\Engine2\Animation.h" />
     <ClInclude Include="..\Assets\Engine2\Bmap.h" />
     <ClInclude Include="..\Assets\Engine2\Button.h" />
+    <ClInclude Include="..\Assets\Engine2\Checkbox.h" />
+    <ClInclude Include="..\Assets\Engine2\GuiElementManager.h" />
+    <ClInclude Include="..\Assets\Engine2\MouseHelper.h" />
+    <ClInclude Include="..\Assets\Engine2\ManageableElement.h" />
+    <ClInclude Include="..\Assets\Engine2\MouseEventObject.h" />
     <ClInclude Include="..\Assets\Engine2\ColorButton.h" />
     <ClInclude Include="..\Assets\Engine2\Colors.h" />
     <ClInclude Include="..\Assets\Engine2\ConfigFile.h" />
@@ -45,12 +50,14 @@
     <ClInclude Include="..\Assets\Engine2\Drawing.h" />
     <ClInclude Include="..\Assets\Engine2\GlobalObjects.h" />
     <ClInclude Include="..\Assets\Engine2\Element.h" />
+    <ClInclude Include="..\Assets\Engine2\Group.h" />
     <ClInclude Include="..\Assets\Engine2\KeyData.h" />
-    <ClInclude Include="..\Assets\Engine2\Manager.h" />
+    <ClInclude Include="..\Assets\Engine2\ItemManager.h" />
     <ClInclude Include="..\Assets\Engine2\BitmapFont.h" />
     <ClInclude Include="..\Assets\Engine2\Func.h" />
     <ClInclude Include="..\Assets\Engine2\Game.h" />
     <ClInclude Include="..\Assets\Engine2\ImageButton.h" />
+    <ClInclude Include="..\Assets\Engine2\RadioButton.h" />
     <ClInclude Include="..\Assets\Engine2\Textbox.h" />
     <ClInclude Include="..\Assets\Engine2\TrianglePoly.h" />
     <ClInclude Include="..\Assets\Engine2\GUI.h" />
@@ -75,7 +82,7 @@
     <ClCompile Include="..\Assets\Engine2\Bmap.cpp" />
     <ClCompile Include="..\Assets\Engine2\CustomMath.cpp" />
     <ClCompile Include="..\Assets\Engine2\Drawing.cpp" />
-    <ClCompile Include="..\Assets\Engine2\Element.cpp" />
+    <ClCompile Include="..\Assets\Engine2\ManageableElement.cpp" />
     <ClCompile Include="..\Assets\Engine2\FloodfillMap.cpp" />
     <ClCompile Include="..\Assets\Engine2\GlobalObjects.cpp" />
     <ClCompile Include="..\Assets\Engine2\Func.cpp" />

@@ -172,9 +172,6 @@
     <ClInclude Include="..\Assets\Engine2\GUI.h">
       <Filter>Assets\Engine2\GUI\Main</Filter>
     </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Manager.h">
-      <Filter>Assets\Engine2\GUI\Main</Filter>
-    </ClInclude>
     <ClInclude Include="..\Assets\Engine2\Colors.h">
       <Filter>Assets\Engine2\Helpers</Filter>
     </ClInclude>
@@ -201,6 +198,30 @@
     </ClInclude>
     <ClInclude Include="..\Assets\Engine2\Textbox.h">
       <Filter>Assets\Engine2\GUI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\Group.h">
+      <Filter>Assets\Engine2\GUI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\ItemManager.h">
+      <Filter>Assets\Engine2\GUI\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\RadioButton.h">
+      <Filter>Assets\Engine2\GUI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\Checkbox.h">
+      <Filter>Assets\Engine2\GUI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\MouseEventObject.h">
+      <Filter>Assets\Engine2\GUI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\ManageableElement.h">
+      <Filter>Assets\Engine2\GUI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\GuiElementManager.h">
+      <Filter>Assets\Engine2\GUI\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\MouseHelper.h">
+      <Filter>Assets\Engine2\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -267,7 +288,7 @@
     <ClCompile Include="..\Assets\Engine2\BitmapArray.cpp">
       <Filter>Assets\Engine2\CustomClass\C</Filter>
     </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\Element.cpp">
+    <ClCompile Include="..\Assets\Engine2\ManageableElement.cpp">
       <Filter>Assets\Engine2\GUI\Base\C</Filter>
     </ClCompile>
   </ItemGroup>

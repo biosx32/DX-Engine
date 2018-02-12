@@ -3,35 +3,29 @@
 #include "Interface.h"
 #include "Keyboard.h"
 #include "Vectors.h"
+#include "MouseHelper.h"
 
-struct IoGroup {
+struct IOgroup {
 public:
 	Interface * out = nullptr;
 	MouseClient* mouse = nullptr;
 	KeyboardClient* kbd = nullptr;
+	MouseHelper* mhelper = nullptr;
+
+	void Update() {
+		mhelper->Update();
+	}
 };
 
 class Element {
-
-protected:
-	Vector2 pos;
-	bool visible = true;
-	Element* ElementInfo = this;
-	virtual void Update(IoGroup* ig) = 0;
-	Element(Vector2 Pos):pos(Pos){}
-};
-
-class Manageable : public Element {
-protected:
-	static int ElementCount;
 public:
-	int ID;
-	virtual void Update(IoGroup* ig) = 0;
-	virtual void Draw(IoGroup* ig) = 0;
-
-	Manageable(Vector2 Pos) :Element(Pos) {
-		ID = ElementCount++;
-	}
+	Element * ElementInfo = this;
+	Vector2 rel_pos;
+	bool visible = true;
+	
+	virtual void Update(IOgroup* ig) = 0;
+	Element(Vector2 Pos):rel_pos(Pos){}
 };
+
 
 

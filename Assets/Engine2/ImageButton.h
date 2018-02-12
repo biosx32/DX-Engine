@@ -27,24 +27,25 @@ public:
 
 
 	void DrawSpecial(Interface* out, Bitmap* img, int x, int y, float rx, float ry) {
-		if (state == ButtonState::normal) {
+		if (state == MouseState::normal) {
 			out->DrawBitmap(img, x, y, rx, ry);
 		}
-		else if (state == ButtonState::press) {
+		else if (state == MouseState::hover) {
+			out->DrawBitmap(img, x-1, y-1, rx, ry);
+		}
+		else{
 			out->DrawBitmap(img, x+1, y+2, rx, ry);
 		}
-		else if (state == ButtonState::hover) {
-			out->DrawBitmap(img, x - img->width *0.15*rx / 2, y - img->height *0.15*ry / 2, rx*1.15, ry*1.15);
-		}
+	
 
 	}
 
 	void DrawImage(Interface* out) {
 		ImageSplitCorners * img = StateImages->normal;
-		if (state == ButtonState::press) {
+		if (state == MouseState::press) {
 			img = StateImages->press;
 		}
-		else if (state == ButtonState::hover){
+		else if (state == MouseState::hover){
 			img = StateImages->hover;
 		}
 
@@ -60,26 +61,27 @@ public:
 			ratiocorner = sidescale;
 		}
 
-		int leftx = pos.x;
+		int leftx = GetPos().x;
 		int middlex = leftx + img->cleft->width * ratiocorner;
 		int rightx = middlex + img->cmiddle->width* ratiox;
 
-		DrawSpecial(out,img->cleft, leftx, pos.y, ratiocorner, ratioy);
-		DrawSpecial(out,img->cmiddle, middlex, pos.y, ratiox, ratioy);
-		DrawSpecial(out,img->cright, rightx, pos.y, ratiocorner, ratioy);
+		DrawSpecial(out,img->cleft, leftx, GetPos().y, ratiocorner, ratioy);
+		DrawSpecial(out,img->cmiddle, middlex, GetPos().y, ratiox, ratioy);
+		DrawSpecial(out,img->cright, rightx, GetPos().y, ratiocorner, ratioy);
 
 		
 	}
 
-	void Draw(IoGroup* iog) {
+	void Draw() override {
 		if (autosize) {
-			size = Vector2(font->charw * text.size() * 1.25, font->charh*1.5);
+			int txtsize = text.size() > 1 ? text.size() : 2;
+			size = Vector2(font->charw *txtsize * 1.25, font->charh*1.5);
 		}
 		int textWidth = text.size() * font->charw;
-		int textY = pos.y + size.y / 2 - font->charh / 2;
-		int textX = pos.x + (size.x - textWidth) / 2;
+		int textY = GetPos().y + size.y / 2 - font->charh / 2;
+		int textX = GetPos().x + (size.x - textWidth) / 2;
 
-		this->DrawImage(iog->out);
-		iog->out->PrintText(textX, textY, font, text);
+		this->DrawImage(io->out);
+		io->out->PrintText(textX, textY, font, text);
 	}
 };

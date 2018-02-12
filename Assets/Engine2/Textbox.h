@@ -1,31 +1,30 @@
 #pragma once
 #include "Element.h"
 #include "GlobalObjects.h"
-class TextBox : public Manageable {
+#include "MouseEventObject.h"
+class TextBox : public ManageableElement, public MouseEventObject {
 public:
 	BitmapFont* font = &DOS_BLACK;
 	int wmax;
-	char buffer[4096];
+	char text[4096] = {};
 	int textsize = 0;
 	bool isSelected = false;
 	Vector2 size = Vector2(0, 0);
-	TextBox(Vector2 pos, int wmax) : Manageable(pos), wmax(wmax) {
+	TextBox(Vector2 pos, int wmax) : ManageableElement(pos), wmax(wmax) {
 		this->size = Size(wmax * font->charw, font->charh);
+		this->text[0] = 0;
 	}
 
-	inline bool isHover(IoGroup* iog) {
-		int mx = iog->mouse->GetMouseX(),
-			my = iog->mouse->GetMouseY();
-		return mx >= pos.x && my >= pos.y && mx < pos.x + size.x && my < pos.y + size.y;
+	bool isHover(MouseClient* mouse) override {
+		int mx = mouse->GetMouseX(),
+			my = mouse->GetMouseY();
+		return mx >= GetPos().x && my >= GetPos().y && mx < GetPos().x + size.x && my < GetPos().y + size.y;
 	}
 
-	inline bool isPress(IoGroup*  iog) {
-		return iog->mouse->LeftIsPressed();
-	}
 
-	void UpdateIsSelected(IoGroup* iog) {
-		if (isPress(iog)) {
-			if (isHover(iog)) {
+	void UpdateIsSelected(IOgroup* iog) {
+		if (iog->mouse->LeftIsPressed()) {
+			if (isHover(iog->mouse)) {
 				isSelected = true;
 				iog->kbd->FlushBuffers();
 			}
@@ -36,7 +35,7 @@ public:
 		}
 	}
 
-	void UpdateCheckKey(IoGroup* iog) {
+	void UpdateCheckKey(IOgroup* iog) {
 		KeyboardClient* kbd = iog->kbd;
 		char test = kbd->PeekKey();
 		char testc = kbd->PeekChar();
@@ -47,34 +46,34 @@ public:
 				textsize = textsize > 0 ? textsize - 1 : 0;
 			}
 			else if (testc >= 33 && testc < 127) {
-				buffer[textsize++] = testc;
+				text[textsize++] = testc;
 			}
 			else if (test == VK_SPACE) {
-				buffer[textsize++] = ' ';
+				text[textsize++] = ' ';
 			}
 
 			kbd->FlushBuffers();
 		}
 		textsize = textsize <= wmax ? textsize : wmax;
-		this->buffer[textsize] = 0;
+		this->text[textsize] = 0;
 
 	}
 
-	void Update(IoGroup* iog) override {
-		UpdateIsSelected(iog);
+	void Update() override {
+		UpdateIsSelected(io);
 		if (isSelected) {
-			UpdateCheckKey(iog);
+			UpdateCheckKey(io);
 		}
 		
 	}
 
-	void Draw(IoGroup* iog) override {
+	void Draw() override {
 		const int border = 2;
-		iog->out->paint->rectangleBorder(pos.x - border, pos.y, size.x + border*2, size.y, Colors::Black, border);
-		iog->out->PrintText(pos.x, pos.y, font, buffer);
+		io->out->paint->rectangleBorder(GetPos().x - border, GetPos().y, size.x + border*2, size.y, Colors::Black, border);
+		io->out->PrintText(GetPos().x, GetPos().y, font, text);
 		if (this->isSelected) {
 			int x = textsize * font->charw;
-			iog->out->paint->rectangle(x + pos.x, pos.y, 4, font->charh, Colors::Red);
+			io->out->paint->rectangle(x + GetPos().x, GetPos().y, 4, font->charh, Colors::Red);
 		}
 	
 	}

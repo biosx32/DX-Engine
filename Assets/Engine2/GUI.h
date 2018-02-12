@@ -1,36 +1,26 @@
 #ifndef _GUI_BUILDER_H__N__
 #define _GUI_BUILDER_H__N__
-#include "Manager.h"
+#include "GuiElementManager.h"
 
-class GUI {
+class GUI: public GuiElementManager {
+
+protected:
+	virtual void Build() = 0;
+	virtual void SelfUpdate() = 0;
+	virtual void SelfDraw() = 0;
 public:
-	Manager * manager = nullptr;
-	IoGroup* iog = nullptr;
-	
+	GUI(IOgroup* io): GuiElementManager(io) {}
 
-	virtual void BuildGUI() {}
-	virtual void SelfUpdate() {}
-	virtual void SelfDraw() {}
+};
 
-	virtual void Update() {
-		if (manager) {
-			manager->Update();
-		}
-		SelfUpdate();
-	}
-	virtual void Draw() {
-		if (manager) {
-			manager->Draw();
-		}
-		SelfDraw();
-	}
+class CleanGUI: public GUI {
 
-
-	GUI(IoGroup* iog): iog(iog) {
-		this->manager = new Manager(iog);
-		this->BuildGUI();
-	}
-
+protected:
+	void Build() override {};
+	void SelfUpdate() override {};
+	void SelfDraw() override {};
+public:
+	CleanGUI(IOgroup* iog) : GUI(iog) {}
 };
 
 #endif

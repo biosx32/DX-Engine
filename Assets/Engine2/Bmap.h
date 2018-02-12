@@ -43,7 +43,7 @@ public:
 	ImageSplitCorners(Bitmap* img) {
 		this->width = img->width;
 		this->height = img->height;
-		float corners = 0.3;
+		float corners = 0.3f;
 		float perOne = corners / 2;
 		float perMid = 1 - corners;
 		int sidew = perOne * img->width;

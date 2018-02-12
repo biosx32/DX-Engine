@@ -104,31 +104,33 @@ void Painter::DrawPixel(int xoff, int yoff, Color c, int m)
 	}
 }
 
-void Painter::circleBorder(int x0, int y0, int radius, Color c)
+void Painter::circleBorder(int x0, int y0, int diam, Color c,int width)
 {
-	float r2 = radius * radius;
-	int center = (int)(radius * 0.707107f + 0.5f);
-	for (int x = 0; x <= center; x++)
-	{
-		int y = (int) (sqrt((r2 - x * x)) + 0.5f);
+	int rad = diam / 2;
+	for (int radius = rad; radius > rad - width; radius--) {
+		float r2 = radius * radius;
+		int center = (int)(radius * 0.707107f + 0.5f);
+		for (int x = 0; x <= center; x++){
 
-		DrawPixel(x0 + x, y0 + y, c);
-		DrawPixel(x0 + x, y0 - y, c);
-		DrawPixel(x0 + y, y0 + x, c);
-		DrawPixel(x0 + y, y0 - x, c);
+			int y = (int)sqrt((r2 - x * x));
+			for (int i = 0; i < 2; y++,i++) {
+				DrawPixel(x0 + x, y0 + y, c);
+				DrawPixel(x0 + x, y0 - y, c);
+				DrawPixel(x0 + y, y0 + x, c);
+				DrawPixel(x0 + y, y0 - x, c);
 
-		DrawPixel(x0 - x, y0 + y, c);
-		DrawPixel(x0 - x, y0 - y, c);
-		DrawPixel(x0 - y, y0 + x, c);
-		DrawPixel(x0 - y, y0 - x, c);
+				DrawPixel(x0 - x, y0 + y, c);
+				DrawPixel(x0 - x, y0 - y, c);
+				DrawPixel(x0 - y, y0 + x, c);
+				DrawPixel(x0 - y, y0 - x, c);
+			}
+
+		}
 	}
 }
-void Painter::circle(int x, int y, int rad, Color c)
+void Painter::circle(int x, int y, int diam, Color c)
 {
-	for (int r = 1; r < rad; r++) {
-		circleBorder(x, y, r, c);
-		circleBorder(x + 1, y, r, c);
-	}
+	circleBorder(x, y, diam, c, diam);
 }
 
 void Painter::line(int x1, int y1, int x2, int y2, Color c)

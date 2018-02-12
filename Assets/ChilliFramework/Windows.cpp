@@ -120,6 +120,7 @@ int WINAPI wWinMain( HINSTANCE hInst,HINSTANCE,LPWSTR,INT )
 	wr.right = SCREENWIDTH + wr.left;
 	wr.top = 150;
 	wr.bottom = SCREENHEIGHT + wr.top;
+
 	AdjustWindowRect( &wr,WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,FALSE );
     HWND hWnd = CreateWindowW( windowNameID, windowText,
                               WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,wr.left,wr.top,wr.right-wr.left,wr.bottom-wr.top,
