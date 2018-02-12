@@ -10,12 +10,17 @@ protected:
 	virtual void Draw() = 0;
 
 public:
-	int ID;
+	int ID, pDepth;
 	ManageableElement* parent = nullptr;
 	IOgroup * io = nullptr;
 
 	inline bool HasParent() {
 		return parent != nullptr;
+	}
+
+	int GetDepth() {
+		if (!HasParent()) { return 0; }
+		else { return parent->GetDepth() + 1; }
 	}
 
 	Vector2 GetPos() {
@@ -37,7 +42,7 @@ public:
 		if (io) { Draw(); }
 	}
 
-	ManageableElement(Vector2 Pos) : Element(Pos) {
+	ManageableElement(Vector2 Pos) : Element(Pos), pDepth(0) {
 		ID = ElementCount++;
 	}
 };

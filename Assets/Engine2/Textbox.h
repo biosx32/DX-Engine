@@ -69,6 +69,7 @@ public:
 
 	void Draw() override {
 		const int border = 2;
+		io->out->paint->rectangle(GetPos().x - border, GetPos().y, size.x + border * 2, size.y, Colors::White);
 		io->out->paint->rectangleBorder(GetPos().x - border, GetPos().y, size.x + border*2, size.y, Colors::Black, border);
 		io->out->PrintText(GetPos().x, GetPos().y, font, text);
 		if (this->isSelected) {
