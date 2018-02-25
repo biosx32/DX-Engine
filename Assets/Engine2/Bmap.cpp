@@ -7,10 +7,12 @@ Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 
 Bitmap * Bitmap::GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT, float size)
 {
-	Bitmap* newBitmap= new Bitmap(*this);
 	int n_width = WIDTH * size;
 	int n_height = HEIGHT * size;
-	newBitmap->ReserveMemory(n_width, n_height, newBitmap->bckclr);
+	Bitmap* newBitmap = new Bitmap(n_width, n_height, this->bckclr);
+	newBitmap->keying_enabled = this->keying_enabled;
+	newBitmap->tolerance = this->tolerance;
+	
 
 	for (int y = 0; y < n_height; y++) {
 		int srcy = y / size + yoff;

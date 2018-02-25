@@ -2,6 +2,11 @@
 Replace floodfill by: Make line around sprite, then scanlinefill
 Checkbox, radiobutton
 
+GUI.getElement("ELEMENT_NAME_UNIQUE").ToButton
+   or (Button) GUI.getElement("NAME")
+   or GUI.get(Button, "NAME");
+   or Gui.get<Button>("Name");
+
 Manažment lokálnosti pre radiobutton apod, prípadne keypress
 
 #pragma once

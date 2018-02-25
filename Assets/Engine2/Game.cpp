@@ -29,74 +29,66 @@ Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 	srand( (unsigned int)time( NULL ) );
 }
 
-DebugGUI* debuggui = nullptr;
-GUI*TestGUI = nullptr;
 IOgroup* IOG = nullptr;
+DebugGUI* DebugInfo = nullptr;
+GUI * MainGUI = nullptr;
+
 TextBox* tbox = nullptr;
 CheckBox* CheckBox1 = nullptr;
-GroupBox* gb = nullptr;
-GroupBox* gb2 = nullptr;
+
+
+
 void AddButton() {
-	ImageButton* random = new ImageButton(Pos(0,0), 0, tbox->text);
-	int maxx = 800- random->font->charw * random->text.length();
+	ImageButton* random = new ImageButton(Pos(0, 0), 0, tbox->text);
+	int maxx = 800 - random->font->charw * random->text.length();
 	int maxy = 600 - random->font->charh;
-	
-	Vector2 pos= Vector2(rand()%maxx,rand()%maxy);
+
+	Vector2 pos = Vector2(rand() % maxx, rand() % maxy);
 	random->rel_pos = pos;
 	if (CheckBox1->checked) {
 		random->display = ImageDisplay::scale_middle;
 	}
-	TestGUI->Add(random);
+	MainGUI->Add(random);
 
 }
+
+
+
+void BuildTestGUI() {
+	tbox = new TextBox(Pos(200, 250), 15);
+	CheckBox1 = new CheckBox(Pos(10, 10), "Check box");
+	
+	MainGUI = new CleanGUI(IOG);
+//	MainGUI->Add(CheckBox1);
+//	MainGUI->Add(new ImageButton(Pos(235, 360), AddButton, "Add Random"));
+//	MainGUI->Add(tbox);
+}
+
 
 void Game::Initialise() {
 	srand(time(0));
 	PixelDest screen = PixelDest(&gfx);
 	out = new TestInterface(screen);
-	tbox = new TextBox(Pos(200, 250), 15);
 	IOG = new IOgroup();
 	IOG->mouse = &mouse;
 	IOG->out = out;
 	IOG->kbd = &kbd;
 	IOG->mhelper = new MouseHelper(&mouse);
-
-
-	CheckBox1 = new CheckBox(Pos(10, 10), "Map corners");
-	debuggui = new DebugGUI(IOG);
-	gb = new GroupBox(Pos(30, 30), Size(400, 400));
-	gb2 = new GroupBox(Pos(100, 100), Size(200, 200));
-	gb2->Add(CheckBox1);
-	ManageableElement* m = new ImageButton(Pos(20, 30), 0, "EEE");
-	gb2->Add(m);
-	gb->Add(gb2);
-	TestGUI = new CleanGUI(IOG);
-	TestGUI->Add(gb);
-	TestGUI->Add(gb2);
-
-	TestGUI->Add(m);
-	TestGUI->Add(CheckBox1);
-	TestGUI->Add(new ImageButton(Pos(235, 360), AddButton, "Add Random"));
-	TestGUI->Add(new ImageButton(Pos(500,150),  0,"Scale 2.0x"));
-	TestGUI->Add(new ImageButton(Pos(500,280),  0, "Scale 0.5x"));
-	TestGUI->Add(new ImageButton(Pos(500,410),  0, "Rotate 15*"));
-	TestGUI->Add(new ImageButton(Pos(500,540),  0, "Rotate -15*"));
-
-
-	TestGUI->Add(tbox);
+	DebugInfo = new DebugGUI(IOG);
+	BuildTestGUI();
 }
 
 void Game::ComposeFrame() {
-	TestGUI->Draw();
-	debuggui->FPS_label->Draw();
+	MainGUI->Draw();
+	DebugInfo->FPS_label->Draw();
 }
 
 void Game::UpdateModel()
 {
 
 	IOG->Update();
-	debuggui->Update();
-	TestGUI->Update();
+	DebugInfo->Update();
+	MainGUI->Update();
 }
 
 

@@ -15,6 +15,7 @@ public:
 	bool valid = false;
 	
 	void LoadFromBMP(Bitmap* src, int wcount, int hcount, float size, Color bkclr) {
+
 		int src_wsize = src->width / wcount;
 		int src_hsize = src->height / hcount;
 		charw = src_wsize * size;
@@ -31,7 +32,6 @@ public:
 				int srcY = y * src_hsize;
 
 				Bitmap* newBitmap = src->GetBitmapPart(srcX, srcY, src_wsize, src_hsize, size);
-
 				this->characters[y*wcount + x] = newBitmap;
 			}
 		}
@@ -124,7 +124,7 @@ public:
 		}
 
 		catch (const std::logic_error& ia) {
-			output << "ERROR: Cannot convert config value from cfg (IA): " << config.name << " "<< ia.what() << msgbox;
+			output << "ERROR: Cannot convert config value from cfg (IA): " << config.name << " "<< ia.what() << console;
 			return;
 		}
 	}

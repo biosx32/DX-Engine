@@ -66,6 +66,7 @@ void Interface::DrawBitmap(Bitmap * Bmp, int xoff, int yoff, float mx, float my)
 				paint->DrawPixel(xoff + x, yoff + y, *pixel, 1);
 			}
 
+
 		}
 
 	}
