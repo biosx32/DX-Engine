@@ -1,6 +1,9 @@
 #pragma once
 #include "Element.h"
 #include "GlobalObjects.h"
+#include "MouseEventObject.h"
+
+
 class CheckBox : public ManageableElement, public MouseEventObject {
 public:
 	bool checked = false;

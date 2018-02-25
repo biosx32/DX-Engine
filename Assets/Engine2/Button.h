@@ -2,6 +2,7 @@
 #define __BUTTON_H__
 #include "Vectors.h"
 #include "Mouse.h"
+#include "ManageableElement.h"
 #include "MouseEventObject.h"
 #include "Interface.h"
 #include "GlobalObjects.h"
@@ -44,4 +45,8 @@ public:
 	}
 
 };
+
+#include "ImageButton.h"
+#include "ColorButton.h"
+
 #endif

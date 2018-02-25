@@ -35,10 +35,6 @@
 #include "Interface.h"
 #include "TestInterface.h"
 #include "DebugGUI.h"
-#include "ImageButton.h"
-#include "Element.h"
-#include "ColorButton.h"
-#include "Textbox.h"
 #include <thread>
 
 class Game

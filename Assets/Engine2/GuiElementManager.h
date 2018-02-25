@@ -1,5 +1,12 @@
 #pragma once
 #include "ItemManager.h"
+#include "Checkbox.h"
+#include "Button.h"
+#include "Group.h"
+#include "Label.h"
+#include "Textbox.h"
+
+
 class GuiElementManager : public ItemManager {
 protected:
 	virtual void SelfUpdate() = 0;

@@ -28,8 +28,7 @@ Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 {
 	srand( (unsigned int)time( NULL ) );
 }
-#include "Checkbox.h"
-#include "Group.h"
+
 DebugGUI* debuggui = nullptr;
 GUI*TestGUI = nullptr;
 IOgroup* IOG = nullptr;
@@ -89,7 +88,7 @@ void Game::Initialise() {
 
 void Game::ComposeFrame() {
 	TestGUI->Draw();
-	debuggui->Draw();
+	debuggui->FPS_label->Draw();
 }
 
 void Game::UpdateModel()
