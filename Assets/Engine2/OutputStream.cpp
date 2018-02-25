@@ -2,7 +2,7 @@
 
 SpecialCode msgbox = { 1 };
 SpecialCode console = { 2 };
-OutputStream DebugPrint;
+
 
 OutputStream & OutputStream::operator<<(SpecialCode finish)
 {

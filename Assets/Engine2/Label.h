@@ -13,6 +13,8 @@ public:
 	BitmapFont* font = &DOS_BLACK;
 
 	Label(Vector2 position, char* newtext): ManageableElement(position), text(newtext) {	}
+	Label(Vector2 position, char* newtext, BitmapFont* font) : ManageableElement(position), text(newtext), font(font) {}
+
 	void Update() {}
 	void Draw() {
 		io->out->PrintText(this->GetPos().x, this->GetPos().y, this->font, this->text);

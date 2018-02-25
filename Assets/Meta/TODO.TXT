@@ -7,6 +7,10 @@ GUI.getElement("ELEMENT_NAME_UNIQUE").ToButton
    or GUI.get(Button, "NAME");
    or Gui.get<Button>("Name");
 
+ Groupbox AutoLabel on top
+
+Vymysli spojenie pre groupbox a GUI ------- Redundancy reducement
+
 Manažment lokálnosti pre radiobutton apod, prípadne keypress
 
 #pragma once

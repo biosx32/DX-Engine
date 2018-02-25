@@ -17,8 +17,6 @@
     <Text Include="..\Assets\Meta\TODO.TXT" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Assets\Resources\DOS_FONT_BLACK_22_5.bmp" />
-    <Image Include="..\Assets\Resources\DOS_FONT_WHITE_22_5.bmp" />
     <Image Include="..\Assets\Resources\test_FLOODFILL.bmp" />
     <Image Include="..\Assets\Resources\test_RGB.bmp" />
     <Image Include="..\Assets\Resources\test_SPRITES.bmp" />

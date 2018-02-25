@@ -20,6 +20,6 @@ public:
 	OutputStream & OutputStream::operator<<(const char * data);
 };
 
-extern OutputStream DebugPrint;
+
 
 #endif // !__OUTPUT_STREAM_H_322__
