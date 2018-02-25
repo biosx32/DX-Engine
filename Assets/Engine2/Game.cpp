@@ -32,56 +32,19 @@ Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 IOgroup* IOG = nullptr;
 DebugGUI* DebugInfo = nullptr;
 GUI * MainGUI = nullptr;
-GroupBox* ukazka_tlacidla = nullptr;
-GroupBox* ukazka_textove_pole = nullptr;
-
-void TlacidloAction() {
-	ukazka_tlacidla->bkclr = Colors::Red;
-}
-
-void TlacidloAction2() {
-	ukazka_tlacidla->bkclr = Colors::TKEY;
-}
-void TlacidloAction3() {
-	ukazka_tlacidla->bkclr = Colors::Blue;
-}
-void TlacidloAction4() {
-	ukazka_tlacidla->bkclr = Colors::Green;
-}
-
-void BuildTlacidlaGroup() {
-	ukazka_tlacidla = new GroupBox(Pos(10, 100), Size(200, 300), Colors::Green);
-	ukazka_tlacidla->Add(new Label(Pos(5, 5), "Tlacidla:", &DOS_BLACK_HUGE));
-	ukazka_tlacidla->Add(new ImageButton(Pos(30, 30 + 50), TlacidloAction, "Cervena"));
-	ukazka_tlacidla->Add(new ColorButton(Pos(30, 150 + 50), TlacidloAction2, "Biela",Size(100,30) ));
-	ukazka_tlacidla->Add(new ImageButton(Pos(30, 70 + 50), TlacidloAction4, "Zelena"));
-	ukazka_tlacidla->Add(new ColorButton(Pos(30, 110 + 50), TlacidloAction3, "Modra", Size(100,30)));
-}
-
-void BuildTextBoxGroup() {
-	ukazka_textove_pole = new GroupBox(Pos(230, 100), Size(300, 150), Colors::GrayLight);
-	ukazka_textove_pole->Add(new Label(Pos(5, 5), "Textove pole:", &DOS_BLACK_HUGE));
-	ukazka_textove_pole->Add(new TextBox(Pos(30, 30 + 50), 16));
-	ukazka_textove_pole->Add(new TextBox(Pos(30, 30 + 50+30), 6));
-}
-
+TestInterface* out = nullptr;
 void BuildTestGUI() {
 
 	MainGUI = new CleanGUI(IOG);
+	MainGUI->Add(new Label(Pos(15, 10), "Bitmapa", &DOS_BLACK_HUGE));
+	MainGUI->Add(new MBmap(Pos(15, 60), "..\\Assets\\Resources\\test_RGB.bmp", Size(1, 1)));
+	MainGUI->Add(new Label(Pos(15 + 350, 10), "Bitmapa 2.0x ", &DOS_BLACK_HUGE));
+	MainGUI->Add(new MBmap(Pos(15 + 350, 60), "..\\Assets\\Resources\\test_RGB.bmp", Size(2, 2)));
+	MainGUI->Add(new Label(Pos(15, 10 + 200), "Bitmapa 0.5x", &DOS_BLACK_HUGE));
+	MainGUI->Add(new MBmap(Pos(15, 60 + 200), "..\\Assets\\Resources\\test_RGB.bmp", Size(0.5, 0.5)));
+	MainGUI->Add(new Label(Pos(15, 10 + 330), "Transparentna ", &DOS_BLACK_HUGE));
+	MainGUI->Add(new MBmap(Pos(15, 60 + 330), "..\\Assets\\Resources\\test_RGB.bmp", Colors::TKEY,Size(1, 1)));
 
-	BuildTlacidlaGroup();
-	BuildTextBoxGroup();
-
-	MainGUI->Add(ukazka_tlacidla);
-	MainGUI->Add(ukazka_textove_pole);
-	MainGUI->Add(new CheckBox(Pos(230, 280), "Check box A"));
-	MainGUI->Add(new CheckBox(Pos(230, 310), "Check box B"));
-	MainGUI->Add(new CheckBox(Pos(230, 340), "Check box C"));
-	MainGUI->Add(new Label(Pos(550, 100),"Prvy riadok\nDruhy riadok", &DOS_WHITE));
-	MainGUI->Add(new Label(Pos(550, 200), "Obycajny text", &DOS_WHITE));
-	MainGUI->Add(new Label(Pos(550, 250), "Obycajny text", &DOS_BLACK));
-	MainGUI->Add(new Label(Pos(550, 230), "Obycajny text", &DOS_WHITE_MINI));
-	MainGUI->Add(new Label(Pos(550, 280), "Obycajny text", &DOS_BLACK_MINI));
 }
 
 

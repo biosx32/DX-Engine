@@ -150,10 +150,3 @@ void Bitmap::ReserveMemory(int width, int height, Color bkclr)
 
 
 
-
-
-
-
-
-
-

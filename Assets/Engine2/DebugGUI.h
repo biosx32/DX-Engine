@@ -22,10 +22,10 @@ public:
 	DebugGUI(IOgroup* io) : GUI(io) { Build(); }
 
 	void Build() override {
-		FRA_label = new Label(Pos(0, 0),"NO_FRAME_UPDATE");
-		FPS_label = new Label(Pos(0, 24), "NO_FPS_UPDATE");
-		EPS_label = new Label(Pos(0, 48), "NO_EPS_UPDATE");
-	    MousePosLabel = new Label(Pos(0, 72), "NO_MOUSE_UPDATE");
+		FRA_label = new Label(Pos(0, 24),"NO_FRAME_UPDATE", &DOS_BLACK_MINI);
+		FPS_label = new Label(Pos(0, 0), "NO_FPS_UPDATE",&DOS_BLACK_MINI);
+		EPS_label = new Label(Pos(0, 48), "NO_EPS_UPDATE", &DOS_BLACK_MINI);
+	    MousePosLabel = new Label(Pos(0, 72), "NO_MOUSE_UPDATE", &DOS_BLACK_MINI);
 
 		Add(FRA_label);
 		Add(FPS_label);

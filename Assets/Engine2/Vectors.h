@@ -48,7 +48,16 @@ public:
 
 typedef Vector2 V2;
 typedef Vector3 V3;
-typedef V2 Pos;
-typedef V2 Size;
+
+class Pos : public Vector2 {
+public:
+	Pos(float x, float y): Vector2(x,y){}
+};
+class Size : public Vector2 {public:
+	const int& w = x;
+	const int& h = y;
+
+	Size(float x, float y) : Vector2(x, y) {}
+};
 
 #endif

@@ -37,6 +37,7 @@
     <ClInclude Include="..\Assets\Engine2\Button.h" />
     <ClInclude Include="..\Assets\Engine2\Checkbox.h" />
     <ClInclude Include="..\Assets\Engine2\GuiElementManager.h" />
+    <ClInclude Include="..\Assets\Engine2\MBmap.h" />
     <ClInclude Include="..\Assets\Engine2\MouseHelper.h" />
     <ClInclude Include="..\Assets\Engine2\ManageableElement.h" />
     <ClInclude Include="..\Assets\Engine2\MouseEventObject.h" />

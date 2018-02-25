@@ -217,6 +217,9 @@
     <ClInclude Include="..\Assets\Engine2\MouseHelper.h">
       <Filter>Assets\Engine2\Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="..\Assets\Engine2\MBmap.h">
+      <Filter>Assets\Engine2\CustomClass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Assets\ChilliFramework\Windows.cpp">

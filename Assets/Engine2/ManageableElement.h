@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Element.h"
+#include "OutputStream.h"
 class ManageableElement : public Element {
 protected:
 	static int ElementCount;
@@ -35,11 +36,13 @@ public:
 	void Update(IOgroup* io) {
 		this->io = io;
 		if (io) { Update(); }
+		else { OutputStream() << "No IO group for manageable item" << console; }
 	}
 
 	void Draw(IOgroup* io) {
 		this->io = io;
 		if (io) { Draw(); }
+		else { OutputStream() << "No IO group for manageable item" << console; }
 	}
 
 	ManageableElement(Vector2 Pos) : Element(Pos), pDepth(0) {

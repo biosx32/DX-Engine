@@ -35,6 +35,7 @@
 #include "Interface.h"
 #include "TestInterface.h"
 #include "DebugGUI.h"
+#include "MBmap.h"
 #include <thread>
 
 class Game
