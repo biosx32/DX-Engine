@@ -6,13 +6,12 @@ class TextBox : public ManageableElement, public MouseEventObject {
 public:
 	BitmapFont* font = &DOS_BLACK;
 	int wmax;
-	char text[4096] = {};
+	char text[4096] = "DEFAULT_TEXT";
 	int textsize = 0;
 	bool isSelected = false;
 	Vector2 size = Vector2(0, 0);
 	TextBox(Vector2 pos, int wmax) : ManageableElement(pos), wmax(wmax) {
 		this->size = Size(wmax * font->charw, font->charh);
-		this->text[0] = 0;
 	}
 
 	bool isHover(MouseClient* mouse) override {
