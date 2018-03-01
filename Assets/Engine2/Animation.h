@@ -1,6 +1,7 @@
 #ifndef __ANIM_H__
 #define __ANIM_H__
-#include "Spritesheet.h"
+#include "VectorSpritesheet.h"
+
 class Animation {
 public:
 	int startFrame = 0;

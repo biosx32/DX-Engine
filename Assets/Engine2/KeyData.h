@@ -1,5 +1,6 @@
 #pragma once
-
+#include <string>
+#include "Func.h"
 class KeyData {
 public:
 
