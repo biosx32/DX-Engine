@@ -1,3 +1,14 @@
+* Slider
+* Range slider
+* Progress bar
+* RGB/HSV Picker
+* Listbox
+* PictureBox --> make from manageable bitmap
+* Canvas -> from bitmap && also pixeldest to canvas not bitmap
+
+https://www.usability.gov/how-to-and-tools/methods/user-interface-elements.html
+
+
 --Rectangle select cursor
 Replace floodfill by: Make line around sprite, then scanlinefill
 Checkbox, radiobutton
