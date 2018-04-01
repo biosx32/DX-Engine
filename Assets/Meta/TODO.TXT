@@ -1,10 +1,21 @@
 * Slider
 * Range slider
+* Titleset system
 * Progress bar
 * RGB/HSV Picker
 * Listbox
 * PictureBox --> make from manageable bitmap
 * Canvas -> from bitmap && also pixeldest to canvas not bitmap
+
+* File for saving sprite cuts => select region and add by name:
+  *** SPRITES ***
+  1=0,0,32,32
+  PES=0,0,32,32
+
+* Map editor => 
+     - map::    N*M titles
+	 - titleSize:: N*N pixels
+	 - map::title:: N titles on one title overlay (every title on map has z-index)
 
 https://www.usability.gov/how-to-and-tools/methods/user-interface-elements.html
 
@@ -23,47 +34,3 @@ GUI.getElement("ELEMENT_NAME_UNIQUE").ToButton
 Vymysli spojenie pre groupbox a GUI ------- Redundancy reducement
 
 Manažment lokálnosti pre radiobutton apod, prípadne keypress
-
-#pragma once
-
-class ElementController {
-	int selectedID; //is modified if control has select event
-};
-
-
-class GlobalInfo {
-public:
-	int SelectedID;
-}
-
-class ElementGroup {
-	int GroupID;
-	inf x,y;
-	vector<GuiElement*> elements;
-
-}
-
-class GuiElement {
-protected:
-	int x,y;
-	bool visible;
-	int ID;
-	ElementGroup* parent = nullptr; //podla group offsetni suradnice pri kresleni gui
-	ElementInfo* LocalInfo = this;
-	virtual void Draw() = 0;
-public:
-	static SelectedElement
-
-	bool Selected
-}
-
-class GuiElement {
-public:
-	GlobalInfo* info;
-}
-
-class GroupBox {
-  implement
-};
-
-class 

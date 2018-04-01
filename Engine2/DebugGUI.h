@@ -2,7 +2,7 @@
 #define __DEBUG_GUI_H__
 #include <time.h>
 #include "TestInterface.h"
-#include "Label.h"
+#include "Labelz.h"
 #include "GUI.h"
 #include <vector>
 #include "Vectors.h"

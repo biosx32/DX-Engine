@@ -4,7 +4,8 @@
 
 void LoadBmp( const char* filename,D3DCOLOR* surface )
 {
-	FILE* bmpFile = fopen( filename,"rb" );
+	FILE* bmpFile = nullptr;
+	fopen_s( &bmpFile,filename,"rb" );
 	
 	char signature[ 2 ];
 	fread( signature,sizeof( char ),2,bmpFile );

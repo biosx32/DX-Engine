@@ -22,53 +22,7 @@
     <Image Include="..\Assets\Resources\test_SPRITES.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Assets\ChilliFramework\Bitmap.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\D3DGraphics.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\FrameTimer.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\Keyboard.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\Mouse.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\Resource.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\Sound.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\Surface.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\SurfaceSequence.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\Timer.h" />
-    <ClInclude Include="..\Assets\Engine2\Animation.h" />
-    <ClInclude Include="..\Assets\Engine2\Bmap.h" />
-    <ClInclude Include="..\Assets\Engine2\Button.h" />
-    <ClInclude Include="..\Assets\Engine2\Checkbox.h" />
-    <ClInclude Include="..\Assets\Engine2\GuiElementManager.h" />
-    <ClInclude Include="..\Assets\Engine2\MBmap.h" />
-    <ClInclude Include="..\Assets\Engine2\MouseHelper.h" />
-    <ClInclude Include="..\Assets\Engine2\ManageableElement.h" />
-    <ClInclude Include="..\Assets\Engine2\MouseEventObject.h" />
-    <ClInclude Include="..\Assets\Engine2\ColorButton.h" />
-    <ClInclude Include="..\Assets\Engine2\Colors.h" />
-    <ClInclude Include="..\Assets\Engine2\ConfigFile.h" />
-    <ClInclude Include="..\Assets\Engine2\CustomMath.h" />
-    <ClInclude Include="..\Assets\Engine2\DebugGUI.h" />
-    <ClInclude Include="..\Assets\Engine2\Drawing.h" />
-    <ClInclude Include="..\Assets\Engine2\GlobalObjects.h" />
-    <ClInclude Include="..\Assets\Engine2\Element.h" />
-    <ClInclude Include="..\Assets\Engine2\Group.h" />
-    <ClInclude Include="..\Assets\Engine2\KeyData.h" />
-    <ClInclude Include="..\Assets\Engine2\ItemManager.h" />
-    <ClInclude Include="..\Assets\Engine2\BitmapFont.h" />
-    <ClInclude Include="..\Assets\Engine2\Func.h" />
-    <ClInclude Include="..\Assets\Engine2\Game.h" />
-    <ClInclude Include="..\Assets\Engine2\ImageButton.h" />
-    <ClInclude Include="..\Assets\Engine2\RadioButton.h" />
-    <ClInclude Include="..\Assets\Engine2\Textbox.h" />
-    <ClInclude Include="..\Assets\Engine2\TrianglePoly.h" />
-    <ClInclude Include="..\Assets\Engine2\GUI.h" />
-    <ClInclude Include="..\Assets\Engine2\Interface.h" />
-    <ClInclude Include="..\Assets\Engine2\Label.h" />
-    <ClInclude Include="..\Assets\Engine2\OutputStream.h" />
-    <ClInclude Include="..\Assets\Engine2\BitmapArray.h" />
-    <ClInclude Include="..\Assets\Engine2\TestInterface.h" />
-    <ClInclude Include="..\Assets\Engine2\PixelMap.h" />
-    <ClInclude Include="..\Assets\Engine2\Vectors.h" />
-    <ClInclude Include="..\Assets\Engine2\FloodfillMap.h" />
-    <ClInclude Include="..\Assets\Engine2\VectorSpritesheet.h" />
+    <Resource Include="..\Assets\Resources\ChiliDirectXFramework.res" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Assets\ChilliFramework\Bitmap.cpp" />
@@ -78,24 +32,73 @@
     <ClCompile Include="..\Assets\ChilliFramework\Sound.cpp" />
     <ClCompile Include="..\Assets\ChilliFramework\Timer.cpp" />
     <ClCompile Include="..\Assets\ChilliFramework\Windows.cpp" />
-    <ClCompile Include="..\Assets\Engine2\Bmap.cpp" />
-    <ClCompile Include="..\Assets\Engine2\CustomMath.cpp" />
-    <ClCompile Include="..\Assets\Engine2\Drawing.cpp" />
-    <ClCompile Include="..\Assets\Engine2\ManageableElement.cpp" />
-    <ClCompile Include="..\Assets\Engine2\FloodfillMap.cpp" />
-    <ClCompile Include="..\Assets\Engine2\GlobalObjects.cpp" />
-    <ClCompile Include="..\Assets\Engine2\Func.cpp" />
-    <ClCompile Include="..\Assets\Engine2\Game.cpp" />
-    <ClCompile Include="..\Assets\Engine2\PixelMap.cpp" />
-    <ClCompile Include="..\Assets\Engine2\TrianglePoly.cpp" />
-    <ClCompile Include="..\Assets\Engine2\Interface.cpp" />
-    <ClCompile Include="..\Assets\Engine2\OutputStream.cpp" />
-    <ClCompile Include="..\Assets\Engine2\BitmapArray.cpp" />
-    <ClCompile Include="..\Assets\Engine2\TestInterface.cpp" />
-    <ClCompile Include="..\Assets\Engine2\VectorSpritesheet.cpp" />
+    <ClCompile Include="BitmapArray.cpp" />
+    <ClCompile Include="Bmap.cpp" />
+    <ClCompile Include="CustomMath.cpp" />
+    <ClCompile Include="Drawing.cpp" />
+    <ClCompile Include="FloodfillMap.cpp" />
+    <ClCompile Include="Func.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GlobalObjects.cpp" />
+    <ClCompile Include="Interface.cpp" />
+    <ClCompile Include="ManageableElement.cpp" />
+    <ClCompile Include="OutputStream.cpp" />
+    <ClCompile Include="PixelMap.cpp" />
+    <ClCompile Include="TestInterface.cpp" />
+    <ClCompile Include="TrianglePoly.cpp" />
+    <ClCompile Include="VectorSpritesheet.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="..\Assets\Resources\ChiliDirectXFramework.res" />
+    <ClInclude Include="..\Assets\ChilliFramework\Bitmap.h" />
+    <ClInclude Include="..\Assets\ChilliFramework\D3DGraphics.h" />
+    <ClInclude Include="..\Assets\ChilliFramework\FrameTimer.h" />
+    <ClInclude Include="..\Assets\ChilliFramework\Game.h" />
+    <ClInclude Include="..\Assets\ChilliFramework\Keyboard.h" />
+    <ClInclude Include="..\Assets\ChilliFramework\Mouse.h" />
+    <ClInclude Include="..\Assets\ChilliFramework\Resource.h" />
+    <ClInclude Include="..\Assets\ChilliFramework\Sound.h" />
+    <ClInclude Include="..\Assets\ChilliFramework\Surface.h" />
+    <ClInclude Include="..\Assets\ChilliFramework\SurfaceSequence.h" />
+    <ClInclude Include="..\Assets\ChilliFramework\Timer.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="BitmapArray.h" />
+    <ClInclude Include="BitmapFont.h" />
+    <ClInclude Include="Bmap.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="ButtonManager.h" />
+    <ClInclude Include="Checkbox.h" />
+    <ClInclude Include="ClickableRectangle.h" />
+    <ClInclude Include="ColorButton.h" />
+    <ClInclude Include="Colors.h" />
+    <ClInclude Include="ConfigFile.h" />
+    <ClInclude Include="CustomMath.h" />
+    <ClInclude Include="DebugGUI.h" />
+    <ClInclude Include="Drawing.h" />
+    <ClInclude Include="Element.h" />
+    <ClInclude Include="FloodfillMap.h" />
+    <ClInclude Include="Func.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GlobalObjects.h" />
+    <ClInclude Include="Group.h" />
+    <ClInclude Include="GUI.h" />
+    <ClInclude Include="GuiElementManager.h" />
+    <ClInclude Include="ImageButton.h" />
+    <ClInclude Include="Interface.h" />
+    <ClInclude Include="ItemManager.h" />
+    <ClInclude Include="KeyData.h" />
+    <ClInclude Include="Label.h" />
+    <ClInclude Include="ManageableElement.h" />
+    <ClInclude Include="MBmap.h" />
+    <ClInclude Include="MouseEventObject.h" />
+    <ClInclude Include="MouseHelper.h" />
+    <ClInclude Include="OutputStream.h" />
+    <ClInclude Include="PixelMap.h" />
+    <ClInclude Include="TestInterface.h" />
+    <ClInclude Include="Textbox.h" />
+    <ClInclude Include="TrianglePoly.h" />
+    <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="Vectors.h" />
+    <ClInclude Include="VectorSpritesheet.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9E5C3038-85D6-4CEC-A331-0DAE21E12415}</ProjectGuid>
@@ -128,7 +131,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\Assets\ChilliFramework;$(SolutionDir)\Assets\Engine2;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Assets\ChilliFramework\;$(SolutionDir)\Engine2;$(IncludePath)</IncludePath>
+    <SourcePath>$(VC_SourcePath);</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

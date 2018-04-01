@@ -109,7 +109,7 @@ int WINAPI wWinMain( HINSTANCE hInst,HINSTANCE,LPWSTR,INT )
 
 	WNDCLASSEX wc = { sizeof( WNDCLASSEX ),CS_CLASSDC,MsgProc,0,0,
                       GetModuleHandle( NULL ),NULL,NULL,NULL,NULL,
-						windowNameID,NULL };
+		windowNameID,NULL };
     wc.hIconSm = (HICON)LoadImage( hInst,MAKEINTRESOURCE( IDI_APPICON16 ),IMAGE_ICON,16,16,0 );
 	wc.hIcon   = (HICON)LoadImage( hInst,MAKEINTRESOURCE( IDI_APPICON32 ),IMAGE_ICON,32,32,0 );
 	wc.hCursor = LoadCursor( NULL,IDC_ARROW );
@@ -133,6 +133,7 @@ int WINAPI wWinMain( HINSTANCE hInst,HINSTANCE,LPWSTR,INT )
 	
     MSG msg;
     ZeroMemory( &msg,sizeof( msg ) );
+
 	theGame.Initialise();
     while( msg.message != WM_QUIT )
     {
@@ -147,6 +148,6 @@ int WINAPI wWinMain( HINSTANCE hInst,HINSTANCE,LPWSTR,INT )
 		}
     }
 
-    UnregisterClass( windowNameID,wc.hInstance );
+    UnregisterClass(windowNameID,wc.hInstance );
     return 0;
 }

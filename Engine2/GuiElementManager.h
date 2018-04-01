@@ -3,7 +3,7 @@
 #include "Checkbox.h"
 #include "Button.h"
 #include "Group.h"
-#include "Label.h"
+#include "Labelz.h"
 #include "Textbox.h"
 
 

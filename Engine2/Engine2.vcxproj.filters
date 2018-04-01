@@ -4,53 +4,14 @@
     <Filter Include="Assets">
       <UniqueIdentifier>{a2139b40-5700-4b41-a841-28f93a0dd24d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\ChilliFramework">
-      <UniqueIdentifier>{d7dcff90-e2e0-4e26-a4cc-a7ecdd962bb4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Assets\Resources">
       <UniqueIdentifier>{f291b942-3295-49b7-8b0b-d67e1c12189d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Engine2">
-      <UniqueIdentifier>{63359dbc-fc34-4cd3-b9b0-85e6ae1ba550}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\ChilliFramework\C">
-      <UniqueIdentifier>{ffe2df6a-4625-48c7-a1ec-7a9340ef58bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\ChilliFramework\H">
-      <UniqueIdentifier>{57f0f144-5944-486b-bf4e-651de46c76c8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Assets\META">
       <UniqueIdentifier>{d801954d-6667-4cf1-b69d-0217dde18141}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\Engine2\CustomClass">
-      <UniqueIdentifier>{9bbecff0-b05d-4300-8600-d3cf80a0de46}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Engine2\CustomClass\C">
-      <UniqueIdentifier>{99137909-0348-4320-b2b6-63f16334353b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Engine2\GUI">
-      <UniqueIdentifier>{c4ae3eb1-084c-4a7d-a2c6-eb2053bac364}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Engine2\GUI\Main">
-      <UniqueIdentifier>{666d55ec-d269-40ae-8e50-561741a60e52}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Engine2\GUI\Base">
-      <UniqueIdentifier>{3d20f0d1-0e59-44ef-9c6f-dedc53fb681e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Engine2\GUI\Specs">
-      <UniqueIdentifier>{cde70acf-30e3-4db4-b965-637a53eca212}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Engine2\Helpers">
-      <UniqueIdentifier>{80bccc23-1465-4bdf-ac47-623ad9079cda}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Engine2\Helpers\C">
-      <UniqueIdentifier>{dc267257-93dc-4f06-a0e1-1f6860b2c3ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Engine2\GUI\Base\C">
-      <UniqueIdentifier>{3d18e0d1-2df4-4e57-98a0-a3516c52f475}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Engine2\__future__">
-      <UniqueIdentifier>{0132a01a-8c54-4723-956d-6b5a9771118f}</UniqueIdentifier>
+    <Filter Include="Assets\Chilli">
+      <UniqueIdentifier>{beac4667-7d55-4ecf-b33b-e3f5e7c3c60c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -79,219 +40,120 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Assets\ChilliFramework\Timer.h">
-      <Filter>Assets\ChilliFramework\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\ChilliFramework\Bitmap.h">
-      <Filter>Assets\ChilliFramework\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\ChilliFramework\D3DGraphics.h">
-      <Filter>Assets\ChilliFramework\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\ChilliFramework\FrameTimer.h">
-      <Filter>Assets\ChilliFramework\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\ChilliFramework\Keyboard.h">
-      <Filter>Assets\ChilliFramework\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\ChilliFramework\Mouse.h">
-      <Filter>Assets\ChilliFramework\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\ChilliFramework\Resource.h">
-      <Filter>Assets\ChilliFramework\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\ChilliFramework\Sound.h">
-      <Filter>Assets\ChilliFramework\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\ChilliFramework\Surface.h">
-      <Filter>Assets\ChilliFramework\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\ChilliFramework\SurfaceSequence.h">
-      <Filter>Assets\ChilliFramework\H</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\TrianglePoly.h">
-      <Filter>Assets\Engine2\__future__</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\TestInterface.h">
-      <Filter>Assets\Engine2\__future__</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Button.h">
-      <Filter>Assets\Engine2\GUI\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Label.h">
-      <Filter>Assets\Engine2\GUI\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\ColorButton.h">
-      <Filter>Assets\Engine2\GUI\Specs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\ImageButton.h">
-      <Filter>Assets\Engine2\GUI\Specs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Element.h">
-      <Filter>Assets\Engine2\GUI\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Game.h">
-      <Filter>Assets\Engine2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Animation.h">
-      <Filter>Assets\Engine2\CustomClass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Bmap.h">
-      <Filter>Assets\Engine2\CustomClass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\ConfigFile.h">
-      <Filter>Assets\Engine2\CustomClass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\KeyData.h">
-      <Filter>Assets\Engine2\CustomClass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\BitmapFont.h">
-      <Filter>Assets\Engine2\CustomClass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\BitmapArray.h">
-      <Filter>Assets\Engine2\CustomClass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\PixelMap.h">
-      <Filter>Assets\Engine2\CustomClass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\FloodfillMap.h">
-      <Filter>Assets\Engine2\CustomClass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\VectorSpritesheet.h">
-      <Filter>Assets\Engine2\CustomClass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\DebugGUI.h">
-      <Filter>Assets\Engine2\GUI\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\GUI.h">
-      <Filter>Assets\Engine2\GUI\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Colors.h">
-      <Filter>Assets\Engine2\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\CustomMath.h">
-      <Filter>Assets\Engine2\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Drawing.h">
-      <Filter>Assets\Engine2\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Func.h">
-      <Filter>Assets\Engine2\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\GlobalObjects.h">
-      <Filter>Assets\Engine2\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Interface.h">
-      <Filter>Assets\Engine2\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\OutputStream.h">
-      <Filter>Assets\Engine2\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Vectors.h">
-      <Filter>Assets\Engine2\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Textbox.h">
-      <Filter>Assets\Engine2\GUI\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Group.h">
-      <Filter>Assets\Engine2\GUI\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\ItemManager.h">
-      <Filter>Assets\Engine2\GUI\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\RadioButton.h">
-      <Filter>Assets\Engine2\GUI\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\Checkbox.h">
-      <Filter>Assets\Engine2\GUI\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\MouseEventObject.h">
-      <Filter>Assets\Engine2\GUI\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\ManageableElement.h">
-      <Filter>Assets\Engine2\GUI\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\GuiElementManager.h">
-      <Filter>Assets\Engine2\GUI\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\MouseHelper.h">
-      <Filter>Assets\Engine2\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Assets\Engine2\MBmap.h">
-      <Filter>Assets\Engine2\CustomClass</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\Assets\ChilliFramework\Windows.cpp">
-      <Filter>Assets\ChilliFramework\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\ChilliFramework\Bitmap.cpp">
-      <Filter>Assets\ChilliFramework\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\ChilliFramework\D3DGraphics.cpp">
-      <Filter>Assets\ChilliFramework\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\ChilliFramework\Keyboard.cpp">
-      <Filter>Assets\ChilliFramework\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\ChilliFramework\Mouse.cpp">
-      <Filter>Assets\ChilliFramework\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\ChilliFramework\Sound.cpp">
-      <Filter>Assets\ChilliFramework\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\ChilliFramework\Timer.cpp">
-      <Filter>Assets\ChilliFramework\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\Bmap.cpp">
-      <Filter>Assets\Engine2\CustomClass\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\TrianglePoly.cpp">
-      <Filter>Assets\Engine2\__future__</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\TestInterface.cpp">
-      <Filter>Assets\Engine2\__future__</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\OutputStream.cpp">
-      <Filter>Assets\Engine2\Helpers\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\CustomMath.cpp">
-      <Filter>Assets\Engine2\Helpers\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\Func.cpp">
-      <Filter>Assets\Engine2\Helpers\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\GlobalObjects.cpp">
-      <Filter>Assets\Engine2\Helpers\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\Interface.cpp">
-      <Filter>Assets\Engine2\Helpers\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\Game.cpp">
-      <Filter>Assets\Engine2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\Drawing.cpp">
-      <Filter>Assets\Engine2\Helpers\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\VectorSpritesheet.cpp">
-      <Filter>Assets\Engine2\CustomClass\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\PixelMap.cpp">
-      <Filter>Assets\Engine2\CustomClass\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\FloodfillMap.cpp">
-      <Filter>Assets\Engine2\CustomClass\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\BitmapArray.cpp">
-      <Filter>Assets\Engine2\CustomClass\C</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Assets\Engine2\ManageableElement.cpp">
-      <Filter>Assets\Engine2\GUI\Base\C</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="..\Assets\Resources\ChiliDirectXFramework.res">
       <Filter>Assets\Resources</Filter>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BitmapArray.cpp" />
+    <ClCompile Include="Bmap.cpp" />
+    <ClCompile Include="CustomMath.cpp" />
+    <ClCompile Include="Drawing.cpp" />
+    <ClCompile Include="FloodfillMap.cpp" />
+    <ClCompile Include="Func.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GlobalObjects.cpp" />
+    <ClCompile Include="Interface.cpp" />
+    <ClCompile Include="ManageableElement.cpp" />
+    <ClCompile Include="OutputStream.cpp" />
+    <ClCompile Include="PixelMap.cpp" />
+    <ClCompile Include="TestInterface.cpp" />
+    <ClCompile Include="TrianglePoly.cpp" />
+    <ClCompile Include="VectorSpritesheet.cpp" />
+    <ClCompile Include="..\Assets\ChilliFramework\D3DGraphics.cpp">
+      <Filter>Assets\Chilli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\ChilliFramework\Keyboard.cpp">
+      <Filter>Assets\Chilli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\ChilliFramework\Mouse.cpp">
+      <Filter>Assets\Chilli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\ChilliFramework\Sound.cpp">
+      <Filter>Assets\Chilli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\ChilliFramework\Timer.cpp">
+      <Filter>Assets\Chilli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\ChilliFramework\Windows.cpp">
+      <Filter>Assets\Chilli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Assets\ChilliFramework\Bitmap.cpp">
+      <Filter>Assets\Chilli</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="BitmapArray.h" />
+    <ClInclude Include="BitmapFont.h" />
+    <ClInclude Include="Bmap.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="ButtonManager.h" />
+    <ClInclude Include="Checkbox.h" />
+    <ClInclude Include="ClickableRectangle.h" />
+    <ClInclude Include="ColorButton.h" />
+    <ClInclude Include="Colors.h" />
+    <ClInclude Include="ConfigFile.h" />
+    <ClInclude Include="CustomMath.h" />
+    <ClInclude Include="DebugGUI.h" />
+    <ClInclude Include="Drawing.h" />
+    <ClInclude Include="Element.h" />
+    <ClInclude Include="FloodfillMap.h" />
+    <ClInclude Include="Func.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GlobalObjects.h" />
+    <ClInclude Include="Group.h" />
+    <ClInclude Include="GUI.h" />
+    <ClInclude Include="GuiElementManager.h" />
+    <ClInclude Include="ImageButton.h" />
+    <ClInclude Include="Interface.h" />
+    <ClInclude Include="ItemManager.h" />
+    <ClInclude Include="KeyData.h" />
+    <ClInclude Include="Label.h" />
+    <ClInclude Include="ManageableElement.h" />
+    <ClInclude Include="MBmap.h" />
+    <ClInclude Include="MouseEventObject.h" />
+    <ClInclude Include="MouseHelper.h" />
+    <ClInclude Include="OutputStream.h" />
+    <ClInclude Include="PixelMap.h" />
+    <ClInclude Include="TestInterface.h" />
+    <ClInclude Include="Textbox.h" />
+    <ClInclude Include="TrianglePoly.h" />
+    <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="Vectors.h" />
+    <ClInclude Include="VectorSpritesheet.h" />
+    <ClInclude Include="..\Assets\ChilliFramework\D3DGraphics.h">
+      <Filter>Assets\Chilli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\ChilliFramework\FrameTimer.h">
+      <Filter>Assets\Chilli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\ChilliFramework\Game.h">
+      <Filter>Assets\Chilli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\ChilliFramework\Keyboard.h">
+      <Filter>Assets\Chilli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\ChilliFramework\Mouse.h">
+      <Filter>Assets\Chilli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\ChilliFramework\Resource.h">
+      <Filter>Assets\Chilli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\ChilliFramework\Sound.h">
+      <Filter>Assets\Chilli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\ChilliFramework\Surface.h">
+      <Filter>Assets\Chilli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\ChilliFramework\SurfaceSequence.h">
+      <Filter>Assets\Chilli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\ChilliFramework\Timer.h">
+      <Filter>Assets\Chilli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\ChilliFramework\Bitmap.h">
+      <Filter>Assets\Chilli</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

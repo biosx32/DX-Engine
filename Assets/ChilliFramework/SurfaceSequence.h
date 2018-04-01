@@ -19,7 +19,8 @@ public:
 		{
 			std::wstringstream s;
 			s << std::setw( 4 ) << std::setfill( L'0' ) << index;
-			surfaces[ index ] = new KeyedSurface( basename + s.str() + std::wstring( L".bmp" ),key );
+			std::wstring fix = basename + s.str() + std::wstring(L".bmp");
+			surfaces[ index ] = new KeyedSurface( fix,key );
 		}
 	}
 	~SurfaceSequence()

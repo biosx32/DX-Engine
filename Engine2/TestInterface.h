@@ -4,7 +4,7 @@
 #include "FloodfillMap.h"
 
 #include "Vectors.h"
-#include "Label.h"
+#include "Labelz.h"
 #include "Mouse.h"
 #include <stdio.h>
 
