@@ -13,18 +13,6 @@ public:
 
 	MouseHelper(MouseClient* mouse):mouse(mouse){}
 
-
-
-	Vector2 GetPosition() {
-		return Vector2(mouse->GetMouseX(), mouse->GetMouseY());
-	}
-
-	Vector2 GetDelta() {
-		mouseDelta = position - mouseOld;
-		mouseOld = position;
-		return GetDelta();
-	}
-
 	void Refresh() {
 		position = Vector2(mouse->GetMouseX(), mouse->GetMouseY());
 		mouseDelta = position - mouseOld;

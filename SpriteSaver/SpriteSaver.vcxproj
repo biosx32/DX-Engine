@@ -197,6 +197,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="HelperElement.h" />
     <ClInclude Include="Listbox.h" />
+    <ClInclude Include="ScrollBars.h" />
     <ClInclude Include="SelectBox.h" />
   </ItemGroup>
   <ItemGroup>

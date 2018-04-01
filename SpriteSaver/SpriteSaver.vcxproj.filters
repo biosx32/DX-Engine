@@ -245,6 +245,9 @@
     <ClInclude Include="HelperElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ScrollBars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="TODO.txt">

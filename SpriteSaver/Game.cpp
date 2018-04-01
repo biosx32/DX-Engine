@@ -49,7 +49,7 @@ void Game::Initialise() {
 	out = new TestInterface(screen);
 	IOG = new IOgroup(out,&mouse,&kbd,new MouseHelper(&mouse));
 	lbox->Add("First item");
-	lbox->Add("Second item");
+	lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item");
 
 }
 void PrintProgramHeader(IOgroup* IOG) {
@@ -63,11 +63,11 @@ void Game::ComposeFrame() {
 	if (mouse.LeftIsPressed()) {
 		if (hasBullet == true) {
 			hasBullet = false;
-			test.pos = IOG->mhelper->GetPosition();
+			test.pos = IOG->mhelper->position;
 			test.size = Size(0, 0);
 		}
 		else {
-			test.Update(IOG->mhelper->GetPosition());
+			test.Update(IOG->mhelper->position);
 		}
 		
 	}
@@ -88,6 +88,7 @@ void Game::ComposeFrame() {
 void Game::UpdateModel()
 {
 	lbox->Update(IOG);
+	IOG->mhelper->Refresh();
 }
 
 

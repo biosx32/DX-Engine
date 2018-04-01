@@ -15,7 +15,7 @@ public:
 	ManageableElement* parent = nullptr;
 	IOgroup * io = nullptr;
 
-	inline bool HasParent() {
+	bool HasParent() {
 		return parent != nullptr;
 	}
 
