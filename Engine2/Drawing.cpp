@@ -2,11 +2,19 @@
 #include "Drawing.h"
 
 void Painter::FastHLine(int x0, int y0, int width, Color c) {
+	if (width < 0) {
+		x0 += width;
+		width = -width;
+	}
 	for (int i = 0; i < width; i++) {
 		DrawPixel(x0 + i, y0, c);
 	}
 }
 void Painter::FastVLine(int x0, int y0, int height, Color c) {
+	if (height < 0) {
+		y0 += height;
+		height = -height;
+	}
 	for (int i = 0; i < height; i++) {
 		DrawPixel(x0, y0 + i, c);
 	}

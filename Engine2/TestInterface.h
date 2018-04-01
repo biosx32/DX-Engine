@@ -13,6 +13,7 @@ public:
 	TestInterface(PixelDest dest) : Interface(dest) {}
 	void DrawPixelContainer(FloodFillMap * src, int fx, int fy);
 	void DrawSpritesheet(BitmapArray* sh, int xoff, int yoff);
+	std::string LabelizeVector(Vector2 vec, std::string label);
 };
 
 

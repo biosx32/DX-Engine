@@ -51,6 +51,16 @@ void TestInterface::DrawSpritesheet(BitmapArray * sh, int xoff, int yoff)
 
 }
 
+std::string TestInterface::LabelizeVector(Vector2 vec, std::string label)
+{
+
+	char buffer[256] = {};
+	sprintf_s(buffer, "%s: (%.2f, %.2f)", label.c_str(), vec.x, vec.y);
+	std::string temp = buffer;;
+
+	return temp;
+}
+
 
 
 

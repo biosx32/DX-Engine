@@ -194,6 +194,10 @@
     <ClInclude Include="..\Engine2\Vectors.h" />
     <ClInclude Include="..\Engine2\VectorSpritesheet.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="SelectBox.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

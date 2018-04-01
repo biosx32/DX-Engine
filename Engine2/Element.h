@@ -12,8 +12,15 @@ public:
 	KeyboardClient* kbd = nullptr;
 	MouseHelper* mhelper = nullptr;
 
+	IOgroup(Interface* pout, MouseClient* pmouse, KeyboardClient* pkbd, MouseHelper* pmhelper) {
+		out = pout;
+		mouse = pmouse;
+		kbd = pkbd;
+		mhelper = pmhelper;
+	}
+
 	void Update() {
-		mhelper->Update();
+		mhelper->Refresh();
 	}
 };
 

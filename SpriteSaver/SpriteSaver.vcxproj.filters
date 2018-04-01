@@ -236,5 +236,13 @@
     <ClInclude Include="..\Engine2\UserInterface.h">
       <Filter>Engine2</Filter>
     </ClInclude>
+    <ClInclude Include="SelectBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="TODO.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

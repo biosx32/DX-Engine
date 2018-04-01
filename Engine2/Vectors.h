@@ -2,6 +2,10 @@
 #define __TYPEZ_H__PRIM__
 #include "CustomMath.h"
 
+
+
+
+
 class Vector2 {
 public:
 	float x, y;

@@ -29,6 +29,9 @@ Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 	srand( (unsigned int)time( NULL ) );
 }
 
+Bitmap* spritesheet = new Bitmap("..\\Assets\\Resources\\test_SPRITES.bmp");
+
+
 IOgroup* IOG = nullptr;
 TestInterface* out = nullptr;
 
@@ -37,18 +40,41 @@ void Game::Initialise() {
 	srand(time(0));
 	PixelDest screen = PixelDest(&gfx);
 	out = new TestInterface(screen);
-	IOG = new IOgroup();
-	IOG->mouse = &mouse;
-	IOG->out = out;
-	IOG->kbd = &kbd;
-	IOG->mhelper = new MouseHelper(&mouse);
+	IOG = new IOgroup(out,&mouse,&kbd,new MouseHelper(&mouse));
 	
 }
-Grid* j = new Grid(0, 0, 32);
+void PrintProgramHeader(IOgroup* IOG) {
+	IOG->out->paint->rectangleBorder(0, 0, 170, 25, Colors::Red, 3);
+	IOG->out->PrintText(5, 0, &DOS_WHITE, std::string("Sprite Saver"));
+}
+
+
+bool hasBullet = true;
+#include "SelectBox.h"
+SelectBox test = SelectBox(Vector2(0, 0));
 void Game::ComposeFrame() {
-out->PrintText(0, 0, &DOS_BLACK, std::string("Sprite Saver"));
-out->paint->rectangleBorder(0, 0, 30, 30, Colors::Red, 3);
-j->Draw(out);
+	
+	if (mouse.LeftIsPressed()) {
+		if (hasBullet == true) {
+			hasBullet = false;
+			test.pos = IOG->mhelper->GetPosition();
+		}
+		else {
+			test.Update(IOG->mhelper->GetPosition());
+		}
+		
+	}
+	else {
+		hasBullet = true;
+	}
+
+	
+	//out->DrawBitmap(spritesheet, 0, 0);
+	test.Draw(out);
+	out->PrintText(5, 35, &DOS_WHITE, out->LabelizeVector(test.pos, "Pos"));
+	out->PrintText(5, 85, &DOS_WHITE, out->LabelizeVector(test.size, "Size"));
+
+	PrintProgramHeader(IOG);
 }
 
 void Game::UpdateModel()
