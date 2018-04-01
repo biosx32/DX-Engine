@@ -2,13 +2,13 @@
 #define __BUTTON_H__
 #include "Vectors.h"
 #include "Mouse.h"
-#include "ManageableElement.h"
+#include "Element.h"
 #include "MouseEventObject.h"
 #include "Interface.h"
 #include "GlobalObjects.h"
 
 
-class Button : public ManageableElement, public MouseEventObject {
+class Button : public Element, public MouseEventObject {
 public:
 
 	Vector2 size;
@@ -19,13 +19,13 @@ public:
 	
 
 	Button(Vector2 position, Vector2 size, void(*function)(), string textsrc) :
-		ManageableElement(position), size(size), text(textsrc), function(function){}
+		Element(position), size(size), text(textsrc), function(function){}
 
 
 	virtual bool isHover(MouseClient* mouse) override {
 		int mx = mouse->GetMouseX(), 
 			my = mouse->GetMouseY();
-		return mx >= GetPos().x && my >= GetPos().y && mx < GetPos().x + size.x && my < GetPos().y + size.y;
+		return mx >= GetAbsolutePos().x && my >= GetAbsolutePos().y && mx < GetAbsolutePos().x + size.x && my < GetAbsolutePos().y + size.y;
 	}
 
 	virtual void UpdateOnClick(){

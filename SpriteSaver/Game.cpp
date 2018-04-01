@@ -48,8 +48,16 @@ void Game::Initialise() {
 	PixelDest screen = PixelDest(&gfx);
 	out = new TestInterface(screen);
 	IOG = new IOgroup(out,&mouse,&kbd,new MouseHelper(&mouse));
-	lbox->Add("First item");
-	lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item"); lbox->Add("Second item");
+	lbox->Add("1-st item");
+	lbox->Add("2-nd item");
+	lbox->Add("3-rd item");
+	lbox->Add("4-th item");
+	for (int i = 5; i < 100; i++) {
+		char text[400] = {};
+		sprintf_s(text, "%d-th item", i);
+		lbox->Add(text);
+	}
+	Element::io = IOG;
 
 }
 void PrintProgramHeader(IOgroup* IOG) {
@@ -77,17 +85,17 @@ void Game::ComposeFrame() {
 
 	
 	//out->DrawBitmap(spritesheet, 0, 0);
-	test.Draw(out);
+	test.Draw();
 	out->PrintText(5, 35, &DOS_WHITE, out->LabelizeVector(test.pos, "Pos"));
-	out->PrintText(5, 85, &DOS_WHITE, out->LabelizeVector(test.size, "Size"));
-	lbox->Draw(out);
+	out->PrintText(5, 70, &DOS_WHITE, out->LabelizeVector(test.size, "Size"));
+	lbox->Draw();
 
 
-	out->PrintText(300, 5, &DOS_WHITE, out->LabelizeVector(Vector2(j.value, 0), "Scroll"));
-	lbox->Update(IOG);
-	j.Update(IOG);
-	j.Draw(out);
-
+	out->PrintText(10, 350, &DOS_WHITE, out->LabelizeVector(Vector2(j.value, 0), "Scroll"));
+	lbox->Update();
+	j.Update();
+	j.Draw();
+	out->PrintText(10, 380, &DOS_WHITE, IOG->mhelper->IsFree() ? "AVAILABLE" : "TAKEN");
 	///////////////////////////////////////////
 	PrintProgramHeader(IOG);
 	

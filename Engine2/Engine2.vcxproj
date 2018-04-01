@@ -36,12 +36,12 @@
     <ClCompile Include="Bmap.cpp" />
     <ClCompile Include="CustomMath.cpp" />
     <ClCompile Include="Drawing.cpp" />
+    <ClCompile Include="Element.cpp" />
     <ClCompile Include="FloodfillMap.cpp" />
     <ClCompile Include="Func.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GlobalObjects.cpp" />
     <ClCompile Include="Interface.cpp" />
-    <ClCompile Include="ManageableElement.cpp" />
     <ClCompile Include="OutputStream.cpp" />
     <ClCompile Include="PixelMap.cpp" />
     <ClCompile Include="TestInterface.cpp" />
@@ -67,7 +67,8 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonManager.h" />
     <ClInclude Include="Checkbox.h" />
-    <ClInclude Include="ClickableRectangle.h" />
+    <ClInclude Include="ElementExtended.h" />
+    <ClInclude Include="MouseRegion.h" />
     <ClInclude Include="ColorButton.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="ConfigFile.h" />
@@ -87,7 +88,6 @@
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="KeyData.h" />
     <ClInclude Include="Label.h" />
-    <ClInclude Include="ManageableElement.h" />
     <ClInclude Include="MBmap.h" />
     <ClInclude Include="MouseEventObject.h" />
     <ClInclude Include="MouseHelper.h" />

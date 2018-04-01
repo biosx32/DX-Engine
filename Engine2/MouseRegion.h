@@ -1,6 +1,7 @@
 #pragma once
 #include "Vectors.h"
 #include "Mouse.h"
+#include "Element.h"
 
 namespace ButtonState {
 	enum Type
@@ -12,33 +13,32 @@ namespace ButtonState {
 	};
 }
 
-class MouseRegion {
+class MouseRegion: public Element {
 public:
-	Vector2 pos;
 	Vector2 size;
 	int state = 0;
 
-	MouseRegion(Vector2 ppos, Vector2 psize){
-		pos = ppos; size = psize;
+	MouseRegion(Vector2 ppos, Vector2 psize): Element(ppos){
+		size = psize;
 	}
 
-	bool isHover(MouseClient mouse) {
-		Vector2 mPos = Vector2(mouse.GetMouseX(), mouse.GetMouseY());
+	bool isHover() {
+		Vector2 mPos = Vector2(io->mouse->GetMouseX(), io->mouse->GetMouseY());
 		return mPos.x >= pos.x && mPos.y >= pos.y && mPos.x < pos.x + size.x && mPos.y < pos.y + size.y;
 	}
 
-	bool isPress(MouseClient mouse) {
-		return mouse.LeftIsPressed();
+	bool isPress() {
+		return io->mouse->LeftIsPressed();
 	}
+	void Draw(){}
+	void Update() {
 
-	void Update(MouseClient mouse) {
-
-		if (!isHover(mouse)) {
+		if (!isHover()) {
 			state = ButtonState::normal;
 		}
 
 		else { //!isHover(mouse)
-			if (isPress(mouse)) {
+			if (isPress()) {
 				state = ButtonState::press;
 			}
 

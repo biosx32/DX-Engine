@@ -2,7 +2,7 @@
 #include "Element.h"
 #include "GlobalObjects.h"
 #include "MouseEventObject.h"
-class TextBox : public ManageableElement, public MouseEventObject {
+class TextBox : public Element, public MouseEventObject {
 public:
 	BitmapFont* font = &DOS_BLACK;
 	int wmax;
@@ -10,7 +10,7 @@ public:
 	int textsize = 0;
 	bool isSelected = false;
 	Vector2 size = Vector2(0, 0);
-	TextBox(Vector2 pos, int wmax) : ManageableElement(pos), wmax(wmax) {
+	TextBox(Vector2 pos, int wmax) : Element(pos), wmax(wmax) {
 		this->size = Size(wmax * font->charw, font->charh);
 		this->text[wmax] = 0;
 	}
@@ -18,7 +18,7 @@ public:
 	bool isHover(MouseClient* mouse) override {
 		int mx = mouse->GetMouseX(),
 			my = mouse->GetMouseY();
-		return mx >= GetPos().x && my >= GetPos().y && mx < GetPos().x + size.x && my < GetPos().y + size.y;
+		return mx >= GetAbsolutePos().x && my >= GetAbsolutePos().y && mx < GetAbsolutePos().x + size.x && my < GetAbsolutePos().y + size.y;
 	}
 
 
@@ -69,12 +69,12 @@ public:
 
 	void Draw() override {
 		const int border = 2;
-		io->out->paint->rectangle(GetPos().x - border, GetPos().y, size.x + border * 2, size.y, Colors::White);
-		io->out->paint->rectangleBorder(GetPos().x - border, GetPos().y, size.x + border*2, size.y, Colors::Black, border);
-		io->out->PrintText(GetPos().x, GetPos().y, font, text);
+		io->out->paint->rectangle(GetAbsolutePos().x - border, GetAbsolutePos().y, size.x + border * 2, size.y, Colors::White);
+		io->out->paint->rectangleBorder(GetAbsolutePos().x - border, GetAbsolutePos().y, size.x + border*2, size.y, Colors::Black, border);
+		io->out->PrintText(GetAbsolutePos().x, GetAbsolutePos().y, font, text);
 		if (this->isSelected) {
 			int x = textsize * font->charw;
-			io->out->paint->rectangle(x + GetPos().x, GetPos().y, 4, font->charh, Colors::Red);
+			io->out->paint->rectangle(x + GetAbsolutePos().x, GetAbsolutePos().y, 4, font->charh, Colors::Red);
 		}
 	
 	}

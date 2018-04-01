@@ -19,19 +19,44 @@ public:
 		mhelper = pmhelper;
 	}
 
-	void Update() {
-		mhelper->Refresh();
-	}
 };
+
 
 class Element {
 public:
-	Element * ElementInfo = this;
-	Vector2 rel_pos;
+	static int ElementCount;
+	static IOgroup* io;
+
+public:
+	Element * parent = nullptr;
+	int ID;
+
+public:
+	Vector2 pos;
 	bool visible = true;
 	
-	virtual void Update(IOgroup* ig) = 0;
-	Element(Vector2 Pos):rel_pos(Pos){}
+public:
+	int GetDepth() {
+		if (parent) {
+			return parent->GetDepth() + 1;
+		}
+		return 0;
+	}
+	Vector2 GetAbsolutePos() {
+		if (parent) {
+			return this->pos + parent->GetAbsolutePos();
+		}
+		else {
+			return pos;
+		}
+	}
+
+	virtual void Update() = 0;
+	virtual void Draw() = 0;
+
+	Element(Vector2 Pos):pos(Pos){
+		ID = ElementCount++;
+	}
 };
 
 

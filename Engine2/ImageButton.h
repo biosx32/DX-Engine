@@ -61,13 +61,13 @@ public:
 			ratiocorner = sidescale;
 		}
 
-		int leftx = GetPos().x;
+		int leftx = GetAbsolutePos().x;
 		int middlex = leftx + img->cleft->width * ratiocorner;
 		int rightx = middlex + img->cmiddle->width* ratiox;
 
-		DrawSpecial(out,img->cleft, leftx, GetPos().y, ratiocorner, ratioy);
-		DrawSpecial(out,img->cmiddle, middlex, GetPos().y, ratiox, ratioy);
-		DrawSpecial(out,img->cright, rightx, GetPos().y, ratiocorner, ratioy);
+		DrawSpecial(out,img->cleft, leftx, GetAbsolutePos().y, ratiocorner, ratioy);
+		DrawSpecial(out,img->cmiddle, middlex, GetAbsolutePos().y, ratiox, ratioy);
+		DrawSpecial(out,img->cright, rightx, GetAbsolutePos().y, ratiocorner, ratioy);
 
 		
 	}
@@ -78,8 +78,8 @@ public:
 			size = Vector2(font->charw *txtsize * 1.25, font->charh*1.5);
 		}
 		int textWidth = text.size() * font->charw;
-		int textY = GetPos().y + size.y / 2 - font->charh / 2;
-		int textX = GetPos().x + (size.x - textWidth) / 2;
+		int textY = GetAbsolutePos().y + size.y / 2 - font->charh / 2;
+		int textX = GetAbsolutePos().x + (size.x - textWidth) / 2;
 
 		this->DrawImage(io->out);
 		io->out->PrintText(textX, textY, font, text);

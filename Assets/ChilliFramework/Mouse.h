@@ -31,6 +31,7 @@ public:
 	bool LeftIsPressed() const;
 	bool RightIsPressed() const;
 	bool IsInWindow() const;
+	float GetWheel() const;
 private:
 	const MouseServer& server;
 };
@@ -47,10 +48,12 @@ public:
 	void OnLeftReleased();
 	void OnRightPressed();
 	void OnRightReleased();
+	void OnMouseWheel(float direction);
 	bool IsInWindow() const;
 private:
 	int x;
 	int y;
+	float wheel;
 	bool leftIsPressed;
 	bool rightIsPressed;
 	bool isInWindow;

@@ -1,17 +1,16 @@
 #pragma once
-#include "..\Engine2\Vectors.h"
-#include "..\Engine2\TestInterface.h"
-#include "..\Engine2\GlobalObjects.h"
-
-class HelperElement {
+#include "Element.h"
+class ElementExtended : public Element {
 public:
-	Vector2 pos;
 	Vector2 size;
-	std::string name= "HelperElement";
+	ElementExtended(Pos pos, Size size) :Element(pos), size(size){}
+
+
+	std::string name = "HelperElement";
 	BitmapFont* font = &DOS_WHITE;
 
 	void DrawName(Interface* out) {
-		out->PrintText(pos.x + size.x / 2 - font->charw*name.size() /2, pos.y + size.y / 2 - font->charh/2, font, this->name);
+		out->PrintText(pos.x + size.x / 2 - font->charw*name.size() / 2, pos.y + size.y / 2 - font->charh / 2, font, this->name);
 	}
 
 	void DrawBorder(Interface* out) {

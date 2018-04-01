@@ -94,6 +94,9 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 		case WM_RBUTTONUP:
 			mServ.OnRightReleased();
 			break;
+		case WM_MOUSEWHEEL:
+			mServ.OnMouseWheel((short)HIWORD(wParam));
+			break;
 		// ************ END MOUSE MESSAGES ************ //
     }
 

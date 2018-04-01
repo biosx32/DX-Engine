@@ -4,18 +4,18 @@
 #include "MouseEventObject.h"
 
 
-class CheckBox : public ManageableElement, public MouseEventObject {
+class CheckBox : public Element, public MouseEventObject {
 public:
 	bool checked = false;
 	const int radius = 15;
 	std::string text = "";
 	BitmapFont* font = &DOS_BLACK;
-	CheckBox(Vector2 position, char* text): ManageableElement(position), text(text) {
+	CheckBox(Vector2 position, char* text): Element(position), text(text) {
 
 	}
 
 	bool isHover(MouseClient* mouse) override {
-		return (GetSquareDistance1(mouse->GetMouseX(), GetPos().x+radius) + GetSquareDistance1(mouse->GetMouseY(), GetPos().y+radius)) < radius*radius;
+		return (GetSquareDistance1(mouse->GetMouseX(), GetAbsolutePos().x+radius) + GetSquareDistance1(mouse->GetMouseY(), GetAbsolutePos().y+radius)) < radius*radius;
 	}
 
 	void UpdateCheck(){
@@ -30,17 +30,17 @@ public:
 	}
 
 	void Draw() {
-		io->out->paint->rectangle(GetPos().x, GetPos().y, radius * 2, radius * 2, Colors::White);
+		io->out->paint->rectangle(GetAbsolutePos().x, GetAbsolutePos().y, radius * 2, radius * 2, Colors::White);
 		if (checked) {
-			io->out->paint->rectangle(GetPos().x, GetPos().y, radius * 2, radius * 2, Colors::GreenDark);
-			io->out->paint->line(GetPos().x, GetPos().y, GetPos().x + radius * 2, GetPos().y + radius * 2, Colors::White,2);
-			io->out->paint->line(GetPos().x, GetPos().y + radius * 2, GetPos().x + radius * 2, GetPos().y , Colors::White,2);
+			io->out->paint->rectangle(GetAbsolutePos().x, GetAbsolutePos().y, radius * 2, radius * 2, Colors::GreenDark);
+			io->out->paint->line(GetAbsolutePos().x, GetAbsolutePos().y, GetAbsolutePos().x + radius * 2, GetAbsolutePos().y + radius * 2, Colors::White,2);
+			io->out->paint->line(GetAbsolutePos().x, GetAbsolutePos().y + radius * 2, GetAbsolutePos().x + radius * 2, GetAbsolutePos().y , Colors::White,2);
 
 		
 		}
-		io->out->paint->rectangleBorder(GetPos().x, GetPos().y, radius * 2, radius * 2, Colors::Black, 3);
-		io->out->paint->rectangleBorder(GetPos().x, GetPos().y, radius * 2, radius * 2, Colors::White, 1);
-		io->out->PrintText(GetPos().x + radius * 2.34, GetPos().y + radius /3, font, text);
+		io->out->paint->rectangleBorder(GetAbsolutePos().x, GetAbsolutePos().y, radius * 2, radius * 2, Colors::Black, 3);
+		io->out->paint->rectangleBorder(GetAbsolutePos().x, GetAbsolutePos().y, radius * 2, radius * 2, Colors::White, 1);
+		io->out->PrintText(GetAbsolutePos().x + radius * 2.34, GetAbsolutePos().y + radius /3, font, text);
 
 
 	}

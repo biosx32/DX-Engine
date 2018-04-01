@@ -1,18 +1,18 @@
 #pragma once
 
-#include "ManageableElement.h"
+#include "Element.h"
 
 class ItemManager {
 public:
-	vector<ManageableElement*> Items;
+	vector<Element*> Items;
 
-	void Add(ManageableElement* item) {
+	void Add(Element* item) {
 		Items.push_back(item);
 	}
 
-	void Remove(ManageableElement* e) {
+	void Remove(Element* e) {
 		int index = 0;
-		for (ManageableElement* Item : Items) {
+		for (Element* Item : Items) {
 			if (e == Item) {
 				Items.erase(Items.begin() + index);
 			}

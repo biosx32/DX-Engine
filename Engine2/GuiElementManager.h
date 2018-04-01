@@ -38,11 +38,11 @@ public:
 		}
 	}
 
-	void UpdateOne(ManageableElement* e) {
-		e->Update(io);
+	void UpdateOne(Element* e) {
+		e->Update();
 	}
-	void DrawOne(ManageableElement* e) {
-		e->Draw(io);
+	void DrawOne(Element* e) {
+		e->Draw();
 	}
 
 };

@@ -44,12 +44,18 @@ bool MouseClient::IsInWindow() const
 	return server.isInWindow;
 }
 
+float MouseClient::GetWheel() const
+{
+	return server.wheel;
+}
+
 MouseServer::MouseServer()
 :	isInWindow( false ),
 	leftIsPressed( false ),
 	rightIsPressed( false ),
 	x( -1 ),
-	y( -1 )
+	y( -1 ),
+	wheel(0)
 {}
 void MouseServer::OnMouseMove( int x,int y )
 {
@@ -79,6 +85,10 @@ void MouseServer::OnRightPressed()
 void MouseServer::OnRightReleased()
 {
 	rightIsPressed = false;
+}
+void MouseServer::OnMouseWheel(float direction)
+{
+	this->wheel = direction;
 }
 bool MouseServer::IsInWindow() const
 {

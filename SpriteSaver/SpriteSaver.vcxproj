@@ -133,11 +133,11 @@
     <ClCompile Include="..\Engine2\Bmap.cpp" />
     <ClCompile Include="..\Engine2\CustomMath.cpp" />
     <ClCompile Include="..\Engine2\Drawing.cpp" />
+    <ClCompile Include="..\Engine2\Element.cpp" />
     <ClCompile Include="..\Engine2\FloodfillMap.cpp" />
     <ClCompile Include="..\Engine2\Func.cpp" />
     <ClCompile Include="..\Engine2\GlobalObjects.cpp" />
     <ClCompile Include="..\Engine2\Interface.cpp" />
-    <ClCompile Include="..\Engine2\ManageableElement.cpp" />
     <ClCompile Include="..\Engine2\OutputStream.cpp" />
     <ClCompile Include="..\Engine2\PixelMap.cpp" />
     <ClCompile Include="..\Engine2\TestInterface.cpp" />
@@ -195,7 +195,6 @@
     <ClInclude Include="..\Engine2\Vectors.h" />
     <ClInclude Include="..\Engine2\VectorSpritesheet.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="HelperElement.h" />
     <ClInclude Include="Listbox.h" />
     <ClInclude Include="ScrollBars.h" />
     <ClInclude Include="SelectBox.h" />

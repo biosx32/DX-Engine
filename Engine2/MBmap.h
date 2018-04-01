@@ -1,19 +1,19 @@
 #pragma once
 
-#include "ManageableElement.h"
+#include "Element.h"
 #include "BMap.h"
 
-class MBmap : public ManageableElement, public Bitmap {
+class MBmap : public Element, public Bitmap {
 public:
 	Vector2 size;
-	MBmap(Vector2 pos, const char* FileName, Vector2 size) : Bitmap(FileName), ManageableElement(pos), size(size) {}
-	MBmap(Vector2 pos, const char* FileName, Color c, Vector2 size) : Bitmap(FileName, c), ManageableElement(pos), size(size) {}
+	MBmap(Vector2 pos, const char* FileName, Vector2 size) : Bitmap(FileName), Element(pos), size(size) {}
+	MBmap(Vector2 pos, const char* FileName, Color c, Vector2 size) : Bitmap(FileName, c), Element(pos), size(size) {}
 
 	void Update() override {
 
 	}
 
 	void Draw() override {
-		io->out->DrawBitmap(this, this->GetPos().x, GetPos().y, size.x, size.y);
+		io->out->DrawBitmap(this, this->GetAbsolutePos().x, GetAbsolutePos().y, size.x, size.y);
 	}
 };

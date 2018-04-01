@@ -2,7 +2,7 @@
 #include "..\Engine2\Vectors.h"
 #include "..\Engine2\GlobalObjects.h"
 #include "..\Engine2\TestInterface.h"
-#include "..\Engine2\ClickableRectangle.h"
+#include "..\Engine2\MouseRegion.h"
 #include "ScrollBars.h"
 class ListBoxItem {
 public:
@@ -12,16 +12,15 @@ public:
 	}
 };
 
-class ListBox: public HelperElement {
+class ListBox: public ElementExtended {
 public:
 	MouseRegion mregion;
-	BitmapFont* font = &DOS_WHITE_MINI;
 	std::vector<ListBoxItem> items;
 	int selectedIndex = -1;
 	int offset = 0;
 
 	VScrollBar sc;
-	ListBox(Vector2 ppos, Vector2 psize):
+	ListBox(Pos ppos, Size psize): ElementExtended(ppos,psize),
 		mregion(ppos, Size(psize.x - 15,psize.y)), sc(Pos(ppos.x + psize.x - 15, ppos.y), Size(15, psize.y))
 	{
 		name = "Empty ListBox";
@@ -52,14 +51,14 @@ public:
 		return which >= 0 && which < items.size();
 	}
 
-	void Draw(Interface* out) {
+	void Draw() {
 		this->DrawBorder(out);
 		if (items.size() < 1) {
 			this->DrawName(out);
 		}
 
 		if (scrollbarvisible()) {
-			sc.Draw(out);
+			sc.Draw();
 			out->PrintText(200, 00, &DOS_BLACK, &std::string("Val: %.2f"), sc.value);
 		}
 
@@ -73,22 +72,26 @@ public:
 			out->PrintText(pos.x+5, pos.y+3 + font->charh * i, font, items.at(pickIndex).text);
 		}
 		if (isValidIndex()) {
-			out->paint->rectangleBorder(pos.x, pos.y+3  + selectedIndex * font->charh, size.x-15, font->charh, Colors::Cyan, 2);
+			int drawindex = selectedIndex-offset;
+			if (selectedIndex >= offset && selectedIndex < offset + drawMax) {
+				out->paint->rectangleBorder(pos.x, pos.y + 3 + drawindex * font->charh, size.x - 15, font->charh, Colors::Cyan, 2);
+			}
+			
 		}
 	}
 
-	void Update(IOgroup* IOG) {
-		mregion.Update(*IOG->mouse);
-		sc.Update(IOG);
+	void Update() {
+		mregion.Update();
+		sc.Update();
 		if (scrollbarvisible()) {
 			offset = items.size() * sc.value;
 		}
 		else { offset = 0; }
-		if (mregion.isHover(*IOG->mouse) && mregion.isPress(*IOG->mouse) && sc.locked == false) {
-			IOG->mhelper->Refresh();
-			Vector2 rpos = IOG->mhelper->position-pos;
+		if (mregion.isHover() && mregion.isPress() && sc.locked == false) {
+			io->mhelper->Refresh();
+			Vector2 rpos = io->mhelper->position-pos;
 			int yoff = rpos.y - 3;
-			int possibleIndex = (yoff / font->charh);
+			int possibleIndex = (yoff / font->charh)+offset;
 		
 		
 			if (isValidIndex(possibleIndex)) {

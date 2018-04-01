@@ -1,23 +1,21 @@
-#ifndef __LABELZ_H___
-#define __LABELZ_H___
+#pragma once
 #include "Element.h"
-#include "ManageableElement.h"
 #include <string>
 using std::string;
 #include "BitmapFont.h"
 #include "GlobalObjects.h"
 
-class Label: public ManageableElement {
+class Label: public Element {
 public:
 	string text = "";
 	BitmapFont* font = &DOS_BLACK;
 
-	Label(Vector2 position, const char* newtext): ManageableElement(position), text(newtext) {	}
-	Label(Vector2 position, const char* newtext, BitmapFont* font) : ManageableElement(position), text(newtext), font(font) {}
+	Label(Vector2 position, const char* newtext): Element(position), text(newtext) {	}
+	Label(Vector2 position, const char* newtext, BitmapFont* font) : Element(position), text(newtext), font(font) {}
 
 	void Update() {}
 	void Draw() {
-		io->out->PrintText(this->GetPos().x, this->GetPos().y, this->font, this->text);
+		io->out->PrintText(this->GetAbsolutePos().x, this->GetAbsolutePos().y, this->font, this->text);
 	}
 
 	void SetText(const char *fmt, ...){
@@ -30,7 +28,3 @@ public:
 		va_end(args);
 	}
 };
-
-
-
-#endif // !__LABELZ_H___
