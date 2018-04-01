@@ -64,6 +64,7 @@ void PrintProgramHeader(IOgroup* IOG) {
 	IOG->out->paint->rectangleBorder(0, 0, 170, 25, Colors::Red, 3);
 	IOG->out->PrintText(5, 0, &DOS_WHITE, std::string("Sprite Saver"));
 }
+float k = 0;
 HScrollBar j = HScrollBar(Pos(150, 380), Size(100, 20));
 
 void Game::ComposeFrame() {
@@ -98,7 +99,8 @@ void Game::ComposeFrame() {
 	out->PrintText(10, 380, &DOS_WHITE, IOG->mhelper->IsFree() ? "AVAILABLE" : "TAKEN");
 	///////////////////////////////////////////
 	PrintProgramHeader(IOG);
-	
+	out->PrintText(10, 480, &DOS_WHITE, std::string("text %f"),k);
+	k += IOG->mouse->GetWheel();
 }
 
 void Game::UpdateModel()

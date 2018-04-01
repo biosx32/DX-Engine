@@ -2,48 +2,45 @@
 
 
 
-void Interface::PrintText(int x, int y, BitmapFont* font, string *fmt, ...) {
+void Interface::PrintText(int x, int y, BitmapFont* font, string fmt, ...) {
 		char buffer[TXT_BUFFER_SIZE];
 		va_list args;
 		va_start(args, fmt);
-		int rc = vsnprintf(buffer, TXT_BUFFER_SIZE, fmt->c_str(), args);
+		int rc = vsnprintf(buffer, TXT_BUFFER_SIZE, fmt.c_str(), args);
 		va_end(args);
-		PrintText(x, y, font, buffer);
-}
-void Interface::PrintText(int x, int y, BitmapFont* font, string text)
-{
-	double rel_pos_x = 0;
-	double rel_pos_y = 0;
+		fmt = buffer;
 
-	for (char chr : text) {
+		double rel_pos_x = 0;
+		double rel_pos_y = 0;
 
-		float charw = font->charw;
-		float charh = font->charh;
+		for (char chr : fmt) {
 
-		if (chr == '\x20') {
+			float charw = font->charw;
+			float charh = font->charh;
+
+			if (chr == '\x20') {
+				rel_pos_x += charw;
+			}
+
+			else if (chr == '\n') { // \\x10
+				rel_pos_y += charh;
+				rel_pos_x = 0;
+			}
+
+			if (chr < font->offset) {
+				continue;
+			}
+
+			Bitmap* CharBitmap = font->GetCharacterRepr(chr);
+
+
+			int destx = (int)(x + rel_pos_x);
+			int desty = (int)(y + rel_pos_y);
+
+			DrawBitmap(CharBitmap, destx, desty);
+			//this->Painter->rectangle(destx, desty, charw, charh, 0xFFFF0000);
 			rel_pos_x += charw;
 		}
-
-		else if (chr == '\n') { // \\x10
-			rel_pos_y += charh;
-			rel_pos_x = 0;
-		}
-
-		if (chr < font->offset) {
-			continue;
-		}
-
-		Bitmap* CharBitmap = font->GetCharacterRepr(chr);
-
-
-		int destx = (int)(x + rel_pos_x);
-		int desty = (int)(y + rel_pos_y);
-
-		DrawBitmap(CharBitmap, destx, desty);
-		//this->Painter->rectangle(destx, desty, charw, charh, 0xFFFF0000);
-		rel_pos_x += charw;
-
-	}
 }
 
 

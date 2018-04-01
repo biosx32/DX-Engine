@@ -59,7 +59,7 @@ public:
 
 		if (scrollbarvisible()) {
 			sc.Draw();
-			out->PrintText(200, 00, &DOS_BLACK, &std::string("Val: %.2f"), sc.value);
+			out->PrintText(200, 00, &DOS_BLACK, std::string("Val: %.2f"), sc.value);
 		}
 
 		int drawMax =(size.y + font->charh - 1) / font->charh;

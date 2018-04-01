@@ -22,12 +22,12 @@ public:
 	Interface(PixelDest dest) { 
 		paint = new Painter(dest); 
 	}
+	BitmapFont * font = &DOS_WHITE;
 
 	void DrawBitmap(Bitmap* bmp, int fx, int fy, float mx, float my);
 	void DrawBitmap(Bitmap* bmp, int fx, int fy);
 	void DrawSprite(PixelMap* VBmp, int fx, int fy);
-	void PrintText(int x, int y, BitmapFont* font, string text);
-	void PrintText(int x, int y, BitmapFont* font, string *fmt, ...);
+	void PrintText(int x, int y, BitmapFont* font, string fmt, ...);
 	void FillScreen(Color color);
 
 };

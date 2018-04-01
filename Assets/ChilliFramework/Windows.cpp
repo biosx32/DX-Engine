@@ -147,7 +147,9 @@ int WINAPI wWinMain( HINSTANCE hInst,HINSTANCE,LPWSTR,INT )
         }
         else
 		{
+			
 			theGame.Go();
+			mServ.ResetWheel();
 		}
     }
 

@@ -44,9 +44,10 @@ bool MouseClient::IsInWindow() const
 	return server.isInWindow;
 }
 
-float MouseClient::GetWheel() const
+float MouseClient::GetWheel()
 {
-	return server.wheel;
+	float temp = server.wheel;
+	return temp;
 }
 
 MouseServer::MouseServer()
