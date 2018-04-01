@@ -7,9 +7,9 @@
 #include <time.h>
 
 
-int CharacterCountInCString(char* src, char chr, int max);
+int CharacterCountInCString(const char* src, char chr, int max);
 int File_bytes(FILE* p_file);
-wchar_t *CSTR_to_LSTR(char* charArray);
+wchar_t *CSTR_to_LSTR(const char* charArray);
 void Swap(int*a, int*b);
 
 
@@ -17,8 +17,8 @@ int GetNextLineOffset(FILE* file);
 bool HasNextLn(FILE* file);
 int File_pos(FILE* p_file);
 int File_to_end(FILE* file);
-bool Startswith(char * a, char * b, int sublen);
+bool Startswith(const char * a, const char * b, int sublen);
 void File_Setpos(FILE * p_file, int Pos);
-int FindFirstChar(char * str, char chr);
-int FindLastChar(char * str, char chr);
+int FindFirstChar(const char * str, char chr);
+int FindLastChar(const char * str, char chr);
 #endif

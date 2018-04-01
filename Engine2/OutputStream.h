@@ -1,5 +1,4 @@
-#ifndef __OUTPUT_STREAM_H_322__
-#define __OUTPUT_STREAM_H_322__
+#pragma once
 #include <sstream>
 #include <Windows.h>
 
@@ -9,17 +8,13 @@ extern SpecialCode console;
 
 class OutputStream {
 protected:
-	std::stringstream stream = std::stringstream("", std::ios_base::app | std::ios_base::out);;
+	std::stringstream stream = std::stringstream("", std::ios_base::app | std::ios_base::out);
 public:
-	OutputStream() {}
+	OutputStream();
 
-	OutputStream & OutputStream::operator<<(int data) { stream << data; return *this; }
-	OutputStream & OutputStream::operator<<(double data) { stream << data; return *this; }
-	OutputStream & OutputStream::operator<<(SpecialCode finish);
-	OutputStream & OutputStream::operator<<(char * data);
-	OutputStream & OutputStream::operator<<(const char * data);
+	OutputStream & operator<<(int data);
+	OutputStream & operator<<(double data);
+	OutputStream & operator<<(SpecialCode finish);
+	OutputStream & operator<<(char * data);
+	OutputStream & operator<<(const char * data);
 };
-
-
-
-#endif // !__OUTPUT_STREAM_H_322__

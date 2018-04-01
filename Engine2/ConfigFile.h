@@ -11,10 +11,13 @@ public:
 	char name[256] = {};
 	bool valid = false;
 	vector<KeyData> configvalues;
-	ConfigFile(char* config_file) {
+	ConfigFile(const char* config_file) {
 		FILE* fread;
 		fopen_s(&fread, config_file, "rb");
 		OutputStream output = OutputStream();
+
+		int Remaining, toRead;
+		char linebuffer[256] = {};
 
 		if (fread == nullptr) {
 			output << "ERROR: Could not load config: " << config_file << msgbox;
@@ -25,12 +28,12 @@ public:
 			goto WrongConfig;
 		}
 
-		int toRead = GetNextLineOffset(fread);
+		toRead = GetNextLineOffset(fread);
 		if (toRead < 1) {
 			goto WrongConfig;
 		}
 
-		char linebuffer[256] = {};
+	
 		{   //read name
 			fread_s(linebuffer, 256, 1, toRead, fread);
 			strncpy_s(name, linebuffer, toRead);
@@ -41,7 +44,7 @@ public:
 				fread_s(t, 1, 1, 1, fread);
 			}
 		}
-		int Remaining = File_to_end(fread);
+		Remaining = File_to_end(fread);
 
 		while (Remaining > 0) {
 
@@ -88,7 +91,7 @@ public:
 
 	}
 
-	bool HasKey(char* key) {
+	bool HasKey(const char* key) {
 		int len = strlen(key);
 		if (len > 0) {
 			for (vector<KeyData>::iterator it = configvalues.begin(); it != configvalues.end(); ++it) {
@@ -103,7 +106,7 @@ public:
 		return false;
 	}
 
-	char* GetValue(char* key) {
+	char* GetValue(const char* key) {
 
 		for (vector<KeyData>::iterator it = configvalues.begin(); it != configvalues.end(); ++it) {
 			char* cmp = (*it).keyb;

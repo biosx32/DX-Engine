@@ -7,6 +7,7 @@
 #include "Bmap.h"
 #include "BitmapFont.h"
 #include "PixelMap.h"
+#include "GlobalObjects.h"
 
 using std::string;
 #define TXT_BUFFER_SIZE 4096

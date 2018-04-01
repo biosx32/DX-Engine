@@ -39,7 +39,7 @@ public:
 
 
 
-	BitmapFont(char* image_src_info) {
+	BitmapFont(const char* image_src_info) {
 
 		ConfigFile config = ConfigFile(image_src_info);
 		OutputStream output = OutputStream();
@@ -49,10 +49,10 @@ public:
 		}
 
 		const int RCOUNT = 4;
-		char* required[RCOUNT] = { "LOCATION", "WCOUNT", "HCOUNT", "BKCLR" };
-		char* optional[] = { "DROP", "OFFSET", "LOADSIZE" };
+		const char* required[RCOUNT] = { "LOCATION", "WCOUNT", "HCOUNT", "BKCLR" };
+		const char* optional[] = { "DROP", "OFFSET", "LOADSIZE" };
 
-		char header[] = "FONT_INFO";
+		const char header[] = "FONT_INFO";
 		if (strncmp(config.name, header, strlen(header) == 0)) {
 			output << "ERROR: Incorrect config."<< image_src_info << "\nConfig for: " << config.name << msgbox;
 			return;
@@ -65,7 +65,7 @@ public:
 			}
 		}
 
-		char* sdrop = "0", *soffset = "0", *sloadsize = "1";
+		const char* sdrop = "0", *soffset = "0", *sloadsize = "1";
 		char* slocation = config.GetValue(required[0]);
 		char* swcount = config.GetValue(required[1]);
 		char* shcount = config.GetValue(required[2]);
@@ -98,7 +98,8 @@ public:
 			
 			char location[512] = {};
 			int namelen = strlen(image_src_info);
-			int lastbs = FindLastChar(image_src_info, '\\');
+			const char* abc = image_src_info;
+			int lastbs = FindLastChar(abc, '\\');
 			int fullLen;
 
 			if (lastbs == -1) {

@@ -71,6 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)\Assets\ChilliFramework;$(SolutionDir)\SpriteSaver;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -127,6 +128,20 @@
     <ClCompile Include="..\Assets\ChilliFramework\Sound.cpp" />
     <ClCompile Include="..\Assets\ChilliFramework\Timer.cpp" />
     <ClCompile Include="..\Assets\ChilliFramework\Windows.cpp" />
+    <ClCompile Include="..\Engine2\BitmapArray.cpp" />
+    <ClCompile Include="..\Engine2\Bmap.cpp" />
+    <ClCompile Include="..\Engine2\CustomMath.cpp" />
+    <ClCompile Include="..\Engine2\Drawing.cpp" />
+    <ClCompile Include="..\Engine2\FloodfillMap.cpp" />
+    <ClCompile Include="..\Engine2\Func.cpp" />
+    <ClCompile Include="..\Engine2\GlobalObjects.cpp" />
+    <ClCompile Include="..\Engine2\Interface.cpp" />
+    <ClCompile Include="..\Engine2\ManageableElement.cpp" />
+    <ClCompile Include="..\Engine2\OutputStream.cpp" />
+    <ClCompile Include="..\Engine2\PixelMap.cpp" />
+    <ClCompile Include="..\Engine2\TestInterface.cpp" />
+    <ClCompile Include="..\Engine2\TrianglePoly.cpp" />
+    <ClCompile Include="..\Engine2\VectorSpritesheet.cpp" />
     <ClCompile Include="Game.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +155,44 @@
     <ClInclude Include="..\Assets\ChilliFramework\Surface.h" />
     <ClInclude Include="..\Assets\ChilliFramework\SurfaceSequence.h" />
     <ClInclude Include="..\Assets\ChilliFramework\Timer.h" />
+    <ClInclude Include="..\Engine2\Animation.h" />
+    <ClInclude Include="..\Engine2\BitmapArray.h" />
+    <ClInclude Include="..\Engine2\BitmapFont.h" />
+    <ClInclude Include="..\Engine2\Bmap.h" />
+    <ClInclude Include="..\Engine2\Button.h" />
+    <ClInclude Include="..\Engine2\ButtonManager.h" />
+    <ClInclude Include="..\Engine2\Checkbox.h" />
+    <ClInclude Include="..\Engine2\ClickableRectangle.h" />
+    <ClInclude Include="..\Engine2\ColorButton.h" />
+    <ClInclude Include="..\Engine2\Colors.h" />
+    <ClInclude Include="..\Engine2\ConfigFile.h" />
+    <ClInclude Include="..\Engine2\CustomMath.h" />
+    <ClInclude Include="..\Engine2\DebugGUI.h" />
+    <ClInclude Include="..\Engine2\Drawing.h" />
+    <ClInclude Include="..\Engine2\Element.h" />
+    <ClInclude Include="..\Engine2\FloodfillMap.h" />
+    <ClInclude Include="..\Engine2\Func.h" />
+    <ClInclude Include="..\Engine2\GlobalObjects.h" />
+    <ClInclude Include="..\Engine2\Group.h" />
+    <ClInclude Include="..\Engine2\GUI.h" />
+    <ClInclude Include="..\Engine2\GuiElementManager.h" />
+    <ClInclude Include="..\Engine2\ImageButton.h" />
+    <ClInclude Include="..\Engine2\Interface.h" />
+    <ClInclude Include="..\Engine2\ItemManager.h" />
+    <ClInclude Include="..\Engine2\KeyData.h" />
+    <ClInclude Include="..\Engine2\Labelz.h" />
+    <ClInclude Include="..\Engine2\ManageableElement.h" />
+    <ClInclude Include="..\Engine2\MBmap.h" />
+    <ClInclude Include="..\Engine2\MouseEventObject.h" />
+    <ClInclude Include="..\Engine2\MouseHelper.h" />
+    <ClInclude Include="..\Engine2\OutputStream.h" />
+    <ClInclude Include="..\Engine2\PixelMap.h" />
+    <ClInclude Include="..\Engine2\TestInterface.h" />
+    <ClInclude Include="..\Engine2\Textbox.h" />
+    <ClInclude Include="..\Engine2\TrianglePoly.h" />
+    <ClInclude Include="..\Engine2\UserInterface.h" />
+    <ClInclude Include="..\Engine2\Vectors.h" />
+    <ClInclude Include="..\Engine2\VectorSpritesheet.h" />
     <ClInclude Include="Game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

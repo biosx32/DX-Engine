@@ -16,6 +16,9 @@
     <Filter Include="ChilliFramework">
       <UniqueIdentifier>{42dd0037-a04a-4838-b3fb-7087893ebfef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine2">
+      <UniqueIdentifier>{b28b8fe2-4b20-4bd9-8c0a-4ed58065e551}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -41,6 +44,48 @@
     </ClCompile>
     <ClCompile Include="..\Assets\ChilliFramework\D3DGraphics.cpp">
       <Filter>ChilliFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine2\BitmapArray.cpp">
+      <Filter>Engine2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine2\Bmap.cpp">
+      <Filter>Engine2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine2\CustomMath.cpp">
+      <Filter>Engine2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine2\Drawing.cpp">
+      <Filter>Engine2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine2\FloodfillMap.cpp">
+      <Filter>Engine2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine2\Func.cpp">
+      <Filter>Engine2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine2\GlobalObjects.cpp">
+      <Filter>Engine2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine2\Interface.cpp">
+      <Filter>Engine2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine2\ManageableElement.cpp">
+      <Filter>Engine2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine2\OutputStream.cpp">
+      <Filter>Engine2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine2\PixelMap.cpp">
+      <Filter>Engine2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine2\TestInterface.cpp">
+      <Filter>Engine2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine2\TrianglePoly.cpp">
+      <Filter>Engine2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine2\VectorSpritesheet.cpp">
+      <Filter>Engine2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +121,120 @@
     </ClInclude>
     <ClInclude Include="..\Assets\ChilliFramework\D3DGraphics.h">
       <Filter>ChilliFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\Vectors.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\VectorSpritesheet.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\Animation.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\BitmapArray.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\BitmapFont.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\Bmap.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\Button.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\ButtonManager.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\Checkbox.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\ClickableRectangle.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\ColorButton.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\Colors.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\ConfigFile.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\CustomMath.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\DebugGUI.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\Drawing.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\Element.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\FloodfillMap.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\Func.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\GlobalObjects.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\Group.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\GUI.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\GuiElementManager.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\ImageButton.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\Interface.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\ItemManager.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\KeyData.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\Labelz.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\ManageableElement.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\MBmap.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\MouseEventObject.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\MouseHelper.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\OutputStream.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\PixelMap.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\TestInterface.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\Textbox.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\TrianglePoly.h">
+      <Filter>Engine2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine2\UserInterface.h">
+      <Filter>Engine2</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -19,8 +19,6 @@
  *	along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************************/
 #include "Game.h"
-//#include "..\Engine2\Drawing.h"
-//#include "..\Engine2\TestInterface.h"
 
 Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 :	gfx( hWnd ),
@@ -31,24 +29,26 @@ Game::Game( HWND hWnd,KeyboardServer& kServer,const MouseServer& mServer )
 	srand( (unsigned int)time( NULL ) );
 }
 
-//IOgroup* IOG = nullptr;
-//TestInterface* out = nullptr;
+IOgroup* IOG = nullptr;
+TestInterface* out = nullptr;
 
 
 void Game::Initialise() {
 	srand(time(0));
-/*	PixelDest screen = PixelDest(&gfx);
+	PixelDest screen = PixelDest(&gfx);
 	out = new TestInterface(screen);
 	IOG = new IOgroup();
 	IOG->mouse = &mouse;
 	IOG->out = out;
 	IOG->kbd = &kbd;
 	IOG->mhelper = new MouseHelper(&mouse);
-	*/
+	
 }
-
+Grid* j = new Grid(0, 0, 32);
 void Game::ComposeFrame() {
-//	out->PrintText(0, 0, &DOS_BLACK, std::string("Sprite Saver"));
+out->PrintText(0, 0, &DOS_BLACK, std::string("Sprite Saver"));
+out->paint->rectangleBorder(0, 0, 30, 30, Colors::Red, 3);
+j->Draw(out);
 }
 
 void Game::UpdateModel()

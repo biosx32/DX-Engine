@@ -28,6 +28,18 @@
 #include "FrameTimer.h"
 #include "SurfaceSequence.h"
 
+#include "..\Engine2\Drawing.h"
+ #include "..\Engine2\TestInterface.h"
+ #include "..\Engine2\OutputStream.h"
+ #include "..\Engine2\Bmap.h"
+#include "..\Engine2\Func.h"
+ #include "..\Engine2\Drawing.h"
+ #include "..\Engine2\Interface.h"
+ #include "..\Engine2\TestInterface.h"
+ #include "..\Engine2\DebugGUI.h"
+ #include "..\Engine2\MBmap.h"
+#include <thread>
+
 class Game
 {
 public:

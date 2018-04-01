@@ -1,5 +1,4 @@
-#ifndef __BITMAP_H__
-#define __BITMAP_H__
+#pragma once
 #include "Colors.h"
 #include <math.h>
 #include <stdio.h>
@@ -9,8 +8,8 @@
 class Bitmap {
 
 public:
-	Bitmap(char* FileName);
-	Bitmap(char* FileName, Color c) :Bitmap(FileName) { keying_enabled = true; bckclr = c; }
+	Bitmap(const char* FileName);
+	Bitmap(const char* FileName, Color c) :Bitmap(FileName) { keying_enabled = true; bckclr = c; }
 	Bitmap(int width, int height, Color bkclr);
 	~Bitmap();
 
@@ -65,7 +64,7 @@ public:
 	ImageSplitCorners* hover = nullptr;
 	ImageSplitCorners* press = nullptr;
 
-	ButtonImageGroup(char* src, Color key, bool single) {
+	ButtonImageGroup(const char* src, Color key, bool single) {
 		Bitmap* img = new Bitmap(src, key);
 		if (single) {
 			normal = hover = press = new ImageSplitCorners(img);
@@ -92,5 +91,3 @@ public:
 
 
 };
-
-#endif

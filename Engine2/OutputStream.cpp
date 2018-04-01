@@ -4,10 +4,14 @@ SpecialCode msgbox = { 1 };
 SpecialCode console = { 2 };
 
 
+OutputStream::OutputStream()
+{
+}
+
 OutputStream & OutputStream::operator<<(SpecialCode finish)
 {
-	std::string& str = stream.str(); // extends lifetime of temporary 
-	std::wstring wsTmp(str.begin(), str.end());
+	std::string* str =new std::string(stream.str()); // extends lifetime of temporary 
+	std::wstring wsTmp(str->begin(), str->end());
 	LPCWSTR p = wsTmp.c_str();
 
 	if (finish.code == msgbox.code) {

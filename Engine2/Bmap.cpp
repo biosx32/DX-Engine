@@ -47,7 +47,7 @@ float Bitmap::GetBackgroundSimilarity(Color tstclr)
 	
 }
 
-Bitmap::Bitmap(char * FileName)
+Bitmap::Bitmap(const char * FileName)
 {
 	Color temp_color;
 	int width, height;
@@ -55,6 +55,7 @@ Bitmap::Bitmap(char * FileName)
 	unsigned char temp[3] = {};
 	int bitmap_align_bytes, size_line;
 	int rotation_correct = 0;
+	unsigned char * linedata;
 
 	FILE* file_read;
 	fopen_s(&file_read, FileName, "rb");
@@ -87,7 +88,7 @@ Bitmap::Bitmap(char * FileName)
 	bitmap_align_bytes = width % 4;
 	size_line = width * 3;
 
-	unsigned char * linedata = new unsigned char[size_line];
+	linedata = new unsigned char[size_line];
 
 	for (int i = 0; i < height; i++) {
 		fread_s((void*)linedata, size_line, 1, size_line, file_read);

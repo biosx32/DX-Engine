@@ -1,9 +1,9 @@
 #include "Func.h"
 
-int CharacterCountInCString(char* src, char chr, int max) {
+int CharacterCountInCString(const char* src, char chr, int max) {
 	int counter = 0;
 	for (int i = 0; i < max; i++) {
-		char* j = &src[i];
+		const char* j = &src[i];
 		if (*j == chr) counter++;
 	}
 
@@ -46,7 +46,7 @@ void File_Setpos(FILE* p_file,int Pos)
 	fseek(p_file, 0 + Pos, SEEK_SET);
 }
 
-int FindFirstChar(char* str, char chr) {
+int FindFirstChar(const char* str, char chr) {
 	int size = strlen(str);
 	int Pos = -1;
 	if (size <= 0) {
@@ -64,7 +64,7 @@ int FindFirstChar(char* str, char chr) {
 	return Pos;
 }
 
-int FindLastChar(char * str, char chr)
+int FindLastChar(const char * str, char chr)
 {
 	int size = strlen(str);
 	int Pos = -1;
@@ -117,7 +117,7 @@ int GetNextLineOffset(FILE* file) {
 	return Pos;
 }
 
-wchar_t *CSTR_to_LSTR(char* charArray)
+wchar_t *CSTR_to_LSTR(const char* charArray)
 {
 	wchar_t *wString = new wchar_t[4096];
 	MultiByteToWideChar(CP_ACP, 0, charArray, -1, wString, 4096);

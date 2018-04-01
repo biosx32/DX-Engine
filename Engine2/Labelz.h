@@ -12,8 +12,8 @@ public:
 	string text = "";
 	BitmapFont* font = &DOS_BLACK;
 
-	Label(Vector2 position, char* newtext): ManageableElement(position), text(newtext) {	}
-	Label(Vector2 position, char* newtext, BitmapFont* font) : ManageableElement(position), text(newtext), font(font) {}
+	Label(Vector2 position, const char* newtext): ManageableElement(position), text(newtext) {	}
+	Label(Vector2 position, const char* newtext, BitmapFont* font) : ManageableElement(position), text(newtext), font(font) {}
 
 	void Update() {}
 	void Draw() {

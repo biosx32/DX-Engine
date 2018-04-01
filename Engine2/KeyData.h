@@ -9,17 +9,18 @@ public:
 
 
 	KeyData(char* sourceStr) {
-		int len = strlen(sourceStr);
+		int len, sep_pos, datalen;
+		len = strlen(sourceStr);
 		if (len <= 0) {
 			goto WrongData;
 		}
 
-		int sep_pos = FindFirstChar(sourceStr, '=');
+		sep_pos = FindFirstChar(sourceStr, '=');
+		
 		if (sep_pos < 0 || sep_pos + 1 >= len) {
 			goto WrongData;
 		}
-		int datalen = len - (sep_pos + 1);
-
+		datalen = len - (sep_pos + 1);
 		strncpy_s(keyb, sourceStr, sep_pos);
 		keyb[sep_pos] = 0;
 		strcpy_s(datab, &sourceStr[sep_pos + 1]);
