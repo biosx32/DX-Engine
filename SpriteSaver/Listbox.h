@@ -85,6 +85,18 @@ public:
 		sc.Update();
 		if (scrollbarvisible()) {
 			offset = items.size() * sc.value;
+			if (this->mregion.isHover()) {
+				float piece = 1.0f / items.size();
+				if (io->mouse->WheelUp() &&  sc.value - piece>= 0) {
+					sc.SetValue(sc.value - piece);
+
+				}
+
+				if (io->mouse->WheelDown() && sc.value + piece <= 1) {
+					sc.SetValue(sc.value + piece);
+				}
+
+			}
 		}
 		else { offset = 0; }
 

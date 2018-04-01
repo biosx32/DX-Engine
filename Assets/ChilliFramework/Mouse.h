@@ -31,7 +31,11 @@ public:
 	bool LeftIsPressed() const;
 	bool RightIsPressed() const;
 	bool IsInWindow() const;
-	float GetWheel() ;
+	float GetWheel();
+	bool WheelUp() { return GetWheel() > 0; }
+	bool WheelDown() { return GetWheel() < 0; }
+
+
 private:
 	const MouseServer& server;
 };

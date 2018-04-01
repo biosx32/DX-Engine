@@ -29,6 +29,11 @@ public:
 		value = (scroll.pos.y - pos.y) / (size.y-scroll.size.y);
 	}
 
+	void SetValue(float a) {
+		this->value = a;
+		scroll.pos.y = pos.y +  (size.y - scroll.size.y)*value;
+	}
+
 	void Draw() {
 		io->out->paint->rectangle(scroll.pos.x + 1, scroll.pos.y, scroll.size.x - 1, scroll.size.y, Colors::Green);
 		io->out->paint->rectangleBorder(scroll.pos.x, scroll.pos.y, scroll.size.x - 1, scroll.size.y, Colors::GreenDark,2);
@@ -63,6 +68,8 @@ public:
 
 		value = (scroll.pos.x - pos.x) / (size.x-scroll.size.x);
 	}
+
+
 
 	void Draw() {
 	
