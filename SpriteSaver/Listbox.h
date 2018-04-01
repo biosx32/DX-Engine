@@ -87,8 +87,20 @@ public:
 			offset = items.size() * sc.value;
 		}
 		else { offset = 0; }
-		if (mregion.isHover() && mregion.isPress() && sc.locked == false) {
-			io->mhelper->Refresh();
+
+
+		if (mregion.GetRegionState() == RegionState::press) {
+			io->mhelper->LockMouse(mregion.ID);
+		}
+
+		if (mregion.GetRegionState() == RegionState::release) {
+			io->mhelper->FreeMouse();
+		}
+
+		if (this->mregion.isPress()) {
+	
+			
+
 			Vector2 rpos = io->mhelper->position-pos;
 			int yoff = rpos.y - 3;
 			int possibleIndex = (yoff / font->charh)+offset;

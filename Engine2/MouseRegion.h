@@ -33,7 +33,7 @@ public:
 	}
 
 	bool isPress() {
-		return io->mouse->LeftIsPressed() && isHover();
+		return io->mouse->LeftIsPressed() && isHover() && !io->mhelper->IsBlocked(this->ID);
 	}
 
 	void Draw(){}

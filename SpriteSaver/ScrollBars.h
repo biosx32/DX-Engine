@@ -4,16 +4,12 @@
 class VScrollBar: public MouseRegion {
 public:
 	float value = 0.0f;
-	bool locked = false;
 	MouseRegion scroll;
 	
 	VScrollBar(Pos pos, Size size): MouseRegion(pos,size), scroll(pos, Size(size.x, 16)) {
 
 	}
 	void Update() {
-		if (io->mhelper->IsBlocked(this->scroll.ID)) {
-			return;
-		}
 
 		if (scroll.GetRegionState() == RegionState::press) {
 			io->mhelper->LockMouse(scroll.ID);
@@ -49,9 +45,6 @@ public:
 	HScrollBar(Pos pos, Size size) : MouseRegion(pos, size), scroll(pos, Size(16, size.y)) {
 	}
 	void Update() {
-		if (io->mhelper->IsBlocked(this->scroll.ID)) {
-			return;
-		}
 
 		if (scroll.GetRegionState() == RegionState::press) {
 			io->mhelper->LockMouse(scroll.ID);
