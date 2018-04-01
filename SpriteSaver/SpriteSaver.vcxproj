@@ -72,6 +72,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)\Assets\ChilliFramework;$(SolutionDir)\SpriteSaver;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <SourcePath>$(VC_SourcePath);$(SolutionDir)\Engine2</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -194,6 +195,8 @@
     <ClInclude Include="..\Engine2\Vectors.h" />
     <ClInclude Include="..\Engine2\VectorSpritesheet.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="HelperElement.h" />
+    <ClInclude Include="Listbox.h" />
     <ClInclude Include="SelectBox.h" />
   </ItemGroup>
   <ItemGroup>

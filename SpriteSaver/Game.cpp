@@ -51,7 +51,9 @@ void PrintProgramHeader(IOgroup* IOG) {
 
 bool hasBullet = true;
 #include "SelectBox.h"
+#include "Listbox.h"
 SelectBox test = SelectBox(Vector2(0, 0));
+ListBox* lbox = new ListBox(Pos(100, 100), Size(100, 50));
 void Game::ComposeFrame() {
 	
 	if (mouse.LeftIsPressed()) {
@@ -73,8 +75,9 @@ void Game::ComposeFrame() {
 	test.Draw(out);
 	out->PrintText(5, 35, &DOS_WHITE, out->LabelizeVector(test.pos, "Pos"));
 	out->PrintText(5, 85, &DOS_WHITE, out->LabelizeVector(test.size, "Size"));
-
+	lbox->Draw(out);
 	PrintProgramHeader(IOG);
+	
 }
 
 void Game::UpdateModel()
