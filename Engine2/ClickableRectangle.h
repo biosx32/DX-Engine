@@ -12,24 +12,26 @@ namespace ButtonState {
 	};
 }
 
-class ClickableRectangle {
+class MouseRegion {
 public:
-	int x, y, w, h;
+	Vector2 pos;
+	Vector2 size;
 	int state = 0;
 
-
-	ClickableRectangle(int x, int y, int w, int h) :x(x), y(y), w(w), h(h) {}
-
-	bool isHover(MouseClient mouse) {
-		Vector2 mousePosition = Vector2(mouse.GetMouseX(), mouse.GetMouseY());
-		return mousePosition.x >= x && mousePosition.y >= y && mousePosition.x < x + w && mousePosition.y < y + h;
+	MouseRegion(Vector2 ppos, Vector2 psize){
+		pos = ppos; size = psize;
 	}
 
-	inline bool isPress(MouseClient mouse) {
+	bool isHover(MouseClient mouse) {
+		Vector2 mPos = Vector2(mouse.GetMouseX(), mouse.GetMouseY());
+		return mPos.x >= pos.x && mPos.y >= pos.y && mPos.x < pos.x + size.x && mPos.y < pos.y + size.y;
+	}
+
+	bool isPress(MouseClient mouse) {
 		return mouse.LeftIsPressed();
 	}
 
-	void RefreshClickState(MouseClient mouse) {
+	void Update(MouseClient mouse) {
 
 		if (!isHover(mouse)) {
 			state = ButtonState::normal;
@@ -50,11 +52,6 @@ public:
 			}
 
 		}
-
-		
-		
-		
-		
 
 		
 	}

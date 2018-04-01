@@ -36,12 +36,21 @@ IOgroup* IOG = nullptr;
 TestInterface* out = nullptr;
 
 
+
+bool hasBullet = true;
+#include "SelectBox.h"
+#include "Listbox.h"
+SelectBox test = SelectBox(Vector2(0, 0));
+ListBox* lbox = new ListBox(Pos(100, 100), Size(500, 200));
+
 void Game::Initialise() {
 	srand(time(0));
 	PixelDest screen = PixelDest(&gfx);
 	out = new TestInterface(screen);
 	IOG = new IOgroup(out,&mouse,&kbd,new MouseHelper(&mouse));
-	
+	lbox->Add("First item");
+	lbox->Add("Second item");
+
 }
 void PrintProgramHeader(IOgroup* IOG) {
 	IOG->out->paint->rectangleBorder(0, 0, 170, 25, Colors::Red, 3);
@@ -49,17 +58,13 @@ void PrintProgramHeader(IOgroup* IOG) {
 }
 
 
-bool hasBullet = true;
-#include "SelectBox.h"
-#include "Listbox.h"
-SelectBox test = SelectBox(Vector2(0, 0));
-ListBox* lbox = new ListBox(Pos(100, 100), Size(100, 50));
 void Game::ComposeFrame() {
 	
 	if (mouse.LeftIsPressed()) {
 		if (hasBullet == true) {
 			hasBullet = false;
 			test.pos = IOG->mhelper->GetPosition();
+			test.size = Size(0, 0);
 		}
 		else {
 			test.Update(IOG->mhelper->GetPosition());
@@ -82,7 +87,7 @@ void Game::ComposeFrame() {
 
 void Game::UpdateModel()
 {
-
+	lbox->Update(IOG);
 }
 
 
