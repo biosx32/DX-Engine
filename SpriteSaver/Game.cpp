@@ -41,22 +41,12 @@ bool hasBullet = true;
 #include "SelectBox.h"
 #include "Listbox.h"
 SelectBox test = SelectBox(Vector2(0, 0));
-ListBox* lbox = new ListBox(Pos(100, 100), Size(500, 200));
 
 void Game::Initialise() {
 	srand(time(0));
 	PixelDest screen = PixelDest(&gfx);
 	out = new TestInterface(screen);
 	IOG = new IOgroup(out,&mouse,&kbd,new MouseHelper(&mouse));
-	lbox->Add("1-st item");
-	lbox->Add("2-nd item");
-	lbox->Add("3-rd item");
-	lbox->Add("4-th item");
-	for (int i = 5; i < 100; i++) {
-		char text[400] = {};
-		sprintf_s(text, "%d-th item", i);
-		lbox->Add(text);
-	}
 	Element::io = IOG;
 
 }
@@ -64,9 +54,18 @@ void PrintProgramHeader(IOgroup* IOG) {
 	IOG->out->paint->rectangleBorder(0, 0, 170, 25, Colors::Red, 3);
 	IOG->out->PrintText(5, 0, &DOS_WHITE, std::string("Sprite Saver"));
 }
-float k = 0;
-HScrollBar j = HScrollBar(Pos(150, 380), Size(100, 20));
+#include "Listbox.h"
+ListBox lbox= ListBox(Pos(10,40), Size(500,400));
 
+void AddBox() {
+	std::string app = "";
+	app.append(out->LabelizeVector(test.GetStart(), "Start"));
+	app.append(" :: ");
+	app.append(out->LabelizeVector(test.GetSize(), "Size"));
+	hasBullet = true;
+	lbox.Add(app);
+}
+ColorButton k = ColorButton(Pos(550, 0), AddBox, "Add", Size(100, 30));
 void Game::ComposeFrame() {
 	
 	if (mouse.LeftIsPressed()) {
@@ -80,32 +79,23 @@ void Game::ComposeFrame() {
 		}
 		
 	}
-	else {
-		hasBullet = true;
-	}
 
-	
-	//out->DrawBitmap(spritesheet, 0, 0);
+
+	out->DrawBitmap(spritesheet, 0, 0);
 	test.Draw();
-	out->PrintText(5, 35, &DOS_WHITE, out->LabelizeVector(test.pos, "Pos"));
-	out->PrintText(5, 70, &DOS_WHITE, out->LabelizeVector(test.size, "Size"));
-	lbox->Draw();
-
-
-	out->PrintText(10, 350, &DOS_WHITE, out->LabelizeVector(Vector2(j.value, 0), "Scroll"));
-	lbox->Update();
-	j.Update();
-	j.Draw();
-	out->PrintText(10, 380, &DOS_WHITE, IOG->mhelper->IsFree() ? "AVAILABLE" : "TAKEN");
+	lbox.Draw();
+	k.Draw();
+	out->PrintText(5, 35, &DOS_WHITE, out->LabelizeVector(test.GetStart(), "Start"));
+	out->PrintText(5, 70, &DOS_WHITE, out->LabelizeVector(test.GetEnd(), "End"));
+	out->PrintText(5, 100, &DOS_WHITE, out->LabelizeVector(test.GetSize(), "Size"));
 	///////////////////////////////////////////
 	PrintProgramHeader(IOG);
-	out->PrintText(10, 480, &DOS_WHITE, std::string("text %f"),k);
-	k += IOG->mouse->GetWheel();
+
 }
 
 void Game::UpdateModel()
 {
-
+	k.Update();
 	IOG->mhelper->Refresh();
 }
 

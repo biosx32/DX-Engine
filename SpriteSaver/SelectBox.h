@@ -9,6 +9,18 @@ public:
 		pos = p1;
 	}
 
+	Vector2 GetStart() {
+		return Vector2(min(pos.x, pos.x + size.x),
+			min(pos.y, pos.y + size.y));
+	}
+	Vector2 GetSize() {
+		return Vector2(abs(size.x), abs(size.y));
+	}
+	Vector2 GetEnd() {
+		return Vector2(max(pos.x, pos.x + size.x),
+			max(pos.y, pos.y + size.y));
+	}
+
 	void Update() {}
 
 	void Update(Vector2 p2){

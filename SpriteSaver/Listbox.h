@@ -19,6 +19,8 @@ public:
 	int selectedIndex = -1;
 	int offset = 0;
 
+	BitmapFont* font = &DOS_BLACK_MINI;
+
 	VScrollBar sc;
 	ListBox(Pos ppos, Size psize): ElementExtended(ppos,psize),
 		mregion(ppos, Size(psize.x - 15,psize.y)), sc(Pos(ppos.x + psize.x - 15, ppos.y), Size(15, psize.y))
