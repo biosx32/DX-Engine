@@ -15,15 +15,15 @@ public:
 			return;
 		}
 
-		if (scroll.isHover() && scroll.isPress()) {
-			locked = true;
+		if (scroll.GetRegionState() == RegionState::press) {
+			io->mhelper->LockMouse(scroll.ID);
 		}
 
-		if (!scroll.isPress()) {
-			locked = false;
+		if (scroll.GetRegionState() == RegionState::release) {
+			io->mhelper->FreeMouse();
 		}
 
-		if (locked) {
+		if (io->mouse->LeftIsPressed() && io->mhelper->lockedobject == scroll.ID) {
 			int ypos = io->mouse->GetMouseY();
 			if (ypos - pos.y < 0) ypos = pos.y;
 			else if (ypos - pos.y + scroll.size.y > size.y) ypos = pos.y + size.y -scroll.size.y;
@@ -45,7 +45,6 @@ public:
 class HScrollBar : public MouseRegion {
 public:
 	float value = 0.0f;
-	bool locked = false;
 	MouseRegion scroll;
 	HScrollBar(Pos pos, Size size) : MouseRegion(pos, size), scroll(pos, Size(16, size.y)) {
 	}
@@ -53,19 +52,19 @@ public:
 		if (io->mhelper->IsBlocked(this->scroll.ID)) {
 			return;
 		}
-		if (scroll.isHover() && scroll.isPress()) {
-			locked = true;
+
+		if (scroll.GetRegionState() == RegionState::press) {
 			io->mhelper->LockMouse(scroll.ID);
 		}
 
-		if (!scroll.isPress()) {
-			locked = false;
+		if (scroll.GetRegionState() == RegionState::release) {
+			io->mhelper->FreeMouse();
 		}
 
-		if (locked) {
-			int xpos = io->mouse->GetMouseX();
+		if (io->mouse->LeftIsPressed() && io->mhelper->lockedobject == scroll.ID) {
+			int xpos = io->mouse->GetMouseX() - scroll.size.x/2;
 			if (xpos - pos.x < 0) xpos = pos.x;
-			else if (xpos - pos.x +scroll.size.x> size.x) xpos = pos.x + size.x-scroll.size.x;
+			else if (xpos - pos.x +scroll.size.x >= size.x) xpos = pos.x + size.x -scroll.size.x;
 			scroll.pos.x = xpos;
 		}
 

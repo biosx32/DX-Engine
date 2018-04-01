@@ -163,7 +163,6 @@
     <ClInclude Include="..\Engine2\Button.h" />
     <ClInclude Include="..\Engine2\ButtonManager.h" />
     <ClInclude Include="..\Engine2\Checkbox.h" />
-    <ClInclude Include="..\Engine2\ClickableRectangle.h" />
     <ClInclude Include="..\Engine2\ColorButton.h" />
     <ClInclude Include="..\Engine2\Colors.h" />
     <ClInclude Include="..\Engine2\ConfigFile.h" />

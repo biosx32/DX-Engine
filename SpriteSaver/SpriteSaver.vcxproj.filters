@@ -149,9 +149,6 @@
     <ClInclude Include="..\Engine2\Checkbox.h">
       <Filter>Engine2</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine2\ClickableRectangle.h">
-      <Filter>Engine2</Filter>
-    </ClInclude>
     <ClInclude Include="..\Engine2\ColorButton.h">
       <Filter>Engine2</Filter>
     </ClInclude>

@@ -7,7 +7,6 @@ protected:
 
 public:
 	MouseClient* mouse = nullptr;
-	bool grag_stae = false;
 	Vector2 mouseDelta = Vector2(0, 0);
 	Vector2 position = Vector2(0, 0);
 
@@ -16,6 +15,10 @@ public:
 	MouseHelper(MouseClient* mouse):mouse(mouse){}
 	void LockMouse(int id) {
 		lockedobject = id;
+	}
+
+	void FreeMouse() {
+		lockedobject = -1;
 	}
 
 	bool IsFree() {

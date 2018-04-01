@@ -3,7 +3,7 @@
 #include "Mouse.h"
 #include "Element.h"
 
-namespace ButtonState {
+namespace RegionState {
 	enum Type
 	{
 		normal = 0,
@@ -22,32 +22,39 @@ public:
 		size = psize;
 	}
 
+	int GetRegionState() { 
+		Update();
+		return state; 
+	}
+
 	bool isHover() {
 		Vector2 mPos = Vector2(io->mouse->GetMouseX(), io->mouse->GetMouseY());
 		return mPos.x >= pos.x && mPos.y >= pos.y && mPos.x < pos.x + size.x && mPos.y < pos.y + size.y;
 	}
 
 	bool isPress() {
-		return io->mouse->LeftIsPressed();
+		return io->mouse->LeftIsPressed() && isHover();
 	}
+
 	void Draw(){}
 	void Update() {
 
 		if (!isHover()) {
-			state = ButtonState::normal;
+			state = RegionState::normal;
 		}
 
-		else { //!isHover(mouse)
+		else { 
+			
 			if (isPress()) {
-				state = ButtonState::press;
+				state = RegionState::press;
 			}
 
-			else { // !isPress(mouse)
-				if (state == ButtonState::press) {
-					state = ButtonState::release;
+			else { 
+				if (state == RegionState::press) {
+					state = RegionState::release;
 				}
-				else { //state != ButtonState::press
-					state = ButtonState::hover;
+				else {
+					state = RegionState::hover;
 				}
 			}
 
