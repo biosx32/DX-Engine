@@ -20,7 +20,7 @@ public:
 	int selectedIndex = -1;
 	int offset = 0;
 
-	ScrollBar sc;
+	VScrollBar sc;
 	ListBox(Vector2 ppos, Vector2 psize):
 		mregion(ppos, Size(psize.x - 15,psize.y)), sc(Pos(ppos.x + psize.x - 15, ppos.y), Size(15, psize.y))
 	{

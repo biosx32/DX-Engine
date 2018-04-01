@@ -56,7 +56,7 @@ void PrintProgramHeader(IOgroup* IOG) {
 	IOG->out->paint->rectangleBorder(0, 0, 170, 25, Colors::Red, 3);
 	IOG->out->PrintText(5, 0, &DOS_WHITE, std::string("Sprite Saver"));
 }
-
+HScrollBar j = HScrollBar(Pos(150, 380), Size(100, 20));
 
 void Game::ComposeFrame() {
 	
@@ -81,13 +81,21 @@ void Game::ComposeFrame() {
 	out->PrintText(5, 35, &DOS_WHITE, out->LabelizeVector(test.pos, "Pos"));
 	out->PrintText(5, 85, &DOS_WHITE, out->LabelizeVector(test.size, "Size"));
 	lbox->Draw(out);
+
+
+	out->PrintText(300, 5, &DOS_WHITE, out->LabelizeVector(Vector2(j.value, 0), "Scroll"));
+	lbox->Update(IOG);
+	j.Update(IOG);
+	j.Draw(out);
+
+	///////////////////////////////////////////
 	PrintProgramHeader(IOG);
 	
 }
 
 void Game::UpdateModel()
 {
-	lbox->Update(IOG);
+
 	IOG->mhelper->Refresh();
 }
 
