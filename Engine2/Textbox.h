@@ -1,30 +1,29 @@
 #pragma once
 #include "Element.h"
 #include "GlobalObjects.h"
-#include "MouseEventObject.h"
-class TextBox : public Element, public MouseEventObject {
+
+class TextBox : public MouseRegion {
 public:
 	BitmapFont* font = &DOS_BLACK;
 	int wmax;
 	char text[4096] = "DEFAULT_TEXT";
 	int textsize = 0;
 	bool isSelected = false;
-	Vector2 size = Vector2(0, 0);
-	TextBox(Vector2 pos, int wmax) : Element(pos), wmax(wmax) {
+	TextBox(Vector2 pos, int wmax) : MouseRegion(pos, Size(0,0)), wmax(wmax) {
 		this->size = Size(wmax * font->charw, font->charh);
 		this->text[wmax] = 0;
 	}
 
-	bool isHover(MouseClient* mouse) override {
+	/*bool isHover()  {
 		int mx = mouse->GetMouseX(),
 			my = mouse->GetMouseY();
 		return mx >= GetAbsolutePos().x && my >= GetAbsolutePos().y && mx < GetAbsolutePos().x + size.x && my < GetAbsolutePos().y + size.y;
-	}
+	}*/
 
 
 	void UpdateIsSelected(IOgroup* iog) {
 		if (iog->mouse->LeftIsPressed()) {
-			if (isHover(iog->mouse)) {
+			if (isHover()) {
 				isSelected = true;
 				iog->kbd->FlushBuffers();
 			}

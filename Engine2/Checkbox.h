@@ -1,32 +1,23 @@
 #pragma once
 #include "Element.h"
 #include "GlobalObjects.h"
-#include "MouseEventObject.h"
+#include "MouseRegion.h"
 
-
-class CheckBox : public Element, public MouseEventObject {
+class CheckBox : public MouseRegion {
 public:
 	bool checked = false;
 	const int radius = 15;
 	std::string text = "";
 	BitmapFont* font = &DOS_BLACK;
-	CheckBox(Vector2 position, char* text): Element(position), text(text) {
-
+	CheckBox(Vector2 position, const char* text): MouseRegion(position, Size(0,0)), text(text) {
+		size = Size(radius * 2, radius * 2);
 	}
 
-	bool isHover(MouseClient* mouse) override {
-		return (GetSquareDistance1(mouse->GetMouseX(), GetAbsolutePos().x+radius) + GetSquareDistance1(mouse->GetMouseY(), GetAbsolutePos().y+radius)) < radius*radius;
-	}
-
-	void UpdateCheck(){
-		if (this->state == MouseState::release) {
-			checked = !checked;
-		}
-	}
 
 	void Update() {
-		this->UpdateMouseState(io->mouse);
-		UpdateCheck();
+		if (this->GetRegionState()  == RegionState::release) {
+		checked = !checked;
+		}
 	}
 
 	void Draw() {

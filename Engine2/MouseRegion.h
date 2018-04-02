@@ -23,7 +23,7 @@ public:
 	}
 
 	int GetRegionState() { 
-		Update();
+		UpdateMouseRegionState();
 		return state; 
 	}
 
@@ -37,19 +37,19 @@ public:
 	}
 
 	void Draw(){}
-	void Update() {
 
+	void UpdateMouseRegionState() {
 		if (!isHover()) {
 			state = RegionState::normal;
 		}
 
-		else { 
-			
+		else {
+
 			if (isPress()) {
 				state = RegionState::press;
 			}
 
-			else { 
+			else {
 				if (state == RegionState::press) {
 					state = RegionState::release;
 				}
@@ -59,6 +59,11 @@ public:
 			}
 
 		}
+	}
+
+	void Update() {
+
+		UpdateMouseRegionState();
 
 		
 	}

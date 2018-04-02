@@ -27,10 +27,10 @@ public:
 
 
 	void DrawSpecial(Interface* out, Bitmap* img, int x, int y, float rx, float ry) {
-		if (state == MouseState::normal) {
+		if (state == RegionState::normal) {
 			out->DrawBitmap(img, x, y, rx, ry);
 		}
-		else if (state == MouseState::hover) {
+		else if (state == RegionState::hover) {
 			out->DrawBitmap(img, x-1, y-1, rx, ry);
 		}
 		else{
@@ -42,10 +42,10 @@ public:
 
 	void DrawImage(Interface* out) {
 		ImageSplitCorners * img = StateImages->normal;
-		if (state == MouseState::press) {
+		if (state == RegionState::press) {
 			img = StateImages->press;
 		}
-		else if (state == MouseState::hover){
+		else if (state == RegionState::hover){
 			img = StateImages->hover;
 		}
 

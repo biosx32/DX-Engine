@@ -56,7 +56,7 @@ void PrintProgramHeader(IOgroup* IOG) {
 }
 #include "Listbox.h"
 ListBox lbox= ListBox(Pos(10,40), Size(500,400));
-
+CheckBox a = CheckBox(Pos(0, 0), std::string("WTF").c_str());
 void AddBox() {
 	std::string app = "";
 	app.append(out->LabelizeVector(test.GetStart(), "Start"));
@@ -67,8 +67,9 @@ void AddBox() {
 }
 ColorButton k = ColorButton(Pos(550, 0), AddBox, "Add", Size(100, 30));
 void Game::ComposeFrame() {
-	
-	if (mouse.LeftIsPressed()) {
+	a.Update();
+	k.Update();
+	if (mouse.LeftIsPressed() && !k.isHover()) {
 		if (hasBullet == true) {
 			hasBullet = false;
 			test.pos = IOG->mhelper->position;
@@ -81,7 +82,7 @@ void Game::ComposeFrame() {
 	}
 
 
-	out->DrawBitmap(spritesheet, 0, 0);
+	//out->DrawBitmap(spritesheet, 0, 0);
 	test.Draw();
 	lbox.Draw();
 	k.Draw();
@@ -90,7 +91,7 @@ void Game::ComposeFrame() {
 	out->PrintText(5, 100, &DOS_WHITE, out->LabelizeVector(test.GetSize(), "Size"));
 	///////////////////////////////////////////
 	PrintProgramHeader(IOG);
-
+	a.Draw();
 }
 
 void Game::UpdateModel()

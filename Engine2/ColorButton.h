@@ -20,15 +20,21 @@ public:
 
 	Color GetStateColor() {
 		switch (state) {
-		case MouseState::normal:
+		case RegionState::normal:
 			return Colors::GrayLightLight;
 
-		case MouseState::press:
+		case RegionState::press:
 			return Colors::Gray;
 
-		default: //hover or release
+		default:
 			return Colors::GrayLight;
 		}
+	}
+
+	void Update() {
+		UpdateMouseRegionState();
+		this->UpdateOnClick();
+	   
 	}
 
 	ColorButton(Vector2 position, void(*function)(), string textsrc, Vector2 size) :

@@ -1,2 +1,3 @@
 #Cube selector - size and position for easily adjusting elements
 #update mousehelper a podobne data v Windows.cpp
+Broken checkbox position inheritenace and so...
