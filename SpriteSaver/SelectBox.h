@@ -1,7 +1,7 @@
 #pragma once
-#include "..\Engine2\Vectors.h"
-#include "..\Engine2\TestInterface.h"
-#include "..\Engine2\ElementExtended.h"
+#include "Vectors.h"
+#include "TestInterface.h"
+#include "ElementExtended.h"
 class SelectBox: public ElementExtended  {
 public:
 
@@ -31,8 +31,8 @@ public:
 		if (size.x == 0 && size.y == 0) {
 			return;
 		}
-		this->DrawBorder(out);
-		this->DrawCorners(out);
+		this->DrawBorder(io->out);
+		this->DrawCorners(io->out);
 		
 	
 	}

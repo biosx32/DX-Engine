@@ -1,6 +1,6 @@
 #pragma once
-#include "..\Engine2\MouseRegion.h"
-#include "..\Engine2\TestInterface.h"
+#include "MouseRegion.h"
+#include "TestInterface.h"
 class VScrollBar: public MouseRegion {
 public:
 	float value = 0.0f;

@@ -11,94 +11,66 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Assets\Meta\Matrix.txt" />
-    <Text Include="..\Assets\Meta\PNG LIBRARY.txt" />
-    <Text Include="..\Assets\Meta\Sources.txt" />
-    <Text Include="..\Assets\Meta\TODO.TXT" />
+    <ClCompile Include="Code\Bmap.cpp" />
+    <ClCompile Include="Code\CustomMath.cpp" />
+    <ClCompile Include="Code\Drawing.cpp" />
+    <ClCompile Include="Code\Element.cpp" />
+    <ClCompile Include="Code\FloodfillMap.cpp" />
+    <ClCompile Include="Code\Func.cpp" />
+    <ClCompile Include="Code\GAME\Game.cpp" />
+    <ClCompile Include="Code\GlobalObjects.cpp" />
+    <ClCompile Include="Code\Interface.cpp" />
+    <ClCompile Include="Code\OutputStream.cpp" />
+    <ClCompile Include="Code\PixelMap.cpp" />
+    <ClCompile Include="Code\TestInterface.cpp" />
+    <ClCompile Include="Code\TrianglePoly.cpp" />
+    <ClCompile Include="Static.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Assets\Resources\test_FLOODFILL.bmp" />
-    <Image Include="..\Assets\Resources\test_RGB.bmp" />
-    <Image Include="..\Assets\Resources\test_SPRITES.bmp" />
+    <ClInclude Include="Code\Animation.h" />
+    <ClInclude Include="Code\BitmapArray.h" />
+    <ClInclude Include="Code\BitmapFont.h" />
+    <ClInclude Include="Code\Bmap.h" />
+    <ClInclude Include="Code\Button.h" />
+    <ClInclude Include="Code\ButtonManager.h" />
+    <ClInclude Include="Code\Checkbox.h" />
+    <ClInclude Include="Code\ColorButton.h" />
+    <ClInclude Include="Code\Colors.h" />
+    <ClInclude Include="Code\ConfigFile.h" />
+    <ClInclude Include="Code\CustomMath.h" />
+    <ClInclude Include="Code\DebugGUI.h" />
+    <ClInclude Include="Code\Drawing.h" />
+    <ClInclude Include="Code\Element.h" />
+    <ClInclude Include="Code\ElementExtended.h" />
+    <ClInclude Include="Code\FloodfillMap.h" />
+    <ClInclude Include="Code\Func.h" />
+    <ClInclude Include="Code\GAME\Game.h" />
+    <ClInclude Include="Code\GlobalObjects.h" />
+    <ClInclude Include="Code\Group.h" />
+    <ClInclude Include="Code\GUI.h" />
+    <ClInclude Include="Code\GuiElementManager.h" />
+    <ClInclude Include="Code\ImageButton.h" />
+    <ClInclude Include="Code\Interface.h" />
+    <ClInclude Include="Code\ItemManager.h" />
+    <ClInclude Include="Code\KeyData.h" />
+    <ClInclude Include="Code\Labelz.h" />
+    <ClInclude Include="Code\MBmap.h" />
+    <ClInclude Include="Code\MouseHelper.h" />
+    <ClInclude Include="Code\MouseRegion.h" />
+    <ClInclude Include="Code\OutputStream.h" />
+    <ClInclude Include="Code\PixelMap.h" />
+    <ClInclude Include="Code\TestInterface.h" />
+    <ClInclude Include="Code\Textbox.h" />
+    <ClInclude Include="Code\TrianglePoly.h" />
+    <ClInclude Include="Code\UserInterface.h" />
+    <ClInclude Include="Code\Vectors.h" />
+    <ClInclude Include="Code\VectorSpritesheet.h" />
+    <ClInclude Include="Static.h" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="..\Assets\Resources\ChiliDirectXFramework.res" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\Assets\ChilliFramework\Bitmap.cpp" />
-    <ClCompile Include="..\Assets\ChilliFramework\D3DGraphics.cpp" />
-    <ClCompile Include="..\Assets\ChilliFramework\Keyboard.cpp" />
-    <ClCompile Include="..\Assets\ChilliFramework\Mouse.cpp" />
-    <ClCompile Include="..\Assets\ChilliFramework\Sound.cpp" />
-    <ClCompile Include="..\Assets\ChilliFramework\Timer.cpp" />
-    <ClCompile Include="..\Assets\ChilliFramework\Windows.cpp" />
-    <ClCompile Include="BitmapArray.cpp" />
-    <ClCompile Include="Bmap.cpp" />
-    <ClCompile Include="CustomMath.cpp" />
-    <ClCompile Include="Drawing.cpp" />
-    <ClCompile Include="Element.cpp" />
-    <ClCompile Include="FloodfillMap.cpp" />
-    <ClCompile Include="Func.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GlobalObjects.cpp" />
-    <ClCompile Include="Interface.cpp" />
-    <ClCompile Include="OutputStream.cpp" />
-    <ClCompile Include="PixelMap.cpp" />
-    <ClCompile Include="TestInterface.cpp" />
-    <ClCompile Include="TrianglePoly.cpp" />
-    <ClCompile Include="VectorSpritesheet.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\Assets\ChilliFramework\Bitmap.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\D3DGraphics.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\FrameTimer.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\Game.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\Keyboard.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\Mouse.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\Resource.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\Sound.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\Surface.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\SurfaceSequence.h" />
-    <ClInclude Include="..\Assets\ChilliFramework\Timer.h" />
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="BitmapArray.h" />
-    <ClInclude Include="BitmapFont.h" />
-    <ClInclude Include="Bmap.h" />
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="ButtonManager.h" />
-    <ClInclude Include="Checkbox.h" />
-    <ClInclude Include="ElementExtended.h" />
-    <ClInclude Include="MouseRegion.h" />
-    <ClInclude Include="ColorButton.h" />
-    <ClInclude Include="Colors.h" />
-    <ClInclude Include="ConfigFile.h" />
-    <ClInclude Include="CustomMath.h" />
-    <ClInclude Include="DebugGUI.h" />
-    <ClInclude Include="Drawing.h" />
-    <ClInclude Include="Element.h" />
-    <ClInclude Include="FloodfillMap.h" />
-    <ClInclude Include="Func.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GlobalObjects.h" />
-    <ClInclude Include="Group.h" />
-    <ClInclude Include="GUI.h" />
-    <ClInclude Include="GuiElementManager.h" />
-    <ClInclude Include="ImageButton.h" />
-    <ClInclude Include="Interface.h" />
-    <ClInclude Include="ItemManager.h" />
-    <ClInclude Include="KeyData.h" />
-    <ClInclude Include="Label.h" />
-    <ClInclude Include="MBmap.h" />
-    <ClInclude Include="MouseEventObject.h" />
-    <ClInclude Include="MouseHelper.h" />
-    <ClInclude Include="OutputStream.h" />
-    <ClInclude Include="PixelMap.h" />
-    <ClInclude Include="TestInterface.h" />
-    <ClInclude Include="Textbox.h" />
-    <ClInclude Include="TrianglePoly.h" />
-    <ClInclude Include="UserInterface.h" />
-    <ClInclude Include="Vectors.h" />
-    <ClInclude Include="VectorSpritesheet.h" />
+    <ProjectReference Include="..\ChilliFramework\ChilliFramework.vcxproj">
+      <Project>{961d676a-6c05-488e-9653-510cd362d7d0}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9E5C3038-85D6-4CEC-A331-0DAE21E12415}</ProjectGuid>
@@ -109,7 +81,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
@@ -131,8 +103,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\Assets\ChilliFramework\;$(SolutionDir)\Engine2;$(IncludePath)</IncludePath>
-    <SourcePath>$(VC_SourcePath);</SourcePath>
+    <IncludePath>$(SolutionDir)\ChilliFramework;$(SolutionDir)\Engine2\Code;$(SolutionDir)\Engine2;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -140,13 +111,13 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>Static.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

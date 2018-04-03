@@ -1,8 +1,8 @@
 #pragma once
-#include "..\Engine2\Vectors.h"
-#include "..\Engine2\GlobalObjects.h"
-#include "..\Engine2\TestInterface.h"
-#include "..\Engine2\MouseRegion.h"
+#include "Vectors.h"
+#include "GlobalObjects.h"
+#include "TestInterface.h"
+#include "MouseRegion.h"
 #include "ScrollBars.h"
 class ListBoxItem {
 public:
@@ -54,14 +54,14 @@ public:
 	}
 
 	void Draw() {
-		this->DrawBorder(out);
+		this->DrawBorder(io->out);
 		if (items.size() < 1) {
-			this->DrawName(out);
+			this->DrawName(io->out);
 		}
 
 		if (scrollbarvisible()) {
 			sc.Draw();
-			out->PrintText(200, 00, &DOS_BLACK, std::string("Val: %.2f"), sc.value);
+			io->out->PrintText(200, 00, &DOS_BLACK, std::string("Val: %.2f"), sc.value);
 		}
 
 		int drawMax =(size.y + font->charh - 1) / font->charh;
@@ -71,12 +71,12 @@ public:
 			if (pickIndex >= items.size()) {
 				continue;
 			}
-			out->PrintText(pos.x+5, pos.y+3 + font->charh * i, font, items.at(pickIndex).text);
+			io->out->PrintText(pos.x+5, pos.y+3 + font->charh * i, font, items.at(pickIndex).text);
 		}
 		if (isValidIndex()) {
 			int drawindex = selectedIndex-offset;
 			if (selectedIndex >= offset && selectedIndex < offset + drawMax) {
-				out->paint->rectangleBorder(pos.x, pos.y + 3 + drawindex * font->charh, size.x - 15, font->charh, Colors::Cyan, 2);
+				io->out->paint->rectangleBorder(pos.x, pos.y + 3 + drawindex * font->charh, size.x - 15, font->charh, Colors::Cyan, 2);
 			}
 			
 		}
