@@ -1,6 +1,6 @@
 /****************************************************************************************** 
  *	Chili DirectX Framework Version 12.10.21											  *	
- *	Game.h																				  *
+ *	D3DGraphics.cpp																		  *
  *	Copyright 2012 PlanetChili.net														  *
  *																						  *
  *	This file is part of The Chili DirectX Framework.									  *
@@ -18,52 +18,3 @@
  *	You should have received a copy of the GNU General Public License					  *
  *	along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************************/
-#pragma once
-#include "Element.h"
-#include "IOgroup.h"
-
-class Game
-{
-private:
-	void ComposeFrame();
-	void UpdateModel();
-
-private:
-	D3DGraphics gfx;
-	Interface* out;
-	KeyboardClient kbd;
-	MouseClient mouse;
-	DSound audio;
-	IOgroup* io;
-
-public:
-	Game(HWND hWnd, KeyboardServer& kServer, const MouseServer& mServer)
-		:gfx(hWnd),
-		audio(hWnd),
-		kbd(kServer),
-		mouse(mServer)
-	{
-		io = new IOgroup(&gfx, &mouse, &kbd);
-		Element::io = io;
-		out = io->out;
-		srand((unsigned int)time(NULL));
-		Initialise();
-	}
-
-	~Game() {}
-
-	void Go() {
-		gfx.BeginFrame();
-		UpdateModel();
-		ComposeFrame();
-		gfx.EndFrame();
-
-
-	}
-
-	void Initialise();
-};
-
-
-
-

@@ -49,7 +49,7 @@ void LoadSpriteAlpha( Sprite* sprite );
 
 void FreeSprite( Sprite* sprite );
 
-void LoadFont( Font* font,D3DCOLOR* surface,const char* filename,
+void LoadFont( Font* DFONT,D3DCOLOR* surface,const char* filename,
 	int charWidth,int charHeight,int nCharsPerRow );
 
 class D3DGraphics
@@ -65,8 +65,8 @@ public:
 	void DrawDisc( int cx,int cy,int r,int rd,int g,int b );
 	void DrawSprite( int x,int y,Sprite* sprite );
 	void DrawSpriteAlpha( int xoff,int yoff,Sprite* sprite );
-	void DrawChar( char c,int x,int y,Font* font,D3DCOLOR color );
-	void DrawString( const char* string,int x,int y,Font* font,D3DCOLOR color );
+	void DrawChar( char c,int x,int y,Font* DFONT,D3DCOLOR color );
+	void DrawString( const char* string,int x,int y,Font* DFONT,D3DCOLOR color );
 	void BeginFrame();
 	void EndFrame();
 private:

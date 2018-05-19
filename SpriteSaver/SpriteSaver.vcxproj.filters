@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ChilliFramework">
-      <UniqueIdentifier>{42dd0037-a04a-4838-b3fb-7087893ebfef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine2">
-      <UniqueIdentifier>{b28b8fe2-4b20-4bd9-8c0a-4ed58065e551}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Listbox.h">
@@ -30,10 +24,18 @@
     <ClInclude Include="SelectBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Future.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="TODO.txt">
       <Filter>Resource Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,60 +1,82 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Code\GAME\Game.cpp" />
-    <ClCompile Include="Code\Bmap.cpp" />
-    <ClCompile Include="Code\CustomMath.cpp" />
-    <ClCompile Include="Code\Drawing.cpp" />
-    <ClCompile Include="Code\Element.cpp" />
-    <ClCompile Include="Code\FloodfillMap.cpp" />
-    <ClCompile Include="Code\Func.cpp" />
-    <ClCompile Include="Code\GlobalObjects.cpp" />
-    <ClCompile Include="Code\Interface.cpp" />
-    <ClCompile Include="Code\OutputStream.cpp" />
-    <ClCompile Include="Code\PixelMap.cpp" />
-    <ClCompile Include="Code\TestInterface.cpp" />
-    <ClCompile Include="Code\TrianglePoly.cpp" />
-    <ClCompile Include="Static.cpp" />
+    <ClCompile Include="Bmap.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomMath.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Element.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="FloodfillMap.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Func.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalObjects.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputStream.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelMap.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Static.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="TestInterface.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="TrianglePoly.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Code\GAME\Game.h" />
-    <ClInclude Include="Code\Animation.h" />
-    <ClInclude Include="Code\BitmapArray.h" />
-    <ClInclude Include="Code\BitmapFont.h" />
-    <ClInclude Include="Code\Bmap.h" />
-    <ClInclude Include="Code\Button.h" />
-    <ClInclude Include="Code\ButtonManager.h" />
-    <ClInclude Include="Code\Checkbox.h" />
-    <ClInclude Include="Code\ColorButton.h" />
-    <ClInclude Include="Code\Colors.h" />
-    <ClInclude Include="Code\ConfigFile.h" />
-    <ClInclude Include="Code\CustomMath.h" />
-    <ClInclude Include="Code\DebugGUI.h" />
-    <ClInclude Include="Code\Drawing.h" />
-    <ClInclude Include="Code\Element.h" />
-    <ClInclude Include="Code\ElementExtended.h" />
-    <ClInclude Include="Code\FloodfillMap.h" />
-    <ClInclude Include="Code\Func.h" />
-    <ClInclude Include="Code\GlobalObjects.h" />
-    <ClInclude Include="Code\Group.h" />
-    <ClInclude Include="Code\GUI.h" />
-    <ClInclude Include="Code\GuiElementManager.h" />
-    <ClInclude Include="Code\ImageButton.h" />
-    <ClInclude Include="Code\Interface.h" />
-    <ClInclude Include="Code\ItemManager.h" />
-    <ClInclude Include="Code\KeyData.h" />
-    <ClInclude Include="Code\Labelz.h" />
-    <ClInclude Include="Code\MBmap.h" />
-    <ClInclude Include="Code\MouseHelper.h" />
-    <ClInclude Include="Code\MouseRegion.h" />
-    <ClInclude Include="Code\OutputStream.h" />
-    <ClInclude Include="Code\PixelMap.h" />
-    <ClInclude Include="Code\TestInterface.h" />
-    <ClInclude Include="Code\Textbox.h" />
-    <ClInclude Include="Code\TrianglePoly.h" />
-    <ClInclude Include="Code\UserInterface.h" />
-    <ClInclude Include="Code\Vectors.h" />
-    <ClInclude Include="Code\VectorSpritesheet.h" />
     <ClInclude Include="Static.h" />
+    <ClInclude Include="Painter.h" />
+    <ClInclude Include="VectorSpritesheet.h" />
+    <ClInclude Include="Textbox.h" />
+    <ClInclude Include="TrianglePoly.h" />
+    <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="Vectors.h" />
+    <ClInclude Include="PixelMap.h" />
+    <ClInclude Include="OutputStream.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="BitmapArray.h" />
+    <ClInclude Include="BitmapFont.h" />
+    <ClInclude Include="Bmap.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Checkbox.h" />
+    <ClInclude Include="ColorButton.h" />
+    <ClInclude Include="Colors.h" />
+    <ClInclude Include="ConfigFile.h" />
+    <ClInclude Include="CustomMath.h" />
+    <ClInclude Include="DebugGUI.h" />
+    <ClInclude Include="Element.h" />
+    <ClInclude Include="ElementExtended.h" />
+    <ClInclude Include="FloodfillMap.h" />
+    <ClInclude Include="Func.h" />
+    <ClInclude Include="GlobalObjects.h" />
+    <ClInclude Include="Group.h" />
+    <ClInclude Include="GUI.h" />
+    <ClInclude Include="GuiElementManager.h" />
+    <ClInclude Include="ImageButton.h" />
+    <ClInclude Include="Interface.h" />
+    <ClInclude Include="ItemManager.h" />
+    <ClInclude Include="KeyData.h" />
+    <ClInclude Include="Labelz.h" />
+    <ClInclude Include="MBmap.h" />
+    <ClInclude Include="MouseHelper.h" />
+    <ClInclude Include="MouseRegion.h" />
+    <ClInclude Include="IOgroup.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CPP">
+      <UniqueIdentifier>{fcab8611-9d8d-46a3-8a02-b10e3e6f8b3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

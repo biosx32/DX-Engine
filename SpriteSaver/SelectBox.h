@@ -1,11 +1,10 @@
 #pragma once
 #include "Vectors.h"
-#include "TestInterface.h"
 #include "ElementExtended.h"
-class SelectBox: public ElementExtended  {
+class SelectBox: public ElementMeta  {
 public:
 
-	SelectBox(Vector2 p1):ElementExtended(Pos(p1.x, p1.y), Size(0,0)) {
+	SelectBox(Vector2 p1):ElementMeta(Pos(p1.x, p1.y), Size(0,0)) {
 		pos = p1;
 	}
 

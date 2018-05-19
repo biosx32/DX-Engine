@@ -6,7 +6,7 @@
 * Listbox
 * PictureBox --> make from manageable bitmap
 * Canvas -> from bitmap && also pixeldest to canvas not bitmap
-
+* Sprite animations from adobe flash
 * File for saving sprite cuts => select region and add by name:
   *** SPRITES ***
   1=0,0,32,32

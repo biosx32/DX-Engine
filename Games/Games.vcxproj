@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)\ChilliFramework;$(SolutionDir)\Engine2\Code;$(SolutionDir)\SpriteSaver;Y:\DX-Engine\Engine2;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\ChilliFramework;$(SolutionDir)\Engine2;$(SolutionDir)\SpriteSaver;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -78,7 +78,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>Static.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>

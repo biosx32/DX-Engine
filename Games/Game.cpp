@@ -26,76 +26,47 @@
 #include "ColorButton.h"
 #include "CheckBox.h"
 
-
-
-
-
-
-void Game::UpdateModel()
-{
-
-}
-
-void Game::ComposeFrame() {
-
-}
-
-
-/*
-IOgroup* IOG = nullptr;
-TestInterface* out = nullptr;
-
+void AddBox();
 SelectBox test = SelectBox(Vector2(0, 0));
 ListBox lbox = ListBox(Pos(10, 40), Size(500, 400));
 CheckBox a = CheckBox(Pos(0, 0), std::string("WTF").c_str());
+ColorButton k = ColorButton(Pos(550, 0), AddBox, "Add", Size(100, 30));
 
-void Game::Initialise() {
-	srand(time(0));
-	PixelDest screen = PixelDest(&gfx);
-	out = new TestInterface(screen);
-	IOG = new IOgroup(out, &mouse, &kbd, new MouseHelper(&mouse));
-	Element::io = IOG;
-
+void PrintProgramHeader(Interface* out) {
+	out->paint->rectangleBorder(0, 0, 170, 25, Colors::Red, 3);
+	out->PrintText(5, 0, &DOS_WHITE, std::string("Sprite Saver"));
 }
-void PrintProgramHeader(IOgroup* IOG) {
-	IOG->out->paint->rectangleBorder(0, 0, 170, 25, Colors::Red, 3);
-	IOG->out->PrintText(5, 0, &DOS_WHITE, std::string("Sprite Saver"));
-}
-
 
 void AddBox() {
 	std::string app = "";
-	app.append(out->LabelizeVector(test.GetStart(), "Start"));
+	app.append(LabelizeVector(test.GetStart(), "Start"));
 	app.append(" :: ");
-	app.append(out->LabelizeVector(test.GetSize(), "Size"));
-	hasBullet = true;
+	app.append(LabelizeVector(test.GetSize(), "Size"));
+
 	lbox.Add(app);
 }
-ColorButton k = ColorButton(Pos(550, 0), AddBox, "Add", Size(100, 30));
+
+
+void Game::Initialise() {
+
+}
 
 void Game::UpdateModel()
 {
 	k.Update();
-	IOG->mhelper->Refresh();
+	a.Update();
+	lbox.Update();
 }
 
 void Game::ComposeFrame() {
-	a.Update();
-	k.Update();
-	lbox.Update();
-	//out->DrawBitmap(spritesheet, 0, 0);
 	test.Draw();
 	lbox.Draw();
 	k.Draw();
-	out->PrintText(5, 35, &DOS_WHITE, out->LabelizeVector(test.GetStart(), "Start"));
-	out->PrintText(5, 70, &DOS_WHITE, out->LabelizeVector(test.GetEnd(), "End"));
-	out->PrintText(5, 100, &DOS_WHITE, out->LabelizeVector(test.GetSize(), "Size"));
+	io->out->PrintText(5, 35, &DOS_WHITE, LabelizeVector(test.GetStart(), "Start"));
+	io->out->PrintText(5, 70, &DOS_WHITE, LabelizeVector(test.GetEnd(), "End"));
+	io->out->PrintText(5, 100, &DOS_WHITE,LabelizeVector(test.GetSize(), "Size"));
 	///////////////////////////////////////////
-	PrintProgramHeader(IOG);
+	PrintProgramHeader(io->out);
 	a.Draw();
 }
 
-
-
-
-*/

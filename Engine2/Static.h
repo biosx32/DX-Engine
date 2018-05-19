@@ -13,4 +13,5 @@
 #include "SurfaceSequence.h"
 #include "Timer.h"
 
+/* Windows */
 #include <math.h>

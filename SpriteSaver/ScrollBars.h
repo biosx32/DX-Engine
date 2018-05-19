@@ -1,21 +1,22 @@
 #pragma once
 #include "MouseRegion.h"
-#include "TestInterface.h"
+#include "Vectors.h"
+#include "IOgroup.h"
 class VScrollBar: public MouseRegion {
 public:
 	float value = 0.0f;
-	MouseRegion scroll;
+	MouseRegionR scroll;
 	
-	VScrollBar(Pos pos, Size size): MouseRegion(pos,size), scroll(pos, Size(size.x, 16)) {
+	VScrollBar(Pos pos, Size size): MouseRegionR(pos,size), scroll(pos, Size(size.x, 16)) {
 
 	}
 	void Update() {
 
-		if (scroll.GetRegionState() == RegionState::press) {
+		if (scroll.GetMouseState() == MouseState::pressed) {
 			io->mhelper->LockMouse(scroll.ID);
 		}
 
-		if (scroll.GetRegionState() == RegionState::release) {
+		if (scroll.GetMouseState() == MouseState::release) {
 			io->mhelper->FreeMouse();
 		}
 
@@ -51,11 +52,11 @@ public:
 	}
 	void Update() {
 
-		if (scroll.GetRegionState() == RegionState::press) {
+		if (scroll.GetMouseState() == MouseState::pressed) {
 			io->mhelper->LockMouse(scroll.ID);
 		}
 
-		if (scroll.GetRegionState() == RegionState::release) {
+		if (scroll.GetMouseState() == MouseState::release) {
 			io->mhelper->FreeMouse();
 		}
 

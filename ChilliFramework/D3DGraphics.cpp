@@ -67,14 +67,14 @@ void FreeSprite( Sprite* sprite )
 	free( sprite->surface );
 }
 
-void LoadFont( Font* font,D3DCOLOR* surface,const char* filename,
+void LoadFont( Font* DFONT,D3DCOLOR* surface,const char* filename,
 	int charWidth,int charHeight,int nCharsPerRow )
 {
 	LoadBmp( filename,surface );
-	font->charHeight = charHeight;
-	font->charWidth = charWidth;
-	font->nCharsPerRow = nCharsPerRow;
-	font->surface = surface;
+	DFONT->charHeight = charHeight;
+	DFONT->charWidth = charWidth;
+	DFONT->nCharsPerRow = nCharsPerRow;
+	DFONT->surface = surface;
 }
 
 D3DGraphics::D3DGraphics( HWND hWnd )
@@ -310,26 +310,26 @@ void D3DGraphics::DrawSpriteAlpha( int xoff,int yoff,Sprite* sprite )
 	}
 }
 
-void D3DGraphics::DrawChar( char c,int xoff,int yoff,Font* font,D3DCOLOR color )
+void D3DGraphics::DrawChar( char c,int xoff,int yoff,Font* DFONT,D3DCOLOR color )
 {
 	if( c < ' ' || c > '~' )
 		return;
 
 	const int sheetIndex = c - ' ';
-	const int sheetCol = sheetIndex % font->nCharsPerRow;
-	const int sheetRow = sheetIndex / font->nCharsPerRow;
-	const int xStart = sheetCol * font->charWidth;
-	const int yStart = sheetRow * font->charHeight;
-	const int xEnd = xStart + font->charWidth;
-	const int yEnd = yStart + font->charHeight;
-	const int surfWidth = font->charWidth * font->nCharsPerRow;
+	const int sheetCol = sheetIndex % DFONT->nCharsPerRow;
+	const int sheetRow = sheetIndex / DFONT->nCharsPerRow;
+	const int xStart = sheetCol * DFONT->charWidth;
+	const int yStart = sheetRow * DFONT->charHeight;
+	const int xEnd = xStart + DFONT->charWidth;
+	const int yEnd = yStart + DFONT->charHeight;
+	const int surfWidth = DFONT->charWidth * DFONT->nCharsPerRow;
 
 	for( int y = yStart; y < yEnd; y++ )
 	{
 		
 		for( int x = xStart; x < xEnd; x++ )
 		{
-			if( font->surface[ x + y * surfWidth ] == D3DCOLOR_XRGB( 0,0,0 ) )
+			if( DFONT->surface[ x + y * surfWidth ] == D3DCOLOR_XRGB( 0,0,0 ) )
 			{
 				PutPixel( x + xoff - xStart,y + yoff - yStart,color );
 			}
@@ -337,10 +337,10 @@ void D3DGraphics::DrawChar( char c,int xoff,int yoff,Font* font,D3DCOLOR color )
 	}
 }
 
-void D3DGraphics::DrawString( const char* string,int xoff,int yoff,Font* font,D3DCOLOR color )
+void D3DGraphics::DrawString( const char* string,int xoff,int yoff,Font* DFONT,D3DCOLOR color )
 {
 	for( int index = 0; string[ index ] != '\0'; index++ )
 	{
-		DrawChar( string[ index ],xoff + index * font->charWidth,yoff,font,color );
+		DrawChar( string[ index ],xoff + index * DFONT->charWidth,yoff,DFONT,color );
 	}
 }

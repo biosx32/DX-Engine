@@ -1,9 +1,11 @@
 #pragma once
+#include "Static.h"
 #include "Vectors.h"
+#include "ElementExtended.h"
 #include "GlobalObjects.h"
-#include "TestInterface.h"
 #include "MouseRegion.h"
 #include "ScrollBars.h"
+#include <string>
 class ListBoxItem {
 public:
 	std::string text;
@@ -12,17 +14,17 @@ public:
 	}
 };
 
-class ListBox: public ElementExtended {
+class ListBox: public Element {
 public:
-	MouseRegion mregion;
+	MouseRegionR mregion;
 	std::vector<ListBoxItem> items;
 	int selectedIndex = -1;
 	int offset = 0;
 
-	BitmapFont* font = &DOS_BLACK_MINI;
+	BitmapFont* DFONT = &DOS_BLACK_MINI;
 
 	VScrollBar sc;
-	ListBox(Pos ppos, Size psize): ElementExtended(ppos,psize),
+	ListBox(Pos ppos, Size psize): Element(ppos,psize, "ListBox"),
 		mregion(ppos, Size(psize.x - 15,psize.y)), sc(Pos(ppos.x + psize.x - 15, ppos.y), Size(15, psize.y))
 	{
 		name = "Empty ListBox";
@@ -41,7 +43,7 @@ public:
 		selectedIndex = -1;
 	}
 	bool scrollbarvisible() {
-		int canDraw = size.y / font->charh;
+		int canDraw = size.y / DFONT->charh;
 		return (items.size() > canDraw);
 	}
 
@@ -64,23 +66,24 @@ public:
 			io->out->PrintText(200, 00, &DOS_BLACK, std::string("Val: %.2f"), sc.value);
 		}
 
-		int drawMax =(size.y + font->charh - 1) / font->charh;
+		int drawMax =(size.y + DFONT->charh - 1) / DFONT->charh;
 		int offsetRemaining = items.size() - offset;
 		for (int i = 0; i < drawMax; i++) {
 			int pickIndex = i + offset;
 			if (pickIndex >= items.size()) {
 				continue;
 			}
-			io->out->PrintText(pos.x+5, pos.y+3 + font->charh * i, font, items.at(pickIndex).text);
+			io->out->PrintText(pos.x+5, pos.y+3 + DFONT->charh * i, DFONT, items.at(pickIndex).text);
 		}
 		if (isValidIndex()) {
 			int drawindex = selectedIndex-offset;
 			if (selectedIndex >= offset && selectedIndex < offset + drawMax) {
-				io->out->paint->rectangleBorder(pos.x, pos.y + 3 + drawindex * font->charh, size.x - 15, font->charh, Colors::Cyan, 2);
+				io->out->paint->rectangleBorder(pos.x, pos.y + 3 + drawindex * DFONT->charh, size.x - 15, DFONT->charh, Colors::Cyan, 2);
 			}
 			
 		}
 	}
+
 
 	void Update() {
 		mregion.Update();
@@ -103,11 +106,11 @@ public:
 		else { offset = 0; }
 
 
-		if (mregion.GetRegionState() == RegionState::press) {
+		if (mregion.GetMouseState() == MouseState::pressed) {
 			io->mhelper->LockMouse(mregion.ID);
 		}
 
-		if (mregion.GetRegionState() == RegionState::release) {
+		if (mregion.GetMouseState() == MouseState::release) {
 			io->mhelper->FreeMouse();
 		}
 
@@ -117,7 +120,7 @@ public:
 
 			Vector2 rpos = io->mhelper->position-pos;
 			int yoff = rpos.y - 3;
-			int possibleIndex = (yoff / font->charh)+offset;
+			int possibleIndex = (yoff / DFONT->charh)+offset;
 		
 		
 			if (isValidIndex(possibleIndex)) {
