@@ -27,7 +27,7 @@ public:
 	}
 
 	bool IsBlocked(int i) {
-		return lockedobject == -1 || lockedobject == i;
+		return lockedobject != i && lockedobject != -1;
 	}
 
 	bool IsActive(int i) {

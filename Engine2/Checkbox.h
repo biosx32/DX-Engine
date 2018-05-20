@@ -3,19 +3,24 @@
 #include "GlobalObjects.h"
 #include "MouseRegion.h"
 
-class CheckBox : public MouseRegion {
+class CheckBox : public BaseElement, public PosElement {
 public:
 	bool checked = false;
 	const int radius = 15;
 	std::string text = "";
-	BitmapFont* DFONT = &DOS_BLACK;
-	CheckBox(Vector2 position, const char* text): MouseRegion(position, Size(0,0)), text(text) {
-		size = Size(radius * 2, radius * 2);
+	MouseRegion mregion;
+
+	CheckBox(Vector2 position, const char* text): 
+		PosElement(position), mregion(position, Vector2(30,30))
+	{
+		this->text = text;
+		Vector2 size = Vector2(radius * 2, radius * 2);
 	}
 
 
 	void Update() {
-		if (GetClick()) {
+		mregion.Update();
+		if (mregion.GetClick()) {
 		checked = !checked;
 		}
 	}

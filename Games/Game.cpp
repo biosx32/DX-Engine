@@ -53,20 +53,24 @@ void Game::Initialise() {
 
 void Game::UpdateModel()
 {
-	k.Update();
+	//k.Update();
 	a.Update();
-	lbox.Update();
+//	lbox.Update();
+	io->mhelper->Refresh();
 }
 
 void Game::ComposeFrame() {
-	test.Draw();
+	/*test.Draw();
 	lbox.Draw();
 	k.Draw();
 	io->out->PrintText(5, 35, &DOS_WHITE, LabelizeVector(test.GetStart(), "Start"));
 	io->out->PrintText(5, 70, &DOS_WHITE, LabelizeVector(test.GetEnd(), "End"));
 	io->out->PrintText(5, 100, &DOS_WHITE,LabelizeVector(test.GetSize(), "Size"));
 	///////////////////////////////////////////
-	PrintProgramHeader(io->out);
+	PrintProgramHeader(io->out);*/
 	a.Draw();
+
+	io->out->PrintText(5, 100, &DOS_WHITE, "LOCKED ID: %d", io->mhelper->lockedobject);
+
 }
 

@@ -12,29 +12,32 @@ namespace MouseState {
 	};
 }
 
-class MouseRegion : public Element {
+class MouseRegion : public BaseElement,public PosElement, public SizeElement {
 
 public:
-	int state=0;
+	int state = 0;
 	int click_count = 0;
 
-	MouseRegion(Vector2 pos, Vector2 size) : Element(pos, size) {}
+	MouseRegion(Vector2 pos, Vector2 size) : PosElement(pos), SizeElement(size) {}
 public:
-
-	virtual void Update() {
-		
+	virtual void Update(){	
+	
 		if (isHover()) {
+			state = MouseState::hovered;
+
 			if (isPress()) {
 				state = MouseState::pressed;
+				io->mhelper->LockMouse(this->ID);
 			}
 			else {
 				if (io->mhelper->IsActive(this->ID)) {
 					click_count += 1;
+
 				}
-				state = MouseState::hovered;
+
 			}
 		} else { state = MouseState::none; }
-		
+	
 	}
 
 	virtual bool isHover() {
@@ -44,9 +47,13 @@ public:
 	}
 
 	virtual bool isPress() {
-		if (!io->mhelper->IsBlocked(this->ID) && isHover()) {
-			return io->mouse->LeftIsPressed();
+		if (io->mouse->LeftIsPressed()) {
+			if (isHover()) {
+				return (!io->mhelper->IsBlocked(this->ID));
+			}
 		}
+
+
 		return false;
 	}
 
