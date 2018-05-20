@@ -44,7 +44,7 @@ public:
 		mouse(mServer)
 	{
 		io = new IOgroup(&gfx, &mouse, &kbd);
-		Element::io = io;
+		BaseElement::io = io;
 		out = io->out;
 		srand((unsigned int)time(NULL));
 		Initialise();

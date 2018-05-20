@@ -41,6 +41,7 @@ public:
 	}
 
 	void DrawImage(Interface* out) {
+		Vector2 pos = GetAbs();
 		ImageSplitCorners * img = StateImages->none;
 		if (state == MouseState::pressed) {
 			img = StateImages->pressed;
@@ -61,25 +62,26 @@ public:
 			ratiocorner = sidescale;
 		}
 
-		int leftx = GetPos().x;
+		int leftx = pos.x;
 		int middlex = leftx + img->cleft->width * ratiocorner;
 		int rightx = middlex + img->cmiddle->width* ratiox;
 
-		DrawSpecial(out,img->cleft, leftx, GetPos().y, ratiocorner, ratioy);
-		DrawSpecial(out,img->cmiddle, middlex, GetPos().y, ratiox, ratioy);
-		DrawSpecial(out,img->cright, rightx, GetPos().y, ratiocorner, ratioy);
+		DrawSpecial(out,img->cleft, leftx, pos.y, ratiocorner, ratioy);
+		DrawSpecial(out,img->cmiddle, middlex, pos.y, ratiox, ratioy);
+		DrawSpecial(out,img->cright, rightx, pos.y, ratiocorner, ratioy);
 
 		
 	}
 
 	void Draw() override {
+		Vector2 pos = GetAbs();
 		if (autosize) {
 			int txtsize = text.size() > 1 ? text.size() : 2;
 			size = Vector2(DFONT->charw *txtsize * 1.25, DFONT->charh*1.5);
 		}
 		int textWidth = text.size() * DFONT->charw;
-		int textY = GetPos().y + size.y / 2 - DFONT->charh / 2;
-		int textX = GetPos().x + (size.x - textWidth) / 2;
+		int textY = pos.y + size.y / 2 - DFONT->charh / 2;
+		int textX = pos.x + (size.x - textWidth) / 2;
 
 		this->DrawImage(io->out);
 		io->out->PrintText(textX, textY, DFONT, text);

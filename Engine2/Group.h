@@ -12,12 +12,12 @@ public:
 			int depth = GetDepth();
 			Color colors[] = { Colors::White, Colors::GrayLightLight, Colors::GrayLight, Colors::Gray };
 			depth %= sizeof(colors) / sizeof(colors[0]);
-			io->out->paint->rectangle(GetPos().x, GetPos().y, size.x, size.y, colors[depth]);
+			io->out->paint->rectangle(pos.x, pos.y, size.x, size.y, colors[depth]);
 		}
 		else {
-			io->out->paint->rectangle(GetPos().x, GetPos().y, size.x, size.y, bkclr);
+			io->out->paint->rectangle(pos.x, pos.y, size.x, size.y, bkclr);
 		}
-		io->out->paint->rectangleBorder(GetPos().x, GetPos().y, size.x, size.y, Colors::Black, 2);
+		io->out->paint->rectangleBorder(pos.x, pos.y, size.x, size.y, Colors::Black, 2);
 		
 	}
 

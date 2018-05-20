@@ -16,7 +16,7 @@ public:
 
 class ListBox: public Element {
 public:
-	MouseRegionR mregion;
+	MouseRegion mregion;
 	std::vector<ListBoxItem> items;
 	int selectedIndex = -1;
 	int offset = 0;
@@ -24,11 +24,10 @@ public:
 	BitmapFont* DFONT = &DOS_BLACK_MINI;
 
 	VScrollBar sc;
-	ListBox(Pos ppos, Size psize): Element(ppos,psize, "ListBox"),
+	ListBox(Pos ppos, Size psize): Element(ppos,psize),
 		mregion(ppos, Size(psize.x - 15,psize.y)), sc(Pos(ppos.x + psize.x - 15, ppos.y), Size(15, psize.y))
 	{
 		name = "Empty ListBox";
-		pos = ppos; size = psize;
 	}
 
 	void Add(std::string item) {
@@ -56,9 +55,10 @@ public:
 	}
 
 	void Draw() {
-		this->DrawBorder(io->out);
+		Vector2 pos = GetAbs();
+		this->DrawBorder();
 		if (items.size() < 1) {
-			this->DrawName(io->out);
+			this->DrawName();
 		}
 
 		if (scrollbarvisible()) {
@@ -105,18 +105,11 @@ public:
 		}
 		else { offset = 0; }
 
-
-		if (mregion.GetMouseState() == MouseState::pressed) {
-			io->mhelper->LockMouse(mregion.ID);
-		}
-
-		if (mregion.GetMouseState() == MouseState::release) {
-			io->mhelper->FreeMouse();
-		}
+		mregion.Update();
 
 		if (this->mregion.isPress()) {
 	
-			
+			Vector2 pos = GetAbs();
 
 			Vector2 rpos = io->mhelper->position-pos;
 			int yoff = rpos.y - 3;

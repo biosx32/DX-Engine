@@ -14,6 +14,6 @@ public:
 	}
 
 	void Draw() override {
-		io->out->DrawBitmap(this, this->GetPos().x, GetPos().y, size.x, size.y);
+		io->out->DrawBitmap(this, this->pos.x, pos.y, size.x, size.y);
 	}
 };

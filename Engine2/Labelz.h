@@ -15,7 +15,7 @@ public:
 
 	void Update() {}
 	void Draw() {
-		io->out->PrintText(this->GetPos().x, this->GetPos().y, this->DFONT, this->text);
+		io->out->PrintText(this->pos.x, this->pos.y, this->DFONT, this->text);
 	}
 
 	void SetText(const char *fmt, ...){

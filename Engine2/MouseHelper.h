@@ -30,6 +30,10 @@ public:
 		return lockedobject == -1 || lockedobject == i;
 	}
 
+	bool IsActive(int i) {
+		return lockedobject == i;
+	}
+
 	void Refresh() {
 		position = Vector2(mouse->GetMouseX(), mouse->GetMouseY());
 		mouseDelta = position - mouseOld;

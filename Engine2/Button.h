@@ -18,7 +18,8 @@ public:
 
 
 	void UpdateOnClick(){
-		if (state == MouseState::release) {
+		if (IsClick()) {
+			GetClick();
 			if (function) {
 				function();
 			}

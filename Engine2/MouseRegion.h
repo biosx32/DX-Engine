@@ -12,67 +12,63 @@ namespace MouseState {
 	};
 }
 
-
-
 class MouseRegion : public Element {
 
 public:
-
+	int state=0;
 	int click_count = 0;
-	bool was_pressed = false;
-	MouseRegion(Vector2 ppos) : Element(ppos, Vector2(3,3), "MouseRegion") {}
+
+	MouseRegion(Vector2 pos, Vector2 size) : Element(pos, size) {}
 public:
 
-	virtual void Draw() {
-		BasicDraw();
+	virtual void Update() {
+		
+		if (isHover()) {
+			if (isPress()) {
+				state = MouseState::pressed;
+			}
+			else {
+				if (io->mhelper->IsActive(this->ID)) {
+					click_count += 1;
+				}
+				state = MouseState::hovered;
+			}
+		} else { state = MouseState::none; }
+		
 	}
-	virtual void Update() {}
 
-	virtual bool isHover() = 0;
+	virtual bool isHover() {
+		Vector2 mPos = Vector2(io->mouse->GetMouseX(), io->mouse->GetMouseY());
+		Vector2 ePos = GetAbs();
+		return mPos.x >= ePos.x && mPos.y >= ePos.y && mPos.x < ePos.x + size.x && mPos.y < ePos.y + size.y;
+	}
+
 	virtual bool isPress() {
 		if (!io->mhelper->IsBlocked(this->ID) && isHover()) {
 			return io->mouse->LeftIsPressed();
 		}
 		return false;
 	}
-	int GetMouseState() {
-		if (isHover()) {
-			if (isPress()) {
-				was_pressed = true;
-				return MouseState::pressed;
-			}
-			else {
-				if (was_pressed) {
-					click_count += 1;
-					was_pressed = false;
 
-				}
-				return MouseState::hovered;
-			}
+	bool IsClick() {
+		if (click_count > 0) {
+			return true;
 		}
-		return MouseState::none;
+		return false;
 	}
 
-	bool HasClick() {
-		return click_count > 0;
+	bool GetClick() {
+		if (click_count > 0) {
+			click_count--;
+			return true;
+		}
+		return false;
 	}
 
-	void ReleaseOneClick() { if (HasClick()) click_count--; }
-	void ReleaseAllClick() { click_count = 0; }
 
 };
 
 
-class MouseRegionR : public MouseRegion {
-public:
-	Vector2 size;
-	MouseRegionR(Vector2 pos, Vector2 size): MouseRegion(pos), size(size) {}
-
-	virtual bool isHover() {
-		Vector2 mPos = Vector2(io->mouse->GetMouseX(), io->mouse->GetMouseY());
-		return mPos.x >= pos.x && mPos.y >= pos.y && mPos.x < pos.x + size.x && mPos.y < pos.y + size.y;
-	}
-};
 
 
 

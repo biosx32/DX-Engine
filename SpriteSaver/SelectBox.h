@@ -1,21 +1,25 @@
 #pragma once
 #include "Vectors.h"
-#include "ElementExtended.h"
-class SelectBox: public ElementMeta  {
+#include "Element.h"
+
+class SelectBox: public Element  {
 public:
 
-	SelectBox(Vector2 p1):ElementMeta(Pos(p1.x, p1.y), Size(0,0)) {
-		pos = p1;
+	SelectBox(Vector2 p1): Element(p1, Vector2(50,50)) {
+	
 	}
 
 	Vector2 GetStart() {
+		Vector2 pos = GetAbs();
 		return Vector2(min(pos.x, pos.x + size.x),
-			min(pos.y, pos.y + size.y));
+			           min(pos.y, pos.y + size.y));
 	}
 	Vector2 GetSize() {
+		Vector2 pos = GetAbs();
 		return Vector2(abs(size.x), abs(size.y));
 	}
 	Vector2 GetEnd() {
+		Vector2 pos = GetAbs();
 		return Vector2(max(pos.x, pos.x + size.x),
 			max(pos.y, pos.y + size.y));
 	}
@@ -23,6 +27,7 @@ public:
 	void Update() {}
 
 	void Update(Vector2 p2){
+		Vector2 pos = GetAbs();
 		size = p2 - pos;
 	}
 
@@ -30,8 +35,8 @@ public:
 		if (size.x == 0 && size.y == 0) {
 			return;
 		}
-		this->DrawBorder(io->out);
-		this->DrawCorners(io->out);
+		this->DrawBorder();
+		this->DrawCorners();
 		
 	
 	}

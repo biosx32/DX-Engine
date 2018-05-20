@@ -15,23 +15,25 @@ public:
 
 
 	void Update() {
-		if (this->GetMouseState()  == MouseState::release) {
+		if (GetClick()) {
 		checked = !checked;
 		}
 	}
 
 	void Draw() {
-		io->out->paint->rectangle(GetPos().x, GetPos().y, radius * 2, radius * 2, Colors::White);
+		Vector2 pos = GetAbs();
+
+		io->out->paint->rectangle(pos.x, pos.y, radius * 2, radius * 2, Colors::White);
 		if (checked) {
-			io->out->paint->rectangle(GetPos().x, GetPos().y, radius * 2, radius * 2, Colors::GreenDark);
-			io->out->paint->line(GetPos().x, GetPos().y, GetPos().x + radius * 2, GetPos().y + radius * 2, Colors::White,2);
-			io->out->paint->line(GetPos().x, GetPos().y + radius * 2, GetPos().x + radius * 2, GetPos().y , Colors::White,2);
+			io->out->paint->rectangle(pos.x, pos.y, radius * 2, radius * 2, Colors::GreenDark);
+			io->out->paint->line(pos.x, pos.y, pos.x + radius * 2, pos.y + radius * 2, Colors::White,2);
+			io->out->paint->line(pos.x, pos.y + radius * 2, pos.x + radius * 2, pos.y , Colors::White,2);
 
 		
 		}
-		io->out->paint->rectangleBorder(GetPos().x, GetPos().y, radius * 2, radius * 2, Colors::Black, 3);
-		io->out->paint->rectangleBorder(GetPos().x, GetPos().y, radius * 2, radius * 2, Colors::White, 1);
-		io->out->PrintText(GetPos().x + radius * 2.34, GetPos().y + radius /3, DFONT, text);
+		io->out->paint->rectangleBorder(pos.x, pos.y, radius * 2, radius * 2, Colors::Black, 3);
+		io->out->paint->rectangleBorder(pos.x, pos.y, radius * 2, radius * 2, Colors::White, 1);
+		io->out->PrintText(pos.x + radius * 2.34, pos.y + radius /3, DFONT, text);
 
 
 	}

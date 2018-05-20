@@ -1,5 +1,6 @@
 #include "Static.h"
 #include "Element.h"
 
-int Element::ElementCount = 0;
-IOgroup* Element::io = nullptr;
+int BaseElement::ElementCount = 0;
+IOgroup* BaseElement::io = nullptr;
+BitmapFont * BaseElement::DFONT = &DOS_WHITE;
