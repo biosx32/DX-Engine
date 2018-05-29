@@ -10,20 +10,19 @@ public:
 	std::string text = "";
 	MouseRegion mregion;
 
+	void Toggle() {
+		checked = !checked;
+	}
+
 	CheckBox(Vector2 position, const char* text): 
 		PosElement(position), mregion(position, Vector2(30,30))
 	{
 		this->text = text;
 		Vector2 size = Vector2(radius * 2, radius * 2);
+	//	mregion.function = &Toggle;
 	}
 
 
-	void Update() {
-		mregion.Update();
-		if (mregion.GetClick()) {
-		checked = !checked;
-		}
-	}
 
 	void Draw() {
 		Vector2 pos = GetAbs();

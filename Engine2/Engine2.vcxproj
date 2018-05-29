@@ -35,7 +35,6 @@
     <ClInclude Include="CustomMath.h" />
     <ClInclude Include="DebugGUI.h" />
     <ClInclude Include="Element.h" />
-    <ClInclude Include="ElementExtended.h" />
     <ClInclude Include="FloodfillMap.h" />
     <ClInclude Include="Func.h" />
     <ClInclude Include="GlobalObjects.h" />

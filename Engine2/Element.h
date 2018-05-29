@@ -6,6 +6,9 @@ public:
 	static int ElementCount;
 	static IOgroup* io;
 	static BitmapFont * DFONT;
+	static std::vector<BaseElement*> Elements;
+	static void FullUpdate() { io->UpdateIO();  for (int i = 0; i < Elements.size(); i++) { Elements.at(i)->Update(); } }
+	static void FullDraw() { for (int i = 0; i < Elements.size(); i++) { Elements.at(i)->Draw(); } }
 
 public:
 	int ID = -1;
@@ -13,12 +16,13 @@ public:
 	bool enabled = true;
 	bool visible = true;
 
+	virtual void Update() = 0;
+	virtual void Draw() = 0;
 
 	BaseElement() {
 		ID = ElementCount++;
+		Elements.push_back(this);
 	}
-
-	
 };
 
 class PosElement {
@@ -57,24 +61,16 @@ public:
 	}
 };
 
-class IElement: public BaseElement, public PosElement, public SizeElement {
-public:
-	Vector2 size;
-	IElement(Vector2 pos, Vector2 size):
-		PosElement(pos), SizeElement(size) {
-	}
 
-	virtual void Update() = 0;
-};
-
-class Element: public IElement {
+class Element: public BaseElement, public PosElement, public SizeElement {
 
 public:
-	virtual void Update() = 0;
-	virtual void Draw() { DrawName(); DrawBorder(); DrawCorners(); }
+	virtual void Update() {}
+	virtual void Draw()  { if (this->visible) { DrawName(); DrawBorder(); DrawCorners(); } }
 
 	Element(Vector2 pos, Vector2 size) :
-		IElement(pos, size) {
+		BaseElement(),PosElement(pos), SizeElement(size) {
+	
 	}
 
 

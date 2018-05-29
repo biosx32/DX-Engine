@@ -28,13 +28,13 @@
 
 void AddBox();
 SelectBox test = SelectBox(Vector2(0, 0));
-ListBox lbox = ListBox(Pos(10, 40), Size(500, 400));
-CheckBox a = CheckBox(Pos(0, 0), std::string("WTF").c_str());
+ListBox lbox = ListBox(Pos(100, 150), Size(500, 400));
 ColorButton k = ColorButton(Pos(550, 0), AddBox, "Add", Size(100, 30));
 
 void PrintProgramHeader(Interface* out) {
-	out->paint->rectangleBorder(0, 0, 170, 25, Colors::Red, 3);
-	out->PrintText(5, 0, &DOS_WHITE, std::string("Sprite Saver"));
+	out->paint->rectangleBorder(0, SCREENHEIGHT - DOS_WHITE.charh, 170, 25, Colors::Red, 3);
+	
+	out->PrintText(5, SCREENHEIGHT - DOS_WHITE.charh, &DOS_WHITE, std::string("Sprite Saver"));
 }
 
 void AddBox() {
@@ -47,30 +47,31 @@ void AddBox() {
 }
 
 
+Element TEM = Element(Pos(30, 30), Size(100, 100));
 void Game::Initialise() {
 
 }
 
 void Game::UpdateModel()
 {
-	//k.Update();
-	a.Update();
-//	lbox.Update();
-	io->mhelper->Refresh();
+	BaseElement::FullUpdate();
+
 }
 
 void Game::ComposeFrame() {
-	/*test.Draw();
-	lbox.Draw();
-	k.Draw();
+
+	BaseElement::FullDraw();
+	TEM.Draw();
+
+
 	io->out->PrintText(5, 35, &DOS_WHITE, LabelizeVector(test.GetStart(), "Start"));
 	io->out->PrintText(5, 70, &DOS_WHITE, LabelizeVector(test.GetEnd(), "End"));
 	io->out->PrintText(5, 100, &DOS_WHITE,LabelizeVector(test.GetSize(), "Size"));
 	///////////////////////////////////////////
-	PrintProgramHeader(io->out);*/
-	a.Draw();
+	PrintProgramHeader(io->out);
 
-	io->out->PrintText(5, 100, &DOS_WHITE, "LOCKED ID: %d", io->mhelper->lockedobject);
+
+	io->out->PrintText(5, 180, &DOS_WHITE, "LOCKED ID: %d", io->mhelper->lockedobject);
 
 }
 

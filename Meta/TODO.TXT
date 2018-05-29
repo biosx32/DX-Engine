@@ -23,7 +23,7 @@ https://www.usability.gov/how-to-and-tools/methods/user-interface-elements.html
 --Rectangle select cursor
 Replace floodfill by: Make line around sprite, then scanlinefill
 Checkbox, radiobutton
-
+MREGIONS FIX W ELEMENTS
 GUI.getElement("ELEMENT_NAME_UNIQUE").ToButton
    or (Button) GUI.getElement("NAME")
    or GUI.get(Button, "NAME");
