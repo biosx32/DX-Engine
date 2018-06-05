@@ -49,7 +49,7 @@ void AddBox() {
 
 Element TEM = Element(Pos(30, 30), Size(100, 100));
 void Game::Initialise() {
-
+	int p;
 }
 
 void Game::UpdateModel()

@@ -7,6 +7,7 @@ public:
 	static IOgroup* io;
 	static BitmapFont * DFONT;
 	static std::vector<BaseElement*> Elements;
+
 	static void FullUpdate() { io->UpdateIO();  for (int i = 0; i < Elements.size(); i++) { Elements.at(i)->Update(); } }
 	static void FullDraw() { for (int i = 0; i < Elements.size(); i++) { Elements.at(i)->Draw(); } }
 
@@ -19,7 +20,8 @@ public:
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 
-	BaseElement() {
+	BaseElement()
+	{
 		ID = ElementCount++;
 		Elements.push_back(this);
 	}
@@ -69,7 +71,7 @@ public:
 	virtual void Draw()  { if (this->visible) { DrawName(); DrawBorder(); DrawCorners(); } }
 
 	Element(Vector2 pos, Vector2 size) :
-		BaseElement(),PosElement(pos), SizeElement(size) {
+		PosElement(pos), SizeElement(size) {
 	
 	}
 
