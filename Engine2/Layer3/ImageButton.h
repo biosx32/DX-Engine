@@ -26,21 +26,21 @@ public:
 
 
 
-	void DrawSpecial(Interface* out, Bitmap* img, int x, int y, float rx, float ry) {
+	void DrawSpecial(Bitmap* img, int x, int y, float rx, float ry) {
 		if (state == MouseState::none) {
-			out->DrawBitmap(img, x, y, rx, ry);
+			draw->DrawBitmap(img, x, y, rx, ry);
 		}
 		else if (state == MouseState::hovered) {
-			out->DrawBitmap(img, x-1, y-1, rx, ry);
+			draw->DrawBitmap(img, x-1, y-1, rx, ry);
 		}
 		else{
-			out->DrawBitmap(img, x+1, y+2, rx, ry);
+			draw->DrawBitmap(img, x+1, y+2, rx, ry);
 		}
 	
 
 	}
 
-	void DrawImage(Interface* out) {
+	void DrawImage() {
 		Vector2 pos = GetAbs();
 		ImageSplitCorners * img = StateImages->none;
 		if (state == MouseState::pressed) {
@@ -66,9 +66,9 @@ public:
 		int middlex = leftx + img->cleft->width * ratiocorner;
 		int rightx = middlex + img->cmiddle->width* ratiox;
 
-		DrawSpecial(out,img->cleft, leftx, pos.y, ratiocorner, ratioy);
-		DrawSpecial(out,img->cmiddle, middlex, pos.y, ratiox, ratioy);
-		DrawSpecial(out,img->cright, rightx, pos.y, ratiocorner, ratioy);
+		DrawSpecial(img->cleft, leftx, pos.y, ratiocorner, ratioy);
+		DrawSpecial(img->cmiddle, middlex, pos.y, ratiox, ratioy);
+		DrawSpecial(img->cright, rightx, pos.y, ratiocorner, ratioy);
 
 		
 	}
@@ -83,7 +83,7 @@ public:
 		int textY = pos.y + size.y / 2 - DFONT->charh / 2;
 		int textX = pos.x + (size.x - textWidth) / 2;
 
-		this->DrawImage(io->out);
-		io->out->PrintText(textX, textY, DFONT, text);
+		this->DrawImage();
+		PrintText(draw, textX, textY, text,DFONT);
 	}
 };

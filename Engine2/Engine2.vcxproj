@@ -18,6 +18,7 @@
     <ClCompile Include="Layer2\GlobalObjects.cpp" />
     <ClCompile Include="Layer0\OutputStream.cpp" />
     <ClCompile Include="Layer0\Static.cpp" />
+    <ClCompile Include="Layer3\Func3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Layer0\Layer0.h" />
@@ -32,12 +33,12 @@
     <ClInclude Include="Layer1\ConfigFile.h" />
     <ClInclude Include="Layer0\CustomMath.h" />
     <ClInclude Include="Layer1\Layer1.h" />
-    <ClInclude Include="GameDebug.h" />
     <ClInclude Include="Layer3\Element.h" />
     <ClInclude Include="Layer0\Func.h" />
     <ClInclude Include="Layer2\GlobalObjects.h" />
+    <ClInclude Include="Layer3\Func3.h" />
     <ClInclude Include="Layer3\ImageButton.h" />
-    <ClInclude Include="Layer2\IOgroup.h" />
+    <ClInclude Include="Layer0\IOgroup.h" />
     <ClInclude Include="Layer0\KeyData.h" />
     <ClInclude Include="Layer3\Labelz.h" />
     <ClInclude Include="Layer0\MouseHelper.h" />

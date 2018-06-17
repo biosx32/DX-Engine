@@ -68,12 +68,13 @@ public:
 
 	void Draw() override {
 		const int border = 2;
-		io->out->paint->rectangle(pos.x - border, pos.y, size.x + border * 2, size.y, Colors::White);
-		io->out->paint->rectangleBorder(pos.x - border, pos.y, size.x + border*2, size.y, Colors::Black, border);
-		io->out->PrintText(pos.x, pos.y, DFONT, text);
+		Vector2 pos = GetAbs ();
+		draw->paint->rectangle(pos.x - border, pos.y, size.x + border * 2, size.y, Colors::White);
+		draw->paint->rectangleBorder(pos.x - border, pos.y, size.x + border*2, size.y, Colors::Black, border);
+		PrintText(pos.x, pos.y, DFONT, text);
 		if (this->isSelected) {
 			int x = textsize * DFONT->charw;
-			io->out->paint->rectangle(x + pos.x, pos.y, 4, DFONT->charh, Colors::Red);
+			draw->paint->rectangle(x + pos.x, pos.y, 4, DFONT->charh, Colors::Red);
 		}
 	
 	}

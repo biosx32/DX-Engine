@@ -17,7 +17,7 @@ public:
 	void Update() {}
 	void Draw() {
 		
-	
+		PrintText (draw, GetAbs (), text, DFONT);
 	}
 
 

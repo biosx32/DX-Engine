@@ -22,12 +22,12 @@
     <ClCompile Include="Layer1\Bmap.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
+    <ClCompile Include="Layer3\Func3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MouseRegion.h">
       <Filter>Elements</Filter>
     </ClInclude>
-    <ClInclude Include="GameDebug.h" />
     <ClInclude Include="Layer0\Colors.h" />
     <ClInclude Include="Layer0\CustomMath.h" />
     <ClInclude Include="Layer0\Func.h" />
@@ -58,7 +58,6 @@
     </ClInclude>
     <ClInclude Include="Layer3\Labelz.h" />
     <ClInclude Include="Layer2\GlobalObjects.h" />
-    <ClInclude Include="Layer2\IOgroup.h" />
     <ClInclude Include="Layer0\Layer0.h" />
     <ClInclude Include="Layer1\Layer1.h" />
     <ClInclude Include="Layer0\OutputStream.h" />
@@ -66,6 +65,8 @@
     <ClInclude Include="Layer3\Layer3.h" />
     <ClInclude Include="Layer0\Static.h" />
     <ClInclude Include="Layer1\Painter.h" />
+    <ClInclude Include="Layer3\Func3.h" />
+    <ClInclude Include="Layer0\IOgroup.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CPP">

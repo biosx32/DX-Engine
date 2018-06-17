@@ -1,14 +1,12 @@
 #pragma once
 #include "IOgroup.h"
 #include "Painter.h"
-#include "Labelz.h"
+#include "Func3.h"
 
 class BaseElement {
-protected:
-	static GFXDraw* draw;
-
 public:
 	static int ElementCount;
+	static GFXDraw* draw;
 	static IOgroup* io;
 	static BitmapFont * DFONT;
 	static std::vector<BaseElement*> Elements;
@@ -52,6 +50,15 @@ public:
 			return pos;
 		}
 	}
+	int GetAbsX() {
+		if (parent) { return this->pos.x + parent->GetAbsX(); }
+		else { return pos.x;}
+	}
+	int GetAbsY() {
+		if (parent) { return this->pos.y + parent->GetAbsY(); }
+		else { return pos.y;}
+	}
+
 	
 	void SetRel(Vector2 pos) { this->pos = pos; }
 
@@ -72,25 +79,20 @@ public:
 
 
 class Element: public BaseElement, public PosElement, public SizeElement {
-
 public:
-	virtual void Update() {}
-	virtual void Draw()  { if (this->visible) { DrawName(); DrawBorder(); DrawCorners(); } }
 
-	Label* nameLabel = nullptr;
-
-	Element(Vector2 pos, Vector2 size) :
+	Element(Vector2 pos, Vector2 size):
 		PosElement(pos), SizeElement(size) {
-		Vector2 lpos = Pos (pos.x + size.x / 2 - DFONT->charw*name.size () / 2,
-							pos.y + size.y / 2 - DFONT->charh / 2);
-
-		nameLabel = new Label(pos, this->name.c_str());
 	
 	}
 
 
+
 	void DrawName() {
-		nameLabel->Draw ();
+		Vector2 pos = GetAbs ();
+		Vector2 lpos = Pos (pos.x + size.x / 2 - DFONT->charw*name.size () / 2,
+							pos.y + size.y / 2 - DFONT->charh / 2);
+		PrintText (draw,lpos,name,DFONT);
 	}
 	void DrawBorder() {
 		Vector2 pos = GetAbs();
@@ -108,6 +110,10 @@ public:
 		draw->paint->rectangle(of + pos.x + size.x, of + pos.y, fl, fl, Colors::Blue);
 		draw->paint->rectangle(of + pos.x + size.x, of + pos.y + size.y, fl, fl, Colors::Blue);
 	}
+
+	virtual void Update() {}
+	virtual void Draw () { if(this->visible) { DrawName (); DrawBorder (); DrawCorners (); } }
+
 
 };
 

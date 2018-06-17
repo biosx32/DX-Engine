@@ -1,6 +1,7 @@
 #pragma once
-#include "Static.h"
 #include "Layer1.h"
+
+
 extern BitmapFont DOS_BLACK_MINI;
 extern BitmapFont DOS_BLACK;
 extern BitmapFont DOS_BLACK_HUGE;

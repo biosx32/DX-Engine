@@ -39,9 +39,9 @@ public:
 	void Draw() {
 		Vector2 spos = scroll.GetAbs();
 		Vector2 pos = GetAbs();
-		io->out->paint->rectangle(spos.x + 1, spos.y, scroll.size.x - 1, scroll.size.y, Colors::Green);
-		io->out->paint->rectangleBorder(spos.x, spos.y, scroll.size.x - 1, scroll.size.y, Colors::GreenDark,2);
-		io->out->paint->rectangleBorder(pos.x, pos.y, size.x, size.y, Colors::GreenDark, 1);
+		draw->paint->rectangle(spos.x + 1, spos.y, scroll.size.x - 1, scroll.size.y, Colors::Green);
+		draw->paint->rectangleBorder(spos.x, spos.y, scroll.size.x - 1, scroll.size.y, Colors::GreenDark,2);
+		draw->paint->rectangleBorder(pos.x, pos.y, size.x, size.y, Colors::GreenDark, 1);
 		
 	}
 };
@@ -77,8 +77,8 @@ public:
 	void Draw() {
 		Vector2 spos =scroll.GetAbs();
 		Vector2 pos = GetAbs();
-		io->out->paint->rectangle(spos.x, spos.y, scroll.size.x, scroll.size.y, Colors::Green);
-		io->out->paint->rectangleBorder(spos.x, spos.y, scroll.size.x, scroll.size.y, Colors::GreenDark,2);
-		io->out->paint->rectangleBorder(pos.x, pos.y, size.x, size.y, Colors::GreenDark, 1);
+		draw->paint->rectangle(spos.x, spos.y, scroll.size.x, scroll.size.y, Colors::Green);
+		draw->paint->rectangleBorder(spos.x, spos.y, scroll.size.x, scroll.size.y, Colors::GreenDark,2);
+		draw->paint->rectangleBorder(pos.x, pos.y, size.x, size.y, Colors::GreenDark, 1);
 	}
 };

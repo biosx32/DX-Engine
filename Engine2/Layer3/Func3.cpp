@@ -1,14 +1,12 @@
 #include "Static.h"
 #include "Func3.h"
-#include <string>
-#include "Vectors.h"
 
-void PrintText(GFXDraw* draw, Vector2 pos, std::string text,BitmapFont font) {
+void PrintText(GFXDraw* draw, Vector2 pos, std::string text,BitmapFont* font) {
 
 	double rel_pos_x = 0;
 	double rel_pos_y = 0;
-	float charw = DFONT->charw;
-	float charh = DFONT->charh;
+	float charw = font->charw;
+	float charh = font->charh;
 
 	for ( auto it = text.begin() ; it < text.end(); it++)
 	{
@@ -24,15 +22,15 @@ void PrintText(GFXDraw* draw, Vector2 pos, std::string text,BitmapFont font) {
 			rel_pos_x = 0;
 		}
 
-		if (chr < DFONT->offset) {
+		if (chr < font->offset) {
 			continue;
 		}
 
-		Bitmap* CharBitmap = DFONT->GetCharacterRepr(chr);
+		Bitmap* CharBitmap = font->GetCharacterRepr(chr);
 
 
-		int destx = (int)(x + rel_pos_x);
-		int desty = (int)(y + rel_pos_y);
+		int destx = (int)(pos.x + rel_pos_x);
+		int desty = (int)(pos.y + rel_pos_y);
 
 
 		draw->DrawBitmap(CharBitmap, destx, desty);
@@ -40,6 +38,9 @@ void PrintText(GFXDraw* draw, Vector2 pos, std::string text,BitmapFont font) {
 		rel_pos_x += charw;
 	}
 
-
 }
+
+void PrintText (GFXDraw * draw, int x, int y, std::string text, BitmapFont * font) {
+	Vector2 pos = Vector2 (x, y);
+	PrintText (draw, pos, text, font);
 }

@@ -1,5 +1,6 @@
 #include "Static.h"
 #include "Element.h"
+#include "GlobalObjects.h"
 
 std::vector<BaseElement*> BaseElement::Elements = std::vector<BaseElement*>();
 int BaseElement::ElementCount = 0;

@@ -8,13 +8,13 @@ public:
 	void Draw() override {
 		Color drawColor = GetStateColor();
 		Vector2 pos = GetAbs();
-		io->out->paint->rectangle(pos.x, pos.y, size.x, size.y, drawColor);
-		io->out->paint->rectangleBorder(pos.x, pos.y, size.x, size.y, Colors::Black, 2);
+		draw->paint->rectangle(pos.x, pos.y, size.x, size.y, drawColor);
+		draw->paint->rectangleBorder(pos.x, pos.y, size.x, size.y, Colors::Black, 2);
 
 		int textWidth = text.size() * DFONT->charw;
 		int textY = pos.y + size.y / 2 - DFONT->charh / 2;
 		int textX = pos.x + (size.x - textWidth) / 2;
-		io->out->PrintText(textX, textY, DFONT, text);
+		PrintText(draw, textX, textY, text,DFONT);
 
 	}
 

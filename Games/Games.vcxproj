@@ -123,11 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameDebug.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Windows.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameDebug.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChilliFramework\ChilliFramework.vcxproj">

@@ -77,7 +77,7 @@ public:
 		if (isValidIndex()) {
 			int drawindex = selectedIndex-offset;
 			if (selectedIndex >= offset && selectedIndex < offset + drawMax) {
-				io->out->paint->rectangleBorder(pos.x, pos.y + 3 + drawindex * DFONT->charh, size.x - 15, DFONT->charh, Colors::Cyan, 2);
+				draw->paint->rectangleBorder(pos.x, pos.y + 3 + drawindex * DFONT->charh, size.x - 15, DFONT->charh, Colors::Cyan, 2);
 			}
 			
 		}

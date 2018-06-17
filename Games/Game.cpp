@@ -21,31 +21,30 @@
 
 #include "Static.h"
 #include "Game.h"
-
 #include "ColorButton.h"
 #include "CheckBox.h"
-#include "GameDebug.h"
+
 
 
 Element TEM = Element(Pos(30, 30), Size(100, 100));
 void Game::Initialise() {
-
+	SetDebugIO (io);
 }
 
 void Game::UpdateModel () {
 	BaseElement::FullUpdate ();
 
 }
-#define __DEBUG__ 1
+
 
 void Game::ComposeFrame() {
 
 	BaseElement::FullDraw();
 	TEM.Draw();
 
-#ifdef __DEBUG__ 1
+
 	DrawFrameInfo ();
-#endif
+
 
 }
 

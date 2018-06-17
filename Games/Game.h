@@ -21,6 +21,8 @@
 #pragma once
 
 #include "Layer0.h"
+#include "Element.h"
+#include "IOGroup.h"
 
 class Game
 {
@@ -44,6 +46,8 @@ public:
 	{
 		io = new IOgroup(&gfx, &mouse, &kbd);
 		BaseElement::io = io;
+		BaseElement::draw = new GFXDraw (io->gfx);
+
 		srand((unsigned int)time(NULL));
 		Initialise();
 	}
@@ -63,5 +67,6 @@ public:
 };
 
 
+#define __DEBUG__ 1
 
-
+#include "GameDebug.h"
