@@ -31,13 +31,15 @@ MouseRegion mregion3 (Pos (300, 150), Size (100, 100));
 void Game::Initialise() {
 	SetDebugIO (io);
 }
-
+CheckBox j = CheckBox (Pos (170, 170),"bekej");
 void Game::UpdateModel () {
 	//BaseElement::FullUpdate ();
 	mregion.Update ();
 	mregion2.Update ();
 	mregion3.Update ();
+	j.Update ();
 	io->mhelper->Refresh ();
+
 }
 
 
@@ -48,6 +50,7 @@ void Game::ComposeFrame() {
 	mregion.Draw ();
 	mregion2.Draw ();
 	mregion3.Draw ();
+	j.Draw ();
 	PrintText (draw, Pos (300, 300), &DOS_BLACK, "Click count: %4d",mregion.click_count);
 	DrawFrameInfo ();
 

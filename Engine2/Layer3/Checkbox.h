@@ -8,18 +8,28 @@ public:
 	bool checked = false;
 	const int radius = 15;
 	std::string text = "";
-	MouseRegion mregion;
+	MouseRegion* mregion = nullptr;
 
 	void Toggle() {
 		checked = !checked;
 	}
 
+	virtual void Update () {
+		mregion->Update ();
+
+		if (mregion->GetClick ()) {
+			Toggle ();
+		}
+	}
+
 	CheckBox(Vector2 position, const char* text): 
-		PosElement(position), mregion(position, Vector2(30,30))
+		PosElement(position)
 	{
 		this->text = text;
+		mregion = new MouseRegion (position, Vector2 (30, 30));
+		mregion->name = "";
 		Vector2 size = Vector2(radius * 2, radius * 2);
-	//	mregion.function = &Toggle;
+
 	}
 
 
@@ -40,7 +50,7 @@ public:
 	
 
 		PrintText(draw,pos.x + radius * 2.34, pos.y + radius /3, text, DFONT);
-
+		mregion->Draw ();
 
 	}
 
