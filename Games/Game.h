@@ -19,8 +19,8 @@
  *	along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************************/
 #pragma once
-#include "Element.h"
-#include "IOgroup.h"
+
+#include "Layer0.h"
 
 class Game
 {
@@ -30,7 +30,6 @@ private:
 
 private:
 	D3DGraphics gfx;
-	Interface* out;
 	KeyboardClient kbd;
 	MouseClient mouse;
 	DSound audio;
@@ -45,7 +44,6 @@ public:
 	{
 		io = new IOgroup(&gfx, &mouse, &kbd);
 		BaseElement::io = io;
-		out = io->out;
 		srand((unsigned int)time(NULL));
 		Initialise();
 	}

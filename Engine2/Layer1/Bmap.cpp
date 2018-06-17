@@ -2,6 +2,7 @@
 #include "Bmap.h"
 
 
+
 Bitmap* Bitmap::GetBitmapPart(int xoff, int yoff, int width, int height) {
 	return GetBitmapPart(xoff, yoff, width, height, 1);
 }

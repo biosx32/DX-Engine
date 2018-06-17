@@ -2,7 +2,6 @@
 #include "Vectors.h"
 #include "Mouse.h"
 #include "Element.h"
-#include "Interface.h"
 #include "GlobalObjects.h"
 
 
@@ -28,7 +27,6 @@ public:
 
 
 	virtual void Draw() = 0;
-
 	virtual void Update() = 0;
 
 };

@@ -18,60 +18,34 @@
  *	You should have received a copy of the GNU General Public License					  *
  *	along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************************/
+
 #include "Static.h"
 #include "Game.h"
 
-#include "SelectBox.h"
-#include "Listbox.h"
 #include "ColorButton.h"
 #include "CheckBox.h"
-
-void AddBox();
-SelectBox test = SelectBox(Vector2(0, 0));
-ListBox lbox = ListBox(Pos(100, 150), Size(500, 400));
-ColorButton k = ColorButton(Pos(550, 0), AddBox, "Add", Size(100, 30));
-
-void PrintProgramHeader(Interface* out) {
-	out->paint->rectangleBorder(0, SCREENHEIGHT - DOS_WHITE.charh, 170, 25, Colors::Red, 3);
-	
-	out->PrintText(5, SCREENHEIGHT - DOS_WHITE.charh, &DOS_WHITE, std::string("Sprite Saver"));
-}
-
-void AddBox() {
-	std::string app = "";
-	app.append(LabelizeVector(test.GetStart(), "Start"));
-	app.append(" :: ");
-	app.append(LabelizeVector(test.GetSize(), "Size"));
-
-	lbox.Add(app);
-}
+#include "GameDebug.h"
 
 
 Element TEM = Element(Pos(30, 30), Size(100, 100));
 void Game::Initialise() {
-	int p;
-}
-
-void Game::UpdateModel()
-{
-	BaseElement::FullUpdate();
 
 }
+
+void Game::UpdateModel () {
+	BaseElement::FullUpdate ();
+
+}
+#define __DEBUG__ 1
 
 void Game::ComposeFrame() {
 
 	BaseElement::FullDraw();
 	TEM.Draw();
 
-
-	io->out->PrintText(5, 35, &DOS_WHITE, LabelizeVector(test.GetStart(), "Start"));
-	io->out->PrintText(5, 70, &DOS_WHITE, LabelizeVector(test.GetEnd(), "End"));
-	io->out->PrintText(5, 100, &DOS_WHITE,LabelizeVector(test.GetSize(), "Size"));
-	///////////////////////////////////////////
-	PrintProgramHeader(io->out);
-
-
-	io->out->PrintText(5, 180, &DOS_WHITE, "LOCKED ID: %d", io->mhelper->lockedobject);
+#ifdef __DEBUG__ 1
+	DrawFrameInfo ();
+#endif
 
 }
 

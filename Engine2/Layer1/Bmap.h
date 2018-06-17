@@ -1,9 +1,7 @@
 #pragma once
-#include "Colors.h"
+#include "Layer0.h"
 #include <math.h>
 #include <stdio.h>
-#include "OutputStream.h"
-#include "Func.h"
 
 class Bitmap {
 

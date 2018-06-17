@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{64BDB8A5-7105-4771-9134-7BA3E175E37E}</ProjectGuid>
-    <RootNamespace>Games</RootNamespace>
+    <ProjectGuid>{DFBCA9B4-9CFC-4103-A7AC-BD73AE272416}</ProjectGuid>
+    <RootNamespace>Future</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -29,7 +29,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -69,22 +69,14 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)\ChilliFramework;$(SolutionDir)\Engine2\;$(SolutionDir)\Engine2\Layer0\;$(SolutionDir)\Engine2\Layer1\;$(SolutionDir)\Engine2\Layer2\;$(SolutionDir)\Engine2\Layer3\;$(SolutionDir)\Engine2\Layer4\;$(SolutionDir)\Engine2\Layer5\;$(SolutionDir)\Engine2\Layer6;$(IncludePath)</IncludePath>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Create</PrecompiledHeader>
-      <PrecompiledHeaderFile>Static.h</PrecompiledHeaderFile>
     </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>d3d9.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -123,19 +115,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Windows.cpp" />
+    <ClInclude Include="Future.h" />
+    <ClInclude Include="Listbox.h" />
+    <ClInclude Include="ScrollBars.h" />
+    <ClInclude Include="SelectBox.h" />
+    <ClInclude Include="TooFuture\Animation.h" />
+    <ClInclude Include="TooFuture\FloodfillMap.h" />
+    <ClInclude Include="TooFuture\Group.h" />
+    <ClInclude Include="TooFuture\GUI.h" />
+    <ClInclude Include="TooFuture\GuiElementManager.h" />
+    <ClInclude Include="TooFuture\ItemManager.h" />
+    <ClInclude Include="TooFuture\PixelMap.h" />
+    <ClInclude Include="TooFuture\TrianglePoly.h" />
+    <ClInclude Include="TooFuture\UserInterface.h" />
+    <ClInclude Include="TooFuture\VectorSpritesheet.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="TooFuture\FloodfillMap.cpp" />
+    <ClCompile Include="TooFuture\PixelMap.cpp" />
+    <ClCompile Include="TooFuture\TrianglePoly.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ChilliFramework\ChilliFramework.vcxproj">
-      <Project>{961d676a-6c05-488e-9653-510cd362d7d0}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Engine2\Engine2.vcxproj">
-      <Project>{9e5c3038-85d6-4cec-a331-0dae21e12415}</Project>
-    </ProjectReference>
+    <Text Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

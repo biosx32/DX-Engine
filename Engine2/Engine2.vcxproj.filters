@@ -1,90 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Bmap.cpp">
+    <ClCompile Include="Layer0\CustomMath.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
-    <ClCompile Include="CustomMath.cpp">
+    <ClCompile Include="Layer0\Func.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
-    <ClCompile Include="Element.cpp">
+    <ClCompile Include="Layer3\Element.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
-    <ClCompile Include="FloodfillMap.cpp">
+    <ClCompile Include="Layer2\GlobalObjects.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
-    <ClCompile Include="Func.cpp">
+    <ClCompile Include="Layer0\OutputStream.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
-    <ClCompile Include="GlobalObjects.cpp">
+    <ClCompile Include="Layer0\Static.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
-    <ClCompile Include="OutputStream.cpp">
-      <Filter>CPP</Filter>
-    </ClCompile>
-    <ClCompile Include="PixelMap.cpp">
-      <Filter>CPP</Filter>
-    </ClCompile>
-    <ClCompile Include="Static.cpp">
-      <Filter>CPP</Filter>
-    </ClCompile>
-    <ClCompile Include="TrianglePoly.cpp">
+    <ClCompile Include="Layer1\Bmap.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Static.h" />
-    <ClInclude Include="Painter.h" />
-    <ClInclude Include="VectorSpritesheet.h" />
-    <ClInclude Include="TrianglePoly.h" />
-    <ClInclude Include="UserInterface.h" />
-    <ClInclude Include="Vectors.h" />
-    <ClInclude Include="PixelMap.h" />
-    <ClInclude Include="OutputStream.h" />
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="BitmapArray.h" />
-    <ClInclude Include="BitmapFont.h" />
-    <ClInclude Include="Bmap.h" />
-    <ClInclude Include="Colors.h" />
-    <ClInclude Include="ConfigFile.h" />
-    <ClInclude Include="CustomMath.h" />
-    <ClInclude Include="DebugGUI.h" />
-    <ClInclude Include="FloodfillMap.h" />
-    <ClInclude Include="Func.h" />
-    <ClInclude Include="GlobalObjects.h" />
-    <ClInclude Include="GUI.h" />
-    <ClInclude Include="GuiElementManager.h" />
-    <ClInclude Include="Interface.h" />
-    <ClInclude Include="ItemManager.h" />
-    <ClInclude Include="KeyData.h" />
-    <ClInclude Include="Labelz.h" />
-    <ClInclude Include="MBmap.h" />
-    <ClInclude Include="MouseHelper.h" />
-    <ClInclude Include="IOgroup.h" />
-    <ClInclude Include="Button.h">
-      <Filter>Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="ColorButton.h">
-      <Filter>Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="Element.h">
-      <Filter>Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageButton.h">
-      <Filter>Elements</Filter>
-    </ClInclude>
     <ClInclude Include="MouseRegion.h">
       <Filter>Elements</Filter>
     </ClInclude>
-    <ClInclude Include="Textbox.h">
+    <ClInclude Include="GameDebug.h" />
+    <ClInclude Include="Layer0\Colors.h" />
+    <ClInclude Include="Layer0\CustomMath.h" />
+    <ClInclude Include="Layer0\Func.h" />
+    <ClInclude Include="Layer0\KeyData.h" />
+    <ClInclude Include="Layer0\MouseHelper.h" />
+    <ClInclude Include="Layer0\Vectors.h" />
+    <ClInclude Include="Layer1\BitmapArray.h" />
+    <ClInclude Include="Layer1\BitmapFont.h" />
+    <ClInclude Include="Layer1\Bmap.h" />
+    <ClInclude Include="Layer1\ConfigFile.h" />
+    <ClInclude Include="Layer3\Textbox.h">
       <Filter>Elements</Filter>
     </ClInclude>
-    <ClInclude Include="Group.h">
+    <ClInclude Include="Layer3\Button.h">
       <Filter>Elements</Filter>
     </ClInclude>
-    <ClInclude Include="Checkbox.h">
+    <ClInclude Include="Layer3\Checkbox.h">
       <Filter>Elements</Filter>
     </ClInclude>
+    <ClInclude Include="Layer3\ColorButton.h">
+      <Filter>Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer3\Element.h">
+      <Filter>Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer3\ImageButton.h">
+      <Filter>Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer3\Labelz.h" />
+    <ClInclude Include="Layer2\GlobalObjects.h" />
+    <ClInclude Include="Layer2\IOgroup.h" />
+    <ClInclude Include="Layer0\Layer0.h" />
+    <ClInclude Include="Layer1\Layer1.h" />
+    <ClInclude Include="Layer0\OutputStream.h" />
+    <ClInclude Include="Layer2\Layer2.h" />
+    <ClInclude Include="Layer3\Layer3.h" />
+    <ClInclude Include="Layer0\Static.h" />
+    <ClInclude Include="Layer1\Painter.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CPP">
@@ -92,6 +73,9 @@
     </Filter>
     <Filter Include="Elements">
       <UniqueIdentifier>{51e9fa6f-21d6-4da1-a834-52a7c40dc280}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DISABLED">
+      <UniqueIdentifier>{8830f876-d316-4311-8f4c-713e2c911354}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

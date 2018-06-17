@@ -1,5 +1,7 @@
 #pragma once
-#include "Element.h"
+#include "Static.h"
+#include "Vectors.h"
+
 class MouseHelper {
 
 protected:
@@ -9,7 +11,6 @@ public:
 	MouseClient* mouse = nullptr;
 	Vector2 mouseDelta = Vector2(0, 0);
 	Vector2 position = Vector2(0, 0);
-
 	int lockedobject = -1;
 
 	MouseHelper(MouseClient* mouse):mouse(mouse){}

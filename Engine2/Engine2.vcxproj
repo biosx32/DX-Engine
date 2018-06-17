@@ -11,54 +11,43 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Bmap.cpp" />
-    <ClCompile Include="CustomMath.cpp" />
-    <ClCompile Include="Element.cpp" />
-    <ClCompile Include="FloodfillMap.cpp" />
-    <ClCompile Include="Func.cpp" />
-    <ClCompile Include="GlobalObjects.cpp" />
-    <ClCompile Include="OutputStream.cpp" />
-    <ClCompile Include="PixelMap.cpp" />
-    <ClCompile Include="Static.cpp" />
-    <ClCompile Include="TrianglePoly.cpp" />
+    <ClCompile Include="Layer1\Bmap.cpp" />
+    <ClCompile Include="Layer0\CustomMath.cpp" />
+    <ClCompile Include="Layer3\Element.cpp" />
+    <ClCompile Include="Layer0\Func.cpp" />
+    <ClCompile Include="Layer2\GlobalObjects.cpp" />
+    <ClCompile Include="Layer0\OutputStream.cpp" />
+    <ClCompile Include="Layer0\Static.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="BitmapArray.h" />
-    <ClInclude Include="BitmapFont.h" />
-    <ClInclude Include="Bmap.h" />
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="Checkbox.h" />
-    <ClInclude Include="ColorButton.h" />
-    <ClInclude Include="Colors.h" />
-    <ClInclude Include="ConfigFile.h" />
-    <ClInclude Include="CustomMath.h" />
-    <ClInclude Include="DebugGUI.h" />
-    <ClInclude Include="Element.h" />
-    <ClInclude Include="FloodfillMap.h" />
-    <ClInclude Include="Func.h" />
-    <ClInclude Include="GlobalObjects.h" />
-    <ClInclude Include="Group.h" />
-    <ClInclude Include="GUI.h" />
-    <ClInclude Include="GuiElementManager.h" />
-    <ClInclude Include="ImageButton.h" />
-    <ClInclude Include="Interface.h" />
-    <ClInclude Include="IOgroup.h" />
-    <ClInclude Include="ItemManager.h" />
-    <ClInclude Include="KeyData.h" />
-    <ClInclude Include="Labelz.h" />
-    <ClInclude Include="MBmap.h" />
-    <ClInclude Include="MouseHelper.h" />
+    <ClInclude Include="Layer0\Layer0.h" />
+    <ClInclude Include="Layer1\BitmapArray.h" />
+    <ClInclude Include="Layer1\BitmapFont.h" />
+    <ClInclude Include="Layer1\Bmap.h" />
+    <ClInclude Include="Layer2\Layer2.h" />
+    <ClInclude Include="Layer3\Button.h" />
+    <ClInclude Include="Layer3\Checkbox.h" />
+    <ClInclude Include="Layer3\ColorButton.h" />
+    <ClInclude Include="Layer0\Colors.h" />
+    <ClInclude Include="Layer1\ConfigFile.h" />
+    <ClInclude Include="Layer0\CustomMath.h" />
+    <ClInclude Include="Layer1\Layer1.h" />
+    <ClInclude Include="GameDebug.h" />
+    <ClInclude Include="Layer3\Element.h" />
+    <ClInclude Include="Layer0\Func.h" />
+    <ClInclude Include="Layer2\GlobalObjects.h" />
+    <ClInclude Include="Layer3\ImageButton.h" />
+    <ClInclude Include="Layer2\IOgroup.h" />
+    <ClInclude Include="Layer0\KeyData.h" />
+    <ClInclude Include="Layer3\Labelz.h" />
+    <ClInclude Include="Layer0\MouseHelper.h" />
+    <ClInclude Include="Layer3\Layer3.h" />
     <ClInclude Include="MouseRegion.h" />
-    <ClInclude Include="OutputStream.h" />
-    <ClInclude Include="Painter.h" />
-    <ClInclude Include="PixelMap.h" />
-    <ClInclude Include="Static.h" />
-    <ClInclude Include="Textbox.h" />
-    <ClInclude Include="TrianglePoly.h" />
-    <ClInclude Include="UserInterface.h" />
-    <ClInclude Include="Vectors.h" />
-    <ClInclude Include="VectorSpritesheet.h" />
+    <ClInclude Include="Layer0\OutputStream.h" />
+    <ClInclude Include="Layer1\Painter.h" />
+    <ClInclude Include="Layer0\Static.h" />
+    <ClInclude Include="Layer3\Textbox.h" />
+    <ClInclude Include="Layer0\Vectors.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChilliFramework\ChilliFramework.vcxproj">
@@ -96,7 +85,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\ChilliFramework;$(SolutionDir)\Engine2\Code;$(SolutionDir)\Engine2;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\ChilliFramework;$(SolutionDir)\Engine2\;$(SolutionDir)\Engine2\Layer0\;$(SolutionDir)\Engine2\Layer1\;$(SolutionDir)\Engine2\Layer2\;$(SolutionDir)\Engine2\Layer3\;$(SolutionDir)\Engine2\Layer4\;$(SolutionDir)\Engine2\Layer5\;$(SolutionDir)\Engine2\Layer6;$(IncludePath)</IncludePath>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

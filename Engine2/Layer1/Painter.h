@@ -1,5 +1,12 @@
 #pragma once
 #include "Colors.h"
+#include "Bmap.h"
+#include "BitmapFont.h"
+#include <string>
+
+#define TXT_BUFFER_SIZE 4096
+using std::string;
+
 class Painter {
 public:
 	void DrawPixelM(int xoff, int yoff, Color c, int m) {
@@ -192,6 +199,89 @@ public:
 	}
 
 
+};
+
+
+
+
+class Drawer: protected Painter {
+
+public:
+	Painter* paint = this;
+	virtual void DrawPixel(int xoff, int yoff, Color c) = 0;
+
+	void DrawBitmap(Bitmap * Bmp, int xoff, int yoff, float mx, float my)
+	{
+		if (!(mx > 0 && my > 0)) return;
+
+		int width = Bmp->width;
+		int height = Bmp->height;
+		int draw_width = Bmp->width * mx;
+		int draw_height = Bmp->height * my;
+
+		for (int y = 0; y < draw_height; y++) {
+			int srcy = y / my;
+			for (int x = 0; x < draw_width; x++) {
+				int srcx = x / mx;
+				Color *pixel = Bmp->GetPixelPointer(srcx, srcy);
+				if (!Bmp->GetIsBackground(*pixel)) {
+					DrawPixel(xoff + x, yoff + y, *pixel);
+				}
+			}
+		}
+	};
+	void DrawBitmap(Bitmap* Bmp, int fx, int fy) {
+
+		for (int yoff = 0; yoff < Bmp->height; yoff++) {
+			for (int xoff = 0; xoff < Bmp->width; xoff++) {
+				int finalx = fx + xoff;
+				int finaly = fy + yoff;
+				Color Pixel = *Bmp->GetPixelPointer(xoff, yoff);
+				if (!Bmp->GetIsBackground(Pixel)) {
+					DrawPixel(finalx, finaly, Pixel);
+				}
+			}
+		}
+	}
+	/*void DrawSprite(PixelMap* VBmp, int fx, int fy) {
+	for (std::vector<FPixel*>::iterator it = VBmp->pixels->begin(); it != VBmp->pixels->end(); ++it) {
+	DrawPixel(fx + (*it)->x, fy + (*it)->y, (*it)->color);
+	}
+	}*/
+	
+	void Fill(Color color) {
+		rectangle(0, 0, SCREENWIDTH - 1, SCREENHEIGHT - 1, color);
+	}
+};
+
+class GFXDraw: public Drawer {
+public:
+	D3DGraphics * gfx;
+	GFXDraw(D3DGraphics* gfx): gfx(gfx) {}
+
+	void DrawPixel(int xoff, int yoff, Color c) {
+		if (!gfx ||
+			xoff >= SCREENWIDTH ||
+			yoff >= SCREENHEIGHT ||
+			xoff < 0 ||
+			yoff < 0) {
+			return;
+		}
+		this->gfx->PutPixel(xoff, yoff, c);
+	}
+};
+
+class BMPDraw : public Drawer {
+public:
+	Bitmap* bmp;
+	BMPDraw(Bitmap* bmp) : bmp(bmp) {}
+
+	void DrawPixel(int xoff, int yoff, Color c) {
+		Color * dst = bmp->GetPixelPointer(xoff, yoff);
+		if (dst != nullptr) {
+			*dst = c;
+		}
+	}
 };
 
 
