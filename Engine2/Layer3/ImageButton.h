@@ -16,21 +16,21 @@ public:
 	float corners = 0.33f;
 	ButtonImageGroup * StateImages = &DEFAULT_BUTTON_MULTI;
 	
-	ImageButton(Vector2 position, void(*function)(), char* textsrc) :
+	ImageButton(Vector2 position, void(*function)(), std::string textsrc) :
 		Button(position, V2(), function, textsrc) {
 	}
 
-	ImageButton(Vector2 position, void(*function)(), char* textsrc, Vector2 size) :
+	ImageButton(Vector2 position, void(*function)(), std::string textsrc, Vector2 size) :
 		Button(position, size, function, textsrc), autosize(false) {
 	}
 
 
 
 	void DrawSpecial(Bitmap* img, int x, int y, float rx, float ry) {
-		if (state == MouseState::none) {
+		if (mregion->state == MouseState::none) {
 			draw->DrawBitmap(img, x, y, rx, ry);
 		}
-		else if (state == MouseState::hovered) {
+		else if (mregion->state == MouseState::hovered) {
 			draw->DrawBitmap(img, x-1, y-1, rx, ry);
 		}
 		else{
@@ -43,10 +43,10 @@ public:
 	void DrawImage() {
 		Vector2 pos = GetAbs();
 		ImageSplitCorners * img = StateImages->none;
-		if (state == MouseState::pressed) {
+		if (mregion->state == MouseState::pressed) {
 			img = StateImages->pressed;
 		}
-		else if (state == MouseState::hovered){
+		else if (mregion->state == MouseState::hovered){
 			img = StateImages->hovered;
 		}
 
@@ -78,6 +78,7 @@ public:
 		if (autosize) {
 			int txtsize = text.size() > 1 ? text.size() : 2;
 			size = Vector2(DFONT->charw *txtsize * 1.25, DFONT->charh*1.5);
+			mregion->size = size;
 		}
 		int textWidth = text.size() * DFONT->charw;
 		int textY = pos.y + size.y / 2 - DFONT->charh / 2;

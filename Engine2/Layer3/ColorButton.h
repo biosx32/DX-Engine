@@ -19,7 +19,7 @@ public:
 	}
 
 	Color GetStateColor() {
-		switch (this->state) {
+		switch (mregion->state) {
 		case MouseState::none:
 			return Colors::GrayLightLight;
 
@@ -31,9 +31,6 @@ public:
 		}
 	}
 
-	void Update() {
-		this->UpdateOnClick();
-	}
 
 	ColorButton(Vector2 position, void(*function)(), string textsrc, Vector2 size) :
 		Button(position,size,function,textsrc){

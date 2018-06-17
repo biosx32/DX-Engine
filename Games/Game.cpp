@@ -28,6 +28,8 @@
 MouseRegion mregion (Pos (30, 30), Size (100, 100));
 MouseRegion mregion2 (Pos (70, 30), Size (100, 100));
 MouseRegion mregion3 (Pos (300, 150), Size (100, 100));
+ImageButton p (Pos(500,400),0,std::string("Nejake tlacidlo").c_str()); 
+
 void Game::Initialise() {
 	SetDebugIO (io);
 }
@@ -38,6 +40,7 @@ void Game::UpdateModel () {
 	mregion2.Update ();
 	mregion3.Update ();
 	j.Update ();
+	p.Update ();
 	io->mhelper->Refresh ();
 
 }
@@ -46,7 +49,7 @@ void Game::UpdateModel () {
 void Game::ComposeFrame() {
 
 	//BaseElement::FullDraw();
-
+	p.Draw ();
 	mregion.Draw ();
 	mregion2.Draw ();
 	mregion3.Draw ();
