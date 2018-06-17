@@ -25,24 +25,30 @@
 #include "CheckBox.h"
 
 
-
-Element TEM = Element(Pos(30, 30), Size(100, 100));
+MouseRegion mregion (Pos (30, 30), Size (100, 100));
+MouseRegion mregion2 (Pos (70, 30), Size (100, 100));
+MouseRegion mregion3 (Pos (300, 150), Size (100, 100));
 void Game::Initialise() {
 	SetDebugIO (io);
 }
 
 void Game::UpdateModel () {
-	BaseElement::FullUpdate ();
-
+	//BaseElement::FullUpdate ();
+	mregion.Update ();
+	mregion2.Update ();
+	mregion3.Update ();
+	io->mhelper->Refresh ();
 }
 
 
 void Game::ComposeFrame() {
 
-	BaseElement::FullDraw();
-	TEM.Draw();
+	//BaseElement::FullDraw();
 
-
+	mregion.Draw ();
+	mregion2.Draw ();
+	mregion3.Draw ();
+	PrintText (draw, Pos (300, 300), &DOS_BLACK, "Click count: %4d",mregion.click_count);
 	DrawFrameInfo ();
 
 

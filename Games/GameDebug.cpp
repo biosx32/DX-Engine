@@ -12,6 +12,7 @@ Label FRA_label(Pos(0, 24),"NO_FRAME_UPDATE", &DOS_BLACK_MINI);
 Label FPS_label(Pos(0, 0), "NO_FPS_UPDATE", &DOS_BLACK_MINI);
 Label EPS_label(Pos(0, 48), "NO_EPS_UPDATE", &DOS_BLACK_MINI);
 Label MousePosLabel(Pos(0, 72), "NO_MOUSE_UPDATE", &DOS_BLACK_MINI);
+Label LIDLabel (Pos (0, 99), "NO_LID_UPDATE", &DOS_BLACK_MINI);
 Label ProgramNameLabel(Pos(SCREENWIDTH / 2 - 170/2, SCREENHEIGHT - DOS_WHITE.charh), __PROG__HEADER_ , &DOS_WHITE);
 
 void SetDebugIO (IOgroup* ios) {
@@ -37,7 +38,8 @@ void PrintProgramHeader() {
 	magic = MousePosLabel.DFONT->charw* MousePosLabel.text.length ()/2+5;
 	MousePosLabel.SetRel (Pos (SCREENWIDTH - magic, 75));
 
-
+	magic = LIDLabel.DFONT->charw* LIDLabel.text.length () + 5;
+	LIDLabel.SetRel (Pos (SCREENWIDTH - magic, 125));
 }
 
 void _UpdateFrameInfo() {
@@ -63,6 +65,7 @@ void _UpdateFrameInfo() {
 	MousePosLabel.SetText("MouseX: %3.0f + %3.0f\nMouseY: %3.0f + %3.0f\0", 
 						   io->mhelper->position.x, io->mhelper->mouseDelta.x, 
 						   io->mhelper->position.y, io->mhelper->mouseDelta.y);
+	LIDLabel.SetText ("LOCKED ID: %4d", io->mhelper->lockedobject);
 
 }
 
@@ -72,6 +75,7 @@ void PrintOthers () {
 	EPS_label.Draw ();
 	MousePosLabel.Draw ();
 	ProgramNameLabel.Draw ();
+	LIDLabel.Draw ();
 }
 
 void DrawFrameInfo () {

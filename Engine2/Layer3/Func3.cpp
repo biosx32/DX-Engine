@@ -44,3 +44,13 @@ void PrintText (GFXDraw * draw, int x, int y, std::string text, BitmapFont * fon
 	Vector2 pos = Vector2 (x, y);
 	PrintText (draw, pos, text, font);
 }
+void PrintText (GFXDraw * draw, Vector2 pos, BitmapFont * font, const char *fmt, ...) {
+	va_list args;
+	va_start (args, fmt);
+	const int size = 32768;
+	char buffer[size];
+	int rc = vsnprintf (buffer, size - 1, fmt, args);
+	std::string text = string (buffer);
+	va_end (args);
+	PrintText (draw, pos, text, font);
+}

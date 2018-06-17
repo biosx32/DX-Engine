@@ -25,9 +25,6 @@
     <ClCompile Include="Layer3\Func3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MouseRegion.h">
-      <Filter>Elements</Filter>
-    </ClInclude>
     <ClInclude Include="Layer0\Colors.h" />
     <ClInclude Include="Layer0\CustomMath.h" />
     <ClInclude Include="Layer0\Func.h" />
@@ -67,6 +64,9 @@
     <ClInclude Include="Layer1\Painter.h" />
     <ClInclude Include="Layer3\Func3.h" />
     <ClInclude Include="Layer0\IOgroup.h" />
+    <ClInclude Include="Layer3\MouseRegion.h">
+      <Filter>Elements</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CPP">

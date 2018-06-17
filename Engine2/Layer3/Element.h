@@ -18,7 +18,7 @@ public:
 
 public:
 	int ID = -1;
-	std::string name = "Default name";
+	std::string name = "X Element";
 	bool enabled = true;
 	bool visible = true;
 

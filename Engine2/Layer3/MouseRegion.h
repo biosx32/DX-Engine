@@ -24,7 +24,19 @@ public:
 
 	}
 public:
+	virtual void Draw () {
 	
+		Color c = Colors::Red;
+
+		if (state == MouseState::pressed) c = Colors::Green;
+		if (state == MouseState::hovered) c = Colors::Blue;
+
+		draw->paint->circleBorder (GetAbsX () + size.x / 2, GetAbsY () + size.y / 2, size.x, c, 1);
+		draw->paint->circleBorder (GetAbsX () + size.x / 2, GetAbsY () + size.y / 2, 1*size.x/3, c, 1);
+
+
+		Element::Draw ();
+	}
 	virtual void Update(){	
 		if (isHover()) {
 			if (isPress()) {
@@ -39,8 +51,8 @@ public:
 			}
 		} else { state = MouseState::none; }
 
-		if (GetClick()) {
-			if (function) { function(); }
+		if (IsClick()) {
+			if (function) { function (); GetClick (); }
 		}
 	
 	}

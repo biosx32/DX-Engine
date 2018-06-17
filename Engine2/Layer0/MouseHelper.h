@@ -35,12 +35,19 @@ public:
 		return lockedobject == i;
 	}
 
-	void Refresh() {
-		position = Vector2(mouse->GetMouseX(), mouse->GetMouseY());
+	void Refresh () {
+		if (mouse->LeftIsPressed ()) {
+			if (IsFree ()) {
+				lockedobject = -2;
+			}
+		}
+
+		position = Vector2 (mouse->GetMouseX (), mouse->GetMouseY ());
 		mouseDelta = position - mouseOld;
 		mouseOld = position;
-		if (!mouse->LeftIsPressed()) {
+		if (!mouse->LeftIsPressed ()) {
 			lockedobject = -1;
 		}
+		
 	}
 };

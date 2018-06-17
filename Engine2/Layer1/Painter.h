@@ -142,10 +142,10 @@ public:
 	}
 
 	void ellipseBorder(int xoff, int yoff, int width, int height, Color c, int r) {
-		for (int i = 0; i < r; i++) {
-			int delta = i;
-			int xoff = xoff + delta;
-			int yoff = yoff + delta;
+		for (int i = 0; i < r*2; i++) {
+			int delta = i/2;
+			int iter_xoff = xoff + delta+i%2;
+			int iter_yoff = yoff + delta;
 
 			int size = width * width;
 			int hsquared = height * height;
@@ -158,10 +158,10 @@ public:
 
 			for (x = 0; hsquared*x <= size * y; x++)
 			{
-				DrawPixel(xoff + x, yoff + y, c);
-				DrawPixel(xoff - x, yoff + y, c);
-				DrawPixel(xoff + x, yoff - y, c);
-				DrawPixel(xoff - x, yoff - y, c);
+				DrawPixel(iter_xoff + x, iter_yoff + y, c);
+				DrawPixel(iter_xoff - x, iter_yoff + y, c);
+				DrawPixel(iter_xoff + x, iter_yoff - y, c);
+				DrawPixel(iter_xoff - x, iter_yoff - y, c);
 				if (th >= 0)
 				{
 					th += fa2 * (1 - y);
@@ -174,10 +174,10 @@ public:
 			th = 2 * size + hsquared * (1 - 2 * width);
 			for (x = width; size*y <= hsquared * x; y++)
 			{
-				DrawPixel(xoff + x, yoff + y, c);
-				DrawPixel(xoff - x, yoff + y, c);
-				DrawPixel(xoff + x, yoff - y, c);
-				DrawPixel(xoff - x, yoff - y, c);
+				DrawPixel(iter_xoff + x, iter_yoff + y, c);
+				DrawPixel(iter_xoff - x, iter_yoff + y, c);
+				DrawPixel(iter_xoff + x, iter_yoff - y, c);
+				DrawPixel(iter_xoff - x, iter_yoff - y, c);
 				if (th >= 0)
 				{
 					th += fb2 * (1 - x);

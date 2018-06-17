@@ -43,7 +43,7 @@
     <ClInclude Include="Layer3\Labelz.h" />
     <ClInclude Include="Layer0\MouseHelper.h" />
     <ClInclude Include="Layer3\Layer3.h" />
-    <ClInclude Include="MouseRegion.h" />
+    <ClInclude Include="Layer3\MouseRegion.h" />
     <ClInclude Include="Layer0\OutputStream.h" />
     <ClInclude Include="Layer1\Painter.h" />
     <ClInclude Include="Layer0\Static.h" />
