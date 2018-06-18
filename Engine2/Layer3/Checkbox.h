@@ -3,7 +3,8 @@
 #include "GlobalObjects.h"
 #include "MouseRegion.h"
 
-class CheckBox : public BaseElement, public PosElement {
+class CheckBox : public ConstructElement
+{
 public:
 	bool checked = false;
 	const int radius = 15;
@@ -22,19 +23,19 @@ public:
 	}
 
 	CheckBox(Vector2 position, const char* text): 
-		PosElement(position)
+		ConstructElement(position, 0)
 	{
 		this->text = text;
 		mregion = new MouseRegion (position, Vector2 (30, 30));
-		mregion->name = "";
+		mregion->property.name = this->text + "_MREGION";
 		Vector2 size = Vector2(radius * 2, radius * 2);
 
 	}
 
 
 
-	void Draw() {
-		Vector2 pos = GetAbs();
+	void Draw() override{
+		Vector2 pos = property.GetAbs();
 
 		draw->paint->rectangle(pos.x, pos.y, radius * 2, radius * 2, Colors::White);
 

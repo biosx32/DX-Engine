@@ -7,7 +7,7 @@
 
 
 
-class Button: public Element {
+class Button: public ConstructElement {
 public:
 
 	BitmapFont* DFONT = &DOS_WHITE;
@@ -16,7 +16,7 @@ public:
 	MouseRegion* mregion = nullptr;
 
 	Button(Vector2 position, Vector2 size, void(*function)(), string textsrc) :
-		Element(position,size), text(textsrc), function(function){
+		ConstructElement(position,size), text(textsrc), function(function){
 		mregion = new MouseRegion (position, size);
 		mregion->function = function;
 	}

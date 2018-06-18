@@ -13,14 +13,17 @@
   <ItemGroup>
     <ClCompile Include="Layer1\Bmap.cpp" />
     <ClCompile Include="Layer0\CustomMath.cpp" />
+    <ClCompile Include="Layer3\Container.cpp" />
     <ClCompile Include="Layer3\Element.cpp" />
     <ClCompile Include="Layer0\Func.cpp" />
     <ClCompile Include="Layer2\GlobalObjects.cpp" />
     <ClCompile Include="Layer0\OutputStream.cpp" />
     <ClCompile Include="Layer0\Static.cpp" />
     <ClCompile Include="Layer3\Func3.cpp" />
+    <ClCompile Include="Layer3\MouseRegion.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Layer0\Cont.h" />
     <ClInclude Include="Layer0\Layer0.h" />
     <ClInclude Include="Layer1\BitmapArray.h" />
     <ClInclude Include="Layer1\BitmapFont.h" />
@@ -33,9 +36,11 @@
     <ClInclude Include="Layer1\ConfigFile.h" />
     <ClInclude Include="Layer0\CustomMath.h" />
     <ClInclude Include="Layer1\Layer1.h" />
+    <ClInclude Include="Layer3\Container.h" />
     <ClInclude Include="Layer3\Element.h" />
     <ClInclude Include="Layer0\Func.h" />
     <ClInclude Include="Layer2\GlobalObjects.h" />
+    <ClInclude Include="Layer3\ElementProperty.h" />
     <ClInclude Include="Layer3\Func3.h" />
     <ClInclude Include="Layer3\ImageButton.h" />
     <ClInclude Include="Layer0\IOgroup.h" />

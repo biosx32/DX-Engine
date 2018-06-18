@@ -10,7 +10,10 @@ class Vector2 {
 public:
 	float x, y;
 	Vector2() :Vector2(0, 0){}
+    Vector2(float a): x(a), y(a){}
 	Vector2(float x, float y) :x(x), y(y) {}
+
+	
 
 	Vector2 operator+(Vector2 other) {
 		return Vector2(this->x + other.x, this->y + other.y);
@@ -18,6 +21,12 @@ public:
 	Vector2 operator-(Vector2 other) {
 		return Vector2(this->x - other.x, this->y - other.y);
 	}
+
+	Vector2& operator=(const Vector2& other)
+        { (*this).x = other.x;
+          (*this).y = other.y;
+          return (*this);
+        }
 
 	Vector2& operator+=(const Vector2& other) {
 		(*this) = (*this) + other;
@@ -28,7 +37,8 @@ public:
 		return (*this);
 	}
 
-
+	const int& w = x;
+    const int& h = y;
 
 	float DistanceFrom(Vector2 other) { 
 		return GetSquareDistance2(*this, other); }
@@ -48,20 +58,10 @@ public:
 	};
 };
 
-
-
 typedef Vector2 V2;
 typedef Vector3 V3;
+typedef Vector2 Size;
+typedef Vector2 Pos;
 
-class Pos : public Vector2 {
-public:
-	Pos(float x, float y): Vector2(x,y){}
-};
-class Size : public Vector2 {public:
-	const int& w = x;
-	const int& h = y;
-
-	Size(float x, float y) : Vector2(x, y) {}
-};
 
 #endif

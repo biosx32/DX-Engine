@@ -7,13 +7,19 @@ class ColorButton : public Button {
 public:
 	void Draw() override {
 		Color drawColor = GetStateColor();
-		Vector2 pos = GetAbs();
-		draw->paint->rectangle(pos.x, pos.y, size.x, size.y, drawColor);
-		draw->paint->rectangleBorder(pos.x, pos.y, size.x, size.y, Colors::Black, 2);
+          Vector2 pos = property.GetAbs();
+                draw->paint->rectangle(
+                  pos.x, pos.y, property.size.x, property.size.y, drawColor);
+                draw->paint->rectangleBorder(pos.x,
+                                             pos.y,
+                                             property.size.x,
+                                             property.size.y,
+                                             Colors::Black,
+                                             2);
 
 		int textWidth = text.size() * DFONT->charw;
-		int textY = pos.y + size.y / 2 - DFONT->charh / 2;
-		int textX = pos.x + (size.x - textWidth) / 2;
+                int textY = pos.y + property.size.y / 2 - DFONT->charh / 2;
+                int textX = pos.x + (property.size.x - textWidth) / 2;
 		PrintText(draw, textX, textY, text,DFONT);
 
 	}

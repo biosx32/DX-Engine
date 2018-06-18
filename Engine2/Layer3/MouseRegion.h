@@ -12,40 +12,38 @@ namespace MouseState {
 	};
 }
 
-class MouseRegion : public Element {
+class MouseRegion : public ConstructElement {
 
 public:
 	int state = 0;
 	int click_count = 0;
 	void(*function)() = nullptr;
 
-	MouseRegion(Vector2 pos, Vector2 size) : Element(pos,size) {
-		this->name = "MouseRegion";
-
+	MouseRegion(Vector2 pos, Vector2 size)
+          : ConstructElement(pos, size)
+        {
+		property.visible = false;
+		property.name = "MouseRegion";
 	}
+
+	MouseRegion(Vector2 pos, Vector2 size, bool rvisible)
+          : ConstructElement(pos, size)
+        {
+        property.visible = rvisible;
+        property.name = "MouseRegion";
+	}
+
 public:
-	virtual void Draw () {
-	
-		Color c = Colors::Red;
-
-		if (state == MouseState::pressed) c = Colors::Green;
-		if (state == MouseState::hovered) c = Colors::Blue;
-
-		draw->paint->circleBorder (GetAbsX () + size.x / 2, GetAbsY () + size.y / 2, size.x, c, 1);
-		draw->paint->circleBorder (GetAbsX () + size.x / 2, GetAbsY () + size.y / 2, 1*size.x/3, c, 1);
-
-
-		Element::Draw ();
-	}
+    void Draw();
 	virtual void Update(){	
 		if (isHover()) {
 			if (isPress()) {
 				state = MouseState::pressed;
-				io->mhelper->LockMouse(this->ID);
+                          io->mhelper->LockMouse(property.ID);
 			}
 			else {
 				state = MouseState::hovered;
-				if (io->mhelper->IsActive(this->ID)) {
+                          if (io->mhelper->IsActive(property.ID)) {
 					click_count += 1;
 				}
 			}
@@ -59,14 +57,16 @@ public:
 
 	virtual bool isHover() {
 		Vector2 mPos = Vector2(io->mouse->GetMouseX(), io->mouse->GetMouseY());
-		Vector2 ePos = GetAbs();
-		return mPos.x >= ePos.x && mPos.y >= ePos.y && mPos.x < ePos.x + size.x && mPos.y < ePos.y + size.y;
+          Vector2 ePos = property.GetAbs();
+                return mPos.x >= ePos.x && mPos.y >= ePos.y &&
+                       mPos.x < ePos.x + property.size.x &&
+                 mPos.y < ePos.y + property.size.y;
 	}
 
 	virtual bool isPress() {
 		if (io->mouse->LeftIsPressed()) {
 			if (isHover()) {
-				return (!io->mhelper->IsBlocked(this->ID));
+                    return (!io->mhelper->IsBlocked(property.ID));
 			}
 		}
 		return false;

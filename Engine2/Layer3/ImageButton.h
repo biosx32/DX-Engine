@@ -41,7 +41,7 @@ public:
 	}
 
 	void DrawImage() {
-		Vector2 pos = GetAbs();
+          Vector2 pos = property.GetAbs();
 		ImageSplitCorners * img = StateImages->none;
 		if (mregion->state == MouseState::pressed) {
 			img = StateImages->pressed;
@@ -51,14 +51,15 @@ public:
 		}
 
 
-		float ratiox = size.x / img->width;
-		float ratioy = size.y / img->height;
+		float ratiox = property.size.x / img->width;
+                float ratioy = property.size.y / img->height;
 		float ratiocorner = ratiox;
 
 		if (display == ImageDisplay::scale_middle) {
 			float sidescale = corners / 2;
 			int sidew_scaled = img->cleft->width * sidescale;
-			ratiox = (size.x - sidew_scaled * 2) / img->cmiddle->width;
+                        ratiox = (property.size.x - sidew_scaled * 2) /
+                                 img->cmiddle->width;
 			ratiocorner = sidescale;
 		}
 
@@ -74,15 +75,15 @@ public:
 	}
 
 	void Draw() override {
-		Vector2 pos = GetAbs();
+		Vector2 pos = property.GetAbs();
 		if (autosize) {
 			int txtsize = text.size() > 1 ? text.size() : 2;
-			size = Vector2(DFONT->charw *txtsize * 1.25, DFONT->charh*1.5);
-			mregion->size = size;
+			property.size = Vector2(DFONT->charw *txtsize * 1.25, DFONT->charh*1.5);
+			mregion->property.size = property.size;
 		}
 		int textWidth = text.size() * DFONT->charw;
-		int textY = pos.y + size.y / 2 - DFONT->charh / 2;
-		int textX = pos.x + (size.x - textWidth) / 2;
+		int textY = pos.y + property.size.y / 2 - DFONT->charh / 2;
+                int textX = pos.x + (property.size.x - textWidth) / 2;
 
 		this->DrawImage();
 		PrintText(draw, textX, textY, text,DFONT);

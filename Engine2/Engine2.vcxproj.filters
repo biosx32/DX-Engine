@@ -23,6 +23,8 @@
       <Filter>CPP</Filter>
     </ClCompile>
     <ClCompile Include="Layer3\Func3.cpp" />
+    <ClCompile Include="Layer3\Container.cpp" />
+    <ClCompile Include="Layer3\MouseRegion.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Layer0\Colors.h" />
@@ -67,6 +69,9 @@
     <ClInclude Include="Layer3\MouseRegion.h">
       <Filter>Elements</Filter>
     </ClInclude>
+    <ClInclude Include="Layer0\Cont.h" />
+    <ClInclude Include="Layer3\Container.h" />
+    <ClInclude Include="Layer3\ElementProperty.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CPP">

@@ -20,8 +20,9 @@
  ******************************************************************************************/
 #pragma once
 
-#include "Layer0.h"
 #include "Element.h"
+#include "Layer0.h"
+
 #include "IOGroup.h"
 
 class Game
@@ -45,8 +46,8 @@ public:
 		mouse(mServer)
 	{
 		io = new IOgroup(&gfx, &mouse, &kbd);
-		BaseElement::io = io;
-		BaseElement::draw = new GFXDraw (io->gfx);
+		Element::io = io;
+		Element::draw = new GFXDraw (io->gfx);
 
 		srand((unsigned int)time(NULL));
 		Initialise();

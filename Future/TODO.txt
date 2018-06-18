@@ -5,3 +5,4 @@ Broken checkbox position inheritenace and so...
 
 rename interface to Graphics destination or sth like that
 ISSUE - PRESS ONLY WORKING IF MHELPER REFRESH AFTER ALL IS REFRESHED!!! (maybe need to change mhelper refresh line order)
+Stack object are added into vector before vector is defined = all stack members are cleared on initialization
