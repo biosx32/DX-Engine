@@ -13,8 +13,9 @@
   <ItemGroup>
     <ClCompile Include="Layer1\Bmap.cpp" />
     <ClCompile Include="Layer0\CustomMath.cpp" />
-    <ClCompile Include="Layer3\Container.cpp" />
     <ClCompile Include="Layer3\Element.cpp" />
+    <ClCompile Include="Layer3\Container.cpp" />
+    <ClCompile Include="Layer3\BaseElement.cpp" />
     <ClCompile Include="Layer0\Func.cpp" />
     <ClCompile Include="Layer2\GlobalObjects.cpp" />
     <ClCompile Include="Layer0\OutputStream.cpp" />
@@ -36,8 +37,9 @@
     <ClInclude Include="Layer1\ConfigFile.h" />
     <ClInclude Include="Layer0\CustomMath.h" />
     <ClInclude Include="Layer1\Layer1.h" />
-    <ClInclude Include="Layer3\Container.h" />
     <ClInclude Include="Layer3\Element.h" />
+    <ClInclude Include="Layer3\Container.h" />
+    <ClInclude Include="Layer3\BaseElement.h" />
     <ClInclude Include="Layer0\Func.h" />
     <ClInclude Include="Layer2\GlobalObjects.h" />
     <ClInclude Include="Layer3\ElementProperty.h" />
@@ -52,6 +54,7 @@
     <ClInclude Include="Layer0\OutputStream.h" />
     <ClInclude Include="Layer1\Painter.h" />
     <ClInclude Include="Layer0\Static.h" />
+    <ClInclude Include="Layer3\MouseRegionVisual.h" />
     <ClInclude Include="Layer3\Textbox.h" />
     <ClInclude Include="Layer0\Vectors.h" />
   </ItemGroup>

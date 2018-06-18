@@ -7,9 +7,6 @@
     <ClCompile Include="Layer0\Func.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
-    <ClCompile Include="Layer3\Element.cpp">
-      <Filter>CPP</Filter>
-    </ClCompile>
     <ClCompile Include="Layer2\GlobalObjects.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
@@ -25,6 +22,10 @@
     <ClCompile Include="Layer3\Func3.cpp" />
     <ClCompile Include="Layer3\Container.cpp" />
     <ClCompile Include="Layer3\MouseRegion.cpp" />
+    <ClCompile Include="Layer3\BaseElement.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Layer3\Element.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Layer0\Colors.h" />
@@ -49,9 +50,6 @@
     <ClInclude Include="Layer3\ColorButton.h">
       <Filter>Elements</Filter>
     </ClInclude>
-    <ClInclude Include="Layer3\Element.h">
-      <Filter>Elements</Filter>
-    </ClInclude>
     <ClInclude Include="Layer3\ImageButton.h">
       <Filter>Elements</Filter>
     </ClInclude>
@@ -72,6 +70,11 @@
     <ClInclude Include="Layer0\Cont.h" />
     <ClInclude Include="Layer3\Container.h" />
     <ClInclude Include="Layer3\ElementProperty.h" />
+    <ClInclude Include="Layer3\BaseElement.h">
+      <Filter>Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer3\Element.h" />
+    <ClInclude Include="Layer3\MouseRegionVisual.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CPP">

@@ -7,17 +7,15 @@
 
 
 
-class Button: public ConstructElement {
+class Button: public Element {
 public:
 
 	BitmapFont* DFONT = &DOS_WHITE;
 	void(*function)() = nullptr;
 	std::string text = "";
-	MouseRegion* mregion = nullptr;
 
 	Button(Vector2 position, Vector2 size, void(*function)(), string textsrc) :
-		ConstructElement(position,size), text(textsrc), function(function){
-		mregion = new MouseRegion (position, size);
+		Element (position,size), text(textsrc), function(function){
 		mregion->function = function;
 	}
 
@@ -25,8 +23,9 @@ public:
 
 	virtual void Draw() = 0;
 	virtual void Update () {
-		mregion->Update ();
+		Element::Update ();
 	}
+	virtual  void SelfUpdate(){}
 
 };
 

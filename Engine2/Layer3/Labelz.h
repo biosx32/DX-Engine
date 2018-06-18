@@ -6,25 +6,25 @@
 
 using std::string;
 
-class Label: public ConstructElement {
+class Label: public Element {
 public:
 	string text = "";
-	BitmapFont* DFONT = &DOS_BLACK;
+	BitmapFont* font = &DOS_BLACK;
 	
 	Label(Vector2 position, const char* newtext)
-          : ConstructElement(position,0)
+          : Element (position,0)
           , text(newtext)
         {}
-        Label(Vector2 position, const char* newtext, BitmapFont* DFONT)
-          : ConstructElement(position,0)
+
+        Label(Vector2 position, const char* newtext, BitmapFont* NFONT)
+          : Element (position,0)
           , text(newtext)
-          , DFONT(DFONT)
+          , font (NFONT)
         {}
 
 	void Update() {}
 	void Draw() {
-		
-		PrintText (draw, property.GetAbs (), text, DFONT);
+		PrintText (draw, property.GetAbs (), text, font);
 	}
 
 

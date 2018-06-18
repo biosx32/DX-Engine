@@ -1,7 +1,7 @@
 #include "Static.h"
 #include "Container.h"
 
-std::vector<Element*> Container::Elements;
+std::vector<BaseElement*> Container::Elements;
 
 
 
@@ -18,8 +18,8 @@ void Container::FullDraw ()
 void Container::FullUpdate ()
 {
 	{
-		for (int i = 0; i < Elements.size (); i++) { Elements.at (i)->Update (); }
-		Element::io->UpdateIO ();
+		for (int i = 0; i < Elements.size (); i++) { Elements.at (i)->AutoUpdate(); }
+		BaseElement::io->UpdateIO ();
 	}
 }
 

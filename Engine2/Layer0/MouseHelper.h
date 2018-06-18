@@ -19,25 +19,25 @@ public:
 		lockedobject = id;
 	}
 
-	void FreeMouse() {
+	void ReleaseLock() {
 		lockedobject = -1;
 	}
 
-	bool IsFree() {
+	bool IsMouseNotLocked() {
 		return lockedobject == -1;
 	}
 
-	bool IsBlocked(int i) {
+	bool CanBeUsedBy(int i) {
 		return lockedobject != i && lockedobject != -1;
 	}
 
-	bool IsActive(int i) {
+	bool IsMouseUsedBy(int i) {
 		return lockedobject == i;
 	}
 
 	void Refresh () {
 		if (mouse->LeftIsPressed ()) {
-			if (IsFree ()) {
+			if (IsMouseNotLocked ()) {
 				lockedobject = -2;
 			}
 		}

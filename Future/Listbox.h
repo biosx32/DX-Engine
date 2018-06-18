@@ -15,7 +15,7 @@ public:
 
 class ListBox: public Element {
 public:
-	MouseRegion mregion;
+	MouseRegion mregion->
 	std::vector<ListBoxItem> items;
 	int selectedIndex = -1;
 	int offset = 0;
@@ -24,7 +24,7 @@ public:
 
 	VScrollBar sc;
 	ListBox(Pos ppos, Size psize): Element(ppos,psize),
-		mregion(ppos, Size(psize.x - 15,psize.y)), sc(Pos(ppos.x + psize.x - 15, ppos.y), Size(15, psize.y))
+		mregion->ppos, Size(psize.x - 15,psize.y)), sc(Pos(ppos.x + psize.x - 15, ppos.y), Size(15, psize.y))
 	{
 		name = "Empty ListBox";
 	}
@@ -85,11 +85,11 @@ public:
 
 
 	void Update() {
-		mregion.Update();
+		mregion->Update();
 		sc.Update();
 		if (scrollbarvisible()) {
 			offset = items.size() * sc.value;
-			if (this->mregion.isHover()) {
+			if (this->mregion->isHover()) {
 				float piece = 1.0f / items.size();
 				if (io->mouse->WheelUp() &&  sc.value - piece>= 0) {
 					sc.SetValue(sc.value - piece);
@@ -104,9 +104,9 @@ public:
 		}
 		else { offset = 0; }
 
-		mregion.Update();
+		mregion->Update();
 
-		if (this->mregion.isPress()) {
+		if (this->mregion->isPress()) {
 	
 			Vector2 pos = GetAbs();
 

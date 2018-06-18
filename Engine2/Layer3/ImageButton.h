@@ -79,7 +79,6 @@ public:
 		if (autosize) {
 			int txtsize = text.size() > 1 ? text.size() : 2;
 			property.size = Vector2(DFONT->charw *txtsize * 1.25, DFONT->charh*1.5);
-			mregion->property.size = property.size;
 		}
 		int textWidth = text.size() * DFONT->charw;
 		int textY = pos.y + property.size.y / 2 - DFONT->charh / 2;

@@ -3,33 +3,27 @@
 #include "GlobalObjects.h"
 #include "MouseRegion.h"
 
-class CheckBox : public ConstructElement
+class CheckBox : public Element
 {
 public:
 	bool checked = false;
 	const int radius = 15;
 	std::string text = "";
-	MouseRegion* mregion = nullptr;
 
 	void Toggle() {
 		checked = !checked;
 	}
 
 	virtual void Update () {
-		mregion->Update ();
+		Element::Update ();
 		if (mregion->GetClick ()) {
 			Toggle ();
 		}
 	}
 
-	CheckBox(Vector2 position, const char* text): 
-		ConstructElement(position, 0)
+	CheckBox(Vector2 position, string text): 
+		Element(position, radius * 2), text(text)
 	{
-		this->text = text;
-		mregion = new MouseRegion (position, Vector2 (30, 30));
-		mregion->property.name = this->text + "_MREGION";
-		Vector2 size = Vector2(radius * 2, radius * 2);
-
 	}
 
 

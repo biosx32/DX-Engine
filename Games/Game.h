@@ -22,8 +22,9 @@
 
 #include "Element.h"
 #include "Layer0.h"
-
+#include "GlobalObjects.h"
 #include "IOGroup.h"
+
 
 class Game
 {
@@ -48,6 +49,7 @@ public:
 		io = new IOgroup(&gfx, &mouse, &kbd);
 		Element::io = io;
 		Element::draw = new GFXDraw (io->gfx);
+		Element::DFONT = &DOS_WHITE;
 
 		srand((unsigned int)time(NULL));
 		Initialise();

@@ -1,7 +1,7 @@
 #pragma once
-#include "Layer0.h"
 #include <math.h>
 #include <stdio.h>
+#include "Colors.h"
 
 class Bitmap {
 

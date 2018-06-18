@@ -1,26 +1,72 @@
 #include "Static.h"
 #include "MouseRegion.h"
 
-void MouseRegion::Draw()
+void MouseRegion::Draw ()
 {
 
-  Color c = Colors::Red;
+	Color c = (state == MouseState::pressed) ? Colors::Green : Colors::Blue;
+	c = state < 1 ? Colors::Red : c;
 
-  if (state == MouseState::pressed)
-    c = Colors::Green;
-  if (state == MouseState::hovered)
-    c = Colors::Blue;
+	Vector2 pos = parent->property.GetAbs () + offset;
+	Vector2 size = parent->property.GetSize ();
 
-  draw->paint->circleBorder(property.GetAbsX() + property.size.x / 2,
-                            property.GetAbsY() + property.size.y / 2,
-                            property.size.x,
-                            c,
-                            1);
-  draw->paint->circleBorder(property.GetAbsX() + property.size.x / 2,
-                            property.GetAbsY() + property.size.y / 2,
-                            1 * property.size.x / 3,
-                            c,
-                            1);
 
-  ConstructElement::Draw();
+	BaseElement::draw->paint->circleBorder (pos.x + size.x / 2,
+		pos.y + size.y / 2,
+		size.x, c, 1);
+
+	BaseElement::draw->paint->circleBorder (pos.x + size.x / 2,
+		pos.y + size.y / 2,
+		1 * size.x / 3, c, 1);
+
+	Vector2 lpos =
+		Pos (pos.x + size.x / 2 - BaseElement::DFONT->charw * name.size () / 2,
+			pos.y + size.y / 2 - BaseElement::DFONT->charh / 2);
+	PrintText (BaseElement::draw, lpos, name, BaseElement::DFONT);
+
+
 }
+
+void MouseRegion::Update ()
+{
+	if (isHover ()) {
+		if (isPress ()) {
+			state = MouseState::pressed;
+			BaseElement::io->mhelper->LockMouse (parent->property.ID);
+		}
+		else {
+			state = MouseState::hovered;
+			if (BaseElement::io->mhelper->IsMouseUsedBy (parent->property.ID)) {
+				click_count += 1;
+			}
+		}
+	}
+	else { state = MouseState::none; }
+
+	if (function) {
+		if (GetClick()) {
+			function ();
+		}
+	}
+
+}
+
+bool MouseRegion::isHover ()
+{
+	Vector2 mPos = Vector2 (BaseElement::io->mouse->GetMouseX (), BaseElement::io->mouse->GetMouseY ());
+	Vector2 ePos = parent->property.GetAbs () + offset;
+	return mPos.x >= ePos.x && mPos.y >= ePos.y &&
+		mPos.x < ePos.x + parent->property.size.x &&
+		mPos.y < ePos.y + parent->property.size.y;
+}
+
+bool MouseRegion::isPress ()
+{
+	if (BaseElement::io->mouse->LeftIsPressed ()) {
+		if (isHover ()) {
+			return BaseElement::io->mhelper->CanBeUsedBy (parent->property.ID);
+		}
+	}
+	return false;
+}
+

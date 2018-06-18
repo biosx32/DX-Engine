@@ -1,42 +1,33 @@
 #pragma once
-#include "Container.h"
-#include "ElementProperty.h"
-#include "Func3.h"
-#include "IOgroup.h"
-#include "Painter.h"
+#include "BaseElement.h"
+#include "Func3.h" //FOR PRINT TEXT
+#include "MouseRegion.h"
 
 
-class Element
+class Element : public BaseElement
 {
 public:
-  static int ElementCount;
-  static GFXDraw* draw;
-  static IOgroup* io;
-  static BitmapFont* DFONT;
 
-public:
-  ElementProperty property;
-  virtual void Update() = 0;
-  virtual void Draw() = 0;
+	MouseRegion* mregion = nullptr;
 
-  Element();
+	Element (Vector2 pos, Vector2 size)
+	//	mregion (static_cast<BaseElement*>(this))
+	{
+		mregion = new MouseRegion (this, 0);
+		property.SetRel (pos);
+		property.SetSize (size);
+	}
+
+	void DrawName ();
+	void DrawBorder ();
+	void DrawCorners ();
+
+	virtual void Draw () override;
+	virtual void SelfUpdate () override;
+	virtual void Update () override;
+
+
 };
 
 
-class ConstructElement: public Element
-{
-public:
-  ConstructElement(Vector2 pos, Vector2 size)
-  {
-    property.SetRel(pos);
-    property.SetSize(size);
-  }
 
-  void DrawName();
-  void DrawBorder();
-  void DrawCorners();
-
-  virtual void Update() override;
-  virtual void Draw() override;
-
-};
