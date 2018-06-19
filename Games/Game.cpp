@@ -29,7 +29,7 @@
 
 
 #include "Bmap.h"
-Bitmap TEST("..\\Resources\\test_FLOODFILL.bmp", Colors::TKEY);
+Bitmap TEST("..\\Resources\\advanced.bmp", Colors::TKEY);
 Bitmap* Compress = TEST.GetBitmapPart (0, 0, TEST.width, TEST.height,0.75);
 
 VScrollBar* VarA = nullptr;
