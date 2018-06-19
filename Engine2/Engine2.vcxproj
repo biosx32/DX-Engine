@@ -22,6 +22,7 @@
     <ClCompile Include="Layer0\OutputStream.cpp" />
     <ClCompile Include="Layer0\Static.cpp" />
     <ClCompile Include="Layer3\Func3.cpp" />
+    <ClCompile Include="Layer4\GameDebug.cpp" />
     <ClCompile Include="Layer3\MouseRegion.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +50,7 @@
     <ClInclude Include="Layer2\GlobalObjects.h" />
     <ClInclude Include="Layer3\ElementProperty.h" />
     <ClInclude Include="Layer3\Func3.h" />
+    <ClInclude Include="Layer4\GameDebug.h" />
     <ClInclude Include="Layer3\ImageButton.h" />
     <ClInclude Include="Layer0\IOgroup.h" />
     <ClInclude Include="Layer0\KeyData.h" />

@@ -5,8 +5,8 @@ void PrintText(GFXDraw* draw, Vector2 pos, BitmapFont* font, Size scale, std::st
 	
 	double rel_pos_x = 0;
 	double rel_pos_y = 0;
-	float charw = font->charw;
-	float charh = font->charh;
+	float charw = font->charw * scale.x;
+	float charh = font->charh * scale.y;
 
 	for ( auto it = text.begin() ; it < text.end(); it++)
 	{

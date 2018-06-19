@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)\ChilliFramework;$(SolutionDir)\Engine2\;$(SolutionDir)\Engine2\Layer0\;$(SolutionDir)\Engine2\Layer1\;$(SolutionDir)\Engine2\Layer2\;$(SolutionDir)\Engine2\Layer3\;$(SolutionDir)\Engine2\Layer4\;$(SolutionDir)\Engine2\Layer5\;$(SolutionDir)\Engine2\Layer6;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Future\TooFuture;$(SolutionDir)\Future;$(SolutionDir)\ChilliFramework;$(SolutionDir)\Engine2\;$(SolutionDir)\Engine2\Layer0\;$(SolutionDir)\Engine2\Layer1\;$(SolutionDir)\Engine2\Layer2\;$(SolutionDir)\Engine2\Layer3\;$(SolutionDir)\Engine2\Layer4\;$(SolutionDir)\Engine2\Layer5\;$(SolutionDir)\Engine2\Layer6;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -123,13 +123,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameDebug.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Windows.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameDebug.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChilliFramework\ChilliFramework.vcxproj">
@@ -138,6 +133,9 @@
     <ProjectReference Include="..\Engine2\Engine2.vcxproj">
       <Project>{9e5c3038-85d6-4cec-a331-0dae21e12415}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

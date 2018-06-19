@@ -25,7 +25,7 @@
 #include "ColorButton.h"
 #include "CheckBox.h"
 
-
+#include "ScrollBars.h"
 
 
 void Game::Initialise() {
@@ -34,6 +34,10 @@ void Game::Initialise() {
 
 	new ImageButton(Pos (500, 400), 0, std::string ("Nejake tlacidlo").c_str (), Size (120, 120));
 	new CheckBox (Pos (170, 170), "bekej");
+	new VScrollBar (Pos (100, 200), Size (200, 30));
+	new VScrollBar (Pos (100, 300), Size (200, 30));
+	new HScrollBar (Pos (300, 100), Size (30, 200));
+
 }
 
 void Game::UpdateModel () {

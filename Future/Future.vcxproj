@@ -133,7 +133,6 @@
     <ClInclude Include="TooFuture\VectorSpritesheet.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="TooFuture\FloodfillMap.cpp" />
     <ClCompile Include="TooFuture\PixelMap.cpp" />
     <ClCompile Include="TooFuture\TrianglePoly.cpp" />

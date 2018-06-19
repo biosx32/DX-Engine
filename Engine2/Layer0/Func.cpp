@@ -93,6 +93,19 @@ int FindLastChar(const char * str, char chr)
 	return Pos;
 }
 
+std::string sprintfToString (const char * fmt, ...)
+{
+	va_list args;
+	va_start (args, fmt);
+	const int size = 32768;
+	char buffer[size];
+	int rc = vsnprintf (buffer, size - 1, fmt, args);
+	std::string text =std::string (buffer);
+	va_end (args);
+
+	return text;
+}
+
 
 int GetNextLineOffset(FILE* file) {
 	char str[8196]; int Pos = -1;

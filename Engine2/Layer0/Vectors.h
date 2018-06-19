@@ -18,15 +18,28 @@ public:
 	Vector2 operator+(Vector2 other) {
 		return Vector2(this->x + other.x, this->y + other.y);
 	}
+
 	Vector2 operator-(Vector2 other) {
 		return Vector2(this->x - other.x, this->y - other.y);
 	}
 
-	Vector2& operator=(const Vector2& other)
-        { (*this).x = other.x;
-          (*this).y = other.y;
-          return (*this);
-        }
+	Vector2 operator/(float other) {
+		return Vector2 (this->x / other, this->y / other);
+	}
+
+	Vector2 operator*(float other) {
+		return Vector2 (this->x * other, this->y * other);
+	}
+
+	Vector2& operator/=(float other) {
+		(*this) = (*this) / other;
+		return (*this);
+	}
+	Vector2& operator*=(float other) {
+		(*this) = (*this) * other;
+		return (*this);
+	}
+	
 
 	Vector2& operator+=(const Vector2& other) {
 		(*this) = (*this) + other;
@@ -34,6 +47,13 @@ public:
 	}
 	Vector2& operator-=(const Vector2& other) {
 		(*this) = (*this) - other;
+		return (*this);
+	}
+
+	Vector2& operator=(const Vector2& other)
+	{
+		(*this).x = other.x;
+		(*this).y = other.y;
 		return (*this);
 	}
 
@@ -57,6 +77,8 @@ public:
 		return GetSquareDistance2(v1, v2) + GetSquareDistance1(v2.z, v1.z);
 	};
 };
+
+
 
 typedef Vector2 V2;
 typedef Vector3 V3;

@@ -22,6 +22,6 @@ bool Startswith(const char * a, const char * b, int sublen);
 void File_Setpos(FILE * p_file, int Pos);
 int FindFirstChar(const char * str, char chr);
 int FindLastChar(const char * str, char chr);
-
+std::string sprintfToString (const char *fmt, ...);
 
 #endif

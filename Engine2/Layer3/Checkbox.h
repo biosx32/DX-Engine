@@ -29,6 +29,7 @@ public:
 		Element(position, radius * 2), text(text)
 	{
 		property.name = "Some checkbox";
+		property.fontSize = .85f;
 	}
 
 
@@ -51,8 +52,8 @@ public:
 
 		draw->paint->rectangleBorder(pos.x, pos.y, radius * 2, radius * 2, Colors::Black, 3);
 		draw->paint->rectangleBorder(pos.x, pos.y, radius * 2, radius * 2, Colors::White, 1);
-	
-		PrintText(draw, Pos(pos.x + radius * 2.34, pos.y + radius /3), property.font,property.fontSize, text);
+		
+		PrintText(draw, Pos(pos.x + radius * 2.34, pos.y + radius - property.font->charh*property.fontSize.h/2 ), property.font,property.fontSize, text);
 	}
 
 

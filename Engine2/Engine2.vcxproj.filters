@@ -27,6 +27,7 @@
     </ClCompile>
     <ClCompile Include="Layer3\Element.cpp" />
     <ClCompile Include="Layer1\Bmap.cpp" />
+    <ClCompile Include="Layer4\GameDebug.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Layer0\Colors.h" />
@@ -80,6 +81,7 @@
     <ClInclude Include="Layer1\Bmap.h" />
     <ClInclude Include="Layer1\BitmapArray.h" />
     <ClInclude Include="Layer1\BitmapFont.h" />
+    <ClInclude Include="Layer4\GameDebug.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CPP">

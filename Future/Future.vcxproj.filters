@@ -59,9 +59,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TooFuture\TrianglePoly.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

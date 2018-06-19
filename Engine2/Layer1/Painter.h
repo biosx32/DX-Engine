@@ -270,7 +270,7 @@ public:
 
 	bool DrawIsReady (){return gfx;}
 
-	bool isValid (int xoff, int yoff) {
+	virtual bool isValid (int xoff, int yoff) {
 		if (!gfx ||
 			xoff >= SCREENWIDTH ||
 			yoff >= SCREENHEIGHT ||
@@ -293,6 +293,35 @@ public:
 			this->gfx->PutPixel(xoff, yoff, c);
 		}
 	}
+};
+
+
+
+class GFXRestDraw : public GFXDraw {
+public:
+	int xmin=0, xmax=SCREENWIDTH, ymin=0, ymax=SCREENWIDTH;
+	GFXRestDraw (D3DGraphics* gfx, Pos pos, Size size): GFXDraw (gfx) {
+		xmin = pos.x > xmin ? pos.x : xmin;
+		ymin = pos.y > ymin ? pos.y : ymin;
+
+		Vector2 endpos = pos + size;
+
+		xmax = endpos.x < xmax ? endpos.x : xmax;
+		ymax = endpos.y < ymax ? endpos.y : ymax;
+
+	}
+
+	bool isValid (int xoff, int yoff) {
+		if (!gfx ||
+			xoff >= xmax ||
+			yoff >= ymax ||
+			xoff < xmin ||
+			yoff < ymin) {
+			return false;
+		}
+		return true;
+	}
+
 };
 
 class BMPDraw : public Drawer {
