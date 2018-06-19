@@ -41,17 +41,18 @@ public:
 
 		if (checked) {
 			draw->paint->rectangle(pos.x, pos.y, radius * 2, radius * 2, Colors::GreenDark);
-			draw->paint->line(pos.x, pos.y, pos.x + radius * 2, pos.y + radius * 2, Colors::White,3);
-			draw->paint->line(pos.x, pos.y + radius * 2, pos.x + radius * 2, pos.y , Colors::White,4);
+			draw->paint->line(pos.x, pos.y, pos.x + radius * 2-1, pos.y + radius * 2-1 , Colors::White,1);
+			draw->paint->line(pos.x, pos.y + radius * 2-1, pos.x + radius * 2 -1, pos.y , Colors::White,1);
 		}
-		else if (mregion->state > MouseState::none) {
+		if (mregion->state > MouseState::none) {
 			int bit = radius * 0.45;
 			draw->paint->rectangle (pos.x + bit, pos.y + bit, radius*2 - bit*1.5, radius * 2 - bit*1.6, Colors::Green);
 		}
 
+		draw->paint->rectangleBorder (pos.x, pos.y, radius * 2, radius * 2, Colors::Black, 3);
+		draw->paint->rectangleBorder (pos.x, pos.y, radius * 2, radius * 2, Colors::White, 1);
 
-		draw->paint->rectangleBorder(pos.x, pos.y, radius * 2, radius * 2, Colors::Black, 3);
-		draw->paint->rectangleBorder(pos.x, pos.y, radius * 2, radius * 2, Colors::White, 1);
+	
 		
 		PrintText(draw, Pos(pos.x + radius * 2.34, pos.y + radius - property.font->charh*property.fontSize.h/2 ), property.font,property.fontSize, text);
 	}

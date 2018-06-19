@@ -229,7 +229,9 @@ public:
 		Color pixel = *Bmp->GetPixelPointer (src.x, src.y);
 		Color gfxPixel = this->GetPixelAt (dst.x, dst.y);
 		
-		return pixel == Bmp->bckclr ? gfxPixel : pixel;
+		bool pass = GetColorSimilarity (pixel, Colors::TKEY) < Bmp->varA;
+		return pass ? pixel : gfxPixel;
+		//return pixel == Bmp->bckclr ? gfxPixel : pixel;
 
 	}
 

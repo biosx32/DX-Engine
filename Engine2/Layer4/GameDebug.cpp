@@ -89,7 +89,7 @@ UpdateFrameInfo()
   FRA_label->SetText("Frame: %02d", FPS_frame);
   EPS_label->SetText("EPS: %0.4f", FPS_real_elapsed);
   FPS_label->SetText("FPS: %2.3f", FPS_fps);
-  MousePosLabel->SetText("MouseX: %3.0f + %3.0f\nMouseY: %3.0f + %3.0f\0",
+  MousePosLabel->SetText("MouseX: %3.0f + %4.0f\nMouseY: %3.0f + %4.0f\0",
                         io->mhelper->position.x,
                         io->mhelper->mouseDelta.x,
                         io->mhelper->position.y,

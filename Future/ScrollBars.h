@@ -8,6 +8,7 @@ public:
 	float value = 0.0f;
 	ScrollBar (Pos pos, Size size): Element (pos, size) {
 		property.fontSize = 0.8f;
+		property.name = "SB";
 	}
 
 	virtual float GetValue () = 0;
@@ -54,7 +55,7 @@ public:
 		restricted.paint->rectangleBorder (pos.x + value * size.x - 10 / 2, pos.y, 10, size.y, Colors::GreenDark, 3);
 		restricted.paint->circleBorder (pos.x + value * size.x, pos.y + size.y / 2, size.y / 1.3, Colors::GreenDark, 3);
 
-		string text = sprintfToString ("Value: %1.3f", value);
+		string text = sprintfToString ("%s -val: %1.3f",property.name.c_str(),value);
 
 		int posx = property.GetAbsX () + property.GetSize ().x / 2 - 0.5 * text.size () * property.font->charw * property.fontSize.w;
 		int posy = property.GetAbsY () + property.GetSize ().y / 2 - property.font->charh * property.fontSize.h /2;

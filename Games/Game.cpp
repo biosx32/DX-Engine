@@ -28,26 +28,39 @@
 #include "ScrollBars.h"
 
 
+#include "Bmap.h"
+Bitmap TEST("..\\Resources\\test_FLOODFILL.bmp", Colors::TKEY);
+Bitmap* Compress = TEST.GetBitmapPart (0, 0, TEST.width, TEST.height,0.75);
+
+VScrollBar* VarA = nullptr;
+VScrollBar* VarB = nullptr;
+
+
 void Game::Initialise() {
 	SetDebugIO (io);
 	CreateDebugUI ();
 
-	new ImageButton(Pos (500, 400), 0, std::string ("Nejake tlacidlo").c_str (), Size (120, 120));
 	new CheckBox (Pos (170, 170), "bekej");
-	new VScrollBar (Pos (100, 200), Size (200, 30));
-	new VScrollBar (Pos (100, 300), Size (200, 30));
-	new HScrollBar (Pos (300, 100), Size (30, 200));
-
+	VarA=new VScrollBar (Pos (100, 200), Size (200, 30));
+	VarA->property.name = "VarA";
+	VarB=new VScrollBar (Pos (100, 300), Size (200, 30));
+	VarB->property.name = "VarB";
 }
 
 void Game::UpdateModel () {
 	Container::FullUpdate ();
+
+	Compress->varA = VarA->value;
+	Compress->varB = VarB->value;
+
 
 }
 
 
 void Game::ComposeFrame() {
 
+	//Element::draw->DrawBitmap (&TEST,30,30,1,1);
+	Element::draw->DrawBitmap (Compress, 30, 30, 1,1);
 	Container::FullDraw ();
 	UpdateDebugInfo ();
 
