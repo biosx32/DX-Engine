@@ -69,7 +69,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(SolutionDir)\ChilliFramework;$(SolutionDir)\Engine2\;$(SolutionDir)\Engine2\Layer0\;$(SolutionDir)\Engine2\Layer1\;$(SolutionDir)\Engine2\Layer2\;$(SolutionDir)\Engine2\Layer3\;$(SolutionDir)\Engine2\Layer4\;$(SolutionDir)\Engine2\Layer5\;$(SolutionDir)\Engine2\Layer6;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>

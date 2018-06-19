@@ -3,13 +3,15 @@
 
 void MouseRegion::Draw ()
 {
-
+	
 	Color c = (state == MouseState::pressed) ? Colors::Green : Colors::Blue;
 	c = state < 1 ? Colors::Red : c;
 
 	Vector2 pos = parent->property.GetAbs () + offset;
 	Vector2 size = parent->property.GetSize ();
 
+	PrintText (BaseElement::draw, pos, parent->property.font, 0.75, name);
+	BaseElement::draw->paint->rectangleBorder (pos.x, pos.y, size.x, size.y, Colors::Red, 2);
 
 	BaseElement::draw->paint->circleBorder (pos.x + size.x / 2,
 		pos.y + size.y / 2,
@@ -22,7 +24,7 @@ void MouseRegion::Draw ()
 	Vector2 lpos =
 		Pos (pos.x + size.x / 2 - BaseElement::DFONT->charw * name.size () / 2,
 			pos.y + size.y / 2 - BaseElement::DFONT->charh / 2);
-	PrintText (BaseElement::draw, lpos, name, BaseElement::DFONT);
+	
 
 
 }
@@ -31,13 +33,16 @@ void MouseRegion::Update ()
 {
 	if (isHover ()) {
 		if (isPress ()) {
-			state = MouseState::pressed;
-			BaseElement::io->mhelper->LockMouse (parent->property.ID);
+			if (BaseElement::io->mhelper->CanBeUsedBy (parent->property.ID)) {
+				state = MouseState::pressed;
+				BaseElement::io->mhelper->LockMouse (parent->property.ID);
+			}
 		}
 		else {
 			state = MouseState::hovered;
 			if (BaseElement::io->mhelper->IsMouseUsedBy (parent->property.ID)) {
 				click_count += 1;
+				BaseElement::io->mhelper->ReleaseLock ();
 			}
 		}
 	}

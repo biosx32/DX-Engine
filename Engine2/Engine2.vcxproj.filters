@@ -26,6 +26,7 @@
       <Filter>CPP</Filter>
     </ClCompile>
     <ClCompile Include="Layer3\Element.cpp" />
+    <ClCompile Include="Layer1\Bmap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Layer0\Colors.h" />
@@ -75,6 +76,10 @@
     </ClInclude>
     <ClInclude Include="Layer3\Element.h" />
     <ClInclude Include="Layer3\MouseRegionVisual.h" />
+    <ClInclude Include="Layer1\ConfigFile.h" />
+    <ClInclude Include="Layer1\Bmap.h" />
+    <ClInclude Include="Layer1\BitmapArray.h" />
+    <ClInclude Include="Layer1\BitmapFont.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CPP">

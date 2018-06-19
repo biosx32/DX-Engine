@@ -1,13 +1,14 @@
 #pragma once
-#include "MouseRegion.h"
+#include "Element.h"
 #include "Vectors.h"
 #include "IOgroup.h"
-class VScrollBar: public MouseRegion {
+
+class VScrollBar: public Element {
 public:
 	float value = 0.0f;
-	MouseRegion scroll;
+	MouseRegion scroll
 	
-	VScrollBar(Pos pos, Size size): MouseRegion(pos,size), scroll(pos, Size(size.x, 16)) {
+	VScrollBar(Pos pos, Size size): scroll(pos, Size(size.x, 16)) {
 
 	}
 	void Update() {

@@ -12,13 +12,14 @@ public:
 	int offset;
 
 	bool valid = false;
+
 	
-	void LoadFromBMP(Bitmap* src, int wcount, int hcount, float size, Color bkclr) {
+	void LoadFromBMP(Bitmap* src, int wcount, int hcount, float compress_size, Color bkclr) {
 
 		int src_wsize = src->width / wcount;
 		int src_hsize = src->height / hcount;
-		charw = src_wsize * size;
-		charh = src_hsize * size;
+		charw = src_wsize * compress_size;
+		charh = src_hsize * compress_size;
 
 		for (int y = 0; y < hcount; y++) {
 			for (int x = 0; x < wcount; x++) {
@@ -30,7 +31,7 @@ public:
 				int srcX = x * src_wsize;
 				int srcY = y * src_hsize;
 
-				Bitmap* newBitmap = src->GetBitmapPart(srcX, srcY, src_wsize, src_hsize, size);
+				Bitmap* newBitmap = src->GetBitmapPart(srcX, srcY, src_wsize, src_hsize, compress_size);
 				this->characters[y*wcount + x] = newBitmap;
 			}
 		}

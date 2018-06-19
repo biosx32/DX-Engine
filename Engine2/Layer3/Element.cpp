@@ -28,7 +28,7 @@ void Element::DrawName ()
 	Vector2 lpos =
 		Pos (pos.x + size.x / 2 - DFONT->charw * property.name.size () / 2,
 			pos.y + size.y / 2 - DFONT->charh / 2);
-	PrintText (draw, lpos, property.name, DFONT);
+	PrintText (draw, lpos, property.font, 0.75, property.name);
 }
 
 void

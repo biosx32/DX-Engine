@@ -41,7 +41,7 @@ void
 UpdateHeader()
 {
   int magic =
-    ProgramNameLabel->DFONT->charw * ProgramNameLabel->text.length() / 2;
+    ProgramNameLabel->property.font->charw * ProgramNameLabel->text.length() / 2;
   draw->paint->line(0,
                     SCREENHEIGHT - DOS_WHITE.charh * 1.05,
                     SCREENWIDTH,
@@ -51,19 +51,19 @@ UpdateHeader()
   ProgramNameLabel->property.SetRel(
     Pos(SCREENWIDTH / 2 - magic, SCREENHEIGHT - DOS_WHITE.charh));
 
-  magic = FRA_label->DFONT->charw * FRA_label->text.length() + 5;
+  magic = FRA_label->property.font->charw * FRA_label->text.length() + 5;
   FRA_label->property.SetRel(Pos(SCREENWIDTH - magic, 0));
 
-  magic = FPS_label->DFONT->charw * FPS_label->text.length() + 5;
+  magic = FPS_label->property.font->charw * FPS_label->text.length() + 5;
   FPS_label->property.SetRel(Pos(SCREENWIDTH - magic, 25));
 
-  magic = EPS_label->DFONT->charw * EPS_label->text.length() + 5;
+  magic = EPS_label->property.font->charw * EPS_label->text.length() + 5;
   EPS_label->property.SetRel(Pos(SCREENWIDTH - magic, 50));
 
-  magic = MousePosLabel->DFONT->charw * MousePosLabel->text.length() / 2 + 5;
+  magic = MousePosLabel->property.font->charw * MousePosLabel->text.length() / 2 + 5;
   MousePosLabel->property.SetRel(Pos(SCREENWIDTH - magic, 75));
 
-  magic = LIDLabel->DFONT->charw * LIDLabel->text.length() + 5;
+  magic = LIDLabel->property.font->charw * LIDLabel->text.length() + 5;
   LIDLabel->property.SetRel(Pos(SCREENWIDTH - magic, 125));
 }
 

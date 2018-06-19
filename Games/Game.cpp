@@ -38,7 +38,6 @@ void Game::Initialise() {
 
 void Game::UpdateModel () {
 	Container::FullUpdate ();
-	io->mhelper->Refresh ();
 
 }
 

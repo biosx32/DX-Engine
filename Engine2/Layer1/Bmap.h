@@ -2,6 +2,8 @@
 #include <math.h>
 #include <stdio.h>
 #include "Colors.h"
+#include "OutputStream.h"
+#include "Func.h"
 
 class Bitmap {
 

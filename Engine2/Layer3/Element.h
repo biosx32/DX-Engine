@@ -11,9 +11,8 @@ public:
 	MouseRegion* mregion = nullptr;
 
 	Element (Vector2 pos, Vector2 size)
-	//	mregion (static_cast<BaseElement*>(this))
 	{
-		mregion = new MouseRegion (this, 0);
+		mregion = new MouseRegion (static_cast<BaseElement*>(this), 0);
 		property.SetRel (pos);
 		property.SetSize (size);
 	}

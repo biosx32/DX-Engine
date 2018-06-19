@@ -1,8 +1,8 @@
 #include "Static.h"
 #include "Func3.h"
 
-void PrintText(GFXDraw* draw, Vector2 pos, std::string text,BitmapFont* font) {
-
+void PrintText(GFXDraw* draw, Vector2 pos, BitmapFont* font, Size scale, std::string text) {
+	
 	double rel_pos_x = 0;
 	double rel_pos_y = 0;
 	float charw = font->charw;
@@ -33,18 +33,14 @@ void PrintText(GFXDraw* draw, Vector2 pos, std::string text,BitmapFont* font) {
 		int desty = (int)(pos.y + rel_pos_y);
 
 
-		draw->DrawBitmap(CharBitmap, destx, desty);
-		//this->Painter->rectangle(destx, desty, charw, charh, 0xFFFF0000);
+		draw->DrawBitmap(CharBitmap, destx, desty, scale.w, scale.h);
+		//draw->paint->rectangleBorder(destx, desty, charw*scale.w, charh*scale.h, 0xFF00FFFF,1);
 		rel_pos_x += charw;
 	}
 
 }
 
-void PrintText (GFXDraw * draw, int x, int y, std::string text, BitmapFont * font) {
-	Vector2 pos = Vector2 (x, y);
-	PrintText (draw, pos, text, font);
-}
-void PrintText (GFXDraw * draw, Vector2 pos, BitmapFont * font, const char *fmt, ...) {
+void PrintText (GFXDraw * draw, Vector2 pos, BitmapFont* font, Size scale, const char *fmt, ...) {
 	va_list args;
 	va_start (args, fmt);
 	const int size = 32768;
@@ -52,5 +48,5 @@ void PrintText (GFXDraw * draw, Vector2 pos, BitmapFont * font, const char *fmt,
 	int rc = vsnprintf (buffer, size - 1, fmt, args);
 	std::string text = string (buffer);
 	va_end (args);
-	PrintText (draw, pos, text, font);
+	PrintText (draw, pos, font, scale, text);
 }

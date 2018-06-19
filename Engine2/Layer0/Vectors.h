@@ -37,8 +37,8 @@ public:
 		return (*this);
 	}
 
-	const int& w = x;
-    const int& h = y;
+	const float& w = x;
+    const float& h = y;
 
 	float DistanceFrom(Vector2 other) { 
 		return GetSquareDistance2(*this, other); }

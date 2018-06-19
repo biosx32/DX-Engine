@@ -28,7 +28,7 @@ public:
 	}
 
 	bool CanBeUsedBy(int i) {
-		return lockedobject != i && lockedobject != -1;
+		return lockedobject == i || lockedobject == -1;
 	}
 
 	bool IsMouseUsedBy(int i) {
@@ -36,18 +36,23 @@ public:
 	}
 
 	void Refresh () {
+	
+
+		position = Vector2 (mouse->GetMouseX (), mouse->GetMouseY ());
+		mouseDelta = position - mouseOld;
+		mouseOld = position;
+
 		if (mouse->LeftIsPressed ()) {
 			if (IsMouseNotLocked ()) {
 				lockedobject = -2;
 			}
 		}
 
-		position = Vector2 (mouse->GetMouseX (), mouse->GetMouseY ());
-		mouseDelta = position - mouseOld;
-		mouseOld = position;
-		if (!mouse->LeftIsPressed ()) {
+		else{
 			lockedobject = -1;
 		}
+
+		
 		
 	}
 };

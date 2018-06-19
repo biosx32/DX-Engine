@@ -85,6 +85,6 @@ public:
                 int textX = pos.x + (property.size.x - textWidth) / 2;
 
 		this->DrawImage();
-		PrintText(draw, textX, textY, text,DFONT);
+		PrintText(draw, Pos(textX,textY), property.font, property.fontSize, text);
 	}
 };

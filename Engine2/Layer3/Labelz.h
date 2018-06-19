@@ -8,9 +8,8 @@ using std::string;
 
 class Label: public Element {
 public:
-	string text = "";
-	BitmapFont* font = &DOS_BLACK;
-	
+	string text = "THANOS_SNAPS_HIS_FINGERS";
+
 	Label(Vector2 position, const char* newtext)
           : Element (position,0)
           , text(newtext)
@@ -19,12 +18,13 @@ public:
         Label(Vector2 position, const char* newtext, BitmapFont* NFONT)
           : Element (position,0)
           , text(newtext)
-          , font (NFONT)
-        {}
+        {
+			property.font = (NFONT);
+		}
 
 	void Update() {}
 	void Draw() {
-		PrintText (draw, property.GetAbs (), text, font);
+		PrintText (draw, property.GetAbs (), property.font, property.fontSize, text);
 	}
 
 

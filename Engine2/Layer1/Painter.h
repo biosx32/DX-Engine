@@ -209,10 +209,34 @@ class Drawer: protected Painter {
 public:
 	Painter* paint = this;
 	virtual void DrawPixel(int xoff, int yoff, Color c) = 0;
+	virtual Color GetPixelAt (int xoff, int yoff) = 0;
+	virtual bool DrawIsReady() = 0;
 
-	void DrawBitmap(Bitmap * Bmp, int xoff, int yoff, float mx, float my)
+	float GetColorSimilarity (Color A, Color B) {
+		int r1 = (A >> 16u) & 0xFFu;
+		int g1 = (A >> 8u) & 0xFFu;
+		int b1 = (A >> 0u) & 0xFFu;
+		int r2 = (B >> 16u) & 0xFFu;
+		int g2 = (B >> 8u) & 0xFFu;
+		int b2 = (B >> 0u) & 0xFFu;
+
+		float distance = pow (r2 - r1, 2) + pow (g2 - g1, 2) + pow (b2 - b1, 2);
+		//float percentage = distance / ( 3*(256*256));
+		return distance / (3 * (256 * 256));
+	}
+
+	Color GetPixelResult (Bitmap* Bmp, Pos src, Pos dst) {
+		Color pixel = *Bmp->GetPixelPointer (src.x, src.y);
+		Color gfxPixel = this->GetPixelAt (dst.x, dst.y);
+		
+		return pixel == Bmp->bckclr ? gfxPixel : pixel;
+
+	}
+
+	void DrawBitmap (Bitmap * Bmp, int xoff, int yoff, float mx, float my)
 	{
-		if (!(mx > 0 && my > 0)) return;
+		if (!DrawIsReady ()) { return; }
+		if (!(mx > 0 && my > 0)){ return;}
 
 		int width = Bmp->width;
 		int height = Bmp->height;
@@ -223,51 +247,51 @@ public:
 			int srcy = y / my;
 			for (int x = 0; x < draw_width; x++) {
 				int srcx = x / mx;
-				Color *pixel = Bmp->GetPixelPointer(srcx, srcy);
-				if (!Bmp->GetIsBackground(*pixel)) {
-					DrawPixel(xoff + x, yoff + y, *pixel);
-				}
+				Color result = GetPixelResult (Bmp, V2 (srcx, srcy), V2 (xoff + x, yoff + y));
+				DrawPixel (xoff + x, yoff + y, result);
+				
 			}
 		}
 	};
-	void DrawBitmap(Bitmap* Bmp, int fx, int fy) {
+	void DrawBitmap(Bitmap* Bmp, int xoff, int yoff) {
 
-		for (int yoff = 0; yoff < Bmp->height; yoff++) {
-			for (int xoff = 0; xoff < Bmp->width; xoff++) {
-				int finalx = fx + xoff;
-				int finaly = fy + yoff;
-				Color Pixel = *Bmp->GetPixelPointer(xoff, yoff);
-				if (!Bmp->GetIsBackground(Pixel)) {
-					DrawPixel(finalx, finaly, Pixel);
-				}
-			}
-		}
+		DrawBitmap (Bmp, xoff, yoff, 1, 1);
 	}
-	/*void DrawSprite(PixelMap* VBmp, int fx, int fy) {
-	for (std::vector<FPixel*>::iterator it = VBmp->pixels->begin(); it != VBmp->pixels->end(); ++it) {
-	DrawPixel(fx + (*it)->x, fy + (*it)->y, (*it)->color);
-	}
-	}*/
 	
 	void Fill(Color color) {
 		rectangle(0, 0, SCREENWIDTH - 1, SCREENHEIGHT - 1, color);
 	}
 };
 
-class GFXDraw: public Drawer {
+class GFXDraw : public Drawer {
 public:
 	D3DGraphics * gfx;
-	GFXDraw(D3DGraphics* gfx): gfx(gfx) {}
+	GFXDraw (D3DGraphics* gfx): gfx (gfx) {}
 
-	void DrawPixel(int xoff, int yoff, Color c) {
+	bool DrawIsReady (){return gfx;}
+
+	bool isValid (int xoff, int yoff) {
 		if (!gfx ||
 			xoff >= SCREENWIDTH ||
 			yoff >= SCREENHEIGHT ||
 			xoff < 0 ||
 			yoff < 0) {
-			return;
+			return false;
 		}
-		this->gfx->PutPixel(xoff, yoff, c);
+		return true;
+	}
+
+	Color GetPixelAt (int xoff, int yoff) {
+		if (isValid (xoff, yoff)) {
+			return gfx->GetPixel (xoff, yoff);
+		}
+		return Colors::Red;
+	}
+
+	void DrawPixel(int xoff, int yoff, Color c) {
+		if (isValid(xoff,yoff)){
+			this->gfx->PutPixel(xoff, yoff, c);
+		}
 	}
 };
 
@@ -275,6 +299,16 @@ class BMPDraw : public Drawer {
 public:
 	Bitmap* bmp;
 	BMPDraw(Bitmap* bmp) : bmp(bmp) {}
+
+	bool DrawIsReady () { return true; }
+
+	Color GetPixelAt (int xoff, int yoff) {
+		Color * dst = bmp->GetPixelPointer (xoff, yoff);
+		if (dst != nullptr) {
+			return *dst;
+		}
+		return Colors::Red;
+	}
 
 	void DrawPixel(int xoff, int yoff, Color c) {
 		Color * dst = bmp->GetPixelPointer(xoff, yoff);

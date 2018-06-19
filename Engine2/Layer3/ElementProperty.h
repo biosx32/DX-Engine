@@ -1,6 +1,6 @@
 #pragma once
 #include "Vectors.h"
-
+#include "GlobalObjects.h"
 struct ElementProperty
 {
 public:
@@ -8,6 +8,8 @@ public:
   std::string name = "DEFAULT";
   bool enabled = true;
   bool visible = true;
+  BitmapFont* font = &DOS_BLACK;
+  Vector2 fontSize = 1.0f;
 
 public:
   Size size;
