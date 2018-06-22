@@ -221,8 +221,7 @@ public:
 		int b2 = (B >> 0u) & 0xFFu;
 
 		float distance = pow (r2 - r1, 2) + pow (g2 - g1, 2) + pow (b2 - b1, 2);
-		//float percentage = distance / ( 3*(256*256));
-		return distance / (3 * (256 * 256));
+		return sqrt(distance)/23;
 	}
 
 	Color MixPercent (Color A, Color B, float perc) {
@@ -233,13 +232,13 @@ public:
 		int g2 = (B >> 8u) & 0xFFu;
 		int b2 = (B >> 0u) & 0xFFu;
 
-		r1 *= perc;
-		g1 *= perc;
-		b1 *= perc;
-		r2 *= (1 - perc);
-		g2 *= (1 - perc);
-		b2 *= (1 - perc);
-		Color result = D3DCOLOR_XRGB (r1 + r2, g1 + g2, b1 + b2);
+
+		r1 = (r1 * (1 - perc) + r2 * (perc));
+		g1 = (g1 * (1 - perc) + g2 * (perc));
+		b1 = (b1 * (1 - perc) + b2 * (perc));
+		
+
+		Color result = D3DCOLOR_XRGB (r1,g1,b1);
 		return result;
 	}
 
@@ -248,10 +247,10 @@ public:
 		Color pixel = *Bmp->GetPixelPointer (src.x, src.y);
 		Color gfxPixel = this->GetPixelAt (dst.x, dst.y);
 		
-		float sim = GetColorSimilarity (pixel, Bmp->bckclr);
-		Color c = MixPercent (pixel, gfxPixel, 1-Bmp->varB);
-		bool pass = sim > Bmp->varA;
-		return pass ? c : gfxPixel;
+		float sim = GetColorSimilarity (pixel, Bmp->bckclr) * (Bmp->varB);
+		Bmp->simA = sim;
+		Color c = MixPercent (pixel, gfxPixel, sim);
+		return c;
 		//return pixel == Bmp->bckclr ? gfxPixel : pixel;
 
 	}

@@ -35,16 +35,16 @@ Bitmap* Compress = TEST.GetBitmapPart (0, 0, TEST.width, TEST.height,0.75);
 VScrollBar* VarA = nullptr;
 VScrollBar* VarB = nullptr;
 
-
+Label * SimA = nullptr;
 void Game::Initialise() {
 	SetDebugIO (io);
 	CreateDebugUI ();
 
-	new CheckBox (Pos (170, 170), "bekej");
-	VarA=new VScrollBar (Pos (100, 200), Size (200, 30));
+	VarA=new VScrollBar (Pos (400, 200), Size (200, 30));
 	VarA->property.name = "VarA";
-	VarB=new VScrollBar (Pos (100, 300), Size (200, 30));
+	VarB=new VScrollBar (Pos (400, 300), Size (200, 30));
 	VarB->property.name = "VarB";
+	SimA = new Label (Pos (400, 400), "Textos");
 }
 
 void Game::UpdateModel () {
@@ -52,7 +52,7 @@ void Game::UpdateModel () {
 
 	Compress->varA = VarA->value;
 	Compress->varB = VarB->value;
-
+	SimA->text = sprintfToString ("SimA: %3.8f", Compress->simA);
 
 }
 

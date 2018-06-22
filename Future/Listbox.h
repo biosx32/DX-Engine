@@ -15,7 +15,7 @@ public:
 
 class ListBox: public Element {
 public:
-	MouseRegion mregion->
+	MouseRegion mregion;
 	std::vector<ListBoxItem> items;
 	int selectedIndex = -1;
 	int offset = 0;
@@ -23,10 +23,9 @@ public:
 	BitmapFont* DFONT = &DOS_BLACK_MINI;
 
 	VScrollBar sc;
-	ListBox(Pos ppos, Size psize): Element(ppos,psize),
-		mregion->ppos, Size(psize.x - 15,psize.y)), sc(Pos(ppos.x + psize.x - 15, ppos.y), Size(15, psize.y))
+	ListBox(Pos ppos, Size psize): Element(ppos,psize), sc(Pos(ppos.x + psize.x - 15, ppos.y), Size(15, psize.y))
 	{
-		name = "Empty ListBox";
+		property.name = "Empty ListBox";
 	}
 
 	void Add(std::string item) {

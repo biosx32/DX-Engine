@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Layer1\Bmap.cpp" />
-    <ClCompile Include="Layer1\Bmap.cpp" />
     <ClCompile Include="Layer0\CustomMath.cpp" />
     <ClCompile Include="Layer3\Element.cpp" />
     <ClCompile Include="Layer3\Container.cpp" />
@@ -26,10 +25,6 @@
     <ClCompile Include="Layer3\MouseRegion.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Layer1\BitmapArray.h" />
-    <ClInclude Include="Layer1\BitmapFont.h" />
-    <ClInclude Include="Layer1\Bmap.h" />
-    <ClInclude Include="Layer1\ConfigFile.h" />
     <ClInclude Include="Layer0\Cont.h" />
     <ClInclude Include="Layer0\Layer0.h" />
     <ClInclude Include="Layer1\BitmapArray.h" />

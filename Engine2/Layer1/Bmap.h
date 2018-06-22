@@ -28,6 +28,7 @@ public:
 	double tolerance = 0.000001;
 	float varA = 0;
 	float varB = 0;
+	float simA = 0;
 	Color bckclr = 0;
 	bool keying_enabled = false;
 
