@@ -289,10 +289,11 @@ public:
 		Color pixel = *Bmp->GetPixelPointer (src.x, src.y);
 		Color gfxPixel = this->GetPixelAt (dst.x, dst.y);
 		float podobnostSBC = GetColorSimilarity(pixel, Bmp->bckclr);
-		float treshold = Bmp->varB;
+		float treshold = 1-Bmp->varB;
 
-		Color alt = Colorize (pixel,gfxPixel,  podobnostSBC* (Bmp->varA) );
-		Color c = podobnostSBC <= treshold ? pixel : alt;
+		Color alt= podobnostSBC <= treshold ? pixel : gfxPixel;
+		Color c = Colorize (alt,gfxPixel,  podobnostSBC* (Bmp->varA) );
+		
 
 
 		//Color c = MixPercent (pixel, gfxPixel, 1-ss);
