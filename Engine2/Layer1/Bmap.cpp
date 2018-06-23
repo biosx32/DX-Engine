@@ -13,7 +13,6 @@ Bitmap * Bitmap::GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT, float 
 	int n_height = HEIGHT * size;
 	Bitmap* newBitmap = new Bitmap(n_width, n_height, this->bckclr);
 	newBitmap->keying_enabled = this->keying_enabled;
-	newBitmap->tolerance = this->tolerance;
 	
 
 	for (int y = 0; y < n_height; y++) {
@@ -32,21 +31,6 @@ Bitmap * Bitmap::GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT, float 
 Color * Bitmap::GetPixelPointer(int x, int y)
 {
 	{ return (x >= 0 && y >= 0 && x < width && y < height) ? &this->data[y * width + x] : nullptr; }
-}
-
-float Bitmap::GetBackgroundSimilarity(Color tstclr)
-{
-	int r1 = (tstclr >> 16u) & 0xFFu; 
-	int g1 = (tstclr >>  8u) & 0xFFu; 
-	int b1 = (tstclr >>  0u) & 0xFFu;
-	int r2 = (bckclr >> 16u) & 0xFFu; 
-	int g2 = (bckclr >>  8u) & 0xFFu; 
-	int b2 = (bckclr >>  0u) & 0xFFu;
-
-	float distance = pow(r2 - r1, 2) + pow(g2 - g1, 2) + pow(b2 - b1, 2);
-	//float percentage = distance / ( 3*(256*256));
-	return distance / (3 * (256 * 256));
-	
 }
 
 Bitmap::Bitmap(const char * FileName)

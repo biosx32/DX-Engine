@@ -21,11 +21,9 @@ public:
 
 	int pixelcount() { return width * height; }
 	Color* GetPixelPointer(int x, int y);
-	bool  GetIsBackground(Color c) { return  keying_enabled && GetBackgroundSimilarity(c) < tolerance; }
-	float GetBackgroundSimilarity(Color c);
 
 public:
-	double tolerance = 0.000001;
+	float bckclr_tolerance = 0.001f;
 	float varA = 0;
 	float varB = 0;
 	float simA = 0;

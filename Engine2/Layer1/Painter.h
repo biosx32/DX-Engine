@@ -250,17 +250,23 @@ public:
 		int Bg2 = Br1 - Bnorm;
 		int Bb2 = Br1 - Bnorm;
 
-		float ABr = abs (Ar2 - Br2) /256.0f;
-		float ABg = abs (Ag2 - Bg2) /256.0f;
-		float ABb = abs (Ab2 - Bb2) /256.0f;
 
 
+		/*float ABr = (abs (Ar2 - Br2) /256.0f);
+		float ABg = (abs (Ag2 - Bg2) /256.0f);
+		float ABb = (abs (Ab2 - Bb2) /256.0f);*/
 
-		return 1-((1-ABr)*(1-ABg)*(1-ABb));
+		float ABr = (abs (Ar1 - Br1) / 256.0f);
+		float ABg = (abs (Ag1 - Bg1) / 256.0f);
+		float ABb = (abs (Ab1 - Bb1) / 256.0f);
+
+	
+		return (3-(ABr+ABg+ABb))/3;
 	}
 
-	Color MixPercent (Color secondary, Color primary, float perc) {
-		Color A = primary, B = secondary;
+	Color Colorize (Color primary, Color secondary, float perc) {
+		perc = perc > 1 ? 1 : perc;
+		Color B = secondary, A = primary;
 		int r1 = (A >> 16u) & 0xFFu;
 		int g1 = (A >> 8u) & 0xFFu;
 		int b1 = (A >> 0u) & 0xFFu;
@@ -282,11 +288,15 @@ public:
 	Color GetPixelResult (Bitmap* Bmp, Pos src, Pos dst) {
 		Color pixel = *Bmp->GetPixelPointer (src.x, src.y);
 		Color gfxPixel = this->GetPixelAt (dst.x, dst.y);
-		float sim = GetColorSimilarity(Bmp->bckclr, pixel);
-		float ss = sim * Bmp->varA;
-		Color c = MixPercent (pixel, gfxPixel, 1-ss);
+		float podobnostSBC = GetColorSimilarity(pixel, Bmp->bckclr);
+		float treshold = Bmp->varB;
+
+		Color alt = Colorize (pixel,gfxPixel,  podobnostSBC* (Bmp->varA) );
+		Color c = podobnostSBC <= treshold ? pixel : alt;
+
+
+		//Color c = MixPercent (pixel, gfxPixel, 1-ss);
 		return c;
-		//return pixel == Bmp->bckclr ? gfxPixel : pixel;
 
 	}
 
