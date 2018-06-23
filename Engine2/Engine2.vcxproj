@@ -23,8 +23,10 @@
     <ClCompile Include="Layer3\Func3.cpp" />
     <ClCompile Include="Layer4\GameDebug.cpp" />
     <ClCompile Include="Layer3\MouseRegion.cpp" />
+    <ClCompile Include="Layer0\Global0.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Layer0\Global0.h" />
     <ClInclude Include="Layer0\Cont.h" />
     <ClInclude Include="Layer0\Layer0.h" />
     <ClInclude Include="Layer1\BitmapArray.h" />

@@ -4,10 +4,20 @@
 #include "Element.h"
 #include "Labelz.h"
 #include "Painter.h"
+#include "Global0.h"
 
 #ifndef  __PROG__HEADER_
 #define __PROG__HEADER_ ("Sprite Saver")
 #endif // ! __PROG__HEADER_
+
+
+extern int FPS_frame;
+extern float FPS_elapsed_from_last_update;
+extern clock_t begin;
+extern const int UpdatesPerSecond;
+extern const int FrameLimit;
+extern const int UpdateEveryN;
+extern int FPS_result;
 
 extern IOgroup * io;
 extern GFXDraw * draw ;

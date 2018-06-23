@@ -1,11 +1,15 @@
 #include "Static.h"
 #include "GameDebug.h"
-
-
+#include "Global0.h"
 
 int FPS_frame = 0;
 float FPS_elapsed_from_last_update = 0;
 clock_t begin = -1;
+const int UpdatesPerSecond = 1;
+const int FrameLimit = 60;
+const int UpdateEveryN = 60 / UpdatesPerSecond;
+int FPS_result = 0;
+
 
 IOgroup* io = nullptr;
 GFXDraw* draw = nullptr;
@@ -70,9 +74,7 @@ UpdateHeader()
 void
 UpdateFrameInfo()
 {
-  const int UpdatesPerSecond = 5;
-  const int FrameLimit = 60;
-  const int UpdateEveryN = 60 / UpdatesPerSecond;
+
 
   FPS_frame++;
   if (FPS_frame > FrameLimit)
@@ -84,11 +86,12 @@ UpdateFrameInfo()
     begin = end;
   }
   float FPS_real_elapsed = FPS_elapsed_from_last_update / UpdateEveryN;
-  float FPS_fps = UpdateEveryN / FPS_elapsed_from_last_update;
-  FPS_fps = FPS_fps > 1000 ? 0 : FPS_fps;
+  FPS_result = UpdateEveryN / FPS_elapsed_from_last_update;
+  FPS_result = FPS_result > 1000 ? 0 : FPS_result;
+  _GLOB_FPS = FPS_result;
   FRA_label->SetText("Frame: %02d", FPS_frame);
   EPS_label->SetText("EPS: %0.4f", FPS_real_elapsed);
-  FPS_label->SetText("FPS: %2.3f", FPS_fps);
+  FPS_label->SetText("FPS: %2.3f", FPS_result);
   MousePosLabel->SetText("MouseX: %3.0f + %4.0f\nMouseY: %3.0f + %4.0f\0",
                         io->mhelper->position.x,
                         io->mhelper->mouseDelta.x,

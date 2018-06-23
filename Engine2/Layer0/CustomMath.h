@@ -1,5 +1,4 @@
-#ifndef _MY_CUST_MATH__
-#define _MY_CUST_MATH__
+#pragma once
 #include <math.h>
 #define MM_PI 3.14159265358979323846
 
@@ -9,5 +8,4 @@ float GetDistance1(float a, float b);
 
 int maximum(float x, float y, float z);
 int minimum(float x, float y, float z);
-#endif
 

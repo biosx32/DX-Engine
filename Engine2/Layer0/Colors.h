@@ -7,6 +7,9 @@ typedef D3DCOLOR Color;
 #define ColorARGB(a,r,g,b) (D3DCOLOR_ARGB(a,r,g,b))
 #define ColorRGB(r,g,b) (D3DCOLOR_XRGB (r,g,b))
 
+
+
+
 namespace Colors
 {
 	static constexpr Color White = D3DCOLOR_XRGB(255u, 255u, 255u);
@@ -23,8 +26,8 @@ namespace Colors
 	static constexpr Color Yellow = D3DCOLOR_XRGB(255u, 255u, 0u);
 	static constexpr Color Cyan = D3DCOLOR_XRGB(0u, 255u, 255u);
 	static constexpr Color Magenta = D3DCOLOR_XRGB(255u, 0u, 255u);
-
 	static constexpr Color TKEY = D3DCOLOR_XRGB(177u, 244u, 177u);
+
 }
 
 

@@ -11,6 +11,9 @@ public:
   BitmapFont* font = &DOS_BLACK;
   Vector2 fontSize = 1.0f;
 
+  Color foreColor=Colors::Black;
+  Color backColor=Colors::White;
+
 public:
   Size size;
   ElementProperty() {}

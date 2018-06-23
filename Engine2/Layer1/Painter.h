@@ -3,6 +3,8 @@
 #include "Bmap.h"
 #include "BitmapFont.h"
 #include <string>
+#include "Global0.h"
+
 
 #define TXT_BUFFER_SIZE 4096
 using std::string;
@@ -47,22 +49,34 @@ public:
 	}
 
 	void line(int x1, int y1, int x2, int y2, Color c, int width) {
+		int r = (0.5f + width) / 2;
+		for (int i = 0; i < r; i++) {
+			int off = -r / 2 + i;
+			int oss = -r / 2;
+			int ose = r; 
+
+			line (x1 + off, y1, x2 + off, y2, c);
+			line (x1, y1 + off, x2, y2 + off, c);
+
+		}
+	}
+	void line(int x1, int y1, int x2, int y2, Color c) {
 		int dstx = x2 - x1;
 		int dsty = y2 - y1;
 
-		DrawPixel(x2, y2, width);
-		DrawPixel(x1, y1, width);
+		DrawPixel (x2, y2,c);
+		DrawPixel (x1, y1,c);
 
 		if (dsty == 0 && dstx == 0) {
 
 		}
 
-		else if (abs(dsty) > abs(dstx))
+		else if (abs (dsty) > abs (dstx))
 		{
 			if (dsty < 0)
 			{
-				Swap(&x1, &x2);
-				Swap(&y1, &y2);
+				Swap (&x1, &x2);
+				Swap (&y1, &y2);
 			}
 
 			float m = (float)dstx / (float)dsty;
@@ -70,8 +84,7 @@ public:
 			for (int y = y1; y <= y2; y = y + 1)
 			{
 				int x = (int)(m*y + b + 0.5f);
-				FastVLine(x, y, width, c);
-				FastHLine(x, y, width, c);
+				DrawPixel (x, y, c);
 			}
 
 		}
@@ -79,21 +92,17 @@ public:
 		{
 			if (dstx < 0)
 			{
-				Swap(&x1, &x2);
-				Swap(&y1, &y2);
+				Swap (&x1, &x2);
+				Swap (&y1, &y2);
 			}
 			float m = (float)dsty / (float)dstx;
 			float b = y1 - m * x1;
 			for (int x = x1; x <= x2; x = x + 1)
 			{
 				int y = (int)(m*x + b + 0.5f);
-				FastVLine(x, y, width, c);
-				FastHLine(x, y, width, c);
+				DrawPixel (x, y, c);
 			}
 		}
-	}
-	void line(int x1, int y1, int x2, int y2, Color c) {
-		this->line(x1, y1, x2, y2, c, 1);
 	}
 
 	void circleBorder(int x0, int y0, int diam, Color c, int width) {
@@ -128,11 +137,19 @@ public:
 
 	void rectangleBorder(int x0, int y0, int width, int height, Color c, int r) {
 		for (int i = 0; i < r; i++) {
-			int OF = i;
-			FastHLine(x0, y0 + OF, width, c);
-			FastHLine(x0, y0 + height - OF, width, c);
-			FastVLine(x0 + OF, y0, height, c);
-			FastVLine(x0 + width - OF, y0, height, c);
+		/*	int off = -r / 2 + i;
+			int oss = -r / 2;
+			int ose = r;*/
+
+		//	FastHLine(x0 + oss, y0 + off, width + ose, c);
+		//	FastHLine(x0 + oss, y0 + off +height, width+ose, c);
+		//	FastVLine(x0 + off, y0, height, c);
+		//	FastVLine(x0 + off + width, y0, height, c);
+
+			FastHLine(x0-r+1, y0 -i, width + r*2-1, c);
+			FastHLine(x0-r+1, y0 +i +height, width +r *2-1, c);
+			FastVLine(x0 - i, y0, height, c);
+			FastVLine(x0 + i+ width, y0, height, c);
 		}
 	}
 	void rectangle(int xoff, int yoff, int width, int height, Color c) {
@@ -212,19 +229,38 @@ public:
 	virtual Color GetPixelAt (int xoff, int yoff) = 0;
 	virtual bool DrawIsReady() = 0;
 
-	float GetColorSimilarity (Color A, Color B) {
-		int r1 = (A >> 16u) & 0xFFu;
-		int g1 = (A >> 8u) & 0xFFu;
-		int b1 = (A >> 0u) & 0xFFu;
-		int r2 = (B >> 16u) & 0xFFu;
-		int g2 = (B >> 8u) & 0xFFu;
-		int b2 = (B >> 0u) & 0xFFu;
+	float GetColorSimilarity (Color key, Color pixel) {
+		Color A = key;
+		Color B = pixel;
 
-		float distance = pow (r2 - r1, 2) + pow (g2 - g1, 2) + pow (b2 - b1, 2);
-		return sqrt(distance)/23;
+		int Ar1 = (A >> 16u) & 0xFFu;
+		int Ag1 = (A >> 8u) & 0xFFu;
+		int Ab1 = (A >> 0u) & 0xFFu;
+		int Br1 = (B >> 16u) & 0xFFu;
+		int Bg1 = (B >> 8u) & 0xFFu;
+		int Bb1 = (B >> 0u) & 0xFFu;
+
+		int Anorm = minimum (Ar1,Ag1,Ab1);
+		int Ar2 = Ar1 - Anorm;
+		int Ag2 = Ar1 - Anorm;
+		int Ab2 = Ar1 - Anorm;
+
+		int Bnorm = minimum (Br1,Bg1,Bb1);
+		int Br2 = Br1 - Bnorm;
+		int Bg2 = Br1 - Bnorm;
+		int Bb2 = Br1 - Bnorm;
+
+		float ABr = abs (Ar2 - Br2) /256.0f;
+		float ABg = abs (Ag2 - Bg2) /256.0f;
+		float ABb = abs (Ab2 - Bb2) /256.0f;
+
+
+
+		return 1-((1-ABr)*(1-ABg)*(1-ABb));
 	}
 
-	Color MixPercent (Color A, Color B, float perc) {
+	Color MixPercent (Color secondary, Color primary, float perc) {
+		Color A = primary, B = secondary;
 		int r1 = (A >> 16u) & 0xFFu;
 		int g1 = (A >> 8u) & 0xFFu;
 		int b1 = (A >> 0u) & 0xFFu;
@@ -246,10 +282,9 @@ public:
 	Color GetPixelResult (Bitmap* Bmp, Pos src, Pos dst) {
 		Color pixel = *Bmp->GetPixelPointer (src.x, src.y);
 		Color gfxPixel = this->GetPixelAt (dst.x, dst.y);
-		
-		float sim = GetColorSimilarity (pixel, Bmp->bckclr) * (Bmp->varB);
-		Bmp->simA = sim;
-		Color c = MixPercent (pixel, gfxPixel, sim);
+		float sim = GetColorSimilarity(Bmp->bckclr, pixel);
+		float ss = sim * Bmp->varA;
+		Color c = MixPercent (pixel, gfxPixel, 1-ss);
 		return c;
 		//return pixel == Bmp->bckclr ? gfxPixel : pixel;
 
@@ -311,6 +346,7 @@ public:
 	}
 
 	void DrawPixel(int xoff, int yoff, Color c) {
+	
 		if (isValid(xoff,yoff)){
 			this->gfx->PutPixel(xoff, yoff, c);
 		}

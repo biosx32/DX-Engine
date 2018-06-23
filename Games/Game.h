@@ -69,7 +69,3 @@ public:
 	void Initialise();
 };
 
-
-#define __DEBUG__ 1
-
-#include "GameDebug.h"

@@ -24,26 +24,32 @@
 #include "Game.h"
 #include "ColorButton.h"
 #include "CheckBox.h"
-
 #include "ScrollBars.h"
-
-
 #include "Bmap.h"
+
+
+
+#define __DEBUG__ 1
+#ifdef __DEBUG__
+#include "GameDebug.h"
+#endif
+
 Bitmap TEST("..\\Resources\\advanced.bmp", Colors::Green);
-Bitmap* Compress = TEST.GetBitmapPart (0, 0, TEST.width, TEST.height,0.75);
+Bitmap* Compress = TEST.GetBitmapPart (0, 0, TEST.width, TEST.height,1);
 
 VScrollBar* VarA = nullptr;
-VScrollBar* VarB = nullptr;
+HScrollBar* VarB = nullptr;
 
 Label * SimA = nullptr;
 void Game::Initialise() {
 	SetDebugIO (io);
 	CreateDebugUI ();
 
-	VarA=new VScrollBar (Pos (400, 200), Size (200, 30));
+	VarA=new VScrollBar (Pos (500, 200), Size (200, 30));
 	VarA->property.name = "VarA";
-	VarB=new VScrollBar (Pos (400, 300), Size (200, 30));
+	VarB=new HScrollBar (Pos (500, 300), Size (30, 200));
 	VarB->property.name = "VarB";
+
 	SimA = new Label (Pos (400, 400), "Textos");
 }
 
@@ -60,8 +66,12 @@ void Game::UpdateModel () {
 void Game::ComposeFrame() {
 
 	//Element::draw->DrawBitmap (&TEST,30,30,1,1);
-	Element::draw->DrawBitmap (Compress, 30, 30, 1,1);
+	//if (FPS_result> 50) {
+		
+	//}
+
 	Container::FullDraw ();
+	Element::draw->DrawBitmap (Compress, 30, 30, 1, 1);
 	UpdateDebugInfo ();
 
 
