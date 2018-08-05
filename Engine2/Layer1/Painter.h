@@ -298,12 +298,13 @@ public:
 		Color pixel = *Bmp->GetPixelPointer (src.x, src.y);
 		Color gfxPixel = this->GetPixelAt (dst.x, dst.y);
 		SRGB A = pixel;
-		SRGB B = gfxPixel;
+		SRGB B = Bmp->bckclr;
+		SRGB C = gfxPixel;
 		float rozdielnost = A.normalizedDistanceFrom (B);
 		
 
-		Color potential = A.colorize (B, Bmp->varA).convert();
-		Color c = rozdielnost >= treshold ? potential :pixel ;
+		Color potential = C.colorize (A, Bmp->varA).convert();
+		Color c = rozdielnost >= treshold ? pixel:potential ;
 		return c;
 
 	}

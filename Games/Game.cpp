@@ -65,9 +65,10 @@ void Game::Initialise() {
 
 	VarA=new VScrollBar (Pos (500, 200), Size (200, 30));
 	VarA->property.name = "VarA";
+	VarA->value = 0.5f;
 	VarB=new HScrollBar (Pos (500, 300), Size (30, 200));
 	VarB->property.name = "VarB";
-
+	VarB->value = 0.5f;
 	RA = new VScrollBar (Pos (400, 20), Size (100, 20)); RA->property.name = "R";
 	GA = new VScrollBar (Pos (400, 50), Size (100, 20)); GA->property.name = "G";
 	BA = new VScrollBar (Pos (400, 80), Size (100, 20)); BA->property.name = "B";
