@@ -279,17 +279,7 @@ public:
 	virtual void DrawPixel(int xoff, int yoff, Color c) = 0;
 	virtual Color GetPixelAt (int xoff, int yoff) = 0;
 	virtual bool DrawIsReady() = 0;
-
-	float GetColorDistance (Color pixel,Color key) {
-		return SRGB (pixel).distanceFrom (SRGB (key));
-	}
-	 
-	SRGB GetHue (Color pixel) {
-		SRGB A = SRGB (pixel);
-		int Amin =(int) minimum (A.r, A.g, A.b);
-		SRGB AN = SRGB (A.r - Amin, A.g - Amin, A.b - Amin);
-		return AN;
-	}
+	
 
 
 	Color GetPixelResult (Bitmap* Bmp, Pos src, Pos dst) {
@@ -300,11 +290,18 @@ public:
 		SRGB A = pixel;
 		SRGB B = Bmp->bckclr;
 		SRGB C = gfxPixel;
-		float rozdielnost = A.normalizedDistanceFrom (B);
-		
+		//float rozdielnost = (A.normalizedDistanceFrom (B) + 3* A.distanceFrom(B)) / 4;
+		float rozdielnost = A.distanceFrom (B);
 
-		Color potential = C.colorize (A, Bmp->varA).convert();
-		Color c = rozdielnost >= treshold ? pixel:potential ;
+		float backgroundovost = 1 - rozdielnost;
+		//chinese algorithm, haha xD
+		
+		SRGB t1 = Colors::Red;
+		SRGB t2 = Colors::Blue;
+
+
+		Color npixel = C.colorize(t1.colorize (t2, backgroundovost), Bmp->varA).convert();
+		Color c = rozdielnost >= treshold ? pixel : npixel ;
 		return c;
 
 	}

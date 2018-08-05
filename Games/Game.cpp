@@ -86,7 +86,7 @@ void Game::UpdateModel () {
 	A = (int)(RA->value * 255) << 16 | (int)(GA->value * 255) << 8 | (int)(BA->value * 255);
 	SRGB AA = SRGB (A);
 
-	SRGB norm =  Element::draw->GetHue (A);
+	SRGB norm = AA.normalized ();
 	
 	B = norm.r << 16 | norm.g << 8 | norm.b;
 	//B = (int)(RB->value * 255) << 16 | (int)(GB->value * 255) << 8 | (int)(BB->value * 255);
