@@ -283,25 +283,13 @@ public:
 
 
 	Color GetPixelResult (Bitmap* Bmp, Pos src, Pos dst) {
-		float treshold =  Bmp->varB;
-
 		Color pixel = *Bmp->GetPixelPointer (src.x, src.y);
 		Color gfxPixel = this->GetPixelAt (dst.x, dst.y);
 		SRGB A = pixel;
 		SRGB B = Bmp->bckclr;
-		SRGB C = gfxPixel;
 		//float rozdielnost = (A.normalizedDistanceFrom (B) + 3* A.distanceFrom(B)) / 4;
 		float rozdielnost = A.distanceFrom (B);
-
-		float backgroundovost = 1 - rozdielnost;
-		//chinese algorithm, haha xD
-		
-		SRGB t1 = Colors::Red;
-		SRGB t2 = Colors::Blue;
-
-
-		Color npixel = C.colorize(t1.colorize (t2, backgroundovost), Bmp->varA).convert();
-		Color c = rozdielnost >= treshold ? pixel : npixel ;
+		Color c = rozdielnost >= Bmp->bckclr_tre ? pixel : gfxPixel ;
 		return c;
 
 	}
