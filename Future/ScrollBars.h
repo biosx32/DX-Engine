@@ -68,7 +68,7 @@ public:
 		int w = csize;
 		restricted.paint->rectangleBorder (x, y, w,h, Colors::GreenDark, 3);
 
-		string text = sprintfToString ("%s -val: %1.3f", property.name.c_str (), value);
+		string text = sprintfToString ("%s: %1.3f", property.name.c_str (), value);
 
 		int posx = property.GetAbsX () + property.GetSize ().x / 2 - 0.5 * text.size () * property.font->charw * property.fontSize.w;
 		int posy = property.GetAbsY () + property.GetSize ().y / 2 - property.font->charh * property.fontSize.h / 2;
@@ -109,11 +109,13 @@ public:
 		int h = csize; ;
 		int w = size.x / 1.112;
 		restricted.paint->rectangleBorder (x, y, w, h, Colors::GreenDark, 3);
-		string text = sprintfToString ("%s -val: %1.3f", property.name.c_str (), value);
+
+		
+		string text = sprintfToString ("%s: %1.3f", property.name.c_str (), value);
 
 		int posx = property.GetAbsX () + property.GetSize ().x / 2 - 0.5 * text.size () * property.font->charw * property.fontSize.w;
 		int posy = property.GetAbsY () + property.GetSize ().y / 2 - property.font->charh * property.fontSize.h / 2;
-		//PrintText (draw, V2 (posx, posy - size.h / 2), property.font, property.fontSize, text);
+		PrintText (draw, V2 (posx, posy - size.h / 2), property.font, property.fontSize, text);
 		
 
 	}

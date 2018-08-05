@@ -14,11 +14,11 @@ float Radians(float degree) {
 	return MM_PI * deg / 180;
 }
 
-int maximum(float x, float y, float z) {
+float maximum(float x, float y, float z) {
 	return (x > y ? (x > z ? x : z) : (y > z ? y : z));
 }
 
-int minimum(float x, float y, float z) {
+float minimum(float x, float y, float z) {
 	return (x < y ? (x < z ? x : z) : (y < z ? y : z));
 }
 

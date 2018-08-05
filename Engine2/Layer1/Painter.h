@@ -219,7 +219,15 @@ public:
 };
 
 
+class SRGB {
+public:
+    int r, g, b;
+	SRGB (int r, int g, int b): r (r), g (g), b (b) {}
+	SRGB (Color A): r (A >> 16u & 0xFFu),
+		g (A >> 8u & 0xFFu),
+		b (A >> 0u & 0xFFu) {}
 
+};
 
 class Drawer: protected Painter {
 
@@ -283,7 +291,31 @@ public:
 		Color result = D3DCOLOR_XRGB (r1,g1,b1);
 		return result;
 	}
+	 
+	SRGB GetHue (Color pixel) {
+		SRGB A = SRGB (pixel);
+	
 
+		int Amin =(int) minimum (A.r, A.g, A.b);
+		SRGB AN = SRGB (A.r - Amin, A.g - Amin, A.b - Amin);
+		return AN;
+		
+	}
+
+	float GetColorHueSimiliarity (Color pixel, Color key) {
+		int r1 = (pixel >> 16u) & 0xFFu;
+		int g1 = (pixel >> 8u) & 0xFFu;
+		int b1 = (pixel >> 0u) & 0xFFu;
+		int r2 = (key >> 16u) & 0xFFu;
+		int g2 = (key >> 8u) & 0xFFu;
+		int b2 = (key >> 0u) & 0xFFu;
+
+		//if (r1 > g1) {
+	//		if (r1 <)
+//		}
+
+
+	}
 
 	Color GetPixelResult (Bitmap* Bmp, Pos src, Pos dst) {
 		Color pixel = *Bmp->GetPixelPointer (src.x, src.y);

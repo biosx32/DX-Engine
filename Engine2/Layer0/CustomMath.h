@@ -6,6 +6,6 @@ float Radians(float degree);
 float GetSquareDistance1(float a, float b);
 float GetDistance1(float a, float b);
 
-int maximum(float x, float y, float z);
-int minimum(float x, float y, float z);
+float maximum(float x, float y, float z);
+float minimum(float x, float y, float z);
 
