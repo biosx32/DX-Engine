@@ -119,6 +119,7 @@
   <ItemGroup>
     <ClInclude Include="Future.h" />
     <ClInclude Include="Listbox.h" />
+    <ClInclude Include="CubeSelector.h" />
     <ClInclude Include="ScrollBars.h" />
     <ClInclude Include="SelectBox.h" />
     <ClInclude Include="TooFuture\Animation.h" />
@@ -138,7 +139,7 @@
     <ClCompile Include="TooFuture\TrianglePoly.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="TODO.txt" />
+    <None Include="TODO.txt.html" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

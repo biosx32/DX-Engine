@@ -34,7 +34,7 @@
 #include "GameDebug.h"
 #endif
 
-Bitmap TEST("..\\Resources\\advanced.bmp", Colors::Green);
+Bitmap TEST("..\\Resources\\advanced2.bmp", Colors::Green);
 Bitmap* Compress = TEST.GetBitmapPart (0, 0, TEST.width, TEST.height,1);
 
 VScrollBar* VarA = nullptr;

@@ -57,6 +57,9 @@
     <ClInclude Include="TooFuture\Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CubeSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TooFuture\TrianglePoly.cpp">
@@ -70,6 +73,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="TODO.txt" />
+    <None Include="TODO.txt.html" />
   </ItemGroup>
 </Project>
