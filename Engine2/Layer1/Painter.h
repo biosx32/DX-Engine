@@ -227,6 +227,49 @@ public:
 		g (A >> 8u & 0xFFu),
 		b (A >> 0u & 0xFFu) {}
 
+	SRGB normalized () {
+		SRGB color = (*this);
+		int m = (int)minimum (r,g,b);
+		return SRGB (r - m, g - m, b - m);
+	}
+
+	Color convert () {
+		return  r << 16u | g << 8u | b << 0u;
+	}
+
+	float distanceFrom (SRGB B) {
+		SRGB A = (*this);
+
+		float ABr = (abs (A.r - B.r) / 256.0f); //individual distances
+		float ABg = (abs (A.g - B.g) / 256.0f);
+		float ABb = (abs (A.b - B.b) / 256.0f);
+
+		return (ABr + ABg + ABb) / 3; //distance average
+	}
+
+	float normalizedDistanceFrom (SRGB B) {
+		SRGB A = (*this).normalized();
+		B = B.normalized ();
+
+		float ABr = (abs (A.r - B.r) / 256.0f); 
+		float ABg = (abs (A.g - B.g) / 256.0f);
+		float ABb = (abs (A.b - B.b) / 256.0f);
+
+		return (ABr + ABg + ABb) / 2; //divide by two because 
+		                              //when normalized, one is always zero
+	}
+
+
+
+	SRGB colorize (SRGB B, float perc) {
+		float q = 1 - perc;
+		SRGB copy = (*this);
+		copy.r = (B.r *perc + r*q);
+		copy.g = (B.g *perc + g*q);
+		copy.b = (B.b *perc + b*q);
+		return copy;
+	}
+
 };
 
 class Drawer: protected Painter {
@@ -237,98 +280,33 @@ public:
 	virtual Color GetPixelAt (int xoff, int yoff) = 0;
 	virtual bool DrawIsReady() = 0;
 
-	float GetColorSimilarity (Color key, Color pixel) {
-		Color A = key;
-		Color B = pixel;
-
-		int Ar1 = (A >> 16u) & 0xFFu;
-		int Ag1 = (A >> 8u) & 0xFFu;
-		int Ab1 = (A >> 0u) & 0xFFu;
-		int Br1 = (B >> 16u) & 0xFFu;
-		int Bg1 = (B >> 8u) & 0xFFu;
-		int Bb1 = (B >> 0u) & 0xFFu;
-
-		int Anorm = minimum (Ar1,Ag1,Ab1);
-		int Ar2 = Ar1 - Anorm;
-		int Ag2 = Ar1 - Anorm;
-		int Ab2 = Ar1 - Anorm;
-
-		int Bnorm = minimum (Br1,Bg1,Bb1);
-		int Br2 = Br1 - Bnorm;
-		int Bg2 = Br1 - Bnorm;
-		int Bb2 = Br1 - Bnorm;
-
-
-
-		/*float ABr = (abs (Ar2 - Br2) /256.0f);
-		float ABg = (abs (Ag2 - Bg2) /256.0f);
-		float ABb = (abs (Ab2 - Bb2) /256.0f);*/
-
-		float ABr = (abs (Ar1 - Br1) / 256.0f);
-		float ABg = (abs (Ag1 - Bg1) / 256.0f);
-		float ABb = (abs (Ab1 - Bb1) / 256.0f);
-
-	
-		return (3-(ABr+ABg+ABb))/3;
-	}
-
-	Color Colorize (Color primary, Color secondary, float perc) {
-		perc = perc > 1 ? 1 : perc;
-		Color B = secondary, A = primary;
-		int r1 = (A >> 16u) & 0xFFu;
-		int g1 = (A >> 8u) & 0xFFu;
-		int b1 = (A >> 0u) & 0xFFu;
-		int r2 = (B >> 16u) & 0xFFu;
-		int g2 = (B >> 8u) & 0xFFu;
-		int b2 = (B >> 0u) & 0xFFu;
-
-
-		r1 = (r1 * (1 - perc) + r2 * (perc));
-		g1 = (g1 * (1 - perc) + g2 * (perc));
-		b1 = (b1 * (1 - perc) + b2 * (perc));
-		
-
-		Color result = D3DCOLOR_XRGB (r1,g1,b1);
-		return result;
+	float GetColorDistance (Color pixel,Color key) {
+		return SRGB (pixel).distanceFrom (SRGB (key));
 	}
 	 
 	SRGB GetHue (Color pixel) {
 		SRGB A = SRGB (pixel);
-	
-
 		int Amin =(int) minimum (A.r, A.g, A.b);
 		SRGB AN = SRGB (A.r - Amin, A.g - Amin, A.b - Amin);
 		return AN;
-		
 	}
 
-	float GetColorHueSimiliarity (Color pixel, Color key) {
-		int r1 = (pixel >> 16u) & 0xFFu;
-		int g1 = (pixel >> 8u) & 0xFFu;
-		int b1 = (pixel >> 0u) & 0xFFu;
-		int r2 = (key >> 16u) & 0xFFu;
-		int g2 = (key >> 8u) & 0xFFu;
-		int b2 = (key >> 0u) & 0xFFu;
-
-		//if (r1 > g1) {
-	//		if (r1 <)
-//		}
-
-
-	}
 
 	Color GetPixelResult (Bitmap* Bmp, Pos src, Pos dst) {
+		float treshold =  Bmp->varB;
+
 		Color pixel = *Bmp->GetPixelPointer (src.x, src.y);
 		Color gfxPixel = this->GetPixelAt (dst.x, dst.y);
-		float podobnostSBC = GetColorSimilarity(pixel, Bmp->bckclr);
-		float treshold = 1-Bmp->varB;
-
-		Color alt= podobnostSBC <= treshold ? pixel : gfxPixel;
-		Color c = Colorize (alt,gfxPixel,  podobnostSBC* (Bmp->varA) );
+		SRGB A = pixel;
+		SRGB B = gfxPixel;
+		float rozdielnost = A.normalizedDistanceFrom (B);
 		
 
+		//		Color alt= podobnostSBC <= treshold ? pixel : gfxPixel;
+		//	Color c = Colorize (alt,gfxPixel,  podobnostSBC* (Bmp->varA) );
 
-		//Color c = MixPercent (pixel, gfxPixel, 1-ss);
+	//	Color potential = Colorize (pixel, gfxPixel, podobnostSBC);
+		Color c = rozdielnost >= treshold ? gfxPixel : pixel;
 		return c;
 
 	}
