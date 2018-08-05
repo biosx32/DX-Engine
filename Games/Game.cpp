@@ -98,6 +98,7 @@ void Game::UpdateModel () {
 
 	Compress->varA = VarA->value;
 	Compress->varB = VarB->value;
+	Compress->bckclr = A;
 
 }
 

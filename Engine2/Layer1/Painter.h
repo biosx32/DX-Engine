@@ -302,11 +302,8 @@ public:
 		float rozdielnost = A.normalizedDistanceFrom (B);
 		
 
-		//		Color alt= podobnostSBC <= treshold ? pixel : gfxPixel;
-		//	Color c = Colorize (alt,gfxPixel,  podobnostSBC* (Bmp->varA) );
-
-	//	Color potential = Colorize (pixel, gfxPixel, podobnostSBC);
-		Color c = rozdielnost >= treshold ? gfxPixel : pixel;
+		Color potential = A.colorize (B, Bmp->varA).convert();
+		Color c = rozdielnost >= treshold ? potential :pixel ;
 		return c;
 
 	}
