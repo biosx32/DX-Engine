@@ -27,28 +27,8 @@
 #include "ScrollBars.h"
 #include "Bmap.h"
 
-
-
-
-
-Bitmap TEST("..\\Resources\\test_RGB.bmp", Colors::TKEY);
-Bitmap* Compress = TEST.GetBitmapPart (0, 0, TEST.width, TEST.height,1);
-
-VScrollBar* VarA = nullptr;
-HScrollBar* VarB = nullptr;
-
-
-VScrollBar* RA = nullptr;
-VScrollBar* GA = nullptr;
-VScrollBar* BA = nullptr;
-
-
-Color A = Colors::Black;
-
 #define _DEBUG 0
 #include "GameDebug.h"
-
-Label* slabel = nullptr;
 
 void Game::Initialise() {
 	
@@ -57,38 +37,19 @@ void Game::Initialise() {
 		CreateDebugUI ();
 	}
 
-
-	VarA=new VScrollBar (Pos (500, 200), Size (200, 30));
-	VarA->property.name = "VarA";
-	VarA->value = 0.5f;
-	RA = new VScrollBar (Pos (400, 20), Size (100, 20)); RA->property.name = "R";
-	GA = new VScrollBar (Pos (400, 50), Size (100, 20)); GA->property.name = "G";
-	BA = new VScrollBar (Pos (400, 80), Size (100, 20)); BA->property.name = "B";
-	
-
-
 }
 
 void Game::UpdateModel () {
 	Container::FullUpdate ();
-	A = (int)(RA->value * 255) << 16 | (int)(GA->value * 255) << 8 | (int)(BA->value * 255);	
-	Compress->bckclr = A;
-	Compress->bckclr_tre = VarA->value;
-
 }
 
 
 void Game::ComposeFrame() {
+	Container::FullDraw ();
+
 	if (_DEBUG) {
 		UpdateDebugInfo ();
 	}
-
-	
-	Container::FullDraw ();
-	Element::draw->DrawBitmap (Compress, 30, 30, 1, 1);
-
-	Element::draw->paint->rectangle (100, 300, 50, 50, A);
-
 
 }
 
