@@ -31,7 +31,7 @@
 
 
 
-Bitmap TEST("..\\Resources\\advanced.bmp", Colors::Green);
+Bitmap TEST("..\\Resources\\test_RGB.bmp", Colors::TKEY);
 Bitmap* Compress = TEST.GetBitmapPart (0, 0, TEST.width, TEST.height,1);
 
 VScrollBar* VarA = nullptr;
