@@ -14,13 +14,8 @@ public:
 
 public:
   ElementProperty property;
-
-  virtual void AutoUpdate () { SelfUpdate (); Update (); }
   virtual void Draw() = 0;
-
-protected:
-	virtual void Update () = 0;
-	virtual void SelfUpdate () = 0;
+  virtual void Update () = 0;	
 
 
   BaseElement();

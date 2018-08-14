@@ -1,0 +1,51 @@
+<h1 class="center">TODO LIST & CHANGE LOG</h1>
+
+<h4 class="center">*****************************************************************************</h4>
+<h2 style="color: red" , class="center">Important</h2>
+<h4 class="center">*****************************************************************************</h4>
+<style>
+    .center {
+        text-align: center;
+    }
+</style>
+<h3 id="bugfix">- Bugfix</h3>
+     #update mousehelper a podobne data v Windows.cpp<br />
+#Broken checkbox position inheritenace and so...<br />
+FIX BITMAP TRANSPARENCY <br />
+ISSUE - PRESS ONLY WORKING IF MHELPER REFRESH AFTER ALL IS REFRESHED!!! (maybe need to change mhelper refresh line order)<br />
+
+
+<h3>- Add features</h3>
+<li>colorizing bitmaps</li>
+<li>Physics shapes</li>
+<li>
+    <b>Cube selector</b> - size and position elements easily<br />
+    #SCALE BY ORIGIN BY SQUARE BOX AND 9 dots (1 movable)
+</li>
+
+
+<h4 class="center">*****************************************************************************</h4>
+<h2 style="color: blue" class="center">Optional</h2>
+<h4 class="center">*****************************************************************************</h4>
+<h3>- Improve performance</h3>
+
+    #Transparentnost => RGB to Hue (resp. zelenost. resp. zaporne a kladne relativne hodnoty RGB)
+<br />
+Different Scrollbar design
+<br />
+Improve MouseRegion creation, remove from Element?
+<h3>- Extend features</h3>
+
+<h4 class="center">*****************************************************************************</h4>
+<h2 style="color: green" class="center">Changelog</h2>
+<h4 class="center">*****************************************************************************</h4>
+<h3 style="color:red">PROTOTYPE 0.0</h3>
+- Not documented
+<h3 style="color:red">PROTOTYPE 0.1</h3>
+<h2 style="color:green">Added</h2>
+PrintTextAlign function<br />
+GetCenterOf function, which returns center from Pos and Size<br />
+<h2 style="color:darkgoldenrod">Removed</h2>
+PrintText(..., const char* fmt) -> use FormatString() function<br />
+Removed GFXRestDraw, now use GFXDraw constructor with Pos and Size parameters
+<h2 style="color:gray">Improved/fixed</h2>

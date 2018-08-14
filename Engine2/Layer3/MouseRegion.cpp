@@ -4,22 +4,25 @@
 void MouseRegion::Draw ()
 {
 	
-	Color c = (state == MouseState::pressed) ? Colors::Green : Colors::Blue;
-	c = state < 1 ? Colors::Red : c;
+	Color clr = (state == MouseState::pressed) ? Colors::Green : Colors::Blue;
+	clr = state == 0 ? Colors::Red : clr;
 
 	Vector2 pos = parent->property.GetAbs () + offset;
-	Vector2 size = parent->property.GetSize ();
 
-	PrintText (BaseElement::draw, pos, parent->property.font, 0.75, name);
+	if (!const_size) {
+		size = parent->property.GetSize ();
+	}
+	
+	PrintTextAlign (BaseElement::draw, GetCenterOf(pos,size), parent->property.font, 1, ALIGN_VH, name);
 	BaseElement::draw->paint->rectangleBorder (pos.x, pos.y, size.x, size.y, Colors::Red, 2);
 
 	BaseElement::draw->paint->circleBorder (pos.x + size.x / 2,
 		pos.y + size.y / 2,
-		size.x, c, 1);
+		size.x, clr, 1);
 
 	BaseElement::draw->paint->circleBorder (pos.x + size.x / 2,
 		pos.y + size.y / 2,
-		1 * size.x / 3, c, 1);
+		1 * size.x / 3, clr, 1);
 
 	Vector2 lpos =
 		Pos (pos.x + size.x / 2 - BaseElement::DFONT->charw * name.size () / 2,

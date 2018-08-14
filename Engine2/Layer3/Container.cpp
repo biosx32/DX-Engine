@@ -18,7 +18,7 @@ void Container::FullDraw ()
 void Container::FullUpdate ()
 {
 		
-		for (int i = 0; i < Elements.size (); i++) { Elements.at (i)->AutoUpdate(); }
+		for (int i = 0; i < Elements.size (); i++) { Elements.at (i)->Update(); }
 		BaseElement::io->UpdateIO ();
 }
 

@@ -4,15 +4,8 @@
 
 void Element::Draw ()
 {
-	DrawName ();
-	DrawBorder ();
-	DrawCorners ();
+	DrawBasic ();
 }
-
-void Element::SelfUpdate ()
-{
-}
-
 
 void Element::Update ()
 {
@@ -24,11 +17,9 @@ void Element::DrawName ()
 
 	Vector2 pos = property.GetAbs ();
 	Vector2 size = property.size;
+	V2 center = GetCenterOf (pos, size);
+	PrintTextAlign (draw, center, property.font, property.fontSize, ALIGN_VH, property.name);
 
-	Vector2 lpos =
-		Pos (pos.x + size.x / 2 - DFONT->charw * property.name.size () / 2,
-			pos.y + size.y / 2 - DFONT->charh / 2);
-	PrintText (draw, lpos, property.font, 0.75, property.name);
 }
 
 void
@@ -54,4 +45,5 @@ Element::DrawCorners ()
 	draw->paint->rectangle (of + pos.x + size.x, of + pos.y, fl, fl, Colors::Blue);
 	draw->paint->rectangle (
 		of + pos.x + size.x, of + pos.y + size.y, fl, fl, Colors::Blue);
+	mregion->Draw ();
 }

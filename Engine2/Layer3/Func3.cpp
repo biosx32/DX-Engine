@@ -1,6 +1,25 @@
 #include "Static.h"
 #include "Func3.h"
 
+
+
+
+void PrintTextAlign (GFXDraw* draw, V2 pos, BitmapFont* font, Size scale, char Align, std::string text) {
+	V2 newpos = pos;
+	if (Align & ALIGN_V) { 
+		int forOneLine = scale.y * font->charh;
+		int lineCount =1 + CharacterCountInString (text, '\n');
+		newpos.y -= (forOneLine * lineCount)/2;
+	}
+	if (Align & ALIGN_H) {
+		int forOneChar = scale.x * font->charw;
+		int textSize = text.length ();
+		newpos.x -=  (forOneChar * textSize)/2;
+	}
+	PrintText (draw, newpos, font, scale, text);
+}
+
+
 void PrintText(GFXDraw* draw, Vector2 pos, BitmapFont* font, Size scale, std::string text) {
 	
 	double rel_pos_x = 0;
@@ -38,15 +57,4 @@ void PrintText(GFXDraw* draw, Vector2 pos, BitmapFont* font, Size scale, std::st
 		rel_pos_x += charw;
 	}
 
-}
-
-void PrintText (GFXDraw * draw, Vector2 pos, BitmapFont* font, Size scale, const char *fmt, ...) {
-	va_list args;
-	va_start (args, fmt);
-	const int size = 32768;
-	char buffer[size];
-	int rc = vsnprintf (buffer, size - 1, fmt, args);
-	std::string text = string (buffer);
-	va_end (args);
-	PrintText (draw, pos, font, scale, text);
 }

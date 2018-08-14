@@ -1,6 +1,21 @@
 #include "Static.h"
 #include "Func.h"
 
+
+int LongestLineInString (std::string src) {
+	int ctr = 0;
+	int top = 0;
+	int max = src.size ();
+	for (int i = 0; i <max; i++) {
+		if (src.at (i) == '\n' || i + 1 == max) {
+			if (ctr > top) { top = ctr; }
+			ctr = 0;
+		}
+	}
+
+	return top;
+}
+
 std::string LabelizeVector(Vector2 vec, std::string label)
 {
 
@@ -13,6 +28,27 @@ std::string LabelizeVector(Vector2 vec, std::string label)
 int CharacterCountInCString(const char* src, char chr, int max) {
 	int counter = 0;
 	for (int i = 0; i < max; i++) {
+		const char* j = &src[i];
+		if (*j == chr) counter++;
+	}
+
+	return counter;
+}
+
+std::string FormatString (const char* fmt, ...) {
+	va_list args;
+	va_start (args, fmt);
+	const int size = 32768;
+	char buffer[size];
+	int rc = vsnprintf (buffer, size - 1, fmt, args);
+	std::string text = std::string (buffer);
+	va_end (args);
+	return text;
+}
+
+int CharacterCountInString (std::string src, char chr) {
+	int counter = 0;
+	for (int i = 0; i < src.length(); i++) {
 		const char* j = &src[i];
 		if (*j == chr) counter++;
 	}
@@ -151,4 +187,9 @@ void Swap(int*a, int*b) {
 	int d = *a;
 	*a = *b;
 	*b = d;
+}
+
+V2 GetCenterOf (V2 pos, V2 size)
+{
+	return V2 (pos.x + size.x / 2, pos.y + size.y / 2);
 }

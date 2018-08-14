@@ -6,13 +6,17 @@
 #include <sstream>
 #include "Vectors.h"
 #include <time.h>
+int LongestLineInString (std::string src);
 std::string LabelizeVector(Vector2 vec, std::string label);
 
 int CharacterCountInCString(const char* src, char chr, int max);
+std::string FormatString (const char * fmt, ...);
+int CharacterCountInString (std::string src, char chr);
 int File_bytes(FILE* p_file);
 wchar_t *CSTR_to_LSTR(const char* charArray);
 void Swap(int*a, int*b);
 
+V2 GetCenterOf (V2 pos, V2 size);
 
 int GetNextLineOffset(FILE* file);
 bool HasNextLn(FILE* file);

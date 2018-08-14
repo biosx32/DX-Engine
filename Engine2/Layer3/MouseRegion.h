@@ -14,17 +14,28 @@ namespace MouseState {
 
 class MouseRegion {
 public:
+	BaseElement * parent = nullptr;
+	Vector2 offset, size;
+	string name = "MOUSE_REGION";
+
+public:
 
 	int state = 0;
 	int click_count = 0;
 	void(*function)() = nullptr;
-	BaseElement* parent = nullptr;
-	Vector2 offset;
-	string name = "MRE";
+	
 
-	MouseRegion(BaseElement* parent, Vector2 offset):parent(parent), offset(offset){
-
+	MouseRegion (BaseElement* parent, Vector2 offset):parent (parent), offset (offset) {
 	}
+
+	MouseRegion (BaseElement* parent, Vector2 offset, V2 size):parent (parent), 
+		offset (offset),size(size), const_size(true) {
+	}
+
+
+protected:
+	bool const_size = false;
+
 
 
 public:

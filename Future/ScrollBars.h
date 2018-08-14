@@ -48,7 +48,7 @@ public:
 	void Draw () override {
 		Vector2 pos = property.GetAbs ();
 		Vector2 size = property.GetSize ();
-		GFXRestDraw restricted (draw->gfx, pos, size);
+		GFXDraw restricted (draw->gfx, pos, size);
 
 		for (int i = 1; i <= size.x; i++) {
 			if (!(i % 4)) {
@@ -89,7 +89,7 @@ public:
 	void Draw () override {
 		Vector2 pos = property.GetAbs ();
 		Vector2 size = property.GetSize ();
-		GFXRestDraw restricted (draw->gfx, pos, size);
+		GFXDraw restricted (draw->gfx, pos, size);
 
 		for (int i = 1; i <= size.y; i++) {
 			if (!(i % 4)) {

@@ -23,7 +23,7 @@ public:
 	Color* GetPixelPointer(int x, int y);
 
 public:
-	float bckclr_tre = 0.001f;
+	float bckclr_tre = 0.00001f;
 	Color bckclr = 0;
 	bool keying_enabled = false;
 

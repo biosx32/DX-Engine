@@ -5,7 +5,7 @@ struct ElementProperty
 {
 public:
   int ID = -1;
-  std::string name = "DEFAULT";
+  std::string name = "UNDEFINED_NAME";
   bool enabled = true;
   bool visible = true;
   BitmapFont* font = &DOS_BLACK;

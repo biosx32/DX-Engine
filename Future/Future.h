@@ -20,7 +20,7 @@ public:
 				ReadPixel = src->pixels[yoff* src->width + xoff];
 
 				if (ReadPixel->state & pxstate::checked) {
-					paint->DrawPixel(xoff + fx, yoff + fy, 0xAC0000);
+					paint->DrawPixel(xoff + fx, yoff + fy, 0xFFAC0000);
 				}
 
 				else if (ReadPixel->state & pxstate::background) {
