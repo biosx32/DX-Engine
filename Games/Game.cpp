@@ -60,5 +60,7 @@ void Game::ComposeFrame() {
 	Element::draw->paint->rectangleBorder (120 - csize/2,120 - vsize/2,csize,vsize,Colors::Red,3);
 	PrintTextAlign (Element::draw, 120, &DOS_BLACK_MINI, 1, ALIGN_VH, mystring);
 	Element::draw->paint->ellipse (30, 30, 30, 30, ColorARGB (127, 255, 0, 0));
+	Element::draw->paint->ellipse (50, 50, 30, 30, ColorARGB (127, 255, 0, 0));
+
 }
 
