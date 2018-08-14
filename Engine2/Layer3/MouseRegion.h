@@ -53,6 +53,9 @@ public:
 		return click_count > 0 ? click_count-- : false;
 	}
 
+	bool isLockedByParent () {
+		return BaseElement::io->mhelper->IsMouseUsedBy (parent->property.ID);
+	}
 
 };
 

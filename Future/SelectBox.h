@@ -6,7 +6,7 @@ class SelectBox: public Element  {
 public:
 
 	SelectBox(Vector2 pos, V2 size): Element(pos,size) {
-		property.name = "BLAK";
+		property.name = "SELECT_BOX";
 	}
 
 	Vector2 GetStart() {
@@ -26,7 +26,10 @@ public:
 	}
 
 	void Update () {
-
+		Element::Update ();
+		if (mregion->isLockedByParent()) {
+			property.SetRel (Element::io->mhelper->position - GetSize()/2);
+		}
 	}
 
 	void Draw() {
@@ -36,6 +39,7 @@ public:
 		}
 		this->DrawBorder();
 		this->DrawCorners();
+		mregion->Draw ();
 		
 	
 	}

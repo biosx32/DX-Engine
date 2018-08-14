@@ -28,7 +28,7 @@
 #include "Bmap.h"
 #include "Func.h"
 
-#define _DEBUG 0
+#define _DEBUG 1
 #include "GameDebug.h"
 #include "SelectBox.h"
 SelectBox* A = nullptr;
