@@ -318,6 +318,7 @@ public:
 			int srcy = y / my;
 			for (int x = 0; x < draw_width; x++) {
 				int srcx = x / mx;
+
 				Color result = GetPixelResult (Bmp, V2 (srcx, srcy), V2 (xoff + x, yoff + y));
 				DrawPixel (xoff + x, yoff + y, result);
 
@@ -372,13 +373,7 @@ public:
 
 	Color GetPixelAt (int xoff, int yoff) {
 		if (isValid (xoff, yoff)) {
-			SRGB abc =SRGB( gfx->GetPixel (xoff, yoff));
-			SRGB b = 0;
-			b.a = abc.a;
-			b.r = abc.r;
-			b.g = abc.g;
-			b.b = abc.b;
-			return b.toColor ();
+			return gfx->GetPixel (xoff, yoff);
 		}
 		return Colors::Red;
 	}

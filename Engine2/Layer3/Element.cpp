@@ -45,5 +45,5 @@ Element::DrawCorners ()
 	draw->paint->rectangle (of + pos.x + size.x, of + pos.y, fl, fl, Colors::Blue);
 	draw->paint->rectangle (
 		of + pos.x + size.x, of + pos.y + size.y, fl, fl, Colors::Blue);
-	mregion->Draw ();
+
 }

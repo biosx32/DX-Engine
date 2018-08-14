@@ -5,33 +5,32 @@
 class SelectBox: public Element  {
 public:
 
-	SelectBox(Vector2 p1): Element(p1, Vector2(50,50)) {
-	
+	SelectBox(Vector2 pos, V2 size): Element(pos,size) {
+		property.name = "BLAK";
 	}
 
 	Vector2 GetStart() {
-		Vector2 pos = GetAbs();
+		Vector2 pos = property.GetAbs ();
+		Vector2 size = property.GetSize ();
 		return Vector2(min(pos.x, pos.x + size.x),
 			           min(pos.y, pos.y + size.y));
 	}
 	Vector2 GetSize() {
-		Vector2 pos = GetAbs();
-		return Vector2(abs(size.x), abs(size.y));
+		return property.GetSize ();
 	}
 	Vector2 GetEnd() {
-		Vector2 pos = GetAbs();
+		Vector2 pos = property.GetAbs ();
+		Vector2 size = property.GetSize ();
 		return Vector2(max(pos.x, pos.x + size.x),
 			max(pos.y, pos.y + size.y));
 	}
 
-	void Update() {}
+	void Update () {
 
-	void Update(Vector2 p2){
-		Vector2 pos = GetAbs();
-		size = p2 - pos;
 	}
 
 	void Draw() {
+		Vector2 size = property.GetSize ();
 		if (size.x == 0 && size.y == 0) {
 			return;
 		}

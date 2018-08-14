@@ -30,8 +30,8 @@
 
 #define _DEBUG 0
 #include "GameDebug.h"
-
-
+#include "SelectBox.h"
+SelectBox* A = nullptr;
 void Game::Initialise() {
 	
 	if (_DEBUG) {
@@ -39,6 +39,7 @@ void Game::Initialise() {
 		CreateDebugUI ();
 	}
 	new Element (330, 330);
+	A = new SelectBox (30, 200);
 }
 
 void Game::UpdateModel () {

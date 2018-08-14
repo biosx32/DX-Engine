@@ -24,7 +24,7 @@
 
 #define SCREENWIDTH 800
 #define SCREENHEIGHT 600
-#define FILLVALUE 0xFF
+#define FILLVALUE 0x33
 
 struct Sprite
 {

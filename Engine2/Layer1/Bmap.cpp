@@ -81,7 +81,7 @@ Bitmap::Bitmap(const char * FileName)
 
 		for (int j = 0; j < width; j++) {
 			unsigned char* datachar = &linedata[j * 3];
-			temp_color = ColorARGB(0,*(2 + datachar), *(1 + datachar), *(0 + datachar));
+			temp_color = ColorARGB(255,*(2 + datachar), *(1 + datachar), *(0 + datachar));
 			Color* data_destination = GetPixelPointer(j, i);
 			*data_destination = temp_color;
 		}
