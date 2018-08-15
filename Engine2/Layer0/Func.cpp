@@ -1,16 +1,26 @@
 #include "Static.h"
 #include "Func.h"
 
-
+bool IsPrintableCharacter (char p) {
+	return p >= 32 && p <= 126;
+}
 int LongestLineInString (std::string src) {
 	int ctr = 0;
 	int top = 0;
 	int max = src.size ();
+
 	for (int i = 0; i <max; i++) {
-		if (src.at (i) == '\n' || i + 1 == max) {
+		if (src.at(i) != '\n') {
+			ctr += 1;
+		}
+		
+	    if (src.at (i) == '\n' || i + 1 == max) {
 			if (ctr > top) { top = ctr; }
 			ctr = 0;
 		}
+	
+
+		
 	}
 
 	return top;
@@ -44,6 +54,10 @@ std::string FormatString (const char* fmt, ...) {
 	std::string text = std::string (buffer);
 	va_end (args);
 	return text;
+}
+
+int NewLineCountInString (std::string src) {
+	return CharacterCountInString (src, '\n');
 }
 
 int CharacterCountInString (std::string src, char chr) {

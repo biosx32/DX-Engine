@@ -17,7 +17,7 @@ extern clock_t begin;
 extern const int UpdatesPerSecond;
 extern const int FrameLimit;
 extern const int UpdateEveryN;
-extern int FPS_result;
+extern float FPS_result;
 
 extern IOgroup * io;
 extern GFXDraw * draw ;

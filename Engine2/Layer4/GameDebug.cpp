@@ -8,7 +8,7 @@ clock_t begin = -1;
 const int UpdatesPerSecond = 1;
 const int FrameLimit = 60;
 const int UpdateEveryN = 60 / UpdatesPerSecond;
-int FPS_result = 0;
+float FPS_result = 0;
 
 
 IOgroup* io = nullptr;
@@ -55,20 +55,11 @@ UpdateHeader()
   ProgramNameLabel->property.SetRel(
     Pos(SCREENWIDTH / 2 - magic, SCREENHEIGHT - DOS_WHITE.charh));
 
-  magic = FRA_label->property.font->charw * FRA_label->text.length() + 5;
-  FRA_label->property.SetRel(Pos(SCREENWIDTH - magic, 0));
-
-  magic = FPS_label->property.font->charw * FPS_label->text.length() + 5;
-  FPS_label->property.SetRel(Pos(SCREENWIDTH - magic, 25));
-
-  magic = EPS_label->property.font->charw * EPS_label->text.length() + 5;
-  EPS_label->property.SetRel(Pos(SCREENWIDTH - magic, 50));
-
-  magic = MousePosLabel->property.font->charw * MousePosLabel->text.length() / 2 + 5;
-  MousePosLabel->property.SetRel(Pos(SCREENWIDTH - magic, 75));
-
-  magic = LIDLabel->property.font->charw * LIDLabel->text.length() + 5;
-  LIDLabel->property.SetRel(Pos(SCREENWIDTH - magic, 125));
+  FRA_label->property.SetRel(Pos(SCREENWIDTH - FRA_label->GetWidth(), 0));
+  FPS_label->property.SetRel(Pos(SCREENWIDTH - FPS_label->GetWidth (), 25));
+  EPS_label->property.SetRel(Pos(SCREENWIDTH - EPS_label->GetWidth(), 50));
+  MousePosLabel->property.SetRel(Pos(SCREENWIDTH - MousePosLabel->GetWidth(), 75));
+  LIDLabel->property.SetRel(Pos(SCREENWIDTH - LIDLabel->GetWidth(), 125));
 }
 
 void
@@ -86,13 +77,13 @@ UpdateFrameInfo()
     begin = end;
   }
   float FPS_real_elapsed = FPS_elapsed_from_last_update / UpdateEveryN;
-  FPS_result = UpdateEveryN / FPS_elapsed_from_last_update;
-  FPS_result = FPS_result > 1000 ? 0 : FPS_result;
+  FPS_result = 1/FPS_real_elapsed;
+  FPS_result = FPS_result > 1000 ? NAN : FPS_result;
   _GLOB_FPS = FPS_result;
   FRA_label->SetText("Frame: %02d", FPS_frame);
   EPS_label->SetText("EPS: %0.4f", FPS_real_elapsed);
   FPS_label->SetText("FPS: %2.3f", FPS_result);
-  MousePosLabel->SetText("MouseX: %3.0f + %4.0f\nMouseY: %3.0f + %4.0f\0",
+  MousePosLabel->SetText("MouseX: %3.0f(+%4.0f)\nMouseY: %3.0f(+%4.0f)",
                         io->mhelper->position.x,
                         io->mhelper->mouseDelta.x,
                         io->mhelper->position.y,

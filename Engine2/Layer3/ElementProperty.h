@@ -4,8 +4,11 @@
 struct ElementProperty
 {
 public:
+
   int ID = -1;
   std::string name = "UNDEFINED_NAME";
+  std::string class_name = "ELEMENT";
+  std::string text = name;
   bool enabled = true;
   bool visible = true;
   BitmapFont* font = &DOS_BLACK;
@@ -30,10 +33,17 @@ public:
   Vector2 GetRel() { return position; }
   Vector2 GetSize() { return size; }
 
+  
+
 protected:
   ElementProperty* parent = nullptr;
   Pos position;
 
 
 protected:
+	void SetName () {}
+	void SetClassName(std::string cname){
+		class_name = cname;
+		name = FormatString ("%s%d", cname, ID);
+	}
 };

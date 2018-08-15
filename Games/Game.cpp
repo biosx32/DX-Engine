@@ -32,14 +32,17 @@
 #include "GameDebug.h"
 #include "SelectBox.h"
 SelectBox* A = nullptr;
+
+
 void Game::Initialise() {
 	
 	if (_DEBUG) {
 		SetDebugIO (io);
 		CreateDebugUI ();
 	}
-	new Element (330, 330);
+
 	A = new SelectBox (30, 200);
+	new Label (V2 (200, 200));
 }
 
 void Game::UpdateModel () {

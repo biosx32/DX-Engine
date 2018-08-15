@@ -28,7 +28,7 @@ public:
 	void Update () {
 		Element::Update ();
 		if (mregion->isLockedByParent()) {
-			property.SetRel (Element::io->mhelper->position - GetSize()/2);
+			property.SetRel (property.GetAbs() +Element::io->mhelper->mouseDelta);
 		}
 	}
 

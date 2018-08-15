@@ -8,13 +8,13 @@ class Element : public BaseElement
 {
 public:
 
-	MouseRegion* mregion = nullptr;
+	Element () {
+	}
 
 	Element (Vector2 pos, Vector2 size)
 	{
 		property.SetRel (pos);
 		property.SetSize (size);
-		mregion = new MouseRegion (static_cast<BaseElement*>(this), 0);
 		
 	}
 

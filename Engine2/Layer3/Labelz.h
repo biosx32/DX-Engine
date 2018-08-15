@@ -8,17 +8,24 @@ using std::string;
 
 class Label: public Element {
 public:
-	string text = "THANOS_SNAPS_HIS_FINGERS";
-
-	Label(Vector2 position, const char* newtext)
+	Label (Vector2 position)
+		: Element (position, 0)
+		
+	{
+		SetClassName ("Label");
+	}
+	Label(Vector2 position, std::string text)
           : Element (position,0)
           , text(newtext)
-        {}
+        {
+		SetClassName ("Label");
+		}
 
         Label(Vector2 position, const char* newtext, BitmapFont* NFONT)
           : Element (position,0)
           , text(newtext)
         {
+			SetClassName ("Label");
 			property.font = (NFONT);
 		}
 
@@ -39,4 +46,11 @@ public:
 		text = string(buffer);
 		va_end(args);
 	}
+
+	int GetWidth () {
+		return property.font->charw * LongestLineInString(text);
+	}int GetHeight () {
+		return property.font->charh * (1+CharacterCountInString (text, '\n'));
+	}
+
 };

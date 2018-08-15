@@ -7,11 +7,6 @@ void Element::Draw ()
 	DrawBasic ();
 }
 
-void Element::Update ()
-{
-	mregion->Update ();
-}
-
 void Element::DrawName ()
 {
 

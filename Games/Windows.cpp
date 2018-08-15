@@ -24,7 +24,7 @@
 
 static KeyboardServer kServ;
 static MouseServer mServ;
-
+HCURSOR hCurs1 = LoadCursor (NULL, IDC_CROSS);
 LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 {
     switch( msg )
@@ -93,6 +93,10 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 			break;
 		case WM_MOUSEWHEEL:
 			mServ.OnMouseWheel((short)HIWORD(wParam));
+			break;
+		case WM_SETCURSOR:
+			
+			SetCursor (hCurs1);
 			break;
 		// ************ END MOUSE MESSAGES ************ //
     }
