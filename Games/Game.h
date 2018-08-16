@@ -20,10 +20,7 @@
  ******************************************************************************************/
 #pragma once
 
-#include "Element.h"
-#include "Layer0.h"
-#include "GlobalObjects.h"
-#include "IOGroup.h"
+#include "Layer4.h"
 
 
 class Game
@@ -47,9 +44,8 @@ public:
 		mouse(mServer)
 	{
 		io = new IOgroup(&gfx, &mouse, &kbd);
-		Element::io = io;
-		Element::draw = new GFXDraw (io->gfx);
-		Element::DFONT = &DOS_WHITE;
+		BaseElement::io = io;
+		BaseElement::draw = new GFXDraw (io->gfx);
 
 		srand((unsigned int)time(NULL));
 		Initialise();

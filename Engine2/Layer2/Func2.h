@@ -1,8 +1,6 @@
 #pragma once
-#include <string>
-#include "Vectors.h"
+#include "Layer1.h"
 #include "Painter.h"
-#include "BitmapFont.h"
 
 
 #define ALIGN_V  (1)

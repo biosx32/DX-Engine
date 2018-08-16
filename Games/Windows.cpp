@@ -19,7 +19,6 @@
  *	along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************************/
 
-#include "Static.h"
 #include "Game.h"
 
 static KeyboardServer kServ;

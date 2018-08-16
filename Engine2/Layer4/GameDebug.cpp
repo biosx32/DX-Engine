@@ -1,6 +1,5 @@
-#include "Static.h"
+
 #include "GameDebug.h"
-#include "Global0.h"
 
 int FPS_frame = 0;
 float FPS_elapsed_from_last_update = 0;
@@ -23,15 +22,14 @@ Label* ProgramNameLabel = nullptr;
 
 void
 CreateDebugUI(){
-	FRA_label  = new Label(Pos (0, 24), "NO_FRAME_UPDATE", &DOS_BLACK_MINI);
-	FPS_label  = new Label(Pos (0, 0), "NO_FPS_UPDATE", &DOS_BLACK_MINI);
-	EPS_label  = new Label(Pos (0, 48), "NO_EPS_UPDATE", &DOS_BLACK_MINI);
-	MousePosLabel = new Label(Pos (0, 72), "NO_MOUSE_UPDATE", &DOS_BLACK_MINI);
-	LIDLabel         = new Label(Pos (0, 99), "NO_LID_UPDATE", &DOS_BLACK_MINI);
+	FRA_label  = new Label(Pos (0, 24), "NO_FRAME_UPDATE");
+	FPS_label  = new Label(Pos (0, 0), "NO_FPS_UPDATE");
+	EPS_label  = new Label(Pos (0, 48), "NO_EPS_UPDATE");
+	MousePosLabel = new Label(Pos (0, 72), "NO_MOUSE_UPDATE");
+	LIDLabel         = new Label(Pos (0, 99), "NO_LID_UPDATE");
 	ProgramNameLabel = new Label(Pos (SCREENWIDTH / 2 - 170 / 2,
 		SCREENHEIGHT - DOS_WHITE.charh),
-		__PROG__HEADER_,
-		&DOS_WHITE);
+		__PROG__HEADER_);
 }
 
 void
@@ -45,7 +43,7 @@ void
 UpdateHeader()
 {
   int magic =
-    ProgramNameLabel->property.font->charw * ProgramNameLabel->text.length() / 2;
+    ProgramNameLabel->property.font->charw * ProgramNameLabel->property.text.length() / 2;
   draw->paint->line(0,
                     SCREENHEIGHT - DOS_WHITE.charh * 1.05,
                     SCREENWIDTH,
@@ -79,16 +77,16 @@ UpdateFrameInfo()
   float FPS_real_elapsed = FPS_elapsed_from_last_update / UpdateEveryN;
   FPS_result = 1/FPS_real_elapsed;
   FPS_result = FPS_result > 1000 ? NAN : FPS_result;
-  _GLOB_FPS = FPS_result;
-  FRA_label->SetText("Frame: %02d", FPS_frame);
-  EPS_label->SetText("EPS: %0.4f", FPS_real_elapsed);
-  FPS_label->SetText("FPS: %2.3f", FPS_result);
-  MousePosLabel->SetText("MouseX: %3.0f(+%4.0f)\nMouseY: %3.0f(+%4.0f)",
+
+  FRA_label->SetText(FSTR("Frame: %02d", FPS_frame));
+  EPS_label->SetText(FSTR ("EPS: %0.4f", FPS_real_elapsed));
+  FPS_label->SetText(FSTR ("FPS: %2.3f", FPS_result));
+  MousePosLabel->SetText(FSTR ("MouseX: %3.0f(+%4.0f)\nMouseY: %3.0f(+%4.0f)",
                         io->mhelper->position.x,
                         io->mhelper->mouseDelta.x,
                         io->mhelper->position.y,
-                        io->mhelper->mouseDelta.y);
-  LIDLabel->SetText("LOCKED ID: %4d", io->mhelper->lockedobject);
+                        io->mhelper->mouseDelta.y));
+  LIDLabel->SetText(FSTR("LOCKED ID: %4d", io->mhelper->lockedobject));
 }
 
 

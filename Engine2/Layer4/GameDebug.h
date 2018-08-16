@@ -1,10 +1,6 @@
 #pragma once
 
-#include <time.h>
-#include "Element.h"
-#include "Labelz.h"
-#include "Painter.h"
-#include "Global0.h"
+#include "Layer3.h"
 
 #ifndef  __PROG__HEADER_
 #define __PROG__HEADER_ ("Sprite Saver")

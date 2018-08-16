@@ -1,12 +1,10 @@
 #pragma once
-#include "Vectors.h"
-#include "Element.h"
+#include "Layer4.h"
 
-class SelectBox: public Element  {
+class SelectBox: public BaseElement, public HasDefaultMregion  {
 public:
 
-	SelectBox(Vector2 pos, V2 size): Element(pos,size) {
-		property.name = "SELECT_BOX";
+	SelectBox(Vector2 pos, V2 size): BaseElement ("SelectBox",pos,size), HasDefaultMregion(this) {
 	}
 
 	Vector2 GetStart() {
@@ -26,9 +24,9 @@ public:
 	}
 
 	void Update () {
-		Element::Update ();
+		mregion->Update ();
 		if (mregion->isLockedByParent()) {
-			property.SetRel (property.GetAbs() +Element::io->mhelper->mouseDelta);
+			property.SetRel (property.GetAbs() + BaseElement::io->mhelper->mouseDelta);
 		}
 	}
 

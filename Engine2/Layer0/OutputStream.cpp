@@ -1,4 +1,4 @@
-#include "Static.h"
+
 #include "OutputStream.h"
 
 SpecialCode msgbox = { 1 };

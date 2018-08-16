@@ -1,9 +1,5 @@
 #pragma once
-#include <string>
-#include "Func.h"
-#include <vector>
-#include "OutputStream.h"
-#include "KeyData.h"
+#include "Layer0.h"
 using std::vector;
 class ConfigFile {
 

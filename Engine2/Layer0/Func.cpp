@@ -1,4 +1,4 @@
-#include "Static.h"
+
 #include "Func.h"
 
 bool IsPrintableCharacter (char p) {
@@ -50,7 +50,21 @@ std::string FormatString (const char* fmt, ...) {
 	va_start (args, fmt);
 	const int size = 32768;
 	char buffer[size];
-	int rc = vsnprintf (buffer, size - 1, fmt, args);
+	//int rc = vsnprintf (buffer, size - 1, fmt, args);
+	vsnprintf (buffer, size - 1, fmt, args);
+	std::string text = std::string (buffer);
+	va_end (args);
+	return text;
+}
+
+std::string FSTR (const char * fmt, ...)
+{
+	va_list args;
+	va_start (args, fmt);
+	const int size = 32768;
+	char buffer[size];
+	//int rc = vsnprintf (buffer, size - 1, fmt, args);
+	vsnprintf (buffer, size - 1, fmt, args);
 	std::string text = std::string (buffer);
 	va_end (args);
 	return text;
@@ -62,7 +76,7 @@ int NewLineCountInString (std::string src) {
 
 int CharacterCountInString (std::string src, char chr) {
 	int counter = 0;
-	for (int i = 0; i < src.length(); i++) {
+	for (unsigned int i = 0; i < src.length(); i++) {
 		const char* j = &src[i];
 		if (*j == chr) counter++;
 	}

@@ -1,4 +1,3 @@
-#include "Static.h"
 #include "MouseRegion.h"
 
 void MouseRegion::Draw ()
@@ -25,8 +24,8 @@ void MouseRegion::Draw ()
 		1 * size.x / 3, clr, 1);
 
 	Vector2 lpos =
-		Pos (pos.x + size.x / 2 - BaseElement::DFONT->charw * name.size () / 2,
-			pos.y + size.y / 2 - BaseElement::DFONT->charh / 2);
+		Pos (pos.x + size.x / 2 - DFONT->charw * name.size () / 2,
+			pos.y + size.y / 2 - DFONT->charh / 2);
 	
 
 

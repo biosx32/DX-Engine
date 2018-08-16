@@ -1,7 +1,4 @@
-#include "Static.h"
-#include "Func3.h"
-
-
+#include "Func2.h"
 
 
 void PrintTextAlign (GFXDraw* draw, V2 pos, BitmapFont* font, Size scale, char Align, std::string text) {

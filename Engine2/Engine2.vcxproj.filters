@@ -7,34 +7,36 @@
     <ClCompile Include="Layer0\Func.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
-    <ClCompile Include="Layer2\GlobalObjects.cpp">
-      <Filter>CPP</Filter>
-    </ClCompile>
     <ClCompile Include="Layer0\OutputStream.cpp">
-      <Filter>CPP</Filter>
-    </ClCompile>
-    <ClCompile Include="Layer0\Static.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
     <ClCompile Include="Layer1\Bmap.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
-    <ClCompile Include="Layer3\Func3.cpp" />
     <ClCompile Include="Layer3\Container.cpp" />
     <ClCompile Include="Layer3\MouseRegion.cpp" />
     <ClCompile Include="Layer3\BaseElement.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
-    <ClCompile Include="Layer3\Element.cpp" />
     <ClCompile Include="Layer1\Bmap.cpp" />
     <ClCompile Include="Layer4\GameDebug.cpp" />
+    <ClCompile Include="Layer3\BaseElementExtend.cpp" />
+    <ClCompile Include="Layer2\GlobalObjects.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Layer0\Layer0.cpp" />
+    <ClCompile Include="Layer0\LayerChilli.cpp" />
+    <ClCompile Include="Layer4\Layer4.cpp" />
+    <ClCompile Include="Layer3\Layer3.cpp" />
+    <ClCompile Include="Layer2\Layer2.cpp" />
+    <ClCompile Include="Layer1\Layer1.cpp" />
+    <ClCompile Include="Layer2\Func2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Layer0\Colors.h" />
     <ClInclude Include="Layer0\CustomMath.h" />
     <ClInclude Include="Layer0\Func.h" />
     <ClInclude Include="Layer0\KeyData.h" />
-    <ClInclude Include="Layer0\MouseHelper.h" />
     <ClInclude Include="Layer0\Vectors.h" />
     <ClInclude Include="Layer1\BitmapArray.h" />
     <ClInclude Include="Layer1\BitmapFont.h" />
@@ -56,16 +58,10 @@
       <Filter>Elements</Filter>
     </ClInclude>
     <ClInclude Include="Layer3\Labelz.h" />
-    <ClInclude Include="Layer2\GlobalObjects.h" />
     <ClInclude Include="Layer0\Layer0.h" />
     <ClInclude Include="Layer1\Layer1.h" />
     <ClInclude Include="Layer0\OutputStream.h" />
-    <ClInclude Include="Layer2\Layer2.h" />
     <ClInclude Include="Layer3\Layer3.h" />
-    <ClInclude Include="Layer0\Static.h" />
-    <ClInclude Include="Layer1\Painter.h" />
-    <ClInclude Include="Layer3\Func3.h" />
-    <ClInclude Include="Layer0\IOgroup.h" />
     <ClInclude Include="Layer3\MouseRegion.h">
       <Filter>Elements</Filter>
     </ClInclude>
@@ -75,13 +71,21 @@
     <ClInclude Include="Layer3\BaseElement.h">
       <Filter>Elements</Filter>
     </ClInclude>
-    <ClInclude Include="Layer3\Element.h" />
     <ClInclude Include="Layer3\MouseRegionVisual.h" />
     <ClInclude Include="Layer1\ConfigFile.h" />
     <ClInclude Include="Layer1\Bmap.h" />
     <ClInclude Include="Layer1\BitmapArray.h" />
     <ClInclude Include="Layer1\BitmapFont.h" />
     <ClInclude Include="Layer4\GameDebug.h" />
+    <ClInclude Include="Layer1\MouseHelper.h" />
+    <ClInclude Include="Layer1\IOgroup.h" />
+    <ClInclude Include="Layer2\GlobalObjects.h" />
+    <ClInclude Include="Layer2\Painter.h" />
+    <ClInclude Include="Layer0\LayerChilli.h" />
+    <ClInclude Include="Layer2\Layer2.h" />
+    <ClInclude Include="Layer4\Layer4.h" />
+    <ClInclude Include="Layer2\Func2.h" />
+    <ClInclude Include="Layer3\HasDefaultMregion.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CPP">
@@ -93,5 +97,9 @@
     <Filter Include="DISABLED">
       <UniqueIdentifier>{8830f876-d316-4311-8f4c-713e2c911354}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Layer0\Layer0.html" />
+    <None Include="Layer1\Layer1.html" />
   </ItemGroup>
 </Project>

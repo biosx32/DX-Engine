@@ -1,4 +1,3 @@
-#include "Static.h"
 #include "Container.h"
 
 std::vector<BaseElement*> Container::Elements;

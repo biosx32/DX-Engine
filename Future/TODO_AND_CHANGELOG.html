@@ -1,54 +1,205 @@
-<h1 class="center">TODO LIST & CHANGE LOG</h1>
+<head>
+    <style>
 
-<h4 class="center">*****************************************************************************</h4>
-<h2 style="color: red" , class="center">Important</h2>
-<h4 class="center">*****************************************************************************</h4>
-<style>
-    .center {
-        text-align: center;
-    }
-</style>
-<h3 id="bugfix">- Bugfix</h3>
-Locking mouse for every mouseregion, not parent
-     #update mousehelper a podobne data v Windows.cpp<br />
-#Broken checkbox position inheritenace and so...<br />
-FIX BITMAP TRANSPARENCY <br />
-ISSUE - PRESS ONLY WORKING IF MHELPER REFRESH AFTER ALL IS REFRESHED!!! (maybe need to change mhelper refresh line order)<br />
+        .version {
+            outline-style: solid;
+            outline-width: 1px;
+            padding: 2px;
+        }
+
+        body {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .thinbox {
+            outline: solid;
+            outline-width: 1px;
+            padding: 8px;
+        }
+
+    
+
+    
+
+        .heading {
+            outline: solid;
+            outline-width: 3px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .headingbox {
+            outline: solid;
+            outline-width: 3px;
+        }
+
+        .headingbox * {
+            color: black;
+        }
+
+            .headingbox > h2 {
+                padding: 3px;
+                font-family: Cambria;
+            }
 
 
-<h3>- Add features</h3>
-<li>colorizing bitmaps</li>
-<li>Physics shapes</li>
-<li>
-    <b>Cube selector</b> - size and position elements easily<br />
-    #SCALE BY ORIGIN BY SQUARE BOX AND 9 dots (1 movable)
-</li>
+     
+
+        .headingbox div li {
+            font-family: Verdana;
+            font-size: 14px;
+   
+        }
+            .headingbox div li:before {
+                font-family: 'Bauhaus 93';
+                font-size: 16px;
+            }
+
+        .version div.add li:before {
+            color: green;
+            content: "ADDED ";
+    
+        }
+            
+
+        .version div.rem li:before {
+            color: red;
+            content: "REMOVED ";
+        }
+
+        .version div.imp li:before {
+            color: cornflowerblue;
+            content: "IMPROVED ";
+        }
+
+        .version div.ren li:before {
+            color: gray;
+            content: "CHANGED ";
+        }
+
+        .fix li:before{
+            content: "FIX BUG: ";
+            color:red;
+        }
+
+        .addfeat li:before{
+            content: "ADD FEATURE: ";
+            color:green;
+        }
+        .toimprove li:before{
+            content: "IMPROVE: ";
+            color:blue;
+        }
+
+  
+    </style>
+
+</head>
+<body>
+
+    <h1 style="text-align:center">TODO LIST & CHANGE LOG</h1>
 
 
-<h4 class="center">*****************************************************************************</h4>
-<h2 style="color: blue" class="center">Optional</h2>
-<h4 class="center">*****************************************************************************</h4>
-<h3>- Improve performance</h3>
 
-    #Transparentnost => RGB to Hue (resp. zelenost. resp. zaporne a kladne relativne hodnoty RGB)
-<br />
-Different Scrollbar design
-<br />
-Improve MouseRegion creation, remove from Element?
-<h3>- Extend features</h3>
+    <div class="headingbox" style="color:red;">
+        <h2 class="heading" style="color: red;background-color:lightgray;">TODO IMPORTANT</h2>
+        <!-- TODO FIX BUGS-->
+        <div class="fix">
+            <li>
+                Locking mouse for every mouseregion, not parent
+                #update mousehelper a podobne data v Windows.cpp
+            </li>
+            <li> #Broken checkbox position inheritenace and so...                       </li>
+            <li> FIX BITMAP TRANSPARENCY </li>
+            <li>
+                ISSUE - PRESS ONLY WORKING IF MHELPER REFRESH AFTER ALL IS REFRESHED!!!
+                (maybe need to change mhelper refresh line order)
+            </li>
+        </div>
+        <!-- TODO ADD FEATURES-->
+        <div class="addfeat">
+            <li>
+                <b>Cube selector</b> - size and position elements easily -SCALE BY ORIGIN BY SQUARE BOX AND 9 dots (1 movable)
+            </li>
+            <li>colorizing bitmaps, effects like photoshop, paint, etc...</li>
+            <li>Physics shapes and collisions</li>
 
-<h4 class="center">*****************************************************************************</h4>
-<h2 style="color: green" class="center">Changelog</h2>
-<h4 class="center">*****************************************************************************</h4>
-<h3 style="color:red">PROTOTYPE 0.0</h3>
-- Not documented
-<h3 style="color:red">PROTOTYPE 0.1</h3>
-<h2 style="color:green">Added</h2>
-PrintTextAlign function<br />
-GetCenterOf function, which returns center from Pos and Size<br />
-<h2 style="color:darkgoldenrod">Removed</h2>
-PrintText(..., const char* fmt) -> use FormatString() function<br />
-Removed GFXRestDraw, now use GFXDraw constructor with Pos and Size parameters
-Removed one default region for every Element
-<h2 style="color:gray">Improved/fixed</h2>
-Merged BaseElement and Element together
+
+        </div>
+
+
+    </div>
+
+    <div class="headingbox" style="color:blue">
+        <h2 class="heading" style="color: blue;background-color:lightgray;">TODO OTHER</h2>
+        <!-- TODO IMPROVE-->
+        <div class="toimprove">
+            <li>#Transparentnost => RGB to Hue (resp. zelenost. resp. zaporne a kladne relativne hodnoty RGB)</li>
+            <li>Different Scrollbar design</li>
+            <li>Improve MouseRegion creation, remove from Element?</li>
+            <li>Remove unnecessary heap allocations, use heap only for large chunks of data</li>
+            <li>Use Smart Pointers? -> Do not use if you don't participate on object lifecycle</li>
+        </div>
+    </div>
+
+
+    <div class="headingbox" style="color:green">
+        <h2 class="heading" style="color: green;background-color:lightgray;">CHANGELOG</h2>
+        <h2 style="color:red">PROTOTYPE 0.0</h2>
+        <div class="version">
+            <p>- Not documented</p>
+        </div>
+
+
+        <!--
+<h2 style="color:red">PROTOTYPE 0.1</h2>
+<div class="version">
+    <div class="add">
+        <li>nothing</li>
+    </div>
+    <div class="rem">
+
+    </div>
+    <div class="imp">
+
+    </div>
+    <div class="ren">
+
+    </div>
+</div>
+    -->
+
+
+        <h2 style="color:red">PROTOTYPE 0.1</h2>
+        <div class="version">
+            <div class="add">
+                <li>PrintTextAlign function</li>
+                <li>GetCenterOf function, which returns center from Pos and Size</li>
+                <li>FormatString has now alias FSTR</li>
+            </div>
+            <div class="rem">
+                <li>PrintText(..., const char* fmt) -> use FormatString() function</li>
+                <li>GFXRestDraw, now use GFXDraw constructor with Pos and Size parameters</li>
+                <li>
+                    one default region for every Element,
+                    use variable or inherit from HasDefaultMregion (haha, just for this build)
+                </li>
+                <li>text variables from labels and buttons, use property.text instead</li>
+
+            </div>
+            <div class="imp">
+                <li>Merged BaseElement and Element together</li>
+                <li>IDs for elements now count for every class name separately</li>
+            </div>
+            <div class="ren">
+                <li>Func3 file is now Func2</li>
+                <li>Some are not listed</li>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+

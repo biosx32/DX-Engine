@@ -119,18 +119,12 @@
   <ItemGroup>
     <ClInclude Include="Future.h" />
     <ClInclude Include="Listbox.h" />
-    <ClInclude Include="CubeSelector.h" />
     <ClInclude Include="ScrollBars.h" />
     <ClInclude Include="SelectBox.h" />
     <ClInclude Include="TooFuture\Animation.h" />
     <ClInclude Include="TooFuture\FloodfillMap.h" />
-    <ClInclude Include="TooFuture\Group.h" />
-    <ClInclude Include="TooFuture\GUI.h" />
-    <ClInclude Include="TooFuture\GuiElementManager.h" />
-    <ClInclude Include="TooFuture\ItemManager.h" />
     <ClInclude Include="TooFuture\PixelMap.h" />
     <ClInclude Include="TooFuture\TrianglePoly.h" />
-    <ClInclude Include="TooFuture\UserInterface.h" />
     <ClInclude Include="TooFuture\VectorSpritesheet.h" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-#include "Static.h"
+
 #include "GlobalObjects.h"
 
 BitmapFont DOS_BLACK_MINI("..\\Resources\\Fonts\\DOS_BLACK_MINI.bin");

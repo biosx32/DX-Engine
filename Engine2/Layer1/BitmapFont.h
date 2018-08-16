@@ -1,6 +1,5 @@
 ﻿#pragma once
-#include <vector>
-#include "BitmapArray.h"
+#include "Layer0.h"
 #include "ConfigFile.h"
 
 class BitmapFont {
@@ -32,6 +31,7 @@ public:
 				int srcY = y * src_hsize;
 
 				Bitmap* newBitmap = src->GetBitmapPart(srcX, srcY, src_wsize, src_hsize, compress_size);
+				newBitmap->bckclr = bkclr;
 				this->characters[y*wcount + x] = newBitmap;
 			}
 		}
@@ -97,7 +97,7 @@ public:
 			loadsize = std::stof(sloadsize,0);
 			
 			char location[512] = {};
-			int namelen = strlen(image_src_info);
+//			int namelen = strlen(image_src_info);
 			const char* abc = image_src_info;
 			int lastbs = FindLastChar(abc, '\\');
 			int fullLen;

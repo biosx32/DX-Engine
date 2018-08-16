@@ -1,17 +1,15 @@
 #pragma once
-#include "Element.h"
-#include "GlobalObjects.h"
+#include "Layer2.h"
+#include "BaseElement.h"
+#include "HasDefaultMregion.h"
 
-class TextBox : public MouseRegion {
+class TextBox : public BaseElement, public HasDefaultMregion {
 public:
-	BitmapFont* DFONT = &DOS_BLACK;
 	int wmax;
-	char text[4096] = "DEFAULT_TEXT";
-	int textsize = 0;
 	bool isSelected = false;
-	TextBox(Vector2 pos, int wmax) : MouseRegion(pos, Size(0,0)), wmax(wmax) {
-		this->size = Size(wmax * DFONT->charw, DFONT->charh);
-		this->text[wmax] = 0;
+	TextBox(Vector2 pos, int wmax): BaseElement("TextBox", pos, 0), HasDefaultMregion(this) {
+		this->wmax = wmax;
+		
 	}
 
 	/*bool isHover()  {
@@ -23,7 +21,7 @@ public:
 
 	void UpdateIsSelected(IOgroup* iog) {
 		if (iog->mouse->LeftIsPressed()) {
-			if (isHover()) {
+			if (mregion->isHover()) {
 				isSelected = true;
 				iog->kbd->FlushBuffers();
 			}
@@ -42,23 +40,26 @@ public:
 		if (test != 0) {
 
 			if (test == VK_BACK) {
-				textsize = textsize > 0 ? textsize - 1 : 0;
+				property.text.pop_back ();
 			}
 			else if (testc >= 33 && testc < 127) {
-				text[textsize++] = testc;
+				property.text += testc;
 			}
 			else if (test == VK_SPACE) {
-				text[textsize++] = ' ';
+				property.text += ' ';
 			}
 
 			kbd->FlushBuffers();
 		}
-		textsize = textsize <= wmax ? textsize : wmax;
-		this->text[textsize] = 0;
+
+		property.text = property.text.substr (0,wmax);
 
 	}
 
 	void Update() override {
+		property.size = (wmax * property.font->charw, property.font->charh);
+		mregion->size = property.size;
+
 		UpdateIsSelected(io);
 		if (isSelected) {
 			UpdateCheckKey(io);
@@ -68,13 +69,14 @@ public:
 
 	void Draw() override {
 		const int border = 2;
-		Vector2 pos = GetAbs ();
+		Vector2 pos = property.GetAbs ();
+		V2 size = property.GetSize ();
 		draw->paint->rectangle(pos.x - border, pos.y, size.x + border * 2, size.y, Colors::White);
 		draw->paint->rectangleBorder(pos.x - border, pos.y, size.x + border*2, size.y, Colors::Black, border);
-		PrintText(pos.x, pos.y, DFONT, text);
+		PrintText(draw, pos, property.font,property.fontSize, property.text);
 		if (this->isSelected) {
-			int x = textsize * DFONT->charw;
-			draw->paint->rectangle(x + pos.x, pos.y, 4, DFONT->charh, Colors::Red);
+			int x = property.text.size() * property.font->charw;
+			draw->paint->rectangle(x + pos.x, pos.y, 4, property.font->charh, Colors::Red);
 		}
 	
 	}

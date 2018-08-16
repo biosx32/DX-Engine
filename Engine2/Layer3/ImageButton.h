@@ -77,14 +77,14 @@ public:
 	void Draw() override {
 		Vector2 pos = property.GetAbs();
 		if (autosize) {
-			int txtsize = text.size() > 1 ? text.size() : 2;
+			int txtsize = property.text.size() > 1 ? property.text.size() : 2;
 			property.size = Vector2(DFONT->charw *txtsize * 1.25, DFONT->charh*1.5);
 		}
-		int textWidth = text.size() * DFONT->charw;
+		int textWidth = property.text.size() * DFONT->charw;
 		int textY = pos.y + property.size.y / 2 - DFONT->charh / 2;
                 int textX = pos.x + (property.size.x - textWidth) / 2;
 
 		this->DrawImage();
-		PrintText(draw, Pos(textX,textY), property.font, property.fontSize, text);
+		PrintText(draw, Pos(textX,textY), property.font, property.fontSize, property.text);
 	}
 };

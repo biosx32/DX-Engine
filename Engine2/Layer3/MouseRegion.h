@@ -1,7 +1,7 @@
 #pragma once
-#include "Vectors.h"
+#include "Layer2.h"
 #include "BaseElement.h"
-#include "Func3.h"
+
 
 namespace MouseState {
 	enum Type
@@ -15,6 +15,7 @@ namespace MouseState {
 class MouseRegion {
 public:
 	BaseElement * parent = nullptr;
+	BitmapFont* DFONT = &DOS_BLACK;
 	Vector2 offset, size;
 	string name = "MOUSE_REGION";
 

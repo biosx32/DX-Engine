@@ -27,37 +27,19 @@
     <ClInclude Include="SelectBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TooFuture\UserInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TooFuture\TrianglePoly.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TooFuture\PixelMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TooFuture\GuiElementManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TooFuture\GUI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TooFuture\Group.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TooFuture\FloodfillMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TooFuture\ItemManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TooFuture\VectorSpritesheet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TooFuture\Animation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CubeSelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

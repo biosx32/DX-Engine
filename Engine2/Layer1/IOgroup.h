@@ -1,5 +1,5 @@
 #pragma once
-#include "Static.h"
+#include "Layer0.h"
 #include "MouseHelper.h"
 
 struct IOgroup {
@@ -16,6 +16,10 @@ public:
 	IOgroup(D3DGraphics* pgfx, MouseClient* pmouse, KeyboardClient* pkbd) :
 		gfx(pgfx), mouse(pmouse), kbd(pkbd),
 		mhelper(new MouseHelper(pmouse)) {
+	}
+
+	~IOgroup () {
+		delete mhelper;
 	}
 
 };

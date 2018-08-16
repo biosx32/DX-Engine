@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Bmap.h"
-#include "Vectors.h"
+#include "Layer0.h"
 
 class BitmapArray {
 public:

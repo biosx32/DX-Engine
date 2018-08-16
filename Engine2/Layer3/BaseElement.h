@@ -1,8 +1,7 @@
 #pragma once
 
+#include "Layer2.h"
 #include "ElementProperty.h"
-#include "IOgroup.h"
-#include "Painter.h"
 #include <map>
 
 class BaseElement
@@ -13,16 +12,23 @@ public:
 public:
   static GFXDraw* draw;
   static IOgroup* io;
-  static BitmapFont* DFONT;
 
 public:
   ElementProperty property;
-  virtual void Draw() = 0;
-  virtual void Update () = 0;	
+  virtual void Draw () { _DrawSimple (); } //default drawing, can be overriden
+  virtual void Update () = 0;
 
+public:
+	BaseElement (std::string name);
+	BaseElement (std::string classname, V2 pos, Vector2 size);
+	void _DrawSimple () { DrawName (); DrawBorder (); DrawCorners (); }
 
-  BaseElement(std::string classname);
-  virtual void __InitName () = 0;
+	virtual ~BaseElement ()= 0{}
+
+protected:
+	void DrawName ();
+	void DrawBorder ();
+	void DrawCorners ();
 };
 
 #include "Container.h"

@@ -1,9 +1,5 @@
 #pragma once
-#include <math.h>
-#include <stdio.h>
-#include "Colors.h"
-#include "OutputStream.h"
-#include "Func.h"
+#include "Layer0.h"
 
 class Bitmap {
 
@@ -18,7 +14,7 @@ public:
 public:
 	int width, height;
 	Color* data;
-
+	std::unique_ptr<Color> datas;
 	int pixelcount() { return width * height; }
 	Color* GetPixelPointer(int x, int y);
 

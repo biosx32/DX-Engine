@@ -1,9 +1,5 @@
 #pragma once
-#include "Colors.h"
-#include "Bmap.h"
-#include "BitmapFont.h"
-#include <string>
-#include "Global0.h"
+#include "Layer1.h"
 
 
 #define TXT_BUFFER_SIZE 4096
@@ -117,8 +113,6 @@ public:
 		int r = (0.5f + width) / 2;
 		for (int i = 0; i < r; i++) {
 			int off = -r / 2 + i;
-			int oss = -r / 2;
-			int ose = r;
 
 			line (x1 + off, y1, x2 + off, y2, c);
 			line (x1, y1 + off, x2, y2 + off, c);
@@ -309,8 +303,6 @@ public:
 		if (!DrawIsReady ()) { return; }
 		if (!(mx > 0 && my > 0)) { return; }
 
-		int width = Bmp->width;
-		int height = Bmp->height;
 		int draw_width = Bmp->width * mx;
 		int draw_height = Bmp->height * my;
 

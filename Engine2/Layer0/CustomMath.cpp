@@ -1,4 +1,3 @@
-#include "Static.h"
 #include "CustomMath.h"
 
 float GetSquareDistance1(float a, float b) {

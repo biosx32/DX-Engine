@@ -1,35 +1,36 @@
 #pragma once
-#include "Element.h"
+#include "BaseElement.h"
 #include "GlobalObjects.h"
 #include "MouseRegion.h"
+#include "HasDefaultMregion.h"
 
-class CheckBox : public Element
+class CheckBox : public BaseElement, public HasDefaultMregion
 {
 public:
 	bool checked = false;
 	static const int radius = 12;
-	std::string text = "";
+
 
 	void Toggle() {
 		checked = !checked;
 	}
 
 	virtual void Update () {
-		Element::Update ();
-	
-	}
-
-	virtual void SelfUpdate () {
 		if (mregion->GetClick ()) {
 			Toggle ();
 		}
 	}
 
+	virtual void SelfUpdate () {
+	
+	}
+
 	CheckBox(Vector2 position, string text): 
-		Element(position, radius * 2), text(text)
+		BaseElement("Checkbox",position, radius * 2),HasDefaultMregion(this)
 	{
-		property.name = "Some checkbox";
 		property.fontSize = .85f;
+		property.text = text;
+
 	}
 
 
@@ -54,7 +55,8 @@ public:
 
 	
 		
-		PrintText(draw, Pos(pos.x + radius * 2.34, pos.y + radius - property.font->charh*property.fontSize.h/2 ), property.font,property.fontSize, text);
+		PrintText(draw, Pos(pos.x + radius * 2.34, pos.y + radius - property.font->charh*property.fontSize.h/2 ), 
+			property.font,property.fontSize, property.text);
 	}
 
 

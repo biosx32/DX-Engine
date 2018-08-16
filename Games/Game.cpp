@@ -19,17 +19,10 @@
  *	along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************************/
 
-#include "Static.h"
-#include "Container.h"
+
 #include "Game.h"
-#include "ColorButton.h"
-#include "CheckBox.h"
-#include "ScrollBars.h"
-#include "Bmap.h"
-#include "Func.h"
 
 #define _DEBUG 1
-#include "GameDebug.h"
 #include "SelectBox.h"
 SelectBox* A = nullptr;
 
@@ -61,10 +54,10 @@ void Game::ComposeFrame() {
 	std::string mystring = "AAA\nBBB";
 	int csize = DOS_BLACK_MINI.charw * mystring.length();
 	int vsize = DOS_BLACK_MINI.charh * (1+CharacterCountInString (mystring, '\n'));
-	Element::draw->paint->rectangleBorder (120 - csize/2,120 - vsize/2,csize,vsize,Colors::Red,3);
-	PrintTextAlign (Element::draw, 120, &DOS_BLACK_MINI, 1, ALIGN_VH, mystring);
-	Element::draw->paint->ellipse (30, 30, 30, 30, ColorARGB (127, 255, 0, 0));
-	Element::draw->paint->ellipse (50, 50, 30, 30, ColorARGB (127, 255, 0, 0));
+	BaseElement::draw->paint->rectangleBorder (120 - csize/2,120 - vsize/2,csize,vsize,Colors::Red,3);
+	PrintTextAlign (BaseElement::draw, 120, &DOS_BLACK_MINI, 1, ALIGN_VH, mystring);
+	BaseElement::draw->paint->ellipse (30, 30, 30, 30, ColorARGB (127, 255, 0, 0));
+	BaseElement::draw->paint->ellipse (50, 50, 30, 30, ColorARGB (127, 255, 0, 0));
 
 }
 

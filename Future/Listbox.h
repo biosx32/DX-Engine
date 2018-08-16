@@ -1,5 +1,5 @@
 #pragma once
-#include "Static.h"
+
 #include "Vectors.h"
 #include "GlobalObjects.h"
 #include "MouseRegion.h"

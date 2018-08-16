@@ -17,10 +17,10 @@ public:
                                              Colors::Black,
                                              2);
 
-		int textWidth = text.size() * DFONT->charw;
+		int textWidth = property.GetSize().x * DFONT->charw;
                 int textY = pos.y + property.size.y / 2 - DFONT->charh / 2;
                 int textX = pos.x + (property.size.x - textWidth) / 2;
-		PrintText (draw, Pos (textX, textY), property.font, property.fontSize, text);
+		PrintText (draw, Pos (textX, textY), property.font, property.fontSize, property.text);
 
 	}
 

@@ -6,11 +6,14 @@
 #include <sstream>
 #include "Vectors.h"
 #include <time.h>
+
+
 int LongestLineInString (std::string src);
 std::string LabelizeVector(Vector2 vec, std::string label);
 
 int CharacterCountInCString(const char* src, char chr, int max);
 std::string FormatString (const char * fmt, ...);
+std::string FSTR (const char* fmt, ...);
 int CharacterCountInString (std::string src, char chr);
 int File_bytes(FILE* p_file);
 wchar_t *CSTR_to_LSTR(const char* charArray);
