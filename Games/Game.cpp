@@ -70,19 +70,19 @@ void Game::ComposeFrame() {
 	BaseElement::draw->paint->ellipse (30, 30, 30, 30, ColorARGB (127, 255, 0, 0));
 	BaseElement::draw->paint->ellipse (50, 50, 30, 30, ColorARGB (127, 255, 0, 0));
 	
-	if (b) {
-		BaseElement::draw->paint->rectangleBorder (10, 300, b->width, b->height, Colors::Red, 2);
-		BaseElement::draw->DrawBitmap (b, 10, 300);
-	}
 	
-	if (clickcount > 0) {
+	
+	if (1) {
 		clickcount--;
 		if (b) { delete b; }
-		b = Bitmap::CreateScreenshot (BaseElement::io->gfx, A->GetStart (), A->GetSize ().toAbs());
+		b = Bitmap::CreateScreenshot (BaseElement::io->gfx, A->GetStart (), A->GetSize ().toAbs(),2);
 		b->bckclr_tre = 0;
 		b->keying_enabled = false;
 	}
 	
-	
+	if (b) {
+		BaseElement::draw->DrawBitmap (b, A->GetStart ().x, A->GetStart ().y);
+	}
+	A->Draw ();
 }
 

@@ -25,7 +25,7 @@ Bitmap * Bitmap::GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT, float 
 
 }
 
-Bitmap * Bitmap::CreateScreenshot (D3DGraphics * gfx, V2 pos, V2 size)
+Bitmap * Bitmap::CreateScreenshot (D3DGraphics * gfx, V2 pos, V2 size, float m)
 {
 	Bitmap* part = new Bitmap (size.x, size.y, Colors::Black);
 	int ymin = pos.y; if (ymin < 0) ymin = 0; if (ymin >= SCREENHEIGHT) ymin = SCREENHEIGHT - 1;
@@ -40,7 +40,11 @@ Bitmap * Bitmap::CreateScreenshot (D3DGraphics * gfx, V2 pos, V2 size)
 		}
 
 	}
-
+	if (m!=1.0f) {
+		Bitmap* ppart = part->GetBitmapPart (0, 0, size.x, size.y, m);
+		delete part;
+		part = ppart;
+	}
 
 	return part;
 }
