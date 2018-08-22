@@ -157,7 +157,7 @@ D3DCOLOR D3DGraphics::GetPixel( int x,int y )
 	assert( y >= 0 );
 	assert( x < SCREENWIDTH );
 	assert( y < SCREENHEIGHT );
-	return pSysBuffer[ x + SCREENWIDTH * y ];
+	return (0xFF << 24) | pSysBuffer[ x + SCREENWIDTH * y ];
 }
 
 void D3DGraphics::BeginFrame()

@@ -27,19 +27,22 @@ Bitmap * Bitmap::GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT, float 
 
 Bitmap * Bitmap::CreateScreenshot (D3DGraphics * gfx, V2 pos, V2 size)
 {
-	Bitmap* fullScreen = new Bitmap (SCREENWIDTH, SCREENHEIGHT, Colors::Black);
+	Bitmap* part = new Bitmap (size.x, size.y, Colors::Black);
+	int ymin = pos.y; if (ymin < 0) ymin = 0; if (ymin >= SCREENHEIGHT) ymin = SCREENHEIGHT - 1;
+	int xmin = pos.x; if (xmin < 0) xmin = 0; if (xmin >= SCREENWIDTH) xmin = SCREENWIDTH - 1;
+	int ymax = pos.y + size.y; if (ymax < 0) ymax = 0; if (ymax >= SCREENHEIGHT) ymax = SCREENHEIGHT - 1;
+	int xmax = pos.x + size.x; if (xmax < 0) xmax = 0; if (xmax >= SCREENWIDTH) xmax = SCREENWIDTH - 1;
 
-	for (int y = 0; y < SCREENHEIGHT; y++) {
-		for (int x = 0; x < SCREENWIDTH; x++) {
-			*fullScreen->GetPixelPointer (x, y) = (0xFF << 24)|gfx->GetPixel (x, y);
+
+	for (int y = 0; y < ymax-ymin; y++) {
+		for (int x = 0; x < xmax-xmin; x++) {
+			*part->GetPixelPointer (x, y) = gfx->GetPixel (x+xmin, y+ymin);
 		}
 
 	}
 
-	//Bitmap* part = fullScreen->GetBitmapPart (pos.x, pos.y, size.x, size.y);
 
-	//delete fullScreen;
-	return fullScreen;
+	return part;
 }
 
 Color * Bitmap::GetPixelPointer(int x, int y)

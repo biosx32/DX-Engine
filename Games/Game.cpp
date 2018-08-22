@@ -78,7 +78,7 @@ void Game::ComposeFrame() {
 	if (clickcount > 0) {
 		clickcount--;
 		if (b) { delete b; }
-		b = Bitmap::CreateScreenshot (BaseElement::io->gfx, A->GetStart (), A->GetSize ());
+		b = Bitmap::CreateScreenshot (BaseElement::io->gfx, A->GetStart (), A->GetSize ().toAbs());
 		b->bckclr_tre = 0;
 		b->keying_enabled = false;
 	}
