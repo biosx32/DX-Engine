@@ -25,6 +25,23 @@ Bitmap * Bitmap::GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT, float 
 
 }
 
+Bitmap * Bitmap::CreateScreenshot (D3DGraphics * gfx, V2 pos, V2 size)
+{
+	Bitmap* fullScreen = new Bitmap (SCREENWIDTH, SCREENHEIGHT, Colors::Black);
+
+	for (int y = 0; y < SCREENHEIGHT; y++) {
+		for (int x = 0; x < SCREENWIDTH; x++) {
+			*fullScreen->GetPixelPointer (x, y) = (0xFF << 24)|gfx->GetPixel (x, y);
+		}
+
+	}
+
+	//Bitmap* part = fullScreen->GetBitmapPart (pos.x, pos.y, size.x, size.y);
+
+	//delete fullScreen;
+	return fullScreen;
+}
+
 Color * Bitmap::GetPixelPointer(int x, int y)
 {
 	{ return (x >= 0 && y >= 0 && x < width && y < height) ? &this->data[y * width + x] : nullptr; }

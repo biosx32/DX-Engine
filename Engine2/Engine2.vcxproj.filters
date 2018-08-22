@@ -71,7 +71,6 @@
     <ClInclude Include="Layer3\BaseElement.h">
       <Filter>Elements</Filter>
     </ClInclude>
-    <ClInclude Include="Layer3\MouseRegionVisual.h" />
     <ClInclude Include="Layer1\ConfigFile.h" />
     <ClInclude Include="Layer1\Bmap.h" />
     <ClInclude Include="Layer1\BitmapArray.h" />
@@ -85,7 +84,7 @@
     <ClInclude Include="Layer2\Layer2.h" />
     <ClInclude Include="Layer4\Layer4.h" />
     <ClInclude Include="Layer2\Func2.h" />
-    <ClInclude Include="Layer3\HasDefaultMregion.h" />
+    <ClInclude Include="Layer3\AutoMouseRegion.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CPP">

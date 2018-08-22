@@ -2,9 +2,9 @@
 #include "BaseElement.h"
 #include "GlobalObjects.h"
 #include "MouseRegion.h"
-#include "HasDefaultMregion.h"
+#include "AutoMouseRegion.h"
 
-class CheckBox : public BaseElement, public HasDefaultMregion
+class CheckBox : public BaseElement, public AutoMouseRegion
 {
 public:
 	bool checked = false;
@@ -26,7 +26,7 @@ public:
 	}
 
 	CheckBox(Vector2 position, string text): 
-		BaseElement("Checkbox",position, radius * 2),HasDefaultMregion(this)
+		BaseElement("Checkbox",position, radius * 2),AutoMouseRegion(this)
 	{
 		property.fontSize = .85f;
 		property.text = text;
@@ -45,7 +45,7 @@ public:
 			draw->paint->line(pos.x, pos.y, pos.x + radius * 2-1, pos.y + radius * 2-1 , Colors::White,1);
 			draw->paint->line(pos.x, pos.y + radius * 2-1, pos.x + radius * 2 -1, pos.y , Colors::White,1);
 		}
-		if (mregion->state > MouseState::none) {
+		if (mregion->statesave > MouseState::none) {
 			int bit = radius * 0.45;
 			draw->paint->rectangle (pos.x + bit, pos.y + bit, radius*2 - bit*1.5, radius * 2 - bit*1.6, Colors::Green);
 		}

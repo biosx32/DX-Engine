@@ -16,9 +16,10 @@ void Container::FullDraw ()
 }
 void Container::FullUpdate ()
 {
-		
-		for (int i = 0; i < Elements.size (); i++) { Elements.at (i)->Update(); }
-		BaseElement::io->UpdateIO ();
+	
+	for (int i = 0; i < Elements.size (); i++) { Elements.at (i)->Update(); }
+	BaseElement::io->mhelper->Refresh ();
+	BaseElement::io->mhelper->RefreshLock ();
 }
 
 

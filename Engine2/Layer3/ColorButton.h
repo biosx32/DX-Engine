@@ -25,7 +25,7 @@ public:
 	}
 
 	Color GetStateColor() {
-		switch (mregion->state) {
+		switch (mregion->statesave) {
 		case MouseState::none:
 			return Colors::GrayLightLight;
 

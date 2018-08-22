@@ -112,10 +112,8 @@
             </li>
             <li> #Broken checkbox position inheritenace and so...                       </li>
             <li> FIX BITMAP TRANSPARENCY </li>
-            <li>
-                ISSUE - PRESS ONLY WORKING IF MHELPER REFRESH AFTER ALL IS REFRESHED!!!
-                (maybe need to change mhelper refresh line order)
-            </li>
+            <li> All element default drawing is now centered</li>
+            <li>stack elements don't work</li>
         </div>
         <!-- TODO ADD FEATURES-->
         <div class="addfeat">
@@ -125,7 +123,7 @@
             <li>colorizing bitmaps, effects like photoshop, paint, etc...</li>
             <li>Physics shapes and collisions</li>
 
-
+            <li>Objects like cubeselector, to matipulate scene objects in game editor</li>
         </div>
 
 
@@ -140,6 +138,7 @@
             <li>Improve MouseRegion creation, remove from Element?</li>
             <li>Remove unnecessary heap allocations, use heap only for large chunks of data</li>
             <li>Use Smart Pointers? -> Do not use if you don't participate on object lifecycle</li>
+            <li>bitmap indexes</li>
         </div>
     </div>
 
@@ -183,7 +182,7 @@
                 <li>GFXRestDraw, now use GFXDraw constructor with Pos and Size parameters</li>
                 <li>
                     one default region for every Element,
-                    use variable or inherit from HasDefaultMregion (haha, just for this build)
+                    use variable or inherit from AutoMouseRegion (haha, just for this build)
                 </li>
                 <li>text variables from labels and buttons, use property.text instead</li>
 

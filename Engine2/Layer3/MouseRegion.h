@@ -14,23 +14,26 @@ namespace MouseState {
 
 class MouseRegion {
 public:
+	static int _IDC;
 	BaseElement * parent = nullptr;
 	BitmapFont* DFONT = &DOS_BLACK;
 	Vector2 offset, size;
 	string name = "MOUSE_REGION";
+	int ID;
 
 public:
 
-	int state = 0;
+	int statesave = 0;
 	int click_count = 0;
-	void(*function)() = nullptr;
-	
+	void (*function)() = nullptr;
 
-	MouseRegion (BaseElement* parent, Vector2 offset):parent (parent), offset (offset) {
+
+	MouseRegion (BaseElement* parent, Vector2 offset): parent (parent), offset (offset), ID (_IDC++) {
 	}
 
-	MouseRegion (BaseElement* parent, Vector2 offset, V2 size):parent (parent), 
-		offset (offset),size(size), const_size(true) {
+	MouseRegion (BaseElement* parent, Vector2 offset, V2 size): parent (parent), offset (offset),
+		size (size), const_size (true), ID (_IDC++) {
+
 	}
 
 
@@ -40,22 +43,28 @@ protected:
 
 
 public:
-    void Draw();
+	void Draw ();
 	void Update ();
+
 
 	virtual bool isHover ();
 	virtual bool isPress ();
 
-	bool IsClick() {
+
+	bool IsClick () {
 		return click_count > 0;
 	}
 
-	bool GetClick() {
+	bool GetClick () {
 		return click_count > 0 ? click_count-- : false;
 	}
 
-	bool isLockedByParent () {
-		return BaseElement::io->mhelper->IsMouseUsedBy (parent->property.ID);
+	bool isLockedOn () {
+		return BaseElement::io->mhelper->IsMouseUsedBy (this->ID);
+	}
+
+	Vector2 GetStartPos () {
+		return parent->property.GetAbs () - size / 2 + offset;
 	}
 
 };

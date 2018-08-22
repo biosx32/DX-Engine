@@ -49,7 +49,7 @@
     <ClInclude Include="Layer2\GlobalObjects.h" />
     <ClInclude Include="Layer3\ElementProperty.h" />
     <ClInclude Include="Layer2\Func2.h" />
-    <ClInclude Include="Layer3\HasDefaultMregion.h" />
+    <ClInclude Include="Layer3\AutoMouseRegion.h" />
     <ClInclude Include="Layer4\GameDebug.h" />
     <ClInclude Include="Layer3\ImageButton.h" />
     <ClInclude Include="Layer1\IOgroup.h" />
@@ -61,7 +61,6 @@
     <ClInclude Include="Layer0\OutputStream.h" />
     <ClInclude Include="Layer2\Painter.h" />
     <ClInclude Include="Layer0\LayerChilli.h" />
-    <ClInclude Include="Layer3\MouseRegionVisual.h" />
     <ClInclude Include="Layer3\Textbox.h" />
     <ClInclude Include="Layer0\Vectors.h" />
     <ClInclude Include="Layer4\Layer4.h" />
@@ -116,7 +115,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <WarningLevel>Level1</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>

@@ -1,13 +1,13 @@
 #pragma once
 #include "Layer2.h"
 #include "BaseElement.h"
-#include "HasDefaultMregion.h"
+#include "AutoMouseRegion.h"
 
-class TextBox : public BaseElement, public HasDefaultMregion {
+class TextBox : public BaseElement, public AutoMouseRegion {
 public:
 	int wmax;
 	bool isSelected = false;
-	TextBox(Vector2 pos, int wmax): BaseElement("TextBox", pos, 0), HasDefaultMregion(this) {
+	TextBox(Vector2 pos, int wmax): BaseElement("TextBox", pos, 0), AutoMouseRegion(this) {
 		this->wmax = wmax;
 		
 	}

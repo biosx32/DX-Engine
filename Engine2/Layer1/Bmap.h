@@ -26,6 +26,7 @@ public:
 public: 
 	Bitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT);
 	Bitmap* GetBitmapPart(int xoff, int yoff, int WIDTH, int HEIGHT, float size);
+	static Bitmap* CreateScreenshot (D3DGraphics* gfx, V2 pos, V2 size);
 };
 
 

@@ -13,7 +13,26 @@ public:
     Vector2(float a): x(a), y(a){}
 	Vector2(float x, float y) :x(x), y(y) {}
 
-	
+	Vector2 operator-() {
+		return Vector2 (-this->x , -this->y);
+	}
+
+	Vector2 operator+() {
+		return Vector2 (this->x, this->y);
+	}
+
+	Vector2 GetXV () {
+		return Vector2 (this->x, 0);
+	}
+
+	Vector2 GetYV () {
+		return Vector2 (0, this->y);
+	}
+
+	Vector2 toAbs () {
+		return Vector2 (abs(this->x), abs(this->y));
+	}
+
 
 	Vector2 operator+(Vector2 other) {
 		return Vector2(this->x + other.x, this->y + other.y);
@@ -30,6 +49,10 @@ public:
 	Vector2 operator*(float other) {
 		return Vector2 (this->x * other, this->y * other);
 	}
+	Vector2 operator*(Vector2 other) {
+		return Vector2 (this->x * other.x, this->y * other.y);
+	}
+
 
 	Vector2& operator/=(float other) {
 		(*this) = (*this) / other;

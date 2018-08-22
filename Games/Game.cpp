@@ -26,6 +26,13 @@
 #include "SelectBox.h"
 SelectBox* A = nullptr;
 
+Label*j = nullptr;
+Bitmap*b = nullptr;
+ImageButton* q = nullptr;
+int clickcount = 0;
+void UpScr () {
+	clickcount++;
+}
 
 void Game::Initialise() {
 	
@@ -34,20 +41,24 @@ void Game::Initialise() {
 		CreateDebugUI ();
 	}
 
-	A = new SelectBox (30, 200);
-	new Label (V2 (200, 200));
+	A = new SelectBox (100, 200);
+	j = new Label (300);
+	q = new ImageButton ({300,30}, UpScr, "UpdateScreen");
+
 }
+
+
 
 void Game::UpdateModel () {
 	Container::FullUpdate ();
-
-
+	std::string result = FormatString ("%s\n%s\n%s%s", LabelizeVector(A->property.GetSize (),"SIZE").c_str(),
+		LabelizeVector(A->GetStart (),"START").c_str (),LabelizeVector( A->GetEnd (),"END")).c_str ();
+	j->SetText (result);
 }
 
 
 void Game::ComposeFrame() {
 	Container::FullDraw ();
-
 	if (_DEBUG) {
 		UpdateDebugInfo ();
 	}
@@ -58,6 +69,20 @@ void Game::ComposeFrame() {
 	PrintTextAlign (BaseElement::draw, 120, &DOS_BLACK_MINI, 1, ALIGN_VH, mystring);
 	BaseElement::draw->paint->ellipse (30, 30, 30, 30, ColorARGB (127, 255, 0, 0));
 	BaseElement::draw->paint->ellipse (50, 50, 30, 30, ColorARGB (127, 255, 0, 0));
-
+	
+	if (b) {
+		BaseElement::draw->paint->rectangleBorder (10, 300, b->width, b->height, Colors::Red, 2);
+		BaseElement::draw->DrawBitmap (b, 10, 300);
+	}
+	
+	if (clickcount > 0) {
+		clickcount--;
+		if (b) { delete b; }
+		b = Bitmap::CreateScreenshot (BaseElement::io->gfx, A->GetStart (), A->GetSize ());
+		b->bckclr_tre = 0;
+		b->keying_enabled = false;
+	}
+	
+	
 }
 

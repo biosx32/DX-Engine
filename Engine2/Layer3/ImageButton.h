@@ -27,10 +27,10 @@ public:
 
 
 	void DrawSpecial(Bitmap* img, int x, int y, float rx, float ry) {
-		if (mregion->state == MouseState::none) {
+		if (mregion->statesave == MouseState::none) {
 			draw->DrawBitmap(img, x, y, rx, ry);
 		}
-		else if (mregion->state == MouseState::hovered) {
+		else if (mregion->statesave == MouseState::hovered) {
 			draw->DrawBitmap(img, x-1, y-1, rx, ry);
 		}
 		else{
@@ -41,12 +41,12 @@ public:
 	}
 
 	void DrawImage() {
-          Vector2 pos = property.GetAbs();
+          Vector2 pos = property.GetAbs() - property.GetSize()/2;
 		ImageSplitCorners * img = StateImages->none;
-		if (mregion->state == MouseState::pressed) {
+		if (mregion->statesave == MouseState::pressed) {
 			img = StateImages->pressed;
 		}
-		else if (mregion->state == MouseState::hovered){
+		else if (mregion->statesave == MouseState::hovered){
 			img = StateImages->hovered;
 		}
 
@@ -75,16 +75,15 @@ public:
 	}
 
 	void Draw() override {
-		Vector2 pos = property.GetAbs();
+		
 		if (autosize) {
 			int txtsize = property.text.size() > 1 ? property.text.size() : 2;
 			property.size = Vector2(DFONT->charw *txtsize * 1.25, DFONT->charh*1.5);
 		}
-		int textWidth = property.text.size() * DFONT->charw;
-		int textY = pos.y + property.size.y / 2 - DFONT->charh / 2;
-                int textX = pos.x + (property.size.x - textWidth) / 2;
-
+		Vector2 pos = property.GetAbs ();
+		Vector2 size = property.GetSize ();
 		this->DrawImage();
-		PrintText(draw, Pos(textX,textY), property.font, property.fontSize, property.text);
+		PrintTextAlign(draw, pos, property.font, property.fontSize, ALIGN_VH, property.text);
+		mregion->Draw ();
 	}
 };

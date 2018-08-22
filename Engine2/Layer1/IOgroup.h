@@ -9,10 +9,6 @@ public:
 	KeyboardClient* kbd = nullptr;
 	MouseHelper* mhelper = nullptr;
 	
-	void UpdateIO() {
-		mhelper->Refresh();
-	}
-
 	IOgroup(D3DGraphics* pgfx, MouseClient* pmouse, KeyboardClient* pkbd) :
 		gfx(pgfx), mouse(pmouse), kbd(pkbd),
 		mhelper(new MouseHelper(pmouse)) {

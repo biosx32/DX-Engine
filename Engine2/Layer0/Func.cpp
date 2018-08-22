@@ -29,7 +29,7 @@ int LongestLineInString (std::string src) {
 std::string LabelizeVector(Vector2 vec, std::string label)
 {
 
-	char buffer[256] = {};
+	char buffer[2048] = {};
 	sprintf_s(buffer, "%s: (%.2f, %.2f)", label.c_str(), vec.x, vec.y);
 	std::string temp = buffer;
 
