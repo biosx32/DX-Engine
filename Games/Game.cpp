@@ -25,10 +25,9 @@
 #define _DEBUG 1
 #include "SelectBox.h"
 SelectBox* A = nullptr;
-
+Bitmap*q = nullptr;
 Label*j = nullptr;
-Bitmap*b = nullptr;
-ImageButton* q = nullptr;
+
 int clickcount = 0;
 void UpScr () {
 	clickcount++;
@@ -43,8 +42,7 @@ void Game::Initialise() {
 
 	A = new SelectBox (100, 200);
 	j = new Label (300);
-	q = new ImageButton ({300,30}, UpScr, "UpdateScreen");
-
+	q = new Bitmap ("..\\RESOURCES\\test_RGB.bmp");
 }
 
 
@@ -58,6 +56,9 @@ void Game::UpdateModel () {
 
 
 void Game::ComposeFrame() {
+	float mx = (A->GetSize ().x) ? A->GetSize ().toAbs ().x / q->width : 0;
+	float my = (A->GetSize ().y) ? A->GetSize ().toAbs ().y / q->height : 0;
+	BaseElement::draw->DrawBitmap (q, A->GetStart ().x, A->GetStart ().y, mx, my);
 	Container::FullDraw ();
 	if (_DEBUG) {
 		UpdateDebugInfo ();
@@ -69,20 +70,8 @@ void Game::ComposeFrame() {
 	PrintTextAlign (BaseElement::draw, 120, &DOS_BLACK_MINI, 1, ALIGN_VH, mystring);
 	BaseElement::draw->paint->ellipse (30, 30, 30, 30, ColorARGB (127, 255, 0, 0));
 	BaseElement::draw->paint->ellipse (50, 50, 30, 30, ColorARGB (127, 255, 0, 0));
+
 	
 	
-	
-	if (1) {
-		clickcount--;
-		if (b) { delete b; }
-		b = Bitmap::CreateScreenshot (BaseElement::io->gfx, A->GetStart (), A->GetSize ().toAbs(),2);
-		b->bckclr_tre = 0;
-		b->keying_enabled = false;
-	}
-	
-	if (b) {
-		BaseElement::draw->DrawBitmap (b, A->GetStart ().x, A->GetStart ().y);
-	}
-	A->Draw ();
 }
 
