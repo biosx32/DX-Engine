@@ -14,7 +14,7 @@ public:
 		MouseRegion (this,-size / 2 + size.GetXV(), size / 20),	
 		//middle
 		MouseRegion (this, -size.GetXV()/2, size / 20),
-		MouseRegion (this, 0, size / 20),
+		MouseRegion (this, 0, size/1.25),
 		MouseRegion (this, +size.GetXV()/2, size / 20),
 		//top
 		MouseRegion (this,+size / 2, size / 20),
@@ -55,7 +55,7 @@ public:
 		regionss[6].offset = +size / 2;
 		regionss[7].offset = +size / 2 - size.GetXV ()/2;
 		regionss[8].offset = +size / 2 - size.GetXV ();
-
+		regionss[4].size = property.GetSize ().toAbs() / 1.25;
 	}
 
 	void Update () {
